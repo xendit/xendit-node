@@ -36,6 +36,8 @@ describe('Card Service', function() {
           exp_year: VALID_EXP_YR,
           cvn: VALID_CVN,
         },
+        is_single_use: false,
+        should_authenticate: true,
       })
       .reply(200, VALID_RESPONSE);
   });
@@ -52,6 +54,7 @@ describe('Card Service', function() {
         expMonth: VALID_EXP_MNTH,
         expYear: VALID_EXP_YR,
         cardCVN: VALID_CVN,
+        isSingleUse: false,
       })
       .then(res => {
         return Promise.all([

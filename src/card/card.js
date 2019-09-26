@@ -27,12 +27,19 @@ Card._constructorWithInjectedXenditOpts = function(options) {
 Card.prototype.createToken = function(data) {
   return new Promise((resolve, reject) => {
     try {
-      const missingFields = Validate.requiredFields([
+      const compulsoryFields = [
         'cardNumber',
         'expMonth',
         'expYear',
         'cardCVN',
-      ]).validate(data);
+        'isSingleUse',
+      ];
+      if (data.isSingleUse) {
+        compulsoryFields.push('amount');
+      }
+      const missingFields = Validate.requiredFields(compulsoryFields).validate(
+        data,
+      );
       if (missingFields.length > 0) {
         let message = 'Missing required fields: ';
         missingFields.forEach((f, i) =>
@@ -58,7 +65,8 @@ Card.prototype.createToken = function(data) {
       fetch(`${this.API_ENDPOINT}/credit_card_tokens`, {
         method: 'POST',
         headers: {
-          Authorization: Auth.basicAuthHeader(this.publicKey),
+          Authorization: Auth.basicAuthHeader(this.opts.publicKey),
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           card_data: {
@@ -67,10 +75,21 @@ Card.prototype.createToken = function(data) {
             exp_year: data.expYear,
             cvn: data.cardCVN,
           },
+          amount: data.amount,
           is_single_use: data.isSingleUse,
+          should_authenticate: true,
         }),
       })
-        .then(res => res.json())
+        .then(res => {
+          if (res.status !== 200) {
+            res
+              .json()
+              .then(e => reject({ status: res.status, message: e.message }));
+            return;
+          }
+
+          return res.json();
+        })
         .then(resolve)
         .catch(reject);
     } catch (e) {

@@ -3,7 +3,7 @@ module.exports = {
     this.validate = function(data) {
       const missing = [];
       fieldsArr.forEach(function(f) {
-        if (!data || !data[f]) {
+        if (!data || !data.hasOwnProperty(f)) {
           missing.push(f);
         }
       });
