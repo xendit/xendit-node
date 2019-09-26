@@ -1,0 +1,20 @@
+{
+  "extends": ["prettier"],
+  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "prettier/prettier": "warn",
+    "no-console": "error",
+    "object-curly-spacing": 0,
+    "new-cap": "warn",
+    "max-len": ["warn", { "code": 80, "ignoreUrls": true }],
+    "curly": ["error", "multi-line"]
+  },
+  "globals": {
+    "Promise": true,
+    "process": true
+  }
+}
