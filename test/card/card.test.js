@@ -6,7 +6,6 @@ const dotenv = require('dotenv');
 const nock = require('nock');
 
 const Xendit = require('../../src/xendit');
-const CardStatus = Xendit.CardStatus;
 
 dotenv.config();
 
@@ -15,6 +14,7 @@ const x = new Xendit({
   secretKey: process.env.SECRET_KEY,
   xenditURL: process.env.XENDIT_URL,
 });
+const { Card } = x;
 
 describe('Card Service', function() {
   const VALID_CARD_NUM = '4000000000000002';
@@ -24,7 +24,7 @@ describe('Card Service', function() {
   const VALID_RESPONSE = {
     id: '5d8c611f6f86303720b1f16f',
     masked_card_number: '400000XXXXXX0002',
-    status: CardStatus.VERIFIED,
+    status: Card.Status.VERIFIED,
   };
 
   before(function() {
@@ -44,7 +44,7 @@ describe('Card Service', function() {
 
   let card;
   beforeEach(function() {
-    card = new x.Card({});
+    card = new Card({});
   });
 
   it('should be able to generate token', done => {
@@ -62,7 +62,7 @@ describe('Card Service', function() {
           expect(res.masked_card_number).to.be.equal(
             VALID_RESPONSE.masked_card_number,
           ),
-          expect(res.status).to.be.equal(CardStatus.VERIFIED),
+          expect(res.status).to.be.equal(Card.Status.VERIFIED),
         ]);
       })
       .then(() => done())
