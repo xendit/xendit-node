@@ -8,7 +8,7 @@ function Xendit(options) {
   } = options;
 
   // default values of opts
-  xenditURL = xenditURL || 'https://api.xendit.co/v2';
+  xenditURL = xenditURL || 'https://api.xendit.co';
 
   this.opts = { publicKey, secretKey, xenditURL };
   this.Card = CardService._constructorWithInjectedXenditOpts(this.opts);

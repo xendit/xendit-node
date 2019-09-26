@@ -29,7 +29,7 @@ describe('Card Service', function() {
 
   before(function() {
     nock(x.opts.xenditURL)
-      .post('/credit_card_tokens', {
+      .post('/v2/credit_card_tokens', {
         card_data: {
           account_number: VALID_CARD_NUM,
           exp_month: VALID_EXP_MNTH,
@@ -55,6 +55,7 @@ describe('Card Service', function() {
         expYear: VALID_EXP_YR,
         cardCVN: VALID_CVN,
         isSingleUse: false,
+        shouldAuthenticate: true,
       })
       .then(res => {
         return Promise.all([

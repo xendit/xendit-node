@@ -1,4 +1,11 @@
 const { createToken } = require('./token');
+const { createCharge, captureCharge, getCharge } = require('./charge');
+const { createAuthentication } = require('./authentication');
+const {
+  createAuthorization,
+  reverseAuthorization,
+} = require('./authorization');
+const { createRefund } = require('./refund');
 const CardStatus = require('./card_status');
 
 const CARD_PATH = '';
@@ -22,5 +29,12 @@ Card._constructorWithInjectedXenditOpts = function(options) {
 Card.Status = CardStatus;
 
 Card.prototype.createToken = createToken;
+Card.prototype.createCharge = createCharge;
+Card.prototype.createAuthentication = createAuthentication;
+Card.prototype.captureCharge = captureCharge;
+Card.prototype.getCharge = getCharge;
+Card.prototype.createAuthorization = createAuthorization;
+Card.prototype.reverseAuthorization = reverseAuthorization;
+Card.prototype.createRefund = createRefund;
 
 module.exports = Card;

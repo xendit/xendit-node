@@ -3,9 +3,8 @@ const {
   isCreditCardExpirationDateValid,
   isCreditCardCVNValidForCardType,
 } = require('./utils');
-const { Validate, Auth } = require('../utils');
+const { Validate, Auth, fetchWithHTTPErr } = require('../utils');
 const errors = require('../errors');
-const fetch = require('node-fetch');
 
 function createToken(data) {
   return new Promise((resolve, reject) => {
@@ -20,18 +19,7 @@ function createToken(data) {
       if (data.isSingleUse) {
         compulsoryFields.push('amount');
       }
-      const missingFields = Validate.requiredFields(compulsoryFields).validate(
-        data,
-      );
-      if (missingFields.length > 0) {
-        let message = 'Missing required fields: ';
-        missingFields.forEach((f, i) =>
-          i < missingFields.length - 1
-            ? (message += `'${f}', `)
-            : (message += `'${f}'`),
-        );
-        reject({ status: 400, code: errors.API_VALIDATION_ERROR, message });
-      }
+      Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
       if (!isCreditCardNumberValid(data.cardNumber)) {
         reject({
@@ -57,7 +45,7 @@ function createToken(data) {
         });
       }
 
-      fetch(`${this.API_ENDPOINT}/credit_card_tokens`, {
+      fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/credit_card_tokens`, {
         method: 'POST',
         headers: {
           Authorization: Auth.basicAuthHeader(this.opts.publicKey),
@@ -72,23 +60,9 @@ function createToken(data) {
           },
           amount: data.amount,
           is_single_use: data.isSingleUse,
-          should_authenticate: true,
+          should_authenticate: data.shouldAuthenticate,
         }),
       })
-        .then(res => {
-          if (res.status !== 200) {
-            res.json().then(e =>
-              reject({
-                status: res.status,
-                code: e.error_code,
-                message: e.message,
-              }),
-            );
-            return;
-          }
-
-          return res.json();
-        })
         .then(resolve)
         .catch(reject);
     } catch (e) {
