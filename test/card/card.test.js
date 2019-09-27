@@ -6,6 +6,7 @@ const tokenTest = require('./token.test');
 const chargeTest = require('./charge.test');
 const authenticationTest = require('./authentication.test');
 const authorizationTest = require('./authorization.test');
+const refundTest = require('./refund.test');
 
 dotenv.config();
 
@@ -20,4 +21,5 @@ describe('Card Service', function() {
   chargeTest(x);
   authenticationTest(x);
   authorizationTest(x);
+  refundTest(x);
 });

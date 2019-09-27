@@ -29,6 +29,13 @@ const VALID_CRE_AUTH_RESPONSE = {
   authorized_amount: AMOUNT,
   external_id: EXT_ID,
 };
+const VALID_REFUND_ID = '5d8d9479a4271a6c9bc5b2ec';
+const VALID_REFUND_RESPONSE = {
+  id: VALID_REFUND_ID,
+  external_id: EXT_ID,
+  credit_card_charge_id: VALID_CHARGE_ID,
+  amount: AMOUNT,
+};
 
 module.exports = {
   VALID_CARD_NUM,
@@ -44,4 +51,6 @@ module.exports = {
   VALID_CAP_CHARGE_RESPONSE,
   VALID_AUTH_ID,
   VALID_CRE_AUTH_RESPONSE,
+  VALID_REFUND_RESPONSE,
+  VALID_REFUND_ID,
 };
