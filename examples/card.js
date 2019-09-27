@@ -35,6 +35,10 @@ card
       { tokenID: id },
     ]);
   })
+  .then(r => {
+    console.log('tokenization response:', r); // eslint-disable-line no-console
+    return r;
+  })
   .then(([{ id, status, payer_authentication_url }, { tokenID }]) => {
     if (status === Card.Status.VERIFIED) {
       resolve({ authID: id, tokenID });
@@ -57,17 +61,25 @@ card
       capture: false,
     }),
   )
+  .then(r => {
+    console.log('charge created:', r); // eslint-disable-line no-console
+    return r;
+  })
   .then(({ id }) =>
     card.captureCharge({
       chargeID: id,
       amount: 10000,
     }),
   )
+  .then(r => {
+    console.log('charge captured:', r); // eslint-disable-line no-console
+    return r;
+  })
   .then(({ id, external_id }) =>
     card.createRefund({ chargeID: id, externalID: external_id, amount: 5000 }),
   )
   .then(res => {
-    console.log(res); // eslint-disable-line no-console
+    console.log('refund created:', res); // eslint-disable-line no-console
     process.exit(0);
   })
   .catch(e => {
