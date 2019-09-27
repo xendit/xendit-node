@@ -24,6 +24,11 @@ const VALID_CAP_CHARGE_RESPONSE = {
   capture_amount: AMOUNT,
 };
 const VALID_AUTH_ID = '5d8d7fa86f86303720b1f309';
+const VALID_CRE_AUTH_RESPONSE = {
+  id: VALID_CHARGE_ID,
+  authorized_amount: AMOUNT,
+  external_id: EXT_ID,
+};
 
 module.exports = {
   VALID_CARD_NUM,
@@ -38,4 +43,5 @@ module.exports = {
   VALID_CRE_CHARGE_RESPONSE,
   VALID_CAP_CHARGE_RESPONSE,
   VALID_AUTH_ID,
+  VALID_CRE_AUTH_RESPONSE,
 };
