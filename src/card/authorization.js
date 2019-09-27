@@ -13,6 +13,7 @@ function reverseAuthorization(data) {
       Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
       fetchWithHTTPErr(
+        // eslint-disable-next-line max-len
         `${this.API_ENDPOINT}/credit_card_charges/${data.chargeID}/auth_reversal`,
         {
           method: 'POST',
