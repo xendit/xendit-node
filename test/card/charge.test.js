@@ -28,6 +28,9 @@ module.exports = function(x) {
         amount: TestConstants.AMOUNT,
       })
       .reply(200, TestConstants.VALID_CAP_CHARGE_RESPONSE);
+    nock(x.opts.xenditURL)
+      .get(`/credit_card_charges/${TestConstants.VALID_CHARGE_ID}`)
+      .reply(200, { id: TestConstants.VALID_CHARGE_ID });
   });
 
   describe('createCharge', () => {
@@ -68,7 +71,30 @@ module.exports = function(x) {
         .and.notify(done);
     });
     it('should report missing required fields', done => {
-      expect(card.createCharge({}))
+      expect(card.captureCharge({}))
+        .to.eventually.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+  });
+
+  describe('getCharge', () => {
+    it('should get charge', done => {
+      expect(
+        card.getCharge({
+          chargeID: TestConstants.VALID_CHARGE_ID,
+        }),
+      )
+        .to.eventually.deep.equal({ id: TestConstants.VALID_CHARGE_ID })
+        .and.notify(done);
+    });
+    it('should report missing required fields', done => {
+      expect(card.getCharge({}))
         .to.eventually.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
