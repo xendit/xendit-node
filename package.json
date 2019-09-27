@@ -46,6 +46,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",

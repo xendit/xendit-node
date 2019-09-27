@@ -1,4 +1,5 @@
-const { CardService, CardStatus } = require('./card');
+const { CardService } = require('./card');
+const Errors = require('./errors');
 
 function Xendit(options) {
   let {
@@ -14,6 +15,6 @@ function Xendit(options) {
   this.Card = CardService._constructorWithInjectedXenditOpts(this.opts);
 }
 
-Xendit.CardStatus = CardStatus;
+Xendit.Errors = Errors;
 
 module.exports = Xendit;
