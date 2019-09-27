@@ -19,6 +19,10 @@ const VALID_CRE_CHARGE_RESPONSE = {
   capture_amount: AMOUNT,
   external_id: EXT_ID,
 };
+const VALID_CAP_CHARGE_RESPONSE = {
+  id: VALID_CHARGE_ID,
+  capture_amount: AMOUNT,
+};
 
 module.exports = {
   VALID_CARD_NUM,
@@ -31,4 +35,5 @@ module.exports = {
   AMOUNT,
   EXT_ID,
   VALID_CRE_CHARGE_RESPONSE,
+  VALID_CAP_CHARGE_RESPONSE,
 };
