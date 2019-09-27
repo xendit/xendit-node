@@ -10,6 +10,15 @@ const VALID_TOKEN_RESPONSE = {
   masked_card_number: '400000XXXXXX0002',
   status: CardStatus.VERIFIED,
 };
+const VALID_CHARGE_ID = '5d8d7fc86f86303720b1f30b';
+const AMOUNT = 10000;
+const EXT_ID = '123';
+const VALID_CRE_CHARGE_RESPONSE = {
+  id: VALID_CHARGE_ID,
+  authorized_amount: AMOUNT,
+  capture_amount: AMOUNT,
+  external_id: EXT_ID,
+};
 
 module.exports = {
   VALID_CARD_NUM,
@@ -18,4 +27,8 @@ module.exports = {
   VALID_CVN,
   VALID_TOKEN_ID,
   VALID_TOKEN_RESPONSE,
+  VALID_CHARGE_ID,
+  AMOUNT,
+  EXT_ID,
+  VALID_CRE_CHARGE_RESPONSE,
 };

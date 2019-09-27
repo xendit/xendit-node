@@ -52,6 +52,7 @@ card
       tokenID,
       authID,
       amount: 10000,
+      // eslint-disable-next-line max-len
       externalID: Date.now().toString(), // use your system's ID of the transaction
       capture: false,
     }),
