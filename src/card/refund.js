@@ -14,6 +14,7 @@ function createRefund(data) {
           headers: {
             Authorization: Auth.basicAuthHeader(this.opts.secretKey),
             'Content-Type': 'application/json',
+            'X-IDEMPOTENCY-KEY': data.xIdempotencyKey,
           },
           body: JSON.stringify({
             external_id: data.externalID,
