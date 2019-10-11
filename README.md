@@ -19,7 +19,7 @@ npm install --save xendit-node
 
 For the full documentation, please refer to [Xendit Node Client Docs](https://docs.xendit.co/en/libraries/xendit-node)
 
-Configure packge with your account's API keys
+Configure package with your account's API keys
 
 ```js
 const Xendit = require('xendit-node');

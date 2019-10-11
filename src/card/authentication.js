@@ -5,13 +5,7 @@ function createAuthentication(data) {
   return new Promise((resolve, reject) => {
     try {
       const compulsoryFields = ['amount', 'tokenID'];
-      const missingFields = Validate.requiredFields(compulsoryFields).validate(
-        data,
-      );
-      if (missingFields.length > 0) {
-        let message = Validate.missingFieldsErrMsg(missingFields);
-        reject({ status: 400, code: errors.API_VALIDATION_ERROR, message });
-      }
+      Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
       fetchWithHTTPErr(
         `${this.API_ENDPOINT}/credit_card_tokens/${data.tokenID}/authentications`, // eslint-disable-line max-len
