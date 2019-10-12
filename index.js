@@ -1,1 +1,1 @@
-module.exports = require('src/xendit');
+module.exports = require('./src/xendit');
