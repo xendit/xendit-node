@@ -1,0 +1,60 @@
+{
+  "name": "xendit-node",
+  "version": "1.0.0-alpha",
+  "description": "NodeJS client for Xendit API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.test.js",
+    "lint": "eslint index.js ./src/**/*.js",
+    "format": "prettier --config .prettierrc --write index.js ./src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xendit/xendit-node.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "xendit",
+    "api",
+    "client",
+    "node"
+  ],
+  "author": "Stanley Nguyen <stanley@xendit.co>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/xendit/xendit-node/issues"
+  },
+  "homepage": "https://github.com/xendit/xendit-node#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "dotenv": "^8.1.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.3.0",
+    "mocha": "^6.2.0",
+    "nock": "^11.3.5",
+    "prettier": "^1.18.2"
+  }
+}
