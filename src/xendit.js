@@ -1,4 +1,5 @@
 const { CardService } = require('./card');
+const { VAService } = require('./va');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -13,6 +14,7 @@ function Xendit(options) {
 
   this.opts = { publicKey, secretKey, xenditURL };
   this.Card = CardService._constructorWithInjectedXenditOpts(this.opts);
+  this.VirtualAcc = VAService._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;

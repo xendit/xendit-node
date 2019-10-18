@@ -8,6 +8,7 @@ export interface XenditOptions {
 }
 
 export = class Xendit {
+  constructor(opts: XenditOptions);
   static Errors = Errors;
   Card: typeof CardService;
 };
