@@ -1,3 +1,5 @@
+const { getVABanks } = require('./bank');
+
 const VA_PATH = '';
 
 function VirtualAcc(options) {
@@ -18,5 +20,7 @@ VirtualAcc._constructorWithInjectedXenditOpts = function(options) {
   VirtualAcc._injectedOpts = options;
   return VirtualAcc;
 };
+
+VirtualAcc.prototype.getVABanks = getVABanks;
 
 module.exports = VirtualAcc;
