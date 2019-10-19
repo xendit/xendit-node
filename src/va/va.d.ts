@@ -1,4 +1,5 @@
 import { getVABanks } from './bank';
+import { createFixedVA, getFixedVA, updateFixedVA } from './account';
 
 export = class VirtualAcc {
   constructor({});
@@ -6,4 +7,7 @@ export = class VirtualAcc {
     opts: XenditOptions,
   ) => typeof VirtualAcc;
   getVABanks = getVABanks;
+  createFixedVA = createFixedVA;
+  getFixedVA = getFixedVA;
+  updateFixedVA = updateFixedVA;
 };

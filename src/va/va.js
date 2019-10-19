@@ -1,4 +1,5 @@
 const { getVABanks } = require('./bank');
+const { createFixedVA, getFixedVA, updateFixedVA } = require('./account');
 
 const VA_PATH = '';
 
@@ -22,5 +23,8 @@ VirtualAcc._constructorWithInjectedXenditOpts = function(options) {
 };
 
 VirtualAcc.prototype.getVABanks = getVABanks;
+VirtualAcc.prototype.createFixedVA = createFixedVA;
+VirtualAcc.prototype.getFixedVA = getFixedVA;
+VirtualAcc.prototype.updateFixedVA = updateFixedVA;
 
 module.exports = VirtualAcc;
