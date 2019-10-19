@@ -1,5 +1,6 @@
 const { getVABanks } = require('./bank');
 const { createFixedVA, getFixedVA, updateFixedVA } = require('./account');
+const { getVAPayment } = require('./payment');
 
 const VA_PATH = '';
 
@@ -26,5 +27,6 @@ VirtualAcc.prototype.getVABanks = getVABanks;
 VirtualAcc.prototype.createFixedVA = createFixedVA;
 VirtualAcc.prototype.getFixedVA = getFixedVA;
 VirtualAcc.prototype.updateFixedVA = updateFixedVA;
+VirtualAcc.prototype.getVAPayment = getVAPayment;
 
 module.exports = VirtualAcc;

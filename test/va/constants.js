@@ -16,6 +16,13 @@ const EXPECTED_AMT = 50;
 const UPDATED_VA_DETAILS = Object.assign({}, VA_DETAILS, {
   expected_amount: EXPECTED_AMT,
 });
+const PAYMENT_ID = '1502450097080';
+const PAYMENT_DETAILS = {
+  id: VA_ID,
+  payment_id: PAYMENT_ID,
+  external_id: EXT_ID,
+  bank_code: BANK_CODE,
+};
 
 module.exports = {
   VALID_VA_BANKS_RESPONSE,
@@ -26,4 +33,6 @@ module.exports = {
   VA_ID,
   UPDATED_VA_DETAILS,
   EXPECTED_AMT,
+  PAYMENT_ID,
+  PAYMENT_DETAILS,
 };

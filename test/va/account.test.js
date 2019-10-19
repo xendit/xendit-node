@@ -47,7 +47,7 @@ module.exports = function(x) {
     });
     it('should report missing required fields', done => {
       expect(va.createFixedVA({}))
-        .to.eventually.to.rejected.then(e =>
+        .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
             expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
@@ -65,7 +65,7 @@ module.exports = function(x) {
     });
     it('should report required fields', done => {
       expect(va.getFixedVA({}))
-        .to.eventually.to.rejected.then(e =>
+        .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
             expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),

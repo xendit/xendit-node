@@ -43,8 +43,6 @@ va.getVABanks()
     console.log('updated va details:', r); // eslint-disable-line no-console
     return r;
   })
-  // TODO: example for getting VA payment once invoice implemented
-  // and payment can be made through invoice endpoint
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);
