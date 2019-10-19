@@ -16,6 +16,7 @@ module.exports = function(x) {
   before(function() {
     nock(x.opts.xenditURL)
       .get(
+        // eslint-disable-next-line max-len
         `/callback_virtual_account_payments/payment_id=${TestConstants.PAYMENT_ID}`,
       )
       .reply(200, TestConstants.PAYMENT_DETAILS);
