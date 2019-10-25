@@ -1,5 +1,6 @@
 import Errors from './errors';
 import { CardService } from './card';
+import { VAService } from './va';
 
 export interface XenditOptions {
   publicKey: string;
@@ -8,6 +9,8 @@ export interface XenditOptions {
 }
 
 export = class Xendit {
+  constructor(opts: XenditOptions);
   static Errors = Errors;
   Card: typeof CardService;
+  VirtualAcc: typeof VAService;
 };

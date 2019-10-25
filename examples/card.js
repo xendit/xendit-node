@@ -1,19 +1,11 @@
-// For actual usage, this should be require('xendit')
-const Xendit = require('../src/xendit');
-const dotenv = require('dotenv');
+const x = require('./xendit');
 const readline = require('readline');
 
-dotenv.config();
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const x = new Xendit({
-  publicKey: process.env.PUBLIC_KEY,
-  secretKey: process.env.SECRET_KEY,
-  xenditURL: process.env.XENDIT_URL,
-});
 const Card = x.Card;
 const card = new Card({});
 
