@@ -4,7 +4,7 @@ import { createAuthetication } from './authentication';
 import { createRefund } from './refund';
 import { createAuthorization, reverseAuthorization } from './authorization';
 import CardStatus from './card_status';
-import { XenditOptions } from '../xendit';
+import { XenditOptions } from '../xendit_opts';
 
 export = class Card {
   constructor({});
