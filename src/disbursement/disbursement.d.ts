@@ -1,5 +1,6 @@
 import { XenditOptions } from '../xendit_opts';
 import { getBanks } from './bank';
+import { create, createBatch, getByID, getByExtID } from './disburse';
 
 export = class Disbursement {
   constructor({});
@@ -7,4 +8,8 @@ export = class Disbursement {
     opts: XenditOptions,
   ) => typeof Disbursement;
   getBanks = getBanks;
+  create = create;
+  createBatch = createBatch;
+  getByID = getByID;
+  getByExtID = getByExtID;
 };

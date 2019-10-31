@@ -1,4 +1,5 @@
 const { getBanks } = require('./bank');
+const { create, createBatch, getByExtID, getByID } = require('./disburse');
 
 const DISBURSE_PATH = '';
 
@@ -22,5 +23,9 @@ Disbursement._constructorWithInjectedXenditOpts = function(options) {
 };
 
 Disbursement.prototype.getBanks = getBanks;
+Disbursement.prototype.create = create;
+Disbursement.prototype.createBatch = createBatch;
+Disbursement.prototype.getByID = getByID;
+Disbursement.prototype.getByExtID = getByExtID;
 
 module.exports = Disbursement;
