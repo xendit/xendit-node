@@ -29,7 +29,7 @@ const x = new Xendit({
 });
 ```
 
-##### Card Services
+#### Card Services
 
 Instanitiate Card service using constructor that has been injected with Xendit keys
 
@@ -53,6 +53,93 @@ card
   .catch(e => {
     console.error(`Charge creation failed with message: ${e.message}`);
   });
+```
+
+##### Methods
+
+- Create token
+
+```ts
+card.createToken(data: {
+  cardNumber: string;
+  expMonth: string;
+  expYear: string;
+  cardCVN: string;
+  isSingleUse: boolean;
+  amount?: number;
+  shouldAuthenticate?: boolean;
+})
+```
+
+- Create charge
+
+```ts
+card.createCharge(data: {
+  tokenID: string;
+  externalID: string;
+  amount?: number;
+  authID?: string;
+  cardCVN?: string;
+  capture?: boolean;
+  descriptor?: string;
+})
+```
+
+- Capture charge
+
+```ts
+card.captureCharge(data: {
+  chargeID: string;
+  amount: number;
+})
+```
+
+- Get charge
+
+```ts
+card.getCharge(data: { chargeID: string })
+```
+
+- Create Authentication
+
+```ts
+card.createAuthetication(data: {
+  amount: number;
+  tokenID: string;
+})
+```
+
+- Create authorization
+
+```ts
+card.createAuthorization(data: {
+  tokenID: string;
+  externalID: string;
+  amount?: number;
+  authID?: string;
+  cardCVN?: string;
+  descriptor?: string;
+})
+```
+
+- Reverse authorization
+
+```ts
+card.reverseAuthorization(data: {
+  chargeID: string;
+  externalID: string;
+})
+```
+
+- Create refund
+
+```ts
+card.createRefund(data: {
+  chargeID: string;
+  amount: number;
+  externalID: string;
+  xIdempotencyKey?: string;
+})
 ```
 
 ### Contributing
