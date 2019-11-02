@@ -5,17 +5,17 @@ This library is the abstraction of Xendit API for access from applications writt
 **Note**: This library is only meant for usage from server-side with Xendit secret API key.
 For PCI compliance to be maintained, tokenization of credt cards info should be done on client side with [Xendit.js](https://docs.xendit.co/en/cards-tokenization.html/).
 
-### API Documentation
+## API Documentation
 
 Please check [Xendit Docs](https://docs.xendit.co/en/index.html)
 
-### Installation
+## Installation
 
 ```bash
 npm install --save xendit-node
 ```
 
-### Usage
+## Usage
 
 For the full documentation, please refer to [Xendit Node Client Docs](https://docs.xendit.co/en/libraries/xendit-node)
 
@@ -29,7 +29,7 @@ const x = new Xendit({
 });
 ```
 
-#### Card Services
+### Card Services
 
 Instanitiate Card service using constructor that has been injected with Xendit keys
 
@@ -142,7 +142,7 @@ card.createRefund(data: {
 })
 ```
 
-### Contributing
+## Contributing
 
 Running test suite
 
