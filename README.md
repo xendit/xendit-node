@@ -55,7 +55,7 @@ card
   });
 ```
 
-##### Methods
+#### Methods
 
 - Create token
 
@@ -141,6 +141,83 @@ card.createRefund(data: {
   xIdempotencyKey?: string;
 })
 ```
+
+### Virtual Account Services
+
+Instanitiate VA service using constructor that has been injected with Xendit keys
+
+```js
+const { VirtualAcc } = x;
+const vaSpecificOptions = {};
+const va = new VirtualAcc(vaSpecificOptions);
+```
+
+Example: Create a fixed virtual account
+
+```js
+va.createFixedVA({
+  externalID: 'your-external-id',
+  bankCode: 'BCA',
+  name: 'Stanley Nguyen',
+})
+.then(({ id }) => {
+    console.log(`Fixed VA created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(`VA creation failed with message: ${e.message}`);
+```
+
+#### Methods
+
+- Get banks with available virtual account service
+
+```ts
+va.getVABanks();
+```
+
+- Create a fixed virtual account
+
+```ts
+va.createFixedVA(data: {
+  externalID: string;
+  bankCode: string;
+  name: string;
+  virtualAccNumber?: string;
+  suggestedAmt?: number;
+  isClosed?: boolean;
+  expectedAmt?: number;
+  expirationDate?: Date;
+  isSingleUse?: boolean;
+  description?: string;
+})
+```
+
+- Get details of your fixed virtual account
+
+```ts
+va.getFixedVA(data: { id: string })
+```
+
+- Update details of your fixed virtual account
+
+```ts
+va.updateFixedVA(data: {
+  id: string;
+  suggestedAmt?: number;
+  expectedAmt?: number;
+  expirationDate?: Date;
+  isSingleUse?: boolean;
+  description?: string;
+})
+```
+
+- Get details of a VA payment
+
+```ts
+va.getVAPayment(data: { paymentID: string })
+```
+
+`paymentID`: ID of the payment that you obtained from your callback
 
 ## Contributing
 
