@@ -160,11 +160,12 @@ va.createFixedVA({
   bankCode: 'BCA',
   name: 'Stanley Nguyen',
 })
-.then(({ id }) => {
+  .then(({ id }) => {
     console.log(`Fixed VA created with ID: ${id}`);
   })
   .catch(e => {
     console.error(`VA creation failed with message: ${e.message}`);
+  });
 ```
 
 #### Methods
@@ -218,6 +219,92 @@ va.getVAPayment(data: { paymentID: string })
 ```
 
 `paymentID`: ID of the payment that you obtained from your callback
+
+### Disbursement Services
+
+Instanitiate Disbursement service using constructor that has been injected with Xendit keys
+
+```js
+const { Disbursement } = x;
+const disbursementSpecificOptions = {};
+const d = new Disbursement(disbursementSpecificOptions);
+```
+
+Example: Create a disbursement
+
+```js
+d.create({
+  externalID: 'your-external-tracking-ID',
+  bankCode: 'BCA',
+  accountHolderName: 'Stan',
+  accountNumber: '1234567890',
+  description: 'Payment for nasi padang',
+  amount: 10000,
+})
+  .then(({ id }) => {
+    console.log(`Disbursement created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(`Disbursement creation failed with message: ${e.message}`);
+  });
+```
+
+#### Methods
+
+- Get banks with available disbursement service
+
+```ts
+d.getBanks();
+```
+
+- Create a disbursement
+
+```ts
+d.create(data: {
+  externalID: string;
+  bankCode: string;
+  accountHolderName: string;
+  accountNumber: string;
+  description: string;
+  amount: number;
+  emailTo?: string[];
+  emailCC?: string[];
+  emailBCC?: string[];
+  xIdempotencyKey?: string;
+})
+```
+
+- Create a batch of disbursements
+
+```ts
+d.createBatch(data: {
+  reference: string;
+  disbursements: Array<{
+    externalID: string;
+    bankCode: string;
+    accountHolderName: string;
+    accountNumber: string;
+    description: string;
+    amount: number;
+    emailTo?: string[];
+    emailCC?: string[];
+    emailBCC?: string[];
+  }>;
+  xIdempotencyKey?: string;
+})
+```
+
+- Get a disbursement by ID
+
+```ts
+d.getByID(data: { disbursementID: string })
+```
+
+- Get a disbursement by external ID
+
+```ts
+d.getByExtID(data: { externalID: string })
+```
 
 ## Contributing
 
