@@ -1,6 +1,7 @@
 import { getVABanks } from './bank';
 import { createFixedVA, getFixedVA, updateFixedVA } from './account';
 import { getVAPayment } from './payment';
+import { XenditOptions } from '../xendit_opts';
 
 export = class VirtualAcc {
   constructor({});

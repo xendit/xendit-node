@@ -5,14 +5,10 @@ function createRefund(data) {
     const compulsoryFields = ['chargeID', 'amount', 'externalID'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
-    const headers = {
-      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      'Content-Type': 'application/json',
-    };
-
-    if (data.xIdempotencyKey) {
-      headers['X-IDEMPOTENCY-KEY'] = data.xIdempotencyKey;
-    }
+    const headers = Auth.basicHeaderWithIdempotencyKey(
+      this.opts.secretKey,
+      data.xIdempotencyKey,
+    );
 
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/credit_card_charges/${data.chargeID}/refunds`,

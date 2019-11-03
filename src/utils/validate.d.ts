@@ -4,6 +4,8 @@ export function requiredFields(
   validate: (data: object) => Array<string>;
 };
 
+export function missingFieldsToStr(missingFields: Array<string>): string;
+
 export function missingFieldsErrMsg(missingFields: Array<string>): string;
 
 export function rejectOnMissingFields(

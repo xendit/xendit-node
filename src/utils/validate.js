@@ -15,14 +15,16 @@ const Validate = {
     return this;
   },
 
+  missingFieldsToStr(missingFields) {
+    let rtv = '';
+    return missingFields.forEach((f, i) =>
+      i < missingFields.length - 1 ? (rtv += `'${f}', `) : (rtv += `'${f}'`),
+    );
+  },
+
   missingFieldsErrMsg(missingFields) {
     let message = 'Missing required fields: ';
-    missingFields.forEach((f, i) =>
-      i < missingFields.length - 1
-        ? (message += `'${f}', `)
-        : (message += `'${f}'`),
-    );
-
+    message += Validate.missingFieldsToStr(missingFields);
     return message;
   },
 
