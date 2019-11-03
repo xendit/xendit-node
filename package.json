@@ -7,7 +7,7 @@
     "test": "mocha test/**/*.test.js",
     "lint": "eslint index.js ./src/**/*.js",
     "format": "prettier --config .prettierrc --write index.js ./src/**/*.js",
-    "publish": "np"
+    "release": "np"
   },
   "repository": {
     "type": "git",
