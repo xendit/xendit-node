@@ -1,12 +1,13 @@
 {
   "name": "xendit-node",
-  "version": "1.0.0-alpha",
+  "version": "0.1.2",
   "description": "NodeJS client for Xendit API",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/**/*.test.js",
     "lint": "eslint index.js ./src/**/*.js",
-    "format": "prettier --config .prettierrc --write index.js ./src/**/*.js"
+    "format": "prettier --config .prettierrc --write index.js ./src/**/*.js",
+    "release": "np"
   },
   "repository": {
     "type": "git",
@@ -55,6 +56,7 @@
     "lint-staged": "^9.3.0",
     "mocha": "^6.2.0",
     "nock": "^11.3.5",
+    "np": "^5.1.2",
     "prettier": "^1.18.2"
   }
 }
