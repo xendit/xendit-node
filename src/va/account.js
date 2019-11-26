@@ -21,7 +21,7 @@ function createFixedVA(data) {
         expected_amount: data.expectedAmt,
         expiration_date: data.expirationDate
           ? data.expirationDate.toISOString()
-          : null,
+          : undefined,
         is_single_use: data.isSingleUse,
         description: data.description,
       }),

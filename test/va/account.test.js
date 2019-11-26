@@ -19,7 +19,6 @@ module.exports = function(x) {
         external_id: TestConstants.EXT_ID,
         bank_code: TestConstants.BANK_CODE,
         name: TestConstants.NAME,
-        expiration_date: null,
       })
       .reply(200, TestConstants.VA_DETAILS);
     nock(x.opts.xenditURL)
