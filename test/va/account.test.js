@@ -27,9 +27,30 @@ module.exports = function(x) {
     nock(x.opts.xenditURL)
       .patch(`/callback_virtual_accounts/${TestConstants.VA_ID}`, {
         expected_amount: TestConstants.EXPECTED_AMT,
-        expiration_date: null,
       })
       .reply(200, TestConstants.UPDATED_VA_DETAILS);
+    nock(x.opts.xenditURL)
+      .post('/callback_virtual_accounts', {
+        external_id: TestConstants.EXT_ID,
+        bank_code: TestConstants.BANK_CODE,
+        name: TestConstants.NAME,
+        expiration_date: null,
+      })
+      .reply(400, {
+        status: 400,
+        code: 'API_VALIDATION_ERROR',
+        message: 'There was an error with the format submitted to the server.',
+      });
+    nock(x.opts.xenditURL)
+      .patch(`/callback_virtual_accounts/${TestConstants.VA_ID}`, {
+        expected_amount: TestConstants.EXPECTED_AMT,
+        expiration_date: null,
+      })
+      .reply(400, {
+        status: 400,
+        code: 'API_VALIDATION_ERROR',
+        message: 'There was an error with the format submitted to the server.',
+      });
   });
 
   describe('createFixedVA', () => {
