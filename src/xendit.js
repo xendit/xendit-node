@@ -1,6 +1,7 @@
 const { CardService } = require('./card');
 const { VAService } = require('./va');
 const { DisbursementService } = require('./disbursement');
+const { InvoiceService } = require('./invoice');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -19,6 +20,7 @@ function Xendit(options) {
   this.Disbursement = DisbursementService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  this.Invoice = InvoiceService._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;
