@@ -7,6 +7,7 @@
     "test": "mocha test/**/*.test.js",
     "lint": "eslint index.js ./src/**/*.js",
     "format": "prettier --config .prettierrc --write index.js ./src/**/*.js",
+    "gentoc": "markdown-toc -i README.md",
     "release": "np"
   },
   "repository": {
@@ -26,6 +27,10 @@
     ],
     "*.js": [
       "eslint",
+      "git add"
+    ],
+    "README.md": [
+      "markdown-toc -i",
       "git add"
     ]
   },
@@ -54,6 +59,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.0.5",
     "lint-staged": "^9.3.0",
+    "markdown-toc": "^1.2.0",
     "mocha": "^6.2.0",
     "nock": "^11.3.5",
     "np": "^5.1.2",
