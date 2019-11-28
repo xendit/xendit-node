@@ -21,7 +21,7 @@ export = class Invoice {
   }): Promise<object>;
   getInvoice(data: { invoiceID: string }): Promise<object>;
   expireInvoice(data: { invoiceID: string }): Promise<object>;
-  getAllInvoices(data: {
+  getAllInvoices(data?: {
     statuses?: string[];
     limit?: number;
     createdAfter?: Date;

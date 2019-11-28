@@ -16,6 +16,8 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-1)
   * [Disbursement Services](#disbursement-services)
     + [Methods](#methods-2)
+  * [Invoice Services](#invoice-services)
+    + [Methods](#methods-3)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -319,6 +321,82 @@ d.getByID(data: { disbursementID: string })
 
 ```ts
 d.getByExtID(data: { externalID: string })
+```
+
+### Invoice Services
+
+Instanitiate Invoice service using constructor that has been injected with Xendit keys
+
+```js
+const { Invoice } = x;
+const invoiceSpecificOptions = {};
+const i = new Invoice(invoiceSpecificOptions);
+```
+
+Example: Create an invoice
+
+```js
+i.createInvoice({
+  externalID: 'your-external-id',
+  payerEmail: 'stanley@xendit.co',
+  description: 'Invoice for Shoes Purchase',
+  amount: 100000,
+}).then(({ id }) => {
+  console.log(`Invoice created with ID: ${id}`);
+});
+```
+
+#### Methods
+
+- Create an invoice
+
+```ts
+i.createInvoice(data: {
+    externalID: string;
+    payerEmail: string;
+    description: string;
+    amount: number;
+    shouldSendEmail?: boolean;
+    callbackVirtualAccountID?: string;
+    invoiceDuration?: number;
+    successRedirectURL?: string;
+    failureRedirectURL?: string;
+    paymentMethods?: string[];
+    currency?: string;
+    midLabel?: string;
+  })
+```
+
+- Get an invoice
+
+```ts
+i.getInvoice(data: { invoiceID: string })
+```
+
+- Expire an invoice
+
+```ts
+i.expireInvoice(data: { invoiceID: string })
+```
+
+- Get all invoices
+
+```ts
+i.getAllInvoices(data?: {
+    statuses?: string[];
+    limit?: number;
+    createdAfter?: Date;
+    createdBefore?: Date;
+    paidAfter?: Date;
+    paidBefore?: Date;
+    expiredAfter?: Date;
+    expiredBefore?: Date;
+    lastInvoiceID?: string;
+    clientTypes?: string[];
+    paymentChannels?: string[];
+    onDemandLink?: string;
+    recurringPaymentID?: string;
+  })
 ```
 
 ## Contributing
