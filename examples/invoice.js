@@ -23,6 +23,11 @@ i.createInvoice({
     console.log('expired invoice', r); // eslint-disable-line no-console
     return r;
   })
+  .then(() => i.getAllInvoices())
+  .then(r => {
+    console.log('first 10 invoices', r); // eslint-disable-line no-console
+    return r;
+  })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);

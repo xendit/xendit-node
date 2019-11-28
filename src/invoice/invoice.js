@@ -1,5 +1,10 @@
-const querystring = require('querystring');
-const { promWithJsErr, Auth, Validate, fetchWithHTTPErr } = require('../utils');
+const {
+  promWithJsErr,
+  Auth,
+  Validate,
+  fetchWithHTTPErr,
+  queryStringWithoutUndefined,
+} = require('../utils');
 
 const INVOICE_PATH = '';
 
@@ -89,35 +94,45 @@ Invoice.prototype.expireInvoice = function(data) {
 
 Invoice.prototype.getAllInvoices = function(data) {
   return promWithJsErr((resolve, reject) => {
-    const queryStr = querystring.stringify({
-      statuses: data.statuses,
-      limit: data.limit,
-      created_after: data.createdAfter
-        ? data.createdAfter.toISOString()
-        : undefined,
-      created_before: data.createdBefore
-        ? data.createdBefore.toISOString()
-        : undefined,
-      paid_after: data.paidAfter ? data.paidAfter.toISOString() : undefined,
-      paid_before: data.paidBefore ? data.paidBefore.toISOString() : undefined,
-      expired_after: data.expiredAfter
-        ? data.expiredAfter.toISOString()
-        : undefined,
-      expired_before: data.expiredBefore
-        ? data.expiredBefore.toISOString()
-        : undefined,
-      last_invoice_id: data.lastInvoiceID,
-      client_types: data.clientTypes,
-      payment_channels: data.paymentChannels,
-      on_demand_link: data.onDemandLink,
-      recurring_payment_id: data.recurringPaymentID,
-    });
-    fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/invoices?${queryStr}`, {
-      method: 'GET',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    // if no data provided, querystring should be empty
+    const queryStr = data
+      ? queryStringWithoutUndefined({
+          statuses: data.statuses,
+          limit: data.limit,
+          created_after: data.createdAfter
+            ? data.createdAfter.toISOString()
+            : undefined,
+          created_before: data.createdBefore
+            ? data.createdBefore.toISOString()
+            : undefined,
+          paid_after: data.paidAfter ? data.paidAfter.toISOString() : undefined,
+          paid_before: data.paidBefore
+            ? data.paidBefore.toISOString()
+            : undefined,
+          expired_after: data.expiredAfter
+            ? data.expiredAfter.toISOString()
+            : undefined,
+          expired_before: data.expiredBefore
+            ? data.expiredBefore.toISOString()
+            : undefined,
+          last_invoice_id: data.lastInvoiceID,
+          client_types: data.clientTypes,
+          payment_channels: data.paymentChannels,
+          on_demand_link: data.onDemandLink,
+          recurring_payment_id: data.recurringPaymentID,
+        })
+      : '';
+    const queryStrWithQuestionMark = queryStr ? `?${queryStr}` : '';
+
+    fetchWithHTTPErr(
+      `${this.API_ENDPOINT}/v2/invoices${queryStrWithQuestionMark}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        },
       },
-    })
+    )
       .then(resolve)
       .catch(reject);
   });
