@@ -1,4 +1,4 @@
-// For actual usage, this should be require('xendit')
+// For actual usage, this should be require('xendit-node')
 const Xendit = require('../src/xendit');
 const dotenv = require('dotenv');
 
