@@ -25,4 +25,3 @@ jobs:
         env:
           PUBLIC_KEY: xnd_public_development_vgtnQqfRTCJIsphU9Xw3pJWu2CDBZ5kCSfZk9BCtd18MThRXPP1VXJjKFOW8q9
           SECRET_KEY: xnd_development_irTAXfT87xvOZzmvbesllrwFd41Y4vFIh1z5sy8rP0YSkcsb0zlYaFBPg9NeNbg
-          NODE_OPTIONS: --http-parser=legacy

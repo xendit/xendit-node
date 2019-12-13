@@ -8,6 +8,7 @@ Promise.all([
   .then(() => {
     // eslint-disable-next-line no-console
     console.log('Successful integation test!');
+    process.exit(0);
   })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
