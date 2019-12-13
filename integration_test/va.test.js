@@ -20,5 +20,9 @@ module.exports = function() {
         suggestedAmt: 20,
         expectedAmt: 30,
       });
+    })
+    .then(() => {
+      // eslint-disable-next-line no-console
+      console.log('VA integration test done...');
     });
 };

@@ -13,5 +13,9 @@ module.exports = function() {
     })
     .then(r => i.getInvoice({ invoiceID: r.id }))
     .then(r => i.expireInvoice({ invoiceID: r.id }))
-    .then(() => i.getAllInvoices());
+    .then(() => i.getAllInvoices())
+    .then(() => {
+      // eslint-disable-next-line no-console
+      console.log('Invoice integration test done...');
+    });
 };

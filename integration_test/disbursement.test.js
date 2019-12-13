@@ -29,5 +29,9 @@ module.exports = function() {
       }),
     )
     .then(r => d.getByID({ disbursementID: r.id }))
-    .then(r => d.getByExtID({ externalID: r.external_id }));
+    .then(r => d.getByExtID({ externalID: r.external_id }))
+    .then(() => {
+      // eslint-disable-next-line no-console
+      console.log('Disbursement integration test done...');
+    });
 };
