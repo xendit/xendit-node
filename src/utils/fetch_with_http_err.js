@@ -1,3 +1,6 @@
+process.binding(
+  'http_parser',
+).HTTPParser = require('http-parser-js').HTTPParser;
 const fetch = require('node-fetch');
 
 module.exports = function() {

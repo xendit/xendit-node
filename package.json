@@ -48,6 +48,7 @@
   },
   "homepage": "https://github.com/xendit/xendit-node#readme",
   "dependencies": {
+    "http-parser-js": "^0.5.2",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
