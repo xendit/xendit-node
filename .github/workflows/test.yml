@@ -23,8 +23,8 @@ jobs:
       - run: npm test
       - run: npm run test:integration
         env:
-          PUBLIC_KEY: xnd_public_development_vgtnQqfRTCJIsphU9Xw3pJWu2CDBZ5kCSfZk9BCtd18MThRXPP1VXJjKFOW8q9
-          SECRET_KEY: xnd_development_irTAXfT87xvOZzmvbesllrwFd41Y4vFIh1z5sy8rP0YSkcsb0zlYaFBPg9NeNbg
+          PUBLIC_KEY: xnd_public_development_2hi8lWQiSiR07H7n9RNt4HDmEGn5hJbUIDejBaqL44XtLzWkLd6ICd4LwJLrXRw
+          SECRET_KEY: xnd_development_chBDpzjQZEI8nncBLrWtwau5r7rgiuunCJ4JCqsd68rXemDd74BnRpdO0bIZAMK
 
   testv12:
     runs-on: ubuntu-latest
@@ -39,6 +39,6 @@ jobs:
       - run: npm test
       - run: npm run test:integration
         env:
-          PUBLIC_KEY: xnd_public_development_vgtnQqfRTCJIsphU9Xw3pJWu2CDBZ5kCSfZk9BCtd18MThRXPP1VXJjKFOW8q9
-          SECRET_KEY: xnd_development_irTAXfT87xvOZzmvbesllrwFd41Y4vFIh1z5sy8rP0YSkcsb0zlYaFBPg9NeNbg
+          PUBLIC_KEY: xnd_public_development_2hi8lWQiSiR07H7n9RNt4HDmEGn5hJbUIDejBaqL44XtLzWkLd6ICd4LwJLrXRw
+          SECRET_KEY: xnd_development_chBDpzjQZEI8nncBLrWtwau5r7rgiuunCJ4JCqsd68rXemDd74BnRpdO0bIZAMK
           NODE_OPTIONS: --http-parser=legacy
