@@ -7,11 +7,11 @@ on:
       - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['13', '12', '10', '8']
+        node: ['13', '10', '8']
     name: Test with Node version ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v1
@@ -25,3 +25,20 @@ jobs:
         env:
           PUBLIC_KEY: xnd_public_development_vgtnQqfRTCJIsphU9Xw3pJWu2CDBZ5kCSfZk9BCtd18MThRXPP1VXJjKFOW8q9
           SECRET_KEY: xnd_development_irTAXfT87xvOZzmvbesllrwFd41Y4vFIh1z5sy8rP0YSkcsb0zlYaFBPg9NeNbg
+
+  testv12:
+    runs-on: ubuntu-latest
+    name: Test with Node version 12
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm test
+      - run: npm run test:integration
+        env:
+          PUBLIC_KEY: xnd_public_development_vgtnQqfRTCJIsphU9Xw3pJWu2CDBZ5kCSfZk9BCtd18MThRXPP1VXJjKFOW8q9
+          SECRET_KEY: xnd_development_irTAXfT87xvOZzmvbesllrwFd41Y4vFIh1z5sy8rP0YSkcsb0zlYaFBPg9NeNbg
+          NODE_OPTIONS: --http-parser=legacy
