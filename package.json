@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/**/*.test.js",
-    "test:integration": "node integration_test/index.test.js",
+    "test:integration": "node integration_test",
     "lint": "eslint index.js ./src/**/*.js",
     "format": "prettier --config .prettierrc --write index.js ./src/**/*.js",
     "gentoc": "markdown-toc -i README.md",
