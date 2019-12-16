@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,3 +21,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm install
       - run: npm test
+      - run: npm run test:integration
+        env:
+          PUBLIC_KEY: xnd_public_development_2hi8lWQiSiR07H7n9RNt4HDmEGn5hJbUIDejBaqL44XtLzWkLd6ICd4LwJLrXRw
+          SECRET_KEY: xnd_development_chBDpzjQZEI8nncBLrWtwau5r7rgiuunCJ4JCqsd68rXemDd74BnRpdO0bIZAMK
