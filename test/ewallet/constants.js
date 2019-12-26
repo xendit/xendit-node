@@ -14,6 +14,15 @@ const VALID_CREATE_OVO_RESPONSE = {
   business_id: '12121212',
 };
 
+const VALID_GET_OVO_PAYMENT_STATUS = {
+  external_id: EXT_ID,
+  amount: AMOUNT,
+  transaction_date: String(new Date()),
+  business_id: '12121212',
+  ewallet_type: OVO_EWALLET_TYPE,
+  status: 'COMPLETED',
+};
+
 module.exports = {
   OVO_EWALLET_TYPE,
   DANA_EWALLET_TYPE,
@@ -22,4 +31,5 @@ module.exports = {
   PHONE,
   AMOUNT,
   VALID_CREATE_OVO_RESPONSE,
+  VALID_GET_OVO_PAYMENT_STATUS,
 };
