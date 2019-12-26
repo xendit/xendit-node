@@ -13,4 +13,3 @@ export function createPayment(data: {
   callbackURL: string;
   redirectURL: string;  
 }): Promise<object>;
-    
