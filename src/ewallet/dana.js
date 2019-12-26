@@ -31,4 +31,21 @@ function createPayment(data) {
   });
 }
 
-module.exports = { createPayment };
+function getByExtID(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['externalID'], data, reject);
+    fetchWithHTTPErr(
+      `${this.API_ENDPOINT}/external_id=${data.external_id}&ewallet_type=${DANA_EWALLET_TYPE}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        },
+      },
+    )
+      .then(resolve)
+      .catch(reject);
+  });
+}
+
+module.exports = { createPayment, getByExtID };
