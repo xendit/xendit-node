@@ -1,5 +1,6 @@
 const ovo = require('./ovo');
 const dana = require('./dana');
+const linkaja = require('./linkaja');
 
 const EWALLET_PATH = 'ewallets';
 
@@ -23,5 +24,6 @@ EWallet.prototype.createOVOPayment = ovo.createPayment;
 EWallet.prototype.getOVOPaymentStatusByExtID = ovo.getByExtID;
 EWallet.prototype.createDanaPayment = dana.createPayment;
 EWallet.prototype.getDanaPaymentStatusByExtID = dana.getByExtID;
+EWallet.prototype.createLinkAjaPayment = linkaja.createPayment;
 
 module.exports = EWallet;
