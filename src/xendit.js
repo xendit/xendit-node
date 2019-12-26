@@ -22,7 +22,7 @@ function Xendit(options) {
     this.opts,
   );
   this.Invoice = InvoiceService._constructorWithInjectedXenditOpts(this.opts);
-  this.EWallet = EWalletService._constructorWithInjectedXenditOpts(thi.opts);
+  this.EWallet = EWalletService._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;
