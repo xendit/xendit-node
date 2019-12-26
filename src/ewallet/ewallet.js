@@ -1,4 +1,6 @@
-const EWALLET_PATH = '';
+const ovo = require('./ovo');
+
+const EWALLET_PATH = 'ewallets';
 
 function EWallet(options) {
   let aggOpts = options;
@@ -15,5 +17,8 @@ EWallet._constructorWithInjectedXenditOpts = function(options) {
   EWallet._injectedOpts = options;
   return EWallet;
 };
+
+Disbursement.prototype.createOVOPayment = ovo.createPayment;
+Disbursement.prototype.getOVOPaymentStatusByExtID = ovo.getByExtID;
 
 module.exports = EWallet;

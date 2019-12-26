@@ -14,7 +14,7 @@ function createPayment(data) {
       data.xIdempotencyKey,
     );
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}/ewallets`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
       method: 'POST',
       headers,
       body: JSON.stringify(_transformEWalletForRequestBody(data)),
@@ -37,7 +37,7 @@ function getByExtID(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID'], data, reject);
     fetchWithHTTPErr(
-      `${this.API_ENDPOINT}/ewallets/external_id=${data.external_id}&ewallet_type=${OVO_EWALLET_TYPE}`,
+      `${this.API_ENDPOINT}/external_id=${data.external_id}&ewallet_type=${OVO_EWALLET_TYPE}`,
       {
         method: 'GET',
         headers: {
