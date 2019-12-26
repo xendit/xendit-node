@@ -1,4 +1,4 @@
-const E_WALLET_PATH = '';
+const EWALLET_PATH = '';
 
 function EWallet(options) {
   let aggOpts = options;
@@ -7,7 +7,7 @@ function EWallet(options) {
   }
 
   this.opts = aggOpts;
-  this.API_ENDPOINT = this.opts.xenditURL + E_WALLET_PATH;
+  this.API_ENDPOINT = this.opts.xenditURL + EWALLET_PATH;
 }
 
 EWallet._injectedOpts = {};
