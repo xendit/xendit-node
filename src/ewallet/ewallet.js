@@ -1,4 +1,5 @@
 const ovo = require('./ovo');
+const dana = require('./dana');
 
 const EWALLET_PATH = 'ewallets';
 
@@ -18,7 +19,9 @@ EWallet._constructorWithInjectedXenditOpts = function(options) {
   return EWallet;
 };
 
-Disbursement.prototype.createOVOPayment = ovo.createPayment;
-Disbursement.prototype.getOVOPaymentStatusByExtID = ovo.getByExtID;
+EWallet.prototype.createOVOPayment = ovo.createPayment;
+EWallet.prototype.getOVOPaymentStatusByExtID = ovo.getByExtID;
+EWallet.prototype.createDanaPayment = dana.createPayment;
+EWallet.prototype.getDanaPaymentStatusByExtID = dana.getByExtID;
 
 module.exports = EWallet;
