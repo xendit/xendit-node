@@ -17,20 +17,16 @@ function createPayment(data) {
     fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
       method: 'POST',
       headers,
-      body: JSON.stringify(_transformEWalletForRequestBody(data)),
+      body: JSON.stringify({
+        external_id: ewalletPayment.externalID,
+        amount: ewalletPayment.amount,
+        phone: ewalletPayment.phone,
+        ewallet_type: OVO_EWALLET_TYPE,
+      }),
     })
       .then(resolve)
       .catch(reject);
   });
-}
-
-function _transformEWalletForRequestBody(ewalletPayment) {
-  return {
-    external_id: ewalletPayment.externalID,
-    amount: ewalletPayment.amount,
-    phone: ewalletPayment.phone,
-    ewallet_type: OVO_EWALLET_TYPE,
-  };
 }
 
 function getByExtID(data) {
