@@ -1,6 +1,4 @@
-const { createToken } = require('./token');
 const { createCharge, captureCharge, getCharge } = require('./charge');
-const { createAuthentication } = require('./authentication');
 const {
   createAuthorization,
   reverseAuthorization,
@@ -28,9 +26,7 @@ Card._constructorWithInjectedXenditOpts = function(options) {
 
 Card.Status = CardStatus;
 
-Card.prototype.createToken = createToken;
 Card.prototype.createCharge = createCharge;
-Card.prototype.createAuthentication = createAuthentication;
 Card.prototype.captureCharge = captureCharge;
 Card.prototype.getCharge = getCharge;
 Card.prototype.createAuthorization = createAuthorization;
