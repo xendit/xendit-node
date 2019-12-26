@@ -74,20 +74,6 @@ card
 
 #### Methods
 
-- Create token
-
-```ts
-card.createToken(data: {
-  cardNumber: string;
-  expMonth: string;
-  expYear: string;
-  cardCVN: string;
-  isSingleUse: boolean;
-  amount?: number;
-  shouldAuthenticate?: boolean;
-})
-```
-
 - Create charge
 
 ```ts
@@ -115,15 +101,6 @@ card.captureCharge(data: {
 
 ```ts
 card.getCharge(data: { chargeID: string })
-```
-
-- Create Authentication
-
-```ts
-card.createAuthetication(data: {
-  amount: number;
-  tokenID: string;
-})
 ```
 
 - Create authorization
