@@ -4,7 +4,7 @@ const Card = x.Card;
 const card = new Card({});
 
 module.exports = function() {
-  return card.getCharge({ chargeID: '5e0461c615e99e428efad4bc' }).then(() => {
+  return card.getCharge({ chargeID: '5e046a736113354249aab8bd' }).then(() => {
     // eslint-disable-next-line no-console
     console.log('Card integration test done...');
   });
