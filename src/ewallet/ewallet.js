@@ -2,7 +2,7 @@ const ovo = require('./ovo');
 const dana = require('./dana');
 const linkaja = require('./linkaja');
 
-const EWALLET_PATH = 'ewallets';
+const EWALLET_PATH = '/ewallets';
 
 function EWallet(options) {
   let aggOpts = options;
