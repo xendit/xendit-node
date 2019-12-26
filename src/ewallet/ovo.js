@@ -18,9 +18,9 @@ function createPayment(data) {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        external_id: ewalletPayment.externalID,
-        amount: ewalletPayment.amount,
-        phone: ewalletPayment.phone,
+        external_id: data.externalID,
+        amount: data.amount,
+        phone: data.phone,
         ewallet_type: OVO_EWALLET_TYPE,
       }),
     })
