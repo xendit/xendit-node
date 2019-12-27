@@ -1,7 +1,7 @@
 const { promWithJsErr, Validate, fetchWithHTTPErr, Auth } = require('../utils');
 
 function operatePayment(action, data) {
-  promWithJsErr((resolve, reject) => {
+  return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['id'], data, reject);
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}/${action}!`, {
@@ -16,15 +16,15 @@ function operatePayment(action, data) {
 }
 
 function stopPayment(data) {
-  return operatePayment('stop', data);
+  return operatePayment.bind(this)('stop', data);
 }
 
 function pausePayment(data) {
-  return operatePayment('pause', data);
+  return operatePayment.bind(this)('pause', data);
 }
 
 function resumePayment(data) {
-  return operatePayment('resume', data);
+  return operatePayment.bind(this)('resume', data);
 }
 
 module.exports = { stopPayment, pausePayment, resumePayment };
