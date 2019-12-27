@@ -4,6 +4,7 @@ Promise.all([
   require('./disbursement.test')(),
   require('./invoice.test')(),
   require('./va.test')(),
+  require('./payout.test')(),
 ])
   .then(() => {
     // eslint-disable-next-line no-console
