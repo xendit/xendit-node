@@ -33,7 +33,7 @@ function getByExtID(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID'], data, reject);
     fetchWithHTTPErr(
-      `${this.API_ENDPOINT}/external_id=${data.externalID}&ewallet_type=${OVO_EWALLET_TYPE}`,
+      `${this.API_ENDPOINT}?external_id=${data.externalID}&ewallet_type=${OVO_EWALLET_TYPE}`,
       {
         method: 'GET',
         headers: {
