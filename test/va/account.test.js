@@ -83,7 +83,7 @@ module.exports = function(x) {
         .to.eventually.deep.equal(TestConstants.VA_DETAILS)
         .and.notify(done);
     });
-    it('should report required fields', done => {
+    it('should report missing required fields', done => {
       expect(va.getFixedVA({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
