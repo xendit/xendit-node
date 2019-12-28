@@ -3,4 +3,5 @@ export function createPayment(data: {
   amount: number;
   phone: string;
 }): Promise<object>;
+
 export function getByExtID(data: { externalID: string }): Promise<object>;

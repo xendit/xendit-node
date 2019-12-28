@@ -5,5 +5,6 @@ export function createPayment(data: {
   callbackURL: string;
   redirectURL: string;  
 }): Promise<object>;
+
 export function getByExtID(data: { externalID: string }): Promise<object>;
   
