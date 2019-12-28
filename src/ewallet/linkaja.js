@@ -9,14 +9,11 @@ function createPayment(data) {
       reject,
     );
 
-    const headers = Auth.basicHeaderWithIdempotencyKey(
-      this.opts.secretKey,
-      data.xIdempotencyKey,
-    );
-
     fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
       method: 'POST',
-      headers,
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
       body: JSON.stringify({
         external_id: data.externalID,
         phone: data.phone,
