@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha test/**/*.test.js",
     "test:integration": "node integration_test",
-    "lint": "eslint index.js ./src/**/*.js",
-    "format": "prettier --config .prettierrc --write index.js ./src/**/*.js",
+    "lint": "eslint index.js ./src/**/*.{js,ts}",
+    "format": "prettier --config .prettierrc --write index.js ./src/**/*.{js,json,ts}",
     "gentoc": "markdown-toc -i README.md",
     "release": "np"
   },
@@ -22,11 +22,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,json}": [
+    "*.{js,json,ts}": [
       "prettier --write",
       "git add"
     ],
-    "*.js": [
+    "*.{js,ts}": [
       "eslint",
       "git add"
     ],
