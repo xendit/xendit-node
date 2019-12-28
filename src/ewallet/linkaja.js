@@ -12,6 +12,7 @@ function createPayment(data) {
     fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
       },
       body: JSON.stringify({
