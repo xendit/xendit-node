@@ -5,28 +5,6 @@ This library is the abstraction of Xendit API for access from applications writt
 **Note**: This library is only meant for usage from server-side with Xendit secret API key.
 For PCI compliance to be maintained, tokenization of credt cards info should be done on client side with [Xendit.js](https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html).
 
-<!-- toc depthFrom:2 -->
-
-- [API Documentation](#api-documentation)
-- [Installation](#installation)
-- [Usage](#usage)
-  * [Card Services](#card-services)
-    + [Methods](#methods)
-  * [Virtual Account Services](#virtual-account-services)
-    + [Methods](#methods-1)
-  * [Disbursement Services](#disbursement-services)
-    + [Methods](#methods-2)
-  * [Invoice Services](#invoice-services)
-    + [Methods](#methods-3)
-  * [EWallet Services](#ewallet-services)
-    + [OVO](#ovo)
-      - [Methods](#methods-4)
-    + [Dana](#dana)
-      - [Methods](#methods-5)
-    + [LinkAja](#linkaja)
-      - [Methods](#methods-6)
-- [Contributing](#contributing)
-
 <!-- toc -->
 
 - [API Documentation](#api-documentation)
@@ -41,12 +19,7 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
   * [Invoice Services](#invoice-services)
     + [Methods](#methods-3)
   * [EWallet Services](#ewallet-services)
-    + [OVO](#ovo)
-    + [Methods](#methods-4)
-    + [Dana](#dana)
-    + [Methods](#methods-5)
-    + [LinkAja](#linkaja)
-    + [Methods](#methods-6)
+    + [Method](#method)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -430,7 +403,7 @@ i.getAllInvoices(data?: {
 
 ### EWallet Services
 
-Instanitiate Invoice service using constructor that has been injected with Xendit keys
+Instanitiate EWallet service using constructor that has been injected with Xendit keys
 
 ```js
 const { EWallet } = x;
@@ -438,107 +411,47 @@ const ewalletSpecificOptions = {};
 const ew = new EWallet(ewalletSpecificOptions);
 ```
 
-- #### OVO
-
-  Example: Create an OVO payment
+  Example: Create an ewallet payment
 
 ```js
 ew.ovo.createPayment({
     externalID: 'my-ovo-payment',
     amount: 1,
     phone: '081234567890',
+    ewalletType: 'OVO',
   })
   .then(r => {
-    console.log('create OVO payment detail:', r);
+    console.log('create ewallet payment detail:', r);
     return r;
   })
 ```
 
-  #### Methods
+#### Method
 
-  - Create an OVO payment
+- Create an ewallet payment
 ```ts
-ew.ovo.createPayment(data: {
+ew.createPayment(data: {
   externalID: string;
   amount: number;
-  phone: string;
-})
-```
-
-  - Get an OVO Payment Status
-```ts
-ew.ovo.getPaymentStatusByExtID(data: { externalID: string })
-```
-
-- #### Dana
-
-  Example: Create a dana payment
-
-```js
-ew.dana.createPayment({
-    externalID: 'my-dana-payment',
-    amount: 1,
-    callbackURL: 'https://my-shop.com/callbacks',
-    redirectURL: 'https://my-shop.com/home',
-  })
-  .then(r => {
-    console.log('create Dana payment detail:', r);
-    return r;
-  })
-```
-
-  #### Methods
-
-  - Create an Dana payment
-```ts
-ew.dana.createPayment(data: {
-  externalID: string;
-  amount: number;
+  phone?: string;
   expirationDate?: string;
-  callbackURL: string;
-  redirectURL: string;
+  callbackURL?: string;
+  redirectURL?: string;
+  items?: Array<{
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+  ewalletType: string;
 })
 ```
 
-- #### LinkAja
-
-  Example: Create a linkAja payment
-
-```js
-ew.linkaja.createPayment({
-    externalID: 'my-linkaja-payment',
-    phone: '081234567890',
-    amount: 30000,
-    items: [
-      {
-        id: '123123',
-        name: 'Phone Case',
-        price: 100000,
-        quantity: 1,
-      },
-      {
-        id: '345678',
-        name: 'Powerbank',
-        price: 200000,
-        quantity: 1,
-      },
-    ],
-    callbackURL: 'https://yourwebsite.com/callback',
-    redirectURL: 'https://yourwebsite.com/home',
-  })
-```
-
-  #### Methods
-
-  - Create an Dana payment
+- Get an ewallet Payment Status
 ```ts
-ew.linkaja.createPayment(data: {
-  externalID: string;
-  phone: string;
-  amount: number;
-  items: paymentItem[];
-  callbackURL: string;
-  redirectURL: string;
+ew.ovo.getPayment(data: {
+  externalID: string:
+  ewallet: string;
 })
 ```
 
