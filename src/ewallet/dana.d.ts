@@ -8,7 +8,7 @@ export = class OVO {
   createPayment(data: {
     externalID: string;
     amount: number;
-    expirationDate: string;
+    expirationDate?: string;
     callbackURL: string;
     redirectURL: string;  
   }): Promise<object>;
