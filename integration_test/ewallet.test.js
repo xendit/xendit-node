@@ -9,7 +9,7 @@ module.exports = function() {
       externalID: Date.now().toString(),
       phone: '081234567890',
       amount: 1,
-      ewalletType: 'OVO',
+      ewalletType: EWallet.EWalletType.OVO,
     })
     .then(r =>
       ew.getPayment({
