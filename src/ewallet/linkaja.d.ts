@@ -1,6 +1,6 @@
 import { EWalletOptions } from './ewallet_opts';
 
-interface paymentItem {
+interface PaymentItem {
   id: string;
   name: string;
   price: number;
@@ -17,7 +17,7 @@ export = class LinkAja {
     externalID: string;
     phone: string;
     amount: number;
-    items: paymentItem[];
+    items: PaymentItem[];
     callbackURL: string;
     redirectURL: string;  
   }): Promise<object>;
