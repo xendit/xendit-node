@@ -18,8 +18,12 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-2)
   * [Invoice Services](#invoice-services)
     + [Methods](#methods-3)
+  * [Recurring Payments Services](#recurring-payments-services)
+    + [Methods](#methods-4)
+  * [Payout Services](#payout-services)
+    + [Methods](#methods-5)
   * [EWallet Services](#ewallet-services)
-    + [Method](#method)
+    + [Methods](#methods-6)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -76,20 +80,6 @@ card
 
 #### Methods
 
-- Create token
-
-```ts
-card.createToken(data: {
-  cardNumber: string;
-  expMonth: string;
-  expYear: string;
-  cardCVN: string;
-  isSingleUse: boolean;
-  amount?: number;
-  shouldAuthenticate?: boolean;
-})
-```
-
 - Create charge
 
 ```ts
@@ -117,15 +107,6 @@ card.captureCharge(data: {
 
 ```ts
 card.getCharge(data: { chargeID: string })
-```
-
-- Create Authentication
-
-```ts
-card.createAuthetication(data: {
-  amount: number;
-  tokenID: string;
-})
 ```
 
 - Create authorization
@@ -401,6 +382,142 @@ i.getAllInvoices(data?: {
   })
 ```
 
+### Recurring Payments Services
+
+Instanitiate Recurring Payments service using constructor that has been injected with Xendit keys
+
+```js
+const { RecurringPayment } = x;
+const rpSpecificOptions = {};
+const rp = new RecurringPayment(rpSpecificOptions);
+```
+
+Example: Create a recurring payment
+
+```js
+rp.createPayment({
+  externalID: '123',
+  payerEmail: 'stanley@xendit.co',
+  description: 'Payment for something',
+  amount: 10000,
+  interval: RecurringPayment.Interval.Month,
+  intervalCount: 1,
+})
+  .then(({ id }) => {
+    console.log(`Recurring payment created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(
+      `Recurring payment creation failed with message: ${e.message}`,
+    );
+  });
+```
+
+#### Methods
+
+- Create recurring payment
+
+```ts
+rp.createPayment(data: {
+  externalID: string;
+  payerEmail: string;
+  description: string;
+  amount: number;
+  interval: Interval;
+  intervalCount: number;
+  totalRecurrence?: number;
+  invoiceDuration?: number;
+  shouldSendEmail?: boolean;
+  missedPaymentAction?: Action;
+  creditCardToken?: string;
+  startDate?: Date;
+  successRedirectURL?: string;
+  failureRedirectURL?: string;
+  recharge?: boolean;
+  chargeImmediately?: boolean;
+}): Promise<object>;
+```
+
+- Get recurring payment
+
+```ts
+rp.getPayment(data: { id: string }): Promise<object>;
+```
+
+- Edit recurring payment
+
+```ts
+rp.editPayment(data: {
+  id: string;
+  amount?: number;
+  creditCardToken?: string;
+  interval?: Interval;
+  intervalCount?: number;
+  shouldSendEmail?: boolean;
+  invoiceDuration?: number;
+  missedPaymentAction?: Action;
+}): Promise<object>;
+```
+
+- Stop recurring payment
+
+```ts
+rp.stopPayment(data: { id: string }): Promise<object>;
+```
+
+- Pause recurring payment
+
+```ts
+rp.pausePayment(data: { id: string }): Promise<object>;
+```
+
+- Resume recurring payment
+
+```ts
+rp.resumePayment(data: { id: string }): Promise<object>;
+```
+
+### Payout Services
+
+Instanitiate Payout service using constructor that has been injected with Xendit keys
+
+```js
+const { Payout } = x;
+const payoutSpecificOptions = {};
+const p = new Payout(payoutSpecificOptions);
+```
+
+Example: Create a payout
+
+```js
+p.createPayout({
+  externalID: 'your-external-id',
+  amount: 100000,
+}).then(({ id }) => {
+  console.log(`Invoice created with ID: ${id}`);
+});
+```
+
+#### Methods
+
+- Create a payout
+
+```ts
+p.createPayout(data: { externalID: string; amount: string })
+```
+
+- Get a payout
+
+```ts
+p.getPayout(data: { id: string })
+```
+
+- Void a payout
+
+```ts
+p.voidPayout(data: { id: string })
+```
+
 ### EWallet Services
 
 Instanitiate EWallet service using constructor that has been injected with Xendit keys
@@ -426,7 +543,7 @@ ew.ovo.createPayment({
   })
 ```
 
-#### Method
+#### Methods
 
 - Create an ewallet payment
 ```ts

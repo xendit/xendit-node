@@ -1,9 +1,11 @@
 console.log('Starting integration test...'); // eslint-disable-line no-console
 Promise.all([
-  // require('./card.test')(),
-  // require('./disbursement.test')(),
-  // require('./invoice.test')(),
-  // require('./va.test')(),
+  require('./card.test')(),
+  require('./disbursement.test')(),
+  require('./invoice.test')(),
+  require('./va.test')(),
+  require('./payout.test')(),
+  require('./recurring.test')(),
   require('./ewallet.test')(),
 ])
   .then(() => {

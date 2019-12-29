@@ -3,8 +3,10 @@ import { CardService } from './card';
 import { VAService } from './va';
 import { DisbursementService } from './disbursement';
 import { InvoiceService } from './invoice';
-import { EWalletService } from './ewallet';
+import { PayoutService } from './payout';
+import { RecurringPayment } from './recurring';
 import { XenditOptions } from './xendit_opts';
+import { EWalletService } from './ewallet';
 
 export = class Xendit {
   constructor(opts: XenditOptions);
@@ -13,5 +15,7 @@ export = class Xendit {
   VirtualAcc: typeof VAService;
   Disbursement: typeof DisbursementService;
   Invoice: typeof InvoiceService;
+  Payout: typeof PayoutService;
+  RecurringPayment: typeof RecurringPayment;
   EWalletService: typeof EWalletService;
 };

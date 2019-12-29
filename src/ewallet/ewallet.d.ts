@@ -1,5 +1,3 @@
-
-import linkaja from './linkaja';
 import { XenditOptions } from '../xendit_opts';
 
 interface PaymentItem {

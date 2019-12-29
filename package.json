@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha test/**/*.test.js",
     "test:integration": "node integration_test",
-    "lint": "eslint index.js ./src/**/*.js",
-    "format": "prettier --config .prettierrc --write index.js ./src/**/*.js",
+    "lint": "eslint index.js ./src/**/*.{js,ts}",
+    "format": "prettier --config .prettierrc --write index.js ./src/**/*.{js,json,ts}",
     "gentoc": "markdown-toc -i README.md",
     "release": "np"
   },
@@ -22,11 +22,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,json}": [
+    "*.{js,json,ts}": [
       "prettier --write",
       "git add"
     ],
-    "*.js": [
+    "*.{js,ts}": [
       "eslint",
       "git add"
     ],
@@ -51,19 +51,22 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
     "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "husky": "^3.0.5",
     "lint-staged": "^9.3.0",
     "markdown-toc": "^1.2.0",
     "mocha": "^6.2.0",
     "nock": "^11.3.5",
     "np": "^5.1.2",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "typescript": "^3.7.4"
   }
 }
