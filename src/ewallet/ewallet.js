@@ -1,4 +1,10 @@
-const { promWithJsErr, Auth, Validate, fetchWithHTTPErr } = require('../utils');
+const {
+  promWithJsErr,
+  Auth,
+  Validate,
+  fetchWithHTTPErr,
+  queryStringWithoutUndefined,
+} = require('../utils');
 
 const EWALLET_PATH = '/ewallets';
 
@@ -26,7 +32,7 @@ EWallet.prototype.createPayment = function(data) {
       reject,
     );
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
+    fetchWithHTTPErr(this.API_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,15 +57,20 @@ EWallet.prototype.createPayment = function(data) {
 EWallet.prototype.getPayment = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID', 'ewalletType'], data, reject);
-    fetchWithHTTPErr(
-      `${this.API_ENDPOINT}?external_id=${data.externalID}&ewallet_type=${data.ewalletType}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
+
+    const queryStr = data
+      ? queryStringWithoutUndefined({
+          external_id: data.externalID,
+          ewallet_type: data.ewalletType,
+        })
+      : '';
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}?${queryStr}`, {
+      method: 'GET',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
       },
-    )
+    })
       .then(resolve)
       .catch(reject);
   });

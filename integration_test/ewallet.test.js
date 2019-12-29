@@ -7,7 +7,7 @@ module.exports = function() {
   return ew
     .createPayment({
       externalID: Date.now().toString(),
-      phone: '087877971875',
+      phone: '081234567890',
       amount: 1,
       ewalletType: 'OVO',
     })
