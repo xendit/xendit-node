@@ -80,8 +80,9 @@ describe('EWallet Service', function() {
     it('should report missing Dana required fields', done => {
       expect(
         ewallet.createPayment({
-          external_id: TestConstants.EXT_ID,
+          externalID: TestConstants.EXT_ID,
           amount: TestConstants.AMOUNT,
+          redirectURL: TestConstants.REDIRECT_URL,
           ewallet_type: TestConstants.DANA_EWALLET_TYPE,
         }),
       )
@@ -97,9 +98,11 @@ describe('EWallet Service', function() {
     it('should report missing LinkAja required fields', done => {
       expect(
         ewallet.createPayment({
-          external_id: TestConstants.EXT_ID,
+          externalID: TestConstants.EXT_ID,
+          phone: TestConstants.PHONE,
           amount: TestConstants.AMOUNT,
-          ewallet_type: TestConstants.LINKAJA_EWALLET_TYPE,
+          callbackURL: TestConstants.CALLBACK_URL,
+          redirectURL: TestConstants.REDIRECT_URL,
         }),
       )
         .to.eventually.to.be.rejected.then(e =>
