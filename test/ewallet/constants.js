@@ -5,6 +5,22 @@ const LINKAJA_EWALLET_TYPE = 'LINKAJA';
 const EXT_ID = '123';
 const PHONE = '081234567890';
 const AMOUNT = 10000;
+const CALLBACK_URL = 'https://yourwebsite.com/callback';
+const REDIRECT_URL = 'https://yourwebsite.com/order/123';
+const ITEMS = [
+  {
+    id: '123123',
+    name: 'Phone Case',
+    price: 100000,
+    quantity: 1,
+  },
+  {
+    id: '345678',
+    name: 'Powerbank',
+    price: 200000,
+    quantity: 1,
+  },
+];
 
 const VALID_CREATE_OVO_RESPONSE = {
   transaction_date: String(new Date()),
@@ -23,6 +39,15 @@ const VALID_GET_OVO_PAYMENT_STATUS_RESPONSE = {
   status: 'COMPLETED',
 };
 
+const VALID_CREATE_LINKAJA_RESPONSE = {
+  checkout_url:
+    'https://ewallet-linkaja.xendit.co/checkouts/75d64796-c9e7-46e9-8c96-3edeacf3817b',
+  transaction_date: String(new Date()),
+  amount: 30000,
+  external_id: EXT_ID,
+  ewallet_type: LINKAJA_EWALLET_TYPE,
+};
+
 module.exports = {
   OVO_EWALLET_TYPE,
   DANA_EWALLET_TYPE,
@@ -30,6 +55,10 @@ module.exports = {
   EXT_ID,
   PHONE,
   AMOUNT,
+  CALLBACK_URL,
+  REDIRECT_URL,
+  ITEMS,
   VALID_CREATE_OVO_RESPONSE,
   VALID_GET_OVO_PAYMENT_STATUS_RESPONSE,
+  VALID_CREATE_LINKAJA_RESPONSE,
 };

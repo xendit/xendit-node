@@ -19,31 +19,32 @@ module.exports = function(x) {
         external_id: TestConstants.EXT_ID,
         phone: TestConstants.PHONE,
         amount: TestConstants.AMOUNT,
+        items: TestConstants.ITEMS,
+        callback_url: TestConstants.CALLBACK_URL,
+        redirect_url: TestConstants.REDIRECT_URL,
         ewallet_type: TestConstants.LINKAJA_EWALLET_TYPE,
       })
-      .reply(200, TestConstants.VALID_CREATE_OVO_RESPONSE);
-    nock(x.opts.xenditURL)
-      .get(
-        `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.LINKAJA_EWALLET_TYPE}`,
-      )
-      .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS);
+      .reply(200, TestConstants.VALID_CREATE_LINKAJA_RESPONSE);
   });
 
   describe('createPayment', () => {
-    it('should create an OVO Payment', done => {
+    it('should create an linkAja Payment', done => {
       expect(
-        ewallet.ovo.createPayment({
+        ewallet.linkaja.createPayment({
           externalID: TestConstants.EXT_ID,
           phone: TestConstants.PHONE,
           amount: TestConstants.AMOUNT,
+          items: TestConstants.ITEMS,
+          callbackURL: TestConstants.CALLBACK_URL,
+          redirectURL: TestConstants.REDIRECT_URL,
         }),
       )
-        .to.eventually.deep.equal(TestConstants.VALID_CREATE_OVO_RESPONSE)
+        .to.eventually.deep.equal(TestConstants.VALID_CREATE_LINKAJA_RESPONSE)
         .then(() => done())
         .catch(e => done(e));
     });
     it('should report missing required fields', done => {
-      expect(ewallet.ovo.createPayment({}))
+      expect(ewallet.linkaja.createPayment({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
