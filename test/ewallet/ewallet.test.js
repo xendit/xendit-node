@@ -60,6 +60,57 @@ describe('EWallet Service', function() {
         .then(() => done())
         .catch(e => done(e));
     });
+    it('should report missing OVO required fields', done => {
+      expect(
+        ewallet.createPayment({
+          external_id: TestConstants.EXT_ID,
+          amount: TestConstants.AMOUNT,
+          ewallet_type: TestConstants.OVO_EWALLET_TYPE,
+        }),
+      )
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+    it('should report missing Dana required fields', done => {
+      expect(
+        ewallet.createPayment({
+          external_id: TestConstants.EXT_ID,
+          amount: TestConstants.AMOUNT,
+          ewallet_type: TestConstants.DANA_EWALLET_TYPE,
+        }),
+      )
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+    it('should report missing LinkAja required fields', done => {
+      expect(
+        ewallet.createPayment({
+          external_id: TestConstants.EXT_ID,
+          amount: TestConstants.AMOUNT,
+          ewallet_type: TestConstants.LINKAJA_EWALLET_TYPE,
+        }),
+      )
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
   });
 
   describe('getPayment', () => {

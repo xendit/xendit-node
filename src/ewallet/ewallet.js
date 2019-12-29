@@ -36,7 +36,7 @@ EWallet.prototype.createPayment = function(data) {
     if (data.ewalletType) {
       switch (data.ewalletType) {
         case 'OVO':
-          compulsoryFields = ['externalID', 'amount', 'ewalletType'];
+          compulsoryFields = ['externalID', 'amount', 'phone', 'ewalletType'];
           break;
         case 'DANA':
           compulsoryFields = [
