@@ -7,9 +7,11 @@ module.exports = function() {
   return ew
     .createPayment({
       externalID: Date.now().toString(),
-      phone: '081234567890',
-      amount: 1,
-      ewalletType: EWallet.EWalletType.OVO,
+      amount: 11000,
+      expiration_date: '2020-02-20T00:00:00.000Z',
+      callback_url: 'https://my-shop.com/callbacks',
+      redirect_url: 'https://my-shop.com/home',
+      ewalletType: EWallet.EWalletType.DANA,
     })
     .then(r =>
       ew.getPayment({
