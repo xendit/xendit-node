@@ -535,7 +535,7 @@ ew.ovo.createPayment({
     externalID: 'my-ovo-payment',
     amount: 1,
     phone: '081234567890',
-    ewalletType: 'OVO',
+    ewalletType: EWallet.EWalletType.OVO,
   })
   .then(r => {
     console.log('create ewallet payment detail:', r);
@@ -560,7 +560,7 @@ ew.createPayment(data: {
     price: number;
     quantity: number;
   }>;
-  ewalletType: string;
+  ewalletType: CreateSupportWalletTypes;
 })
 ```
 
@@ -568,7 +568,7 @@ ew.createPayment(data: {
 ```ts
 ew.ovo.getPayment(data: {
   externalID: string:
-  ewallet: string;
+  ewalletType: GetSupportWalletTypes;
 })
 ```
 
