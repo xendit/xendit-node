@@ -7,7 +7,7 @@ ew.ovo
   .createPayment({
     externalID: new Date(),
     amount: 1,
-    phone: '087877971875',
+    phone: '081234567890',
   })
   .then(r => {
     console.log('create OVO payment detail:', r); // eslint-disable-line no-console
