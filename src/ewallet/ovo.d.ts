@@ -4,4 +4,4 @@ export function createPayment(data: {
   phone: string;
 }): Promise<object>;
 
-export function getByExtID(data: { externalID: string }): Promise<object>;
+export function getPaymentStatusByExtID(data: { externalID: string }): Promise<object>;

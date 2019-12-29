@@ -29,10 +29,10 @@ module.exports = function(x) {
       .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS);
   });
 
-  describe('createOVOPayment', () => {
+  describe('createPayment', () => {
     it('should create an OVO Payment', done => {
       expect(
-        ewallet.createOVOPayment({
+        ewallet.ovo.createPayment({
           externalID: TestConstants.EXT_ID,
           phone: TestConstants.PHONE,
           amount: TestConstants.AMOUNT,
@@ -43,7 +43,7 @@ module.exports = function(x) {
         .catch(e => done(e));
     });
     it('should report missing required fields', done => {
-      expect(ewallet.createOVOPayment({}))
+      expect(ewallet.ovo.createPayment({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
@@ -58,7 +58,7 @@ module.exports = function(x) {
   describe('getOVOPaymentStatusByExtID', () => {
     it('should get OVO Payment Status', done => {
       expect(
-        ewallet.getOVOPaymentStatusByExtID({
+        ewallet.ovo.getPaymentStatusByExtID({
           externalID: TestConstants.EXT_ID,
         }),
       )
@@ -67,7 +67,7 @@ module.exports = function(x) {
         .catch(e => done(e));
     });
     it('should report missing required fields', done => {
-      expect(ewallet.getOVOPaymentStatusByExtID({}))
+      expect(ewallet.ovo.getPaymentStatusByExtID({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

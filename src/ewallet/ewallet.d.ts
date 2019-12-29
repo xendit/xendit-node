@@ -8,8 +8,8 @@ export = class EWallet {
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
   ) => typeof EWallet;
-  createOVOPayment = ovo.createPayment;
-  getOVOPaymentStatusByExtID = ovo.getByExtID;
+
+  ovo: typeof ovo;
   createDanaPayment = dana.createPayment;
   getDanaPaymentStatusByExtID = dana.getByExtID;
   createLinkAjaPayment = linkaja.createPayment;

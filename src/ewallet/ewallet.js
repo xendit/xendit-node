@@ -1,4 +1,4 @@
-const ovo = require('./ovo');
+const OVO = require('./ovo');
 const dana = require('./dana');
 const linkaja = require('./linkaja');
 
@@ -11,7 +11,11 @@ function EWallet(options) {
   }
 
   this.opts = aggOpts;
-  this.API_ENDPOINT = this.opts.xenditURL + EWALLET_PATH;
+  this.opts.API_ENDPOINT = this.opts.xenditURL + EWALLET_PATH;
+
+  let ovo = OVO._constructorWithInjectedXenditOpts(this.opts);
+
+  this.ovo = new ovo({});
 }
 
 EWallet._injectedOpts = {};
@@ -20,8 +24,6 @@ EWallet._constructorWithInjectedXenditOpts = function(options) {
   return EWallet;
 };
 
-EWallet.prototype.createOVOPayment = ovo.createPayment;
-EWallet.prototype.getOVOPaymentStatusByExtID = ovo.getByExtID;
 EWallet.prototype.createDanaPayment = dana.createPayment;
 EWallet.prototype.getDanaPaymentStatusByExtID = dana.getByExtID;
 EWallet.prototype.createLinkAjaPayment = linkaja.createPayment;

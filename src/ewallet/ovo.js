@@ -1,7 +1,24 @@
 const { Validate, Auth, fetchWithHTTPErr, promWithJsErr } = require('../utils');
 const OVO_EWALLET_TYPE = 'OVO';
 
-function createPayment(data) {
+function OVO(options) {
+  let aggOpts = options;
+  if (OVO._injectedOpts && Object.keys(OVO._injectedOpts).length > 0) {
+    aggOpts = Object.assign({}, options, OVO._injectedOpts);
+  }
+
+  this.opts = aggOpts;
+  this.API_ENDPOINT = this.opts.API_ENDPOINT;
+  this.EWALLET_TYPE = 'OVO';
+}
+
+OVO._injectedOpts = {};
+OVO._constructorWithInjectedXenditOpts = function(options) {
+  OVO._injectedOpts = options;
+  return OVO;
+};
+
+OVO.prototype.createPayment = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(
       ['externalID', 'amount', 'phone'],
@@ -19,15 +36,15 @@ function createPayment(data) {
         external_id: data.externalID,
         amount: data.amount,
         phone: data.phone,
-        ewallet_type: OVO_EWALLET_TYPE,
+        ewallet_type: this.EWALLET_TYPE,
       }),
     })
       .then(resolve)
       .catch(reject);
   });
-}
+};
 
-function getByExtID(data) {
+OVO.prototype.getPaymentStatusByExtID = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID'], data, reject);
     fetchWithHTTPErr(
@@ -42,6 +59,6 @@ function getByExtID(data) {
       .then(resolve)
       .catch(reject);
   });
-}
+};
 
-module.exports = { createPayment, getByExtID };
+module.exports = OVO;
