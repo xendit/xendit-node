@@ -7,7 +7,7 @@ ew.ovo
   .createPayment({
     externalID: new Date(),
     amount: 1,
-    phone: '081234567890',
+    phone: '087877971875',
   })
   .then(r => {
     console.log('create OVO payment detail:', r); // eslint-disable-line no-console
@@ -25,18 +25,19 @@ ew.ovo
     process.exit(1);
   });
 
-ew.createDanaPayment({
-  externalID: new Date(),
-  amount: 1,
-  callbackURL: 'http://google.com',
-  redirectURL: 'http://google.com',
-})
+ew.dana
+  .createPayment({
+    externalID: new Date(),
+    amount: 1,
+    callbackURL: 'http://google.com',
+    redirectURL: 'http://google.com',
+  })
   .then(r => {
     console.log('create dana payment detail:', r); // eslint-disable-line no-console
     return r;
   })
   .then(({ external_id }) =>
-    ew.getDanaPaymentStatusByExtID({ externalID: external_id }),
+    ew.dana.getPaymentStatusByExtID({ externalID: external_id }),
   )
   .then(r => {
     console.log('Dana payment status detail:', r); // eslint-disable-line no-console
@@ -47,27 +48,28 @@ ew.createDanaPayment({
     process.exit(1);
   });
 
-ew.createLinkAjaPayment({
-  externalID: new Date(),
-  phone: '081234567890',
-  amount: 30000,
-  items: [
-    {
-      id: '123123',
-      name: 'Phone Case',
-      price: 100000,
-      quantity: 1,
-    },
-    {
-      id: '345678',
-      name: 'Powerbank',
-      price: 200000,
-      quantity: 1,
-    },
-  ],
-  callbackURL: 'https://yourwebsite.com/callback',
-  redirectURL: 'https://yourwebsite.com/callback',
-})
+ew.linkaja
+  .createPayment({
+    externalID: new Date(),
+    phone: '081234567890',
+    amount: 30000,
+    items: [
+      {
+        id: '123123',
+        name: 'Phone Case',
+        price: 100000,
+        quantity: 1,
+      },
+      {
+        id: '345678',
+        name: 'Powerbank',
+        price: 200000,
+        quantity: 1,
+      },
+    ],
+    callbackURL: 'https://yourwebsite.com/callback',
+    redirectURL: 'https://yourwebsite.com/callback',
+  })
   .then(r => {
     console.log('create linkAja payment detail:', r); // eslint-disable-line no-console
     return r;

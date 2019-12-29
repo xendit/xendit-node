@@ -1,5 +1,6 @@
 const { Validate, Auth, fetchWithHTTPErr, promWithJsErr } = require('../utils');
-const OVO_EWALLET_TYPE = 'OVO';
+
+const OVO_EWALLET_PATH = '';
 
 function OVO(options) {
   let aggOpts = options;
@@ -8,12 +9,12 @@ function OVO(options) {
   }
 
   this.opts = aggOpts;
-  this.API_ENDPOINT = this.opts.API_ENDPOINT;
+  this.API_ENDPOINT = this.opts.eWalletURL + OVO_EWALLET_PATH;
   this.EWALLET_TYPE = 'OVO';
 }
 
 OVO._injectedOpts = {};
-OVO._constructorWithInjectedXenditOpts = function(options) {
+OVO._constructorWithInjectedEWalletOpts = function(options) {
   OVO._injectedOpts = options;
   return OVO;
 };
@@ -48,7 +49,7 @@ OVO.prototype.getPaymentStatusByExtID = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID'], data, reject);
     fetchWithHTTPErr(
-      `${this.API_ENDPOINT}?external_id=${data.externalID}&ewallet_type=${OVO_EWALLET_TYPE}`,
+      `${this.API_ENDPOINT}?external_id=${data.externalID}&ewallet_type=${this.EWALLET_TYPE}`,
       {
         method: 'GET',
         headers: {

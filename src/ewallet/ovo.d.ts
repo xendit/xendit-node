@@ -1,7 +1,14 @@
-export function createPayment(data: {
-  externalID: string;
-  amount: number;
-  phone: string;
-}): Promise<object>;
+import { EWalletOptions } from './ewallet_opts';
 
-export function getPaymentStatusByExtID(data: { externalID: string }): Promise<object>;
+export = class OVO {
+  constructor({});
+  static _constructorWithInjectedEWalletOpts: (
+    opts: EWalletOptions,
+  ) => typeof OVO;
+  createPayment(data: {
+    externalID: string;
+    amount: number;
+    phone: string;
+  }): Promise<object>;
+  getPaymentStatusByExtID(data: { externalID: string }): Promise<object>;
+};
