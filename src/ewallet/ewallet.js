@@ -1,5 +1,4 @@
 const { promWithJsErr, Auth, Validate, fetchWithHTTPErr } = require('../utils');
-const Dana = require('./dana');
 const LinkAja = require('./linkaja');
 
 const EWALLET_PATH = '/ewallets';
@@ -14,10 +13,8 @@ function EWallet(options) {
   this.opts.eWalletURL = this.opts.xenditURL + EWALLET_PATH;
   this.API_ENDPOINT = this.opts.xenditURL + EWALLET_PATH;
 
-  let dana = Dana._constructorWithInjectedEWalletOpts(this.opts);
   let linkaja = LinkAja._constructorWithInjectedEWalletOpts(this.opts);
 
-  this.dana = new dana({});
   this.linkaja = new linkaja({});
 }
 
@@ -45,6 +42,9 @@ EWallet.prototype.createPayment = function(data) {
         external_id: data.externalID,
         amount: data.amount,
         phone: data.phone,
+        expiration_date: data.expirationDate,
+        callback_url: data.callbackURL,
+        redirec_url: data.redirecURL,
         ewallet_type: data.ewalletType,
       }),
     })

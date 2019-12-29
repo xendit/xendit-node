@@ -1,5 +1,4 @@
-import ovo  from './ovo';
-import dana from './dana';
+
 import linkaja from './linkaja';
 import { XenditOptions } from '../xendit_opts';
 
@@ -11,7 +10,10 @@ export = class EWallet {
   createPayment(data: {
     externalID: string;
     amount: number;
-    phone: string;
+    phone?: string;
+    expirationDate?: string;
+    callbackURL?: string;
+    redirectURL?: string;
     ewalletType: string;
   }): Promise<object>;
   getPayment(data: {
