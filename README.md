@@ -566,7 +566,7 @@ ew.createPayment(data: {
 
 - Get an ewallet Payment Status
 ```ts
-ew.ovo.getPayment(data: {
+ew.getPayment(data: {
   externalID: string:
   ewalletType: GetSupportWalletTypes;
 })
