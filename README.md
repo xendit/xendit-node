@@ -5,6 +5,28 @@ This library is the abstraction of Xendit API for access from applications writt
 **Note**: This library is only meant for usage from server-side with Xendit secret API key.
 For PCI compliance to be maintained, tokenization of credt cards info should be done on client side with [Xendit.js](https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html).
 
+<!-- toc depthFrom:2 -->
+
+- [API Documentation](#api-documentation)
+- [Installation](#installation)
+- [Usage](#usage)
+  * [Card Services](#card-services)
+    + [Methods](#methods)
+  * [Virtual Account Services](#virtual-account-services)
+    + [Methods](#methods-1)
+  * [Disbursement Services](#disbursement-services)
+    + [Methods](#methods-2)
+  * [Invoice Services](#invoice-services)
+    + [Methods](#methods-3)
+  * [EWallet Services](#ewallet-services)
+    + [OVO](#ovo)
+      - [Methods](#methods-4)
+    + [Dana](#dana)
+      - [Methods](#methods-5)
+    + [LinkAja](#linkaja)
+      - [Methods](#methods-6)
+- [Contributing](#contributing)
+
 <!-- toc -->
 
 - [API Documentation](#api-documentation)
