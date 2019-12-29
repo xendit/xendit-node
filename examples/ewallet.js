@@ -29,8 +29,8 @@ ew.dana
   .createPayment({
     externalID: new Date(),
     amount: 1,
-    callbackURL: 'http://google.com',
-    redirectURL: 'http://google.com',
+    callbackURL: 'https://my-shop.com/callbacks',
+    redirectURL: 'https://my-shop.com/home',
   })
   .then(r => {
     console.log('create dana payment detail:', r); // eslint-disable-line no-console
@@ -68,7 +68,7 @@ ew.linkaja
       },
     ],
     callbackURL: 'https://yourwebsite.com/callback',
-    redirectURL: 'https://yourwebsite.com/callback',
+    redirectURL: 'https://yourwebsite.com/home',
   })
   .then(r => {
     console.log('create linkAja payment detail:', r); // eslint-disable-line no-console

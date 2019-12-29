@@ -18,6 +18,13 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-2)
   * [Invoice Services](#invoice-services)
     + [Methods](#methods-3)
+  * [EWallet Services](#ewallet-services)
+    + [OVO](#ovo)
+    + [Methods](#methods-4)
+    + [Dana](#dana)
+    + [Methods](#methods-5)
+    + [LinkAja](#linkaja)
+    + [Methods](#methods-6)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -397,6 +404,120 @@ i.getAllInvoices(data?: {
     onDemandLink?: string;
     recurringPaymentID?: string;
   })
+```
+
+### EWallet Services
+
+Instanitiate Invoice service using constructor that has been injected with Xendit keys
+
+```js
+const { EWallet } = x;
+const ewalletSpecificOptions = {};
+const ew = new EWallet(ewalletSpecificOptions);
+```
+
+- #### OVO
+
+  Example: Create an OVO payment
+
+```js
+ew.ovo.createPayment({
+    externalID: 'my-ovo-payment',
+    amount: 1,
+    phone: '081234567890',
+  })
+  .then(r => {
+    console.log('create OVO payment detail:', r);
+    return r;
+  })
+```
+
+  #### Methods
+
+  - Create an OVO payment
+```ts
+ew.ovo.createPayment(data: {
+  externalID: string;
+  amount: number;
+  phone: string;
+})
+```
+
+  - Get an OVO Payment Status
+```ts
+ew.ovo.getPaymentStatusByExtID(data: { externalID: string })
+```
+
+- #### Dana
+
+  Example: Create a dana payment
+
+```js
+ew.dana.createPayment({
+    externalID: 'my-dana-payment',
+    amount: 1,
+    callbackURL: 'https://my-shop.com/callbacks',
+    redirectURL: 'https://my-shop.com/home',
+  })
+  .then(r => {
+    console.log('create Dana payment detail:', r);
+    return r;
+  })
+```
+
+  #### Methods
+
+  - Create an Dana payment
+```ts
+ew.dana.createPayment(data: {
+  externalID: string;
+  amount: number;
+  expirationDate?: string;
+  callbackURL: string;
+  redirectURL: string;
+})
+```
+
+- #### LinkAja
+
+  Example: Create a linkAja payment
+
+```js
+ew.linkaja.createPayment({
+    externalID: 'my-linkaja-payment',
+    phone: '081234567890',
+    amount: 30000,
+    items: [
+      {
+        id: '123123',
+        name: 'Phone Case',
+        price: 100000,
+        quantity: 1,
+      },
+      {
+        id: '345678',
+        name: 'Powerbank',
+        price: 200000,
+        quantity: 1,
+      },
+    ],
+    callbackURL: 'https://yourwebsite.com/callback',
+    redirectURL: 'https://yourwebsite.com/home',
+  })
+```
+
+  #### Methods
+
+  - Create an Dana payment
+```ts
+ew.linkaja.createPayment(data: {
+  externalID: string;
+  phone: string;
+  amount: number;
+  items: paymentItem[];
+  callbackURL: string;
+  redirectURL: string;
+})
 ```
 
 ## Contributing
