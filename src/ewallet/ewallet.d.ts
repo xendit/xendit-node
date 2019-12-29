@@ -2,6 +2,13 @@
 import linkaja from './linkaja';
 import { XenditOptions } from '../xendit_opts';
 
+interface PaymentItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 export = class EWallet {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
@@ -14,6 +21,7 @@ export = class EWallet {
     expirationDate?: string;
     callbackURL?: string;
     redirectURL?: string;
+    items?: PaymentItem[];
     ewalletType: string;
   }): Promise<object>;
   getPayment(data: {

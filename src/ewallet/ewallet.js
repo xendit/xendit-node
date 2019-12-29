@@ -1,5 +1,4 @@
 const { promWithJsErr, Auth, Validate, fetchWithHTTPErr } = require('../utils');
-const LinkAja = require('./linkaja');
 
 const EWALLET_PATH = '/ewallets';
 
@@ -10,12 +9,7 @@ function EWallet(options) {
   }
 
   this.opts = aggOpts;
-  this.opts.eWalletURL = this.opts.xenditURL + EWALLET_PATH;
   this.API_ENDPOINT = this.opts.xenditURL + EWALLET_PATH;
-
-  let linkaja = LinkAja._constructorWithInjectedEWalletOpts(this.opts);
-
-  this.linkaja = new linkaja({});
 }
 
 EWallet._injectedOpts = {};
@@ -44,7 +38,8 @@ EWallet.prototype.createPayment = function(data) {
         phone: data.phone,
         expiration_date: data.expirationDate,
         callback_url: data.callbackURL,
-        redirec_url: data.redirecURL,
+        redirect_url: data.redirectURL,
+        items: data.items,
         ewallet_type: data.ewalletType,
       }),
     })
