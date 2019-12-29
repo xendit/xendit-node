@@ -1,5 +1,4 @@
-const { Validate, Auth, fetchWithHTTPErr, promWithJsErr } = require('../utils');
-const OVO = require('./ovo');
+const { promWithJsErr, Auth, Validate, fetchWithHTTPErr } = require('../utils');
 const Dana = require('./dana');
 const LinkAja = require('./linkaja');
 
@@ -15,11 +14,9 @@ function EWallet(options) {
   this.opts.eWalletURL = this.opts.xenditURL + EWALLET_PATH;
   this.API_ENDPOINT = this.opts.xenditURL + EWALLET_PATH;
 
-  let ovo = OVO._constructorWithInjectedEWalletOpts(this.opts);
   let dana = Dana._constructorWithInjectedEWalletOpts(this.opts);
   let linkaja = LinkAja._constructorWithInjectedEWalletOpts(this.opts);
 
-  this.ovo = new ovo({});
   this.dana = new dana({});
   this.linkaja = new linkaja({});
 }
