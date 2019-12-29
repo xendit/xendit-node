@@ -8,9 +8,14 @@ export = class EWallet {
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
   ) => typeof EWallet;
-
-  ovo: typeof ovo;
-  createDanaPayment = dana.createPayment;
-  getDanaPaymentStatusByExtID = dana.getByExtID;
-  createLinkAjaPayment = linkaja.createPayment;
+  createPayment(data: {
+    externalID: string;
+    amount: number;
+    phone: string;
+    ewalletType: string;
+  }): Promise<object>;
+  getPayment(data: {
+    externalID: string;
+    ewalletType: string;
+  }): Promise<object>;
 };

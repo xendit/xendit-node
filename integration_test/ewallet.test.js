@@ -4,13 +4,19 @@ const { EWallet } = x;
 const ew = new EWallet({});
 
 module.exports = function() {
-  return ew.ovo
+  return ew
     .createPayment({
       externalID: Date.now().toString(),
-      phone: '081234567890',
+      phone: '087877971875',
       amount: 1,
+      ewalletType: 'OVO',
     })
-    .then(r => ew.ovo.getPaymentStatusByExtID({ externalID: r.external_id }))
+    .then(r =>
+      ew.getPayment({
+        externalID: r.external_id,
+        ewalletType: r.ewallet_type,
+      }),
+    )
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('EWallet integration test done...');
