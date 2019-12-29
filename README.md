@@ -531,7 +531,7 @@ const ew = new EWallet(ewalletSpecificOptions);
 Example: Create an ewallet payment
 
 ```js
-ew.ovo.createPayment({
+ew.createPayment({
     externalID: 'my-ovo-payment',
     amount: 1,
     phone: '081234567890',
