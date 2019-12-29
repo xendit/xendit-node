@@ -1,17 +1,18 @@
 const x = require('./xendit.test');
 
 const { EWallet } = x;
-const e = new EWallet({});
+const ew = new EWallet({});
 
 module.exports = function() {
-  return e
-    .createOVOPayment({
+  return ew.ovo
+    .createPayment({
       externalID: Date.now().toString(),
       phone: '081234567890',
-      amount: 100000,
+      amount: 1,
     })
+    .then(r => ew.ovo.getPaymentStatusByExtID({ externalID: r.external_id }))
     .then(() => {
       // eslint-disable-next-line no-console
-      console.log('Invoice integration test done...');
+      console.log('EWallet integration test done...');
     });
 };
