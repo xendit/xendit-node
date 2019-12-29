@@ -17,33 +17,35 @@ module.exports = function(x) {
     nock(x.opts.xenditURL)
       .post('/ewallets', {
         external_id: TestConstants.EXT_ID,
-        phone: TestConstants.PHONE,
         amount: TestConstants.AMOUNT,
-        ewallet_type: TestConstants.OVO_EWALLET_TYPE,
+        callback_url: TestConstants.CALLBACK_URL,
+        redirect_url: TestConstants.REDIRECT_URL,
+        ewallet_type: TestConstants.DANA_EWALLET_TYPE,
       })
-      .reply(200, TestConstants.VALID_CREATE_OVO_RESPONSE);
+      .reply(200, TestConstants.VALID_CREATE_DANA_RESPONSE);
     nock(x.opts.xenditURL)
       .get(
-        `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.OVO_EWALLET_TYPE}`,
+        `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.DANA_EWALLET_TYPE}`,
       )
-      .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS_RESPONSE);
+      .reply(200, TestConstants.VALID_GET_DANA_PAYMENT_STATUS_RESPONSE);
   });
 
   describe('createPayment', () => {
-    it('should create an OVO Payment', done => {
+    it('should create an Dana Payment', done => {
       expect(
-        ewallet.ovo.createPayment({
+        ewallet.dana.createPayment({
           externalID: TestConstants.EXT_ID,
-          phone: TestConstants.PHONE,
           amount: TestConstants.AMOUNT,
+          callbackURL: TestConstants.CALLBACK_URL,
+          redirectURL: TestConstants.REDIRECT_URL,
         }),
       )
-        .to.eventually.deep.equal(TestConstants.VALID_CREATE_OVO_RESPONSE)
+        .to.eventually.deep.equal(TestConstants.VALID_CREATE_DANA_RESPONSE)
         .then(() => done())
         .catch(e => done(e));
     });
     it('should report missing required fields', done => {
-      expect(ewallet.ovo.createPayment({}))
+      expect(ewallet.dana.createPayment({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
@@ -56,20 +58,20 @@ module.exports = function(x) {
   });
 
   describe('getPaymentStatusByExtID', () => {
-    it('should get OVO Payment Status', done => {
+    it('should get Dana Payment Status', done => {
       expect(
-        ewallet.ovo.getPaymentStatusByExtID({
+        ewallet.dana.getPaymentStatusByExtID({
           externalID: TestConstants.EXT_ID,
         }),
       )
         .to.eventually.deep.equal(
-          TestConstants.VALID_GET_OVO_PAYMENT_STATUS_RESPONSE,
+          TestConstants.VALID_GET_DANA_PAYMENT_STATUS_RESPONSE,
         )
         .then(() => done())
         .catch(e => done(e));
     });
     it('should report missing required fields', done => {
-      expect(ewallet.ovo.getPaymentStatusByExtID({}))
+      expect(ewallet.dana.getPaymentStatusByExtID({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
