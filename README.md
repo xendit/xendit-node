@@ -18,8 +18,10 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-2)
   * [Invoice Services](#invoice-services)
     + [Methods](#methods-3)
-  * [Payout Services](#payout-services)
+  * [Recurring Payments Services](#recurring-payments-services)
     + [Methods](#methods-4)
+  * [Payout Services](#payout-services)
+    + [Methods](#methods-5)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -376,6 +378,101 @@ i.getAllInvoices(data?: {
     onDemandLink?: string;
     recurringPaymentID?: string;
   })
+```
+
+### Recurring Payments Services
+
+Instanitiate Recurring Payments service using constructor that has been injected with Xendit keys
+
+```js
+const { RecurringPayment } = x;
+const rpSpecificOptions = {};
+const rp = new RecurringPayment(rpSpecificOptions);
+```
+
+Example: Create a recurring payment
+
+```js
+rp.createPayment({
+  externalID: '123',
+  payerEmail: 'stanley@xendit.co',
+  description: 'Payment for something',
+  amount: 10000,
+  interval: RecurringPayment.Interval.Month,
+  intervalCount: 1,
+})
+  .then(({ id }) => {
+    console.log(`Recurring payment created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(
+      `Recurring payment creation failed with message: ${e.message}`,
+    );
+  });
+```
+
+#### Methods
+
+- Create recurring payment
+
+```ts
+rp.createPayment(data: {
+  externalID: string;
+  payerEmail: string;
+  description: string;
+  amount: number;
+  interval: Interval;
+  intervalCount: number;
+  totalRecurrence?: number;
+  invoiceDuration?: number;
+  shouldSendEmail?: boolean;
+  missedPaymentAction?: Action;
+  creditCardToken?: string;
+  startDate?: Date;
+  successRedirectURL?: string;
+  failureRedirectURL?: string;
+  recharge?: boolean;
+  chargeImmediately?: boolean;
+}): Promise<object>;
+```
+
+- Get recurring payment
+
+```ts
+rp.getPayment(data: { id: string }): Promise<object>;
+```
+
+- Edit recurring payment
+
+```ts
+rp.editPayment(data: {
+  id: string;
+  amount?: number;
+  creditCardToken?: string;
+  interval?: Interval;
+  intervalCount?: number;
+  shouldSendEmail?: boolean;
+  invoiceDuration?: number;
+  missedPaymentAction?: Action;
+}): Promise<object>;
+```
+
+- Stop recurring payment
+
+```ts
+rp.stopPayment(data: { id: string }): Promise<object>;
+```
+
+- Pause recurring payment
+
+```ts
+rp.pausePayment(data: { id: string }): Promise<object>;
+```
+
+- Resume recurring payment
+
+```ts
+rp.resumePayment(data: { id: string }): Promise<object>;
 ```
 
 ### Payout Services

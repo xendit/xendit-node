@@ -4,6 +4,7 @@ import { VAService } from './va';
 import { DisbursementService } from './disbursement';
 import { InvoiceService } from './invoice';
 import { PayoutService } from './payout';
+import { RecurringPayment } from './recurring';
 import { XenditOptions } from './xendit_opts';
 
 export = class Xendit {
@@ -14,4 +15,5 @@ export = class Xendit {
   Disbursement: typeof DisbursementService;
   Invoice: typeof InvoiceService;
   Payout: typeof PayoutService;
+  RecurringPayment: typeof RecurringPayment;
 };

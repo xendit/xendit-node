@@ -17,9 +17,10 @@ const Validate = {
 
   missingFieldsToStr(missingFields) {
     let rtv = '';
-    return missingFields.forEach((f, i) =>
+    missingFields.forEach((f, i) =>
       i < missingFields.length - 1 ? (rtv += `'${f}', `) : (rtv += `'${f}'`),
     );
+    return rtv;
   },
 
   missingFieldsErrMsg(missingFields) {
