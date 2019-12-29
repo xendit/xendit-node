@@ -4,6 +4,7 @@ Promise.all([
   require('./disbursement.test')(),
   require('./invoice.test')(),
   require('./va.test')(),
+  require('./payout.test')(),
   require('./recurring.test')(),
 ])
   .then(() => {

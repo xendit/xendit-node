@@ -20,6 +20,8 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-3)
   * [Recurring Payments Services](#recurring-payments-services)
     + [Methods](#methods-4)
+  * [Payout Services](#payout-services)
+    + [Methods](#methods-5)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -471,6 +473,47 @@ rp.pausePayment(data: { id: string }): Promise<object>;
 
 ```ts
 rp.resumePayment(data: { id: string }): Promise<object>;
+```
+
+### Payout Services
+
+Instanitiate Payout service using constructor that has been injected with Xendit keys
+
+```js
+const { Payout } = x;
+const payoutSpecificOptions = {};
+const p = new Payout(payoutSpecificOptions);
+```
+
+Example: Create a payout
+
+```js
+p.createPayout({
+  externalID: 'your-external-id',
+  amount: 100000,
+}).then(({ id }) => {
+  console.log(`Invoice created with ID: ${id}`);
+});
+```
+
+#### Methods
+
+- Create a payout
+
+```ts
+p.createPayout(data: { externalID: string; amount: string })
+```
+
+- Get a payout
+
+```ts
+p.getPayout(data: { id: string })
+```
+
+- Void a payout
+
+```ts
+p.voidPayout(data: { id: string })
 ```
 
 ## Contributing
