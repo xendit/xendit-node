@@ -1,5 +1,16 @@
 import { XenditOptions } from '../xendit_opts';
 
+enum CreateSupportWalletTypes {
+  OVO = 'OVO',
+  Dana = 'Dana',
+  Linkaja = 'LINKAJA',
+}
+
+enum GetSupportWalletTypes {
+  OVO = 'OVO',
+  Dana = 'Dana',
+}
+
 interface PaymentItem {
   id: string;
   name: string;
@@ -20,10 +31,10 @@ export = class EWallet {
     callbackURL?: string;
     redirectURL?: string;
     items?: PaymentItem[];
-    ewalletType: string;
+    ewalletType: CreateSupportWalletTypes;
   }): Promise<object>;
   getPayment(data: {
     externalID: string;
-    ewalletType: string;
+    ewalletType: GetSupportWalletTypes;
   }): Promise<object>;
 };

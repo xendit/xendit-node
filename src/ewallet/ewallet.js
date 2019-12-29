@@ -23,14 +23,45 @@ EWallet._constructorWithInjectedXenditOpts = function(options) {
   EWallet._injectedOpts = options;
   return EWallet;
 };
+EWallet.EWalletType = {
+  OVO: 'OVO',
+  Dana: 'DANA',
+  LinkAja: 'LINKAJA',
+};
 
 EWallet.prototype.createPayment = function(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(
-      ['externalID', 'amount', 'ewalletType'],
-      data,
-      reject,
-    );
+    let compulsoryFields = ['ewalletType'];
+
+    if (data.ewalletType) {
+      switch (data.ewalletType) {
+        case 'OVO':
+          compulsoryFields = ['externalID', 'amount', 'ewalletType'];
+          break;
+        case 'DANA':
+          compulsoryFields = [
+            'externalID',
+            'amount',
+            'callbackURL',
+            'redirectURL',
+            'ewalletType',
+          ];
+          break;
+        case 'LINKAJA':
+          compulsoryFields = [
+            'externalID',
+            'phone',
+            'amount',
+            'items',
+            'callbackURL',
+            'redirectURL',
+            'ewalletType',
+          ];
+          break;
+      }
+    }
+
+    Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
     fetchWithHTTPErr(this.API_ENDPOINT, {
       method: 'POST',
