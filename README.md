@@ -528,7 +528,7 @@ const ewalletSpecificOptions = {};
 const ew = new EWallet(ewalletSpecificOptions);
 ```
 
-  Example: Create an ewallet payment
+Example: Create an ewallet payment
 
 ```js
 ew.ovo.createPayment({
@@ -551,7 +551,7 @@ ew.createPayment(data: {
   externalID: string;
   amount: number;
   phone?: string;
-  expirationDate?: string;
+  expirationDate?: Date;
   callbackURL?: string;
   redirectURL?: string;
   items?: Array<{

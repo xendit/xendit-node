@@ -27,7 +27,7 @@ export = class EWallet {
     externalID: string;
     amount: number;
     phone?: string;
-    expirationDate?: string;
+    expirationDate?: Date;
     callbackURL?: string;
     redirectURL?: string;
     items?: PaymentItem[];
