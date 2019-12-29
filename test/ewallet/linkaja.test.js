@@ -19,14 +19,14 @@ module.exports = function(x) {
         external_id: TestConstants.EXT_ID,
         phone: TestConstants.PHONE,
         amount: TestConstants.AMOUNT,
-        ewallet_type: TestConstants.OVO_EWALLET_TYPE,
+        ewallet_type: TestConstants.LINKAJA_EWALLET_TYPE,
       })
       .reply(200, TestConstants.VALID_CREATE_OVO_RESPONSE);
     nock(x.opts.xenditURL)
       .get(
-        `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.OVO_EWALLET_TYPE}`,
+        `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.LINKAJA_EWALLET_TYPE}`,
       )
-      .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS_RESPONSE);
+      .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS);
   });
 
   describe('createPayment', () => {
@@ -44,32 +44,6 @@ module.exports = function(x) {
     });
     it('should report missing required fields', done => {
       expect(ewallet.ovo.createPayment({}))
-        .to.eventually.to.be.rejected.then(e =>
-          Promise.all([
-            expect(e).to.have.property('status', 400),
-            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
-          ]),
-        )
-        .then(() => done())
-        .catch(e => done(e));
-    });
-  });
-
-  describe('getOVOPaymentStatusByExtID', () => {
-    it('should get OVO Payment Status', done => {
-      expect(
-        ewallet.ovo.getPaymentStatusByExtID({
-          externalID: TestConstants.EXT_ID,
-        }),
-      )
-        .to.eventually.deep.equal(
-          TestConstants.VALID_GET_OVO_PAYMENT_STATUS_RESPONSE,
-        )
-        .then(() => done())
-        .catch(e => done(e));
-    });
-    it('should report missing required fields', done => {
-      expect(ewallet.ovo.getPaymentStatusByExtID({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

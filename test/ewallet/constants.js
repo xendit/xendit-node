@@ -14,7 +14,7 @@ const VALID_CREATE_OVO_RESPONSE = {
   business_id: '12121212',
 };
 
-const VALID_GET_OVO_PAYMENT_STATUS = {
+const VALID_GET_OVO_PAYMENT_STATUS_RESPONSE = {
   external_id: EXT_ID,
   amount: AMOUNT,
   transaction_date: String(new Date()),
@@ -31,5 +31,5 @@ module.exports = {
   PHONE,
   AMOUNT,
   VALID_CREATE_OVO_RESPONSE,
-  VALID_GET_OVO_PAYMENT_STATUS,
+  VALID_GET_OVO_PAYMENT_STATUS_RESPONSE,
 };
