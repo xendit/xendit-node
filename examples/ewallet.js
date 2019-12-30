@@ -7,7 +7,7 @@ ew.createPayment({
   externalID: new Date(),
   amount: 1,
   phone: '081234567890',
-  ewalletType: EWallet.EWalletType.OVO,
+  ewalletType: EWallet.Type.OVO,
 })
   .then(r => {
     console.log('create payment detail:', r); // eslint-disable-line no-console

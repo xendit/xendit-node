@@ -23,7 +23,7 @@ EWallet._constructorWithInjectedXenditOpts = function(options) {
   EWallet._injectedOpts = options;
   return EWallet;
 };
-EWallet.EWalletType = {
+EWallet.Type = {
   OVO: 'OVO',
   Dana: 'DANA',
   LinkAja: 'LINKAJA',

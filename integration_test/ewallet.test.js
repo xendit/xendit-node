@@ -11,7 +11,7 @@ module.exports = function() {
       expirationDate: '2020-02-20T00:00:00.000Z',
       callbackURL: 'https://my-shop.com/callbacks',
       redirectURL: 'https://my-shop.com/home',
-      ewalletType: EWallet.EWalletType.Dana,
+      ewalletType: EWallet.Type.Dana,
     })
     .then(r =>
       ew.getPayment({

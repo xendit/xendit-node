@@ -23,7 +23,7 @@ export = class EWallet {
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
   ) => typeof EWallet;
-  static EwalletType: {
+  static Type: {
     OVO: string;
     Dana: string;
     LinkAja: string;
