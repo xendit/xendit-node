@@ -17,5 +17,5 @@ export = class Xendit {
   Invoice: typeof InvoiceService;
   Payout: typeof PayoutService;
   RecurringPayment: typeof RecurringPayment;
-  EWalletService: typeof EWalletService;
+  EWallet: typeof EWalletService;
 };
