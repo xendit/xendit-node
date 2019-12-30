@@ -2,13 +2,13 @@ import { XenditOptions } from '../xendit_opts';
 
 enum CreateSupportWalletTypes {
   OVO = 'OVO',
-  Dana = 'Dana',
+  Dana = 'DANA',
   Linkaja = 'LINKAJA',
 }
 
 enum GetSupportWalletTypes {
   OVO = 'OVO',
-  Dana = 'Dana',
+  Dana = 'DANA',
 }
 
 interface PaymentItem {
@@ -23,6 +23,11 @@ export = class EWallet {
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
   ) => typeof EWallet;
+  static EwalletType: {
+    OVO: string;
+    Dana: string;
+    LinkAja: string;
+  };
   createPayment(data: {
     externalID: string;
     amount: number;
