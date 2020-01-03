@@ -24,6 +24,8 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-5)
   * [EWallet Services](#ewallet-services)
     + [Methods](#methods-6)
+  * [Balance Services](#balance-services)
+    + [Methods](#methods-7)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -435,13 +437,13 @@ rp.createPayment(data: {
   failureRedirectURL?: string;
   recharge?: boolean;
   chargeImmediately?: boolean;
-}): Promise<object>;
+})
 ```
 
 - Get recurring payment
 
 ```ts
-rp.getPayment(data: { id: string }): Promise<object>;
+rp.getPayment(data: { id: string })
 ```
 
 - Edit recurring payment
@@ -456,25 +458,25 @@ rp.editPayment(data: {
   shouldSendEmail?: boolean;
   invoiceDuration?: number;
   missedPaymentAction?: Action;
-}): Promise<object>;
+})
 ```
 
 - Stop recurring payment
 
 ```ts
-rp.stopPayment(data: { id: string }): Promise<object>;
+rp.stopPayment(data: { id: string })
 ```
 
 - Pause recurring payment
 
 ```ts
-rp.pausePayment(data: { id: string }): Promise<object>;
+rp.pausePayment(data: { id: string })
 ```
 
 - Resume recurring payment
 
 ```ts
-rp.resumePayment(data: { id: string }): Promise<object>;
+rp.resumePayment(data: { id: string })
 ```
 
 ### Payout Services
@@ -532,20 +534,20 @@ Example: Create an ewallet payment
 
 ```js
 ew.createPayment({
-    externalID: 'my-ovo-payment',
-    amount: 1,
-    phone: '081234567890',
-    ewalletType: EWallet.Type.OVO,
-  })
-  .then(r => {
-    console.log('create ewallet payment detail:', r);
-    return r;
-  })
+  externalID: 'my-ovo-payment',
+  amount: 1,
+  phone: '081234567890',
+  ewalletType: EWallet.Type.OVO,
+}).then(r => {
+  console.log('create ewallet payment detail:', r);
+  return r;
+});
 ```
 
 #### Methods
 
 - Create an ewallet payment
+
 ```ts
 ew.createPayment(data: {
   externalID: string;
@@ -565,11 +567,40 @@ ew.createPayment(data: {
 ```
 
 - Get an ewallet Payment Status
+
 ```ts
 ew.getPayment(data: {
   externalID: string:
   ewalletType: GetSupportWalletTypes;
 })
+```
+
+### Balance Services
+
+Instanitiate Balance service using constructor that has been injected with Xendit keys
+
+```js
+const { Balance } = x;
+const balanceSpecificOptions = {};
+const i = new Balance(balanceSpecificOptions);
+```
+
+Example: Get balance of holding account
+
+```js
+b.getBalance({
+  accountType: Balance.AccountType.Holding,
+}).then(({ balance }) => {
+  console.log('Holding balance amount:', balance);
+});
+```
+
+#### Methods
+
+- Get balance
+
+```ts
+b.getBalance(data: { accountType: AccountType })
 ```
 
 ## Contributing
