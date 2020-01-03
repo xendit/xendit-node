@@ -5,6 +5,7 @@ const {
   fetchWithHTTPErr,
   queryStringWithoutUndefined,
 } = require('../utils');
+const errors = require('../errors');
 
 const EWALLET_PATH = '/ewallets';
 
@@ -35,10 +36,10 @@ EWallet.prototype.createPayment = function(data) {
 
     if (data.ewalletType) {
       switch (data.ewalletType) {
-        case 'OVO':
+        case EWallet.Type.OVO:
           compulsoryFields = ['externalID', 'amount', 'phone', 'ewalletType'];
           break;
-        case 'DANA':
+        case EWallet.Type.Dana:
           compulsoryFields = [
             'externalID',
             'amount',
@@ -47,7 +48,7 @@ EWallet.prototype.createPayment = function(data) {
             'ewalletType',
           ];
           break;
-        case 'LINKAJA':
+        case EWallet.Type.LinkAja:
           compulsoryFields = [
             'externalID',
             'phone',
@@ -58,6 +59,12 @@ EWallet.prototype.createPayment = function(data) {
             'ewalletType',
           ];
           break;
+        default:
+          reject({
+            status: 400,
+            code: errors.API_VALIDATION_ERROR,
+            message: 'Invalid EWallet Type',
+          });
       }
     }
 
