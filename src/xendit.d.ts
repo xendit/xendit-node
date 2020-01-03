@@ -7,6 +7,7 @@ import { PayoutService } from './payout';
 import { RecurringPayment } from './recurring';
 import { XenditOptions } from './xendit_opts';
 import { EWalletService } from './ewallet';
+import { BalanceServices } from './balance';
 import { RetailOutletService } from './retail_outlet';
 
 export = class Xendit {
@@ -19,5 +20,6 @@ export = class Xendit {
   Payout: typeof PayoutService;
   RecurringPayment: typeof RecurringPayment;
   EWallet: typeof EWalletService;
+  Balance: typeof BalanceServices;
   RetailOutlet: RetailOutletService;
 };

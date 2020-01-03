@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2020-01-03
+
+- [#23](https://github.com/xendit/xendit-node/pull/23) (feature) Balance
+- [#24](https://github.com/xendit/xendit-node/pull/24s) (feature) Retail Outlet
+
 ## 2019-12-29
 
 - [#16](https://github.com/xendit/xendit-node/pull/16) (feature) Recurring Payments
