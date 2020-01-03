@@ -22,6 +22,8 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-4)
   * [Payout Services](#payout-services)
     + [Methods](#methods-5)
+  * [EWallet Services](#ewallet-services)
+    + [Methods](#methods-6)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -514,6 +516,60 @@ p.getPayout(data: { id: string })
 
 ```ts
 p.voidPayout(data: { id: string })
+```
+
+### EWallet Services
+
+Instanitiate EWallet service using constructor that has been injected with Xendit keys
+
+```js
+const { EWallet } = x;
+const ewalletSpecificOptions = {};
+const ew = new EWallet(ewalletSpecificOptions);
+```
+
+Example: Create an ewallet payment
+
+```js
+ew.createPayment({
+    externalID: 'my-ovo-payment',
+    amount: 1,
+    phone: '081234567890',
+    ewalletType: EWallet.Type.OVO,
+  })
+  .then(r => {
+    console.log('create ewallet payment detail:', r);
+    return r;
+  })
+```
+
+#### Methods
+
+- Create an ewallet payment
+```ts
+ew.createPayment(data: {
+  externalID: string;
+  amount: number;
+  phone?: string;
+  expirationDate?: Date;
+  callbackURL?: string;
+  redirectURL?: string;
+  items?: Array<{
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+  ewalletType: CreateSupportWalletTypes;
+})
+```
+
+- Get an ewallet Payment Status
+```ts
+ew.getPayment(data: {
+  externalID: string:
+  ewalletType: GetSupportWalletTypes;
+})
 ```
 
 ## Contributing

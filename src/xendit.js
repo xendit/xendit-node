@@ -4,6 +4,7 @@ const { DisbursementService } = require('./disbursement');
 const { InvoiceService } = require('./invoice');
 const { PayoutService } = require('./payout');
 const { RecurringPayment } = require('./recurring');
+const { EWalletService } = require('./ewallet');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -27,6 +28,7 @@ function Xendit(options) {
   this.RecurringPayment = RecurringPayment._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  this.EWallet = EWalletService._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;
