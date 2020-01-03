@@ -21,5 +21,5 @@ export = class Xendit {
   RecurringPayment: typeof RecurringPayment;
   EWallet: typeof EWalletService;
   Balance: typeof BalanceServices;
-  RetailOutlet: RetailOutletService;
+  RetailOutlet: typeof RetailOutletService;
 };
