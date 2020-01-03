@@ -656,7 +656,7 @@ ro.getFixedPaymentCode(data: { id: string })
 ro.updateFixedPaymentCode(data: {
   id: string
   name?: string;
-  expectedAmt?: number;]
+  expectedAmt?: number;
   expirationDate?: Date;
 })
 ```
