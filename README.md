@@ -26,6 +26,8 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
     + [Methods](#methods-6)
   * [Balance Services](#balance-services)
     + [Methods](#methods-7)
+  * [Retail Outlet Services](#retail-outlet-services)
+    + [Methods](#methods-8)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -337,19 +339,19 @@ i.createInvoice({
 
 ```ts
 i.createInvoice(data: {
-    externalID: string;
-    payerEmail: string;
-    description: string;
-    amount: number;
-    shouldSendEmail?: boolean;
-    callbackVirtualAccountID?: string;
-    invoiceDuration?: number;
-    successRedirectURL?: string;
-    failureRedirectURL?: string;
-    paymentMethods?: string[];
-    currency?: string;
-    midLabel?: string;
-  })
+  externalID: string;
+  payerEmail: string;
+  description: string;
+  amount: number;
+  shouldSendEmail?: boolean;
+  callbackVirtualAccountID?: string;
+  invoiceDuration?: number;
+  successRedirectURL?: string;
+  failureRedirectURL?: string;
+  paymentMethods?: string[];
+  currency?: string;
+  midLabel?: string;
+})
 ```
 
 - Get an invoice
@@ -368,20 +370,20 @@ i.expireInvoice(data: { invoiceID: string })
 
 ```ts
 i.getAllInvoices(data?: {
-    statuses?: string[];
-    limit?: number;
-    createdAfter?: Date;
-    createdBefore?: Date;
-    paidAfter?: Date;
-    paidBefore?: Date;
-    expiredAfter?: Date;
-    expiredBefore?: Date;
-    lastInvoiceID?: string;
-    clientTypes?: string[];
-    paymentChannels?: string[];
-    onDemandLink?: string;
-    recurringPaymentID?: string;
-  })
+  statuses?: string[];
+  limit?: number;
+  createdAfter?: Date;
+  createdBefore?: Date;
+  paidAfter?: Date;
+  paidBefore?: Date;
+  expiredAfter?: Date;
+  expiredBefore?: Date;
+  lastInvoiceID?: string;
+  clientTypes?: string[];
+  paymentChannels?: string[];
+  onDemandLink?: string;
+  recurringPaymentID?: string;
+})
 ```
 
 ### Recurring Payments Services
@@ -601,6 +603,62 @@ b.getBalance({
 
 ```ts
 b.getBalance(data: { accountType: AccountType })
+```
+
+### Retail Outlet Services
+
+Instanitiate Retail outlet service using constructor that has been injected with Xendit keys
+
+```js
+const { RetailOutlet } = x;
+const retailOutletSpecificOptions = {};
+const ro = new RetailOutlet(retailOutletSpecificOptions);
+```
+
+Example: Example: Create a fixed payment code
+
+```js
+ro.createFixedPaymentCode({
+  externalID: '123',
+  retailOutletName: 'ALFAMART',
+  name: 'Ervan Adetya',
+  expectedAmt: 10000,
+}).then(({ id }) => {
+  console.log(`Fixed Payment Code created with ID: ${id}`);
+});
+```
+
+#### Methods
+
+- Create fixed payment code
+
+```ts
+ro.createFixedPaymentCode(data: {
+  externalID: string;
+  retailOutletName: string;
+  name: string;
+  expectedAmt: number;
+  paymentCode?: string;
+  expirationDate?: Date;
+  isSingleUse?: boolean;
+})
+```
+
+- Get fixed payment code
+
+```ts
+ro.getFixedPaymentCode(data: { id: string })
+```
+
+- Update fixed payment code
+
+```ts
+ro.updateFixedPaymentCode(data: {
+  id: string
+  name?: string;
+  expectedAmt?: number;
+  expirationDate?: Date;
+})
 ```
 
 ## Contributing
