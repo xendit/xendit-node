@@ -46,8 +46,6 @@ npm install --save xendit-node
 
 ## Usage
 
-For the full documentation, please refer to [Xendit Node Client Docs](https://docs.xendit.co/en/libraries/xendit-node)
-
 Configure package with your account's API keys
 
 ```js
@@ -85,6 +83,8 @@ card
 ```
 
 #### Methods
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
 
 - Create charge
 
@@ -176,6 +176,8 @@ va.createFixedVA({
 
 #### Methods
 
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+
 - Get banks with available virtual account service
 
 ```ts
@@ -257,6 +259,8 @@ d.create({
 
 #### Methods
 
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+
 - Get banks with available disbursement service
 
 ```ts
@@ -336,6 +340,8 @@ i.createInvoice({
 ```
 
 #### Methods
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
 
 - Create an invoice
 
@@ -420,6 +426,8 @@ rp.createPayment({
 ```
 
 #### Methods
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
 
 - Create recurring payment
 
@@ -506,6 +514,8 @@ p.createPayout({
 
 #### Methods
 
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+
 - Create a payout
 
 ```ts
@@ -549,6 +559,8 @@ ew.createPayment({
 ```
 
 #### Methods
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
 
 - Create an ewallet payment
 
@@ -601,6 +613,8 @@ b.getBalance({
 
 #### Methods
 
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+
 - Get balance
 
 ```ts
@@ -631,6 +645,8 @@ ro.createFixedPaymentCode({
 ```
 
 #### Methods
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
 
 - Create fixed payment code
 
