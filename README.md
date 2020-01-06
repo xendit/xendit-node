@@ -2,6 +2,8 @@
 
 This library is the abstraction of Xendit API for access from applications written with server-side Javascript.
 
+[![NPM](https://nodei.co/npm/xendit-node.png)](https://nodei.co/npm/xendit-node/)
+
 **Note**: This library is only meant for usage from server-side with Xendit secret API key.
 For PCI compliance to be maintained, tokenization of credt cards info should be done on client side with [Xendit.js](https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html).
 
