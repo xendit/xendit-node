@@ -1,4 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function f(args: any): Promise<object>;
+import { RequestInit } from 'node-fetch';
+
+function f(endpointURL: string, opts: RequestInit): Promise<object>;
 
 export = f;
