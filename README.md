@@ -84,7 +84,7 @@ card
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#credit-cards) for more info about methods' parameters
 
 - Create charge
 
@@ -176,7 +176,7 @@ va.createFixedVA({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#virtual-accounts) for more info about methods' parameters
 
 - Get banks with available virtual account service
 
@@ -259,7 +259,7 @@ d.create({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#disbursements) for more info about methods' parameters
 
 - Get banks with available disbursement service
 
@@ -341,7 +341,7 @@ i.createInvoice({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#invoices) for more info about methods' parameters
 
 - Create an invoice
 
@@ -427,7 +427,7 @@ rp.createPayment({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#recurring-payments) for more info about methods' parameters
 
 - Create recurring payment
 
@@ -514,7 +514,7 @@ p.createPayout({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#payouts) for more info about methods' parameters
 
 - Create a payout
 
@@ -560,7 +560,7 @@ ew.createPayment({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#ewallets) for more info about methods' parameters
 
 - Create an ewallet payment
 
@@ -613,7 +613,7 @@ b.getBalance({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#balances) for more info about methods' parameters
 
 - Get balance
 
@@ -646,7 +646,7 @@ ro.createFixedPaymentCode({
 
 #### Methods
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/) for more info about methods' parameters
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#retail-outlets) for more info about methods' parameters
 
 - Create fixed payment code
 
