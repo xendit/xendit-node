@@ -29,6 +29,7 @@ before(function() {
     .reply(200, TestConstants.VALID_CREATE_OVO_RESPONSE);
   nock(x.opts.xenditURL)
     .get(
+      // eslint-disable-next-line max-len
       `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.OVO_EWALLET_TYPE}`,
     )
     .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS_RESPONSE);
