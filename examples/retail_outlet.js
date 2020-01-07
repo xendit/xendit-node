@@ -10,12 +10,14 @@ ro.createFixedPaymentCode({
   expectedAmt: 10000,
 })
   .then(r => {
-    console.log('fixed payment code created:', r); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('fixed payment code created:', r);
     return r;
   })
   .then(({ id }) => ro.getFixedPaymentCode({ id }))
   .then(r => {
-    console.log('fixed payment code details:', r); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('fixed payment code details:', r);
     return r;
   })
   .then(({ id }) => {
@@ -25,7 +27,8 @@ ro.createFixedPaymentCode({
     });
   })
   .then(r => {
-    console.log('updated payment code details:', r); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('updated payment code details:', r);
     return r;
   })
   .catch(e => {
