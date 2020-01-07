@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const RetailOutlet = x.RetailOutlet;
 const ro = new RetailOutlet({});

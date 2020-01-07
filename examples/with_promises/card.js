@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const Card = x.Card;
 const card = new Card({});

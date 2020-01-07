@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const { Invoice } = x;
 const i = new Invoice({});

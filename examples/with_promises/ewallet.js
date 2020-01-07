@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const EWallet = x.EWallet;
 const ew = new EWallet({});
@@ -14,7 +14,7 @@ ew.createPayment({
     return r;
   })
   .then(({ external_id, ewallet_type }) =>
-    ew.ovo.getPaymentStatusByExtID({
+    ew.getPaymentStatusByExtID({
       externalID: external_id,
       ewalletType: ewallet_type,
     }),

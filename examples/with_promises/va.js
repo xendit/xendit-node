@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const VirtualAcc = x.VirtualAcc;
 const va = new VirtualAcc({});
