@@ -11,7 +11,6 @@ const Errors = require('./errors');
 
 function Xendit(options) {
   let {
-    publicKey, // customer's public API key
     secretKey, // customer's secret API key
     xenditURL, // should there be a need to override API base URL
   } = options;
@@ -19,7 +18,7 @@ function Xendit(options) {
   // default values of opts
   xenditURL = xenditURL || 'https://api.xendit.co';
 
-  this.opts = { publicKey, secretKey, xenditURL };
+  this.opts = { secretKey, xenditURL };
   this.Card = CardService._constructorWithInjectedXenditOpts(this.opts);
   this.VirtualAcc = VAService._constructorWithInjectedXenditOpts(this.opts);
   this.Disbursement = DisbursementService._constructorWithInjectedXenditOpts(

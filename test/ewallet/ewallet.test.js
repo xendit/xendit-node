@@ -7,7 +7,6 @@ const { Errors } = require('../../src/xendit');
 const Xendit = require('../../src/xendit');
 
 const x = new Xendit({
-  publicKey: 'fake_public_key',
   secretKey: 'fake_secret_key',
 });
 
