@@ -51,7 +51,6 @@ Configure package with your account's API keys
 ```js
 const Xendit = require('xendit-node');
 const x = new Xendit({
-  publicKey: 'xnd_public...',
   secretKey: 'xnd_...',
 });
 ```

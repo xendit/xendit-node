@@ -5,7 +5,6 @@ const bankTest = require('./bank.test');
 const disburseTest = require('./disburse.test');
 
 const x = new Xendit({
-  publicKey: 'fake_public_key',
   secretKey: 'fake_secret_key',
 });
 

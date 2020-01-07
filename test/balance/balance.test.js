@@ -6,7 +6,6 @@ const nock = require('nock');
 const Xendit = require('../../src/xendit');
 
 const x = new Xendit({
-  publicKey: 'fake_public_key',
   secretKey: 'fake_secret_key',
 });
 
