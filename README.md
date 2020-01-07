@@ -55,6 +55,11 @@ const x = new Xendit({
 });
 ```
 
+Usage examples:
+
+- With promises, please check [here](./examples/with_promises)
+- With async/await, please check [here](./examples/with_async)
+
 ### Card Services
 
 Instanitiate Card service using constructor that has been injected with Xendit keys
