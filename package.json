@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "NodeJS client for Xendit API",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha test/**/*.test.js",
     "test:integration": "node integration_test",
