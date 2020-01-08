@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const { Payout } = x;
 const p = new Payout({});

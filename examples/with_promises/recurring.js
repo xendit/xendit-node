@@ -1,4 +1,4 @@
-const x = require('./xendit');
+const x = require('../xendit');
 
 const RecurringPayment = x.RecurringPayment;
 const rp = new RecurringPayment({});
