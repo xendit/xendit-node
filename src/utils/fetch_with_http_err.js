@@ -1,11 +1,10 @@
 const fetch = require('node-fetch');
 
-module.exports = function() {
-  const _args = arguments;
-
+module.exports = function(endpointURL, opts) {
   return new Promise((resolve, reject) => {
     try {
-      fetch(..._args)
+      opts.headers = injectTrackingHeaders(opts.headers);
+      fetch(endpointURL, opts)
         .then(res => {
           if (res.status < 200 || res.status > 299) {
             res.text().then(txt => {
@@ -28,3 +27,14 @@ module.exports = function() {
     }
   });
 };
+
+const clientVersion = require('../../package.json').version;
+function injectTrackingHeaders(headers) {
+  // Making this function pure - not affecting the original headers object
+  // This assignment also handles undefined/null values of headers arg
+  const injectedHeaders = Object.assign({}, headers);
+  injectedHeaders['xendit-lib'] = 'node';
+  injectedHeaders['xendit-lib-ver'] = clientVersion;
+
+  return injectedHeaders;
+}
