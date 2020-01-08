@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2020-01-08
+
+- [#31](https://github.com/xendit/xendit-node/pull/31) Add xendit tracking headers
+- [#32](https://github.com/xendit/xendit-node/pull/32) Add examples with async/await
+- [#28](https://github.com/xendit/xendit-node/pull/28) Touch up README pre-launch
+
+## 2020-01-07
+
+- [#30](https://github.com/xendit/xendit-node/pull/30) Remove `publicKey` from options
+- [#29](https://github.com/xendit/xendit-node/pull/29) Add linting for ts files into CI
+
 ## 2020-01-03
 
 - [#23](https://github.com/xendit/xendit-node/pull/23) (feature) Balance
