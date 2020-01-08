@@ -697,3 +697,5 @@ node examples/card.js # or whichever example you would like to run
 
 There are a commit hook to run linting and formatting and push hook to run all tests.
 Please make sure they pass before making commits/pushes.
+
+For any requests, bug or comments, please open an [issue or submit](https://github.com/xendit/xendit-node/issues) a [pull request](https://github.com/xendit/xendit-node/pulls).
