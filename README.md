@@ -13,23 +13,48 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
 - [Installation](#installation)
 - [Usage](#usage)
   * [Card Services](#card-services)
-    + [Methods](#methods)
+    + [Create charge](#create-charge)
+    + [Capture charge](#capture-charge)
+    + [Get charge](#get-charge)
+    + [Create authorization](#create-authorization)
+    + [Reverse authorization](#reverse-authorization)
+    + [Create refund](#create-refund)
   * [Virtual Account Services](#virtual-account-services)
-    + [Methods](#methods-1)
+    + [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
+    + [Create a fixed virtual account](#create-a-fixed-virtual-account)
+    + [Get details of your fixed virtual account](#get-details-of-your-fixed-virtual-account)
+    + [Update details of your fixed virtual account](#update-details-of-your-fixed-virtual-account)
+    + [Get details of a VA payment](#get-details-of-a-va-payment)
   * [Disbursement Services](#disbursement-services)
-    + [Methods](#methods-2)
+    + [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
+    + [Create a disbursement](#create-a-disbursement)
+    + [Create a batch of disbursements](#create-a-batch-of-disbursements)
+    + [Get a disbursement by ID](#get-a-disbursement-by-id)
   * [Invoice Services](#invoice-services)
-    + [Methods](#methods-3)
+    + [Create an invoice](#create-an-invoice)
+    + [Get an invoice](#get-an-invoice)
+    + [Expire an invoice](#expire-an-invoice)
+    + [Get all invoices](#get-all-invoices)
   * [Recurring Payments Services](#recurring-payments-services)
-    + [Methods](#methods-4)
+    + [Create recurring payment](#create-recurring-payment)
+    + [Get recurring payment](#get-recurring-payment)
+    + [Edit recurring payment](#edit-recurring-payment)
+    + [Stop recurring payment](#stop-recurring-payment)
+    + [Pause recurring payment](#pause-recurring-payment)
+    + [Resume recurring payment](#resume-recurring-payment)
   * [Payout Services](#payout-services)
-    + [Methods](#methods-5)
+    + [Create a payout](#create-a-payout)
+    + [Get a payout](#get-a-payout)
+    + [Void a payout](#void-a-payout)
   * [EWallet Services](#ewallet-services)
-    + [Methods](#methods-6)
+    + [Create an ewallet payment](#create-an-ewallet-payment)
+    + [Get an ewallet Payment Status](#get-an-ewallet-payment-status)
   * [Balance Services](#balance-services)
-    + [Methods](#methods-7)
+    + [Get balance](#get-balance)
   * [Retail Outlet Services](#retail-outlet-services)
-    + [Methods](#methods-8)
+    + [Create fixed payment code](#create-fixed-payment-code)
+    + [Get fixed payment code](#get-fixed-payment-code)
+    + [Update fixed payment code](#update-fixed-payment-code)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -82,11 +107,9 @@ card
   });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#credit-cards) for more info about methods' parameters
 
-- Create charge
+#### Create charge
 
 ```ts
 card.createCharge(data: {
@@ -100,7 +123,7 @@ card.createCharge(data: {
 })
 ```
 
-- Capture charge
+#### Capture charge
 
 ```ts
 card.captureCharge(data: {
@@ -109,13 +132,13 @@ card.captureCharge(data: {
 })
 ```
 
-- Get charge
+#### Get charge
 
 ```ts
 card.getCharge(data: { chargeID: string })
 ```
 
-- Create authorization
+#### Create authorization
 
 ```ts
 card.createAuthorization(data: {
@@ -128,7 +151,7 @@ card.createAuthorization(data: {
 })
 ```
 
-- Reverse authorization
+#### Reverse authorization
 
 ```ts
 card.reverseAuthorization(data: {
@@ -137,7 +160,7 @@ card.reverseAuthorization(data: {
 })
 ```
 
-- Create refund
+#### Create refund
 
 ```ts
 card.createRefund(data: {
@@ -174,17 +197,15 @@ va.createFixedVA({
   });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#virtual-accounts) for more info about methods' parameters
 
-- Get banks with available virtual account service
+#### Get banks with available virtual account service
 
 ```ts
 va.getVABanks();
 ```
 
-- Create a fixed virtual account
+#### Create a fixed virtual account
 
 ```ts
 va.createFixedVA(data: {
@@ -201,13 +222,13 @@ va.createFixedVA(data: {
 })
 ```
 
-- Get details of your fixed virtual account
+#### Get details of your fixed virtual account
 
 ```ts
 va.getFixedVA(data: { id: string })
 ```
 
-- Update details of your fixed virtual account
+#### Update details of your fixed virtual account
 
 ```ts
 va.updateFixedVA(data: {
@@ -220,7 +241,7 @@ va.updateFixedVA(data: {
 })
 ```
 
-- Get details of a VA payment
+#### Get details of a VA payment
 
 ```ts
 va.getVAPayment(data: { paymentID: string })
@@ -257,17 +278,15 @@ d.create({
   });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#disbursements) for more info about methods' parameters
 
-- Get banks with available disbursement service
+#### Get banks with available disbursement service
 
 ```ts
 d.getBanks();
 ```
 
-- Create a disbursement
+#### Create a disbursement
 
 ```ts
 d.create(data: {
@@ -284,7 +303,7 @@ d.create(data: {
 })
 ```
 
-- Create a batch of disbursements
+#### Create a batch of disbursements
 
 ```ts
 d.createBatch(data: {
@@ -304,7 +323,7 @@ d.createBatch(data: {
 })
 ```
 
-- Get a disbursement by ID
+#### Get a disbursement by ID
 
 ```ts
 d.getByID(data: { disbursementID: string })
@@ -339,11 +358,9 @@ i.createInvoice({
 });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#invoices) for more info about methods' parameters
 
-- Create an invoice
+#### Create an invoice
 
 ```ts
 i.createInvoice(data: {
@@ -362,19 +379,19 @@ i.createInvoice(data: {
 })
 ```
 
-- Get an invoice
+#### Get an invoice
 
 ```ts
 i.getInvoice(data: { invoiceID: string })
 ```
 
-- Expire an invoice
+#### Expire an invoice
 
 ```ts
 i.expireInvoice(data: { invoiceID: string })
 ```
 
-- Get all invoices
+#### Get all invoices
 
 ```ts
 i.getAllInvoices(data?: {
@@ -425,11 +442,9 @@ rp.createPayment({
   });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#recurring-payments) for more info about methods' parameters
 
-- Create recurring payment
+#### Create recurring payment
 
 ```ts
 rp.createPayment(data: {
@@ -452,13 +467,13 @@ rp.createPayment(data: {
 })
 ```
 
-- Get recurring payment
+#### Get recurring payment
 
 ```ts
 rp.getPayment(data: { id: string })
 ```
 
-- Edit recurring payment
+#### Edit recurring payment
 
 ```ts
 rp.editPayment(data: {
@@ -473,19 +488,19 @@ rp.editPayment(data: {
 })
 ```
 
-- Stop recurring payment
+#### Stop recurring payment
 
 ```ts
 rp.stopPayment(data: { id: string })
 ```
 
-- Pause recurring payment
+#### Pause recurring payment
 
 ```ts
 rp.pausePayment(data: { id: string })
 ```
 
-- Resume recurring payment
+#### Resume recurring payment
 
 ```ts
 rp.resumePayment(data: { id: string })
@@ -512,23 +527,21 @@ p.createPayout({
 });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#payouts) for more info about methods' parameters
 
-- Create a payout
+#### Create a payout
 
 ```ts
 p.createPayout(data: { externalID: string; amount: string })
 ```
 
-- Get a payout
+#### Get a payout
 
 ```ts
 p.getPayout(data: { id: string })
 ```
 
-- Void a payout
+#### Void a payout
 
 ```ts
 p.voidPayout(data: { id: string })
@@ -558,11 +571,9 @@ ew.createPayment({
 });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#ewallets) for more info about methods' parameters
 
-- Create an ewallet payment
+#### Create an ewallet payment
 
 ```ts
 ew.createPayment(data: {
@@ -582,7 +593,7 @@ ew.createPayment(data: {
 })
 ```
 
-- Get an ewallet Payment Status
+#### Get an ewallet Payment Status
 
 ```ts
 ew.getPayment(data: {
@@ -611,11 +622,9 @@ b.getBalance({
 });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#balances) for more info about methods' parameters
 
-- Get balance
+#### Get balance
 
 ```ts
 b.getBalance(data: { accountType: AccountType })
@@ -644,11 +653,9 @@ ro.createFixedPaymentCode({
 });
 ```
 
-#### Methods
-
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#retail-outlets) for more info about methods' parameters
 
-- Create fixed payment code
+#### Create fixed payment code
 
 ```ts
 ro.createFixedPaymentCode(data: {
@@ -662,13 +669,13 @@ ro.createFixedPaymentCode(data: {
 })
 ```
 
-- Get fixed payment code
+#### Get fixed payment code
 
 ```ts
 ro.getFixedPaymentCode(data: { id: string })
 ```
 
-- Update fixed payment code
+#### Update fixed payment code
 
 ```ts
 ro.updateFixedPaymentCode(data: {
