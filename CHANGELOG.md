@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-09
+
+- [#36](https://github.com/xendit/xendit-node/pull/31) Add root definition file
+
 ## 2020-01-08
 
 - [#31](https://github.com/xendit/xendit-node/pull/31) Add xendit tracking headers
