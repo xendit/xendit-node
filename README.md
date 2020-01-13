@@ -5,7 +5,7 @@ This library is the abstraction of Xendit API for access from applications writt
 [![NPM](https://nodei.co/npm/xendit-node.png)](https://nodei.co/npm/xendit-node/)
 
 **Note**: This library is only meant for usage from server-side with Xendit secret API key.
-For PCI compliance to be maintained, tokenization of credt cards info should be done on client side with [Xendit.js](https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html).
+For PCI compliance to be maintained, tokenization of credit cards info should be done on client side with [Xendit.js](https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html).
 
 <!-- toc -->
 
@@ -61,7 +61,7 @@ For PCI compliance to be maintained, tokenization of credt cards info should be 
 
 ## API Documentation
 
-Please check [Xendit Docs](https://docs.xendit.co/en/index.html)
+Please check [Xendit API Reference](https://xendit.github.io/apireference/).
 
 ## Installation
 
@@ -71,7 +71,7 @@ npm install --save xendit-node
 
 ## Usage
 
-Configure package with your account's API keys
+Configure package with your account's **secret key** obtained from your [Xendit Dashboard](https://dashboard.xendit.co/settings/developers#api-keys).
 
 ```js
 const Xendit = require('xendit-node');

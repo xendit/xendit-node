@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-01-13
+
+- [#41](https://github.com/xendit/xendit-node/pull/41) LICENSE & miscellaneous docs updates
+
 ## 2020-01-09
 
 - [#36](https://github.com/xendit/xendit-node/pull/31) Add root definition file
