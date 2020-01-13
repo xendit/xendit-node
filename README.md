@@ -1,5 +1,8 @@
 # Xendit API Node.js Client
 
+![](https://github.com/xendit/xendit-node/workflows/Code%20Linting/badge.svg)
+![](https://github.com/xendit/xendit-node/workflows/Integration%20Tests/badge.svg)
+
 This library is the abstraction of Xendit API for access from applications written with server-side Javascript.
 
 [![NPM](https://nodei.co/npm/xendit-node.png)](https://nodei.co/npm/xendit-node/)

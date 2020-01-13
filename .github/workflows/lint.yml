@@ -1,3 +1,5 @@
+name: 'Code Linting'
+
 on:
   push:
     branches:
