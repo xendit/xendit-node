@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-02-07
+
+- Hotfix index definition file
+
 ## 2020-01-13
 
 - [#41](https://github.com/xendit/xendit-node/pull/41) LICENSE & miscellaneous docs updates

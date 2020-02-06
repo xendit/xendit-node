@@ -1,1 +1,3 @@
-export { default } from './src/xendit';
+import Xendit from './src/xendit';
+
+export = Xendit;
