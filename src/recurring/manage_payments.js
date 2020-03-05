@@ -30,9 +30,7 @@ function createPayment(data) {
         should_send_email: data.shouldSendEmail,
         missed_payment_action: data.missedPaymentAction,
         credit_card_token: data.creditCardToken,
-        start_date: data.expirationDate
-          ? data.expirationDate.toISOString()
-          : undefined,
+        start_date: data.startDate ? data.startDate.toISOString() : undefined,
         success_redirect_url: data.successRedirectURL,
         failure_redirect_url: data.failureRedirectURL,
         recharge: data.recharge,
