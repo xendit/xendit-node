@@ -5,6 +5,7 @@ const AMOUNT = 10000;
 const INTERVAL = 'MONTH';
 const INTERVAL_COUNT = 1;
 const PAYMENT_ID = '5e0577bdf4d38b20d542009b';
+const START_DATE = '2020-01-31T17:00:00.000Z';
 
 const PAYMENT_DETAILS = {
   id: PAYMENT_ID,
@@ -14,6 +15,7 @@ const PAYMENT_DETAILS = {
   amount: AMOUNT,
   interval: INTERVAL,
   interval_count: INTERVAL_COUNT,
+  start_date: START_DATE,
 };
 
 const UPDATED_AMOUNT = 20000;
@@ -30,6 +32,7 @@ module.exports = {
   INTERVAL_COUNT,
   PAYMENT_ID,
   PAYMENT_DETAILS,
+  START_DATE,
   UPDATED_AMOUNT,
   UPDATED_PAYMENT_DETAILS,
 };
