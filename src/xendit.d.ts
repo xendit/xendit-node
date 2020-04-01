@@ -10,9 +10,9 @@ import { EWalletService } from './ewallet';
 import { BalanceServices } from './balance';
 import { RetailOutletService } from './retail_outlet';
 
-export = class Xendit {
+declare class Xendit {
   constructor(opts: XenditOptions);
-  static Errors = Errors;
+  static Errors;
   Card: typeof CardService;
   VirtualAcc: typeof VAService;
   Disbursement: typeof DisbursementService;
@@ -22,4 +22,5 @@ export = class Xendit {
   EWallet: typeof EWalletService;
   Balance: typeof BalanceServices;
   RetailOutlet: typeof RetailOutletService;
-};
+}
+export = Xendit;
