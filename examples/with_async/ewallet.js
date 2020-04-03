@@ -6,7 +6,7 @@ const ew = new EWallet({});
 (async function() {
   try {
     const payment = await ew.createPayment({
-      externalID: new Date(),
+      externalID: Date.now().toString(),
       amount: 1,
       phone: '081234567890',
       ewalletType: EWallet.Type.OVO,
@@ -14,7 +14,7 @@ const ew = new EWallet({});
     // eslint-disable-next-line no-console
     console.log('create payment detail:', payment);
 
-    const retrievedPayment = await ew.getPaymentStatusByExtID({
+    const retrievedPayment = await ew.getPayment({
       externalID: payment.external_id,
       ewalletType: payment.ewallet_type,
     });
