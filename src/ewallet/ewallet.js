@@ -75,6 +75,7 @@ EWallet.prototype.createPayment = function(data) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'X-API-VERSION': data.xApiVersion,
       },
       body: JSON.stringify({
         external_id: data.externalID,

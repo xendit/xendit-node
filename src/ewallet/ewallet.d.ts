@@ -37,6 +37,7 @@ export = class EWallet {
     redirectURL?: string;
     items?: PaymentItem[];
     ewalletType: CreateSupportWalletTypes;
+    xApiVersion?: string;
   }): Promise<object>;
   getPayment(data: {
     externalID: string;
