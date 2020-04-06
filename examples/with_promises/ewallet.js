@@ -4,7 +4,7 @@ const EWallet = x.EWallet;
 const ew = new EWallet({});
 
 ew.createPayment({
-  externalID: new Date(),
+  externalID: Date.now().toString(),
   amount: 1,
   phone: '081234567890',
   ewalletType: EWallet.Type.OVO,
@@ -14,7 +14,7 @@ ew.createPayment({
     return r;
   })
   .then(({ external_id, ewallet_type }) =>
-    ew.getPaymentStatusByExtID({
+    ew.getPayment({
       externalID: external_id,
       ewalletType: ewallet_type,
     }),

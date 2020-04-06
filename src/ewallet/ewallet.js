@@ -70,17 +70,24 @@ EWallet.prototype.createPayment = function(data) {
 
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+    if (data.xApiVersion) {
+      headers['X-API-VERSION'] = data.xApiVersion;
+    }
+
     fetchWithHTTPErr(this.API_ENDPOINT, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      },
+      headers,
       body: JSON.stringify({
         external_id: data.externalID,
         amount: data.amount,
         phone: data.phone,
-        expiration_date: data.expirationDate,
+        expiration_date: data.expirationDate
+          ? data.expirationDate.toISOString()
+          : undefined,
         callback_url: data.callbackURL,
         redirect_url: data.redirectURL,
         items: data.items,
