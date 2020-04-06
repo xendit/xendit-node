@@ -12,7 +12,7 @@ function createPayment(data) {
     ];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/`, {
       method: 'POST',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),

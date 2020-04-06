@@ -15,7 +15,7 @@ module.exports = function(x) {
   });
   before(function() {
     nock(rp.API_ENDPOINT)
-      .post('', {
+      .post('/', {
         external_id: TestConstants.EXT_ID,
         payer_email: TestConstants.PAYER_EMAIL,
         description: TestConstants.DESCRIPTION,

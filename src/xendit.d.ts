@@ -1,4 +1,3 @@
-import Errors from './errors';
 import { CardService } from './card';
 import { VAService } from './va';
 import { DisbursementService } from './disbursement';

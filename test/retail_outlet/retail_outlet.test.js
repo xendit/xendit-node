@@ -19,7 +19,7 @@ beforeEach(function() {
 });
 before(function() {
   nock(ro.API_ENDPOINT)
-    .post('', {
+    .post('/', {
       external_id: TestConstants.EXT_ID,
       retail_outlet_name: TestConstants.ALFMART_RETAIL_OUTLET_NAME,
       name: TestConstants.NAME,

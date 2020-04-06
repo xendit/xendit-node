@@ -19,7 +19,7 @@ beforeEach(function() {
 });
 before(function() {
   nock(p.API_ENDPOINT)
-    .post('', {
+    .post('/', {
       external_id: TestConstants.EXT_ID,
       amount: TestConstants.AMOUNT,
     })
