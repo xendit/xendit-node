@@ -22,7 +22,7 @@ Payout.prototype.createPayout = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID', 'amount'], data, reject);
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/`, {
       method: 'POST',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
