@@ -59,6 +59,11 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Create fixed payment code](#create-fixed-payment-code)
     + [Get fixed payment code](#get-fixed-payment-code)
     + [Update fixed payment code](#update-fixed-payment-code)
+  * [QR Code Services](#qr-code-services)
+    + [Create code](#create-code)
+    + [Get code](#get-code)
+    + [Get payments of a QR code](#get-payments-of-a-qr-code)
+    + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -692,6 +697,64 @@ ro.updateFixedPaymentCode(data: {
   expectedAmt?: number;
   expirationDate?: Date;
 })
+```
+
+### QR Code Services
+
+Instanitiate QR Code service using constructor that has been injected with Xendit keys
+
+```js
+const { QrCode } = x;
+const qrcodeSpecificOptions = {};
+const q = new QrCode(qrcodeSpecificOptions);
+```
+
+Example: create a QR code
+
+```js
+q.createCode({
+  externalID: 'your-system-tracking-id',
+  amount: 10000,
+  type: QrCode.Type.Dynamic,
+  callback_url: 'https://yourwebsite/callback',
+})
+  .then(({ id }) => {
+    console.log(`QR code created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(`QR code creation failed with message: ${e.message}`);
+  });
+```
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#qr-codes) for more info about methods' parameters
+
+#### Create code
+
+```ts
+q.createCode(data: {
+  externalID: string;
+  type: QrCodeTypes;
+  callbackURL: string;
+  amount?: number;
+});
+```
+
+#### Get code
+
+```ts
+q.getCode(data: { externalID: string });
+```
+
+#### Get payments of a QR code
+
+```ts
+q.getPayments(data: { externalID: string });
+```
+
+#### Simulate payment (only in dev mode)
+
+```ts
+q.simulate(data: { externalID: string; amount?: number });
 ```
 
 ## Contributing
