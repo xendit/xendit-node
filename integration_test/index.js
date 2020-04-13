@@ -9,6 +9,7 @@ Promise.all([
   require('./balance.test')(),
   require('./retail_outlet.test')(),
   require('./ewallet.test')(),
+  require('./qr_code.test')(),
 ])
   .then(() => {
     // eslint-disable-next-line no-console
