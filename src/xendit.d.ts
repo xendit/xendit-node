@@ -8,6 +8,7 @@ import { XenditOptions } from './xendit_opts';
 import { EWalletService } from './ewallet';
 import { BalanceServices } from './balance';
 import { RetailOutletService } from './retail_outlet';
+import { QrCode } from './qr_code';
 
 declare class Xendit {
   constructor(opts: XenditOptions);
@@ -21,5 +22,6 @@ declare class Xendit {
   EWallet: typeof EWalletService;
   Balance: typeof BalanceServices;
   RetailOutlet: typeof RetailOutletService;
+  QrCode: typeof QrCode;
 }
 export = Xendit;

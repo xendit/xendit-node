@@ -7,6 +7,7 @@ const { RecurringPayment } = require('./recurring');
 const { EWalletService } = require('./ewallet');
 const { BalanceServices } = require('./balance');
 const { RetailOutletService } = require('./retail_outlet');
+const { QrCode } = require('./qr_code');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -34,6 +35,7 @@ function Xendit(options) {
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  this.QrCode = QrCode._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;
