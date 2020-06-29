@@ -534,6 +534,7 @@ Example: Create a payout
 p.createPayout({
   externalID: 'your-external-id',
   amount: 100000,
+  email: 'stanley@xendit.co',
 }).then(({ id }) => {
   console.log(`Invoice created with ID: ${id}`);
 });
@@ -544,7 +545,11 @@ Refer to [Xendit API Reference](https://xendit.github.io/apireference/#payouts) 
 #### Create a payout
 
 ```ts
-p.createPayout(data: { externalID: string; amount: string })
+p.createPayout(data: {
+  externalID: string;
+  amount: string;
+  email: string;
+})
 ```
 
 #### Get a payout

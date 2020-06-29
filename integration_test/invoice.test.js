@@ -17,5 +17,10 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Invoice integration test done...');
+    })
+    .catch(e => {
+      throw new Error(
+        `Invoice integration tests failed with error: ${e.message}`,
+      );
     });
 };

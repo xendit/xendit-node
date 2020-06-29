@@ -6,6 +6,7 @@ const p = new Payout({});
 p.createPayout({
   externalID: Date.now().toString(),
   amount: 10000,
+  email: 'stanley@xendit.co',
 })
   .then(r => {
     console.log('created payout:', r); // eslint-disable-line no-console

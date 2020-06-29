@@ -20,5 +20,10 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('EWallet integration test done...');
+    })
+    .catch(e => {
+      throw new Error(
+        `Ewallet integration tests failed with error: ${e.message}`,
+      );
     });
 };

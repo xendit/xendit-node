@@ -22,6 +22,7 @@ before(function() {
     .post('/', {
       external_id: TestConstants.EXT_ID,
       amount: TestConstants.AMOUNT,
+      email: TestConstants.EMAIL,
     })
     .reply(201, TestConstants.VALID_PAYOUT)
     .get(`/${TestConstants.PAYOUT_ID}`)
@@ -37,6 +38,7 @@ describe('Payout Service', () => {
         p.createPayout({
           externalID: TestConstants.EXT_ID,
           amount: TestConstants.AMOUNT,
+          email: TestConstants.EMAIL,
         }),
       )
         .to.eventually.deep.equal(TestConstants.VALID_PAYOUT)

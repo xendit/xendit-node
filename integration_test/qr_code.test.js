@@ -18,5 +18,10 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('QR Code integration test done...');
+    })
+    .catch(e => {
+      throw new Error(
+        `QR Code integration tests failed with error: ${e.message}`,
+      );
     });
 };

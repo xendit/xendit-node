@@ -33,5 +33,10 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Disbursement integration test done...');
+    })
+    .catch(e => {
+      throw new Error(
+        `Disbursement integration tests failed with error: ${e.message}`,
+      );
     });
 };
