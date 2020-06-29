@@ -25,10 +25,6 @@ q.createCode({
     console.log('simulated payment', r); // eslint-disable-line no-console
     return externalID;
   })
-  .then(externalID => q.getPayments({ externalID }))
-  .then(r => {
-    console.log('all payments for the qr', r); // eslint-disable-line no-console
-  })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);

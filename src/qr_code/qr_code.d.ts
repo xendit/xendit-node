@@ -21,6 +21,5 @@ export = class QrCode {
     amount?: number;
   }): Promise<object>;
   getCode(data: { externalID: string }): Promise<object>;
-  getPayments(data: { externalID: string }): Promise<object>;
   simulate(data: { externalID: string; amount?: number }): Promise<object>;
 };

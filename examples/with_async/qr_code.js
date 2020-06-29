@@ -18,10 +18,6 @@ const q = new QrCode({});
 
     const payment = await q.simulate({ externalID: qrcode.external_id });
     console.log('simulated payment', payment); // eslint-disable-line no-console
-
-    const payments = await q.getPayments({ externalID: qrcode.external_id });
-    // eslint-disable-next-line no-console
-    console.log('all payments for the qr', payments);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);

@@ -61,19 +61,6 @@ QrCode.prototype.getCode = function(data) {
   });
 };
 
-QrCode.prototype.getPayments = function(data) {
-  return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(['externalID'], data, reject);
-
-    fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.externalID}/payments`, {
-      method: 'GET',
-      headers: { Authorization: Auth.basicAuthHeader(this.opts.secretKey) },
-    })
-      .then(resolve)
-      .catch(reject);
-  });
-};
-
 QrCode.prototype.simulate = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['externalID'], data, reject);

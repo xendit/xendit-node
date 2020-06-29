@@ -30,9 +30,6 @@ before(function() {
     .get(`/${TestConstants.EXT_ID}`)
     .reply(200, TestConstants.VALID_CREATE_CODE_RESPONSE);
   nock(qrcode.API_ENDPOINT)
-    .get(`/${TestConstants.EXT_ID}/payments`)
-    .reply(200, TestConstants.VALID_PAYMENT_ARRAY);
-  nock(qrcode.API_ENDPOINT)
     .post(`/${TestConstants.EXT_ID}/payments/simulate`)
     .reply(200, TestConstants.VALID_PAYMENT);
 });
@@ -72,25 +69,6 @@ describe('QrCode Service', function() {
     });
     it('should report missing required fields', done => {
       expect(qrcode.getCode({}))
-        .to.eventually.to.be.rejected.then(e =>
-          Promise.all([
-            expect(e).to.have.property('status', 400),
-            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
-          ]),
-        )
-        .then(() => done())
-        .catch(e => done(e));
-    });
-  });
-
-  describe('getPayments', () => {
-    it('should get an array of payments', done => {
-      expect(qrcode.getPayments({ externalID: TestConstants.EXT_ID }))
-        .to.eventually.deep.equal(TestConstants.VALID_PAYMENT_ARRAY)
-        .and.notify(done);
-    });
-    it('should report missing required fields', done => {
-      expect(qrcode.getPayments({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

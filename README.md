@@ -62,7 +62,6 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
   * [QR Code Services](#qr-code-services)
     + [Create code](#create-code)
     + [Get code](#get-code)
-    + [Get payments of a QR code](#get-payments-of-a-qr-code)
     + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
 - [Contributing](#contributing)
 
@@ -743,12 +742,6 @@ q.createCode(data: {
 
 ```ts
 q.getCode(data: { externalID: string });
-```
-
-#### Get payments of a QR code
-
-```ts
-q.getPayments(data: { externalID: string });
 ```
 
 #### Simulate payment (only in dev mode)
