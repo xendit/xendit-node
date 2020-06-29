@@ -16,5 +16,8 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Retail outlet integration test done...');
+    })
+    .catch(e => {
+      throw new Error(`RO integration tests failed with error: ${e.message}`);
     });
 };

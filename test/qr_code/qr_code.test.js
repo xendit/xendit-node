@@ -12,42 +12,45 @@ const x = new Xendit({
 
 chai.use(chaiAsProm);
 
-const { Payout } = x;
-let p = new Payout({});
+const { QrCode } = x;
+let qrcode = new QrCode({});
 beforeEach(function() {
-  p = new Payout({});
+  qrcode = new QrCode({});
 });
 before(function() {
-  nock(p.API_ENDPOINT)
+  nock(qrcode.API_ENDPOINT)
     .post('/', {
       external_id: TestConstants.EXT_ID,
       amount: TestConstants.AMOUNT,
-      email: TestConstants.EMAIL,
+      callback_url: TestConstants.CALLBACK_URL,
+      type: TestConstants.TYPE,
     })
-    .reply(201, TestConstants.VALID_PAYOUT)
-    .get(`/${TestConstants.PAYOUT_ID}`)
-    .reply(200, TestConstants.VALID_PAYOUT)
-    .post(`/${TestConstants.PAYOUT_ID}/void`)
-    .reply(200, TestConstants.VALID_PAYOUT);
+    .reply(200, TestConstants.VALID_CREATE_CODE_RESPONSE);
+  nock(qrcode.API_ENDPOINT)
+    .get(`/${TestConstants.EXT_ID}`)
+    .reply(200, TestConstants.VALID_CREATE_CODE_RESPONSE);
+  nock(qrcode.API_ENDPOINT)
+    .post(`/${TestConstants.EXT_ID}/payments/simulate`)
+    .reply(200, TestConstants.VALID_PAYMENT);
 });
 
-describe('Payout Service', () => {
-  describe('createPayout', () => {
-    it('should create a payout', done => {
+describe('QrCode Service', function() {
+  describe('creatCode', () => {
+    it('should create a QR code', done => {
       expect(
-        p.createPayout({
+        qrcode.createCode({
           externalID: TestConstants.EXT_ID,
+          type: TestConstants.TYPE,
+          callbackURL: TestConstants.CALLBACK_URL,
           amount: TestConstants.AMOUNT,
-          email: TestConstants.EMAIL,
         }),
       )
-        .to.eventually.deep.equal(TestConstants.VALID_PAYOUT)
+        .to.eventually.deep.equal(TestConstants.VALID_CREATE_CODE_RESPONSE)
         .and.notify(done);
     });
-
     it('should report missing required fields', done => {
-      expect(p.createPayout({}))
-        .to.eventually.be.rejected.then(e =>
+      expect(qrcode.createCode({}))
+        .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
             expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
@@ -58,16 +61,15 @@ describe('Payout Service', () => {
     });
   });
 
-  describe('getPayout', () => {
-    it('should retrieve payout details', done => {
-      expect(p.getPayout({ id: TestConstants.PAYOUT_ID }))
-        .to.eventually.deep.equal(TestConstants.VALID_PAYOUT)
+  describe('getCode', () => {
+    it('should get a QR code', done => {
+      expect(qrcode.getCode({ externalID: TestConstants.EXT_ID }))
+        .to.eventually.deep.equal(TestConstants.VALID_CREATE_CODE_RESPONSE)
         .and.notify(done);
     });
-
     it('should report missing required fields', done => {
-      expect(p.getPayout({}))
-        .to.eventually.be.rejected.then(e =>
+      expect(qrcode.getCode({}))
+        .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
             expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
@@ -78,16 +80,15 @@ describe('Payout Service', () => {
     });
   });
 
-  describe('voidPayout', () => {
-    it('should void a payout', done => {
-      expect(p.voidPayout({ id: TestConstants.PAYOUT_ID }))
-        .to.eventually.deep.equal(TestConstants.VALID_PAYOUT)
+  describe('simulate', () => {
+    it('should simulate a payment', done => {
+      expect(qrcode.simulate({ externalID: TestConstants.EXT_ID }))
+        .to.eventually.deep.equal(TestConstants.VALID_PAYMENT)
         .and.notify(done);
     });
-
     it('should report missing required fields', done => {
-      expect(p.voidPayout({}))
-        .to.eventually.be.rejected.then(e =>
+      expect(qrcode.simulate({}))
+        .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
             expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),

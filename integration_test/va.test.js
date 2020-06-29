@@ -24,5 +24,8 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('VA integration test done...');
+    })
+    .catch(e => {
+      throw new Error(`VA integration tests failed with error: ${e.message}`);
     });
 };

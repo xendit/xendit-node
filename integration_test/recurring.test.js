@@ -21,5 +21,10 @@ module.exports = function() {
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Recurring payments integration test done...');
+    })
+    .catch(e => {
+      throw new Error(
+        `Recurring integration tests failed with error: ${e.message}`,
+      );
     });
 };

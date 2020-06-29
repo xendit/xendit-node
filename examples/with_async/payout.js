@@ -8,6 +8,7 @@ const p = new Payout({});
     const payout = await p.createPayout({
       externalID: Date.now().toString(),
       amount: 10000,
+      email: 'stanley@xendit.co',
     });
     console.log('created payout:', payout); // eslint-disable-line no-console
 

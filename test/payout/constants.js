@@ -5,11 +5,14 @@ const VALID_PAYOUT = {
   id: PAYOUT_ID,
   external_id: EXT_ID,
   amount: AMOUNT,
+  passcode: '123456',
 };
+const EMAIL = 'example@example.com';
 
 module.exports = {
   EXT_ID,
   PAYOUT_ID,
   AMOUNT,
   VALID_PAYOUT,
+  EMAIL,
 };

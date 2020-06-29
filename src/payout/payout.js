@@ -20,7 +20,11 @@ Payout._constructorWithInjectedXenditOpts = function(options) {
 
 Payout.prototype.createPayout = function(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(['externalID', 'amount'], data, reject);
+    Validate.rejectOnMissingFields(
+      ['externalID', 'amount', 'email'],
+      data,
+      reject,
+    );
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/`, {
       method: 'POST',
@@ -31,6 +35,7 @@ Payout.prototype.createPayout = function(data) {
       body: JSON.stringify({
         external_id: data.externalID,
         amount: data.amount,
+        email: data.email,
       }),
     })
       .then(resolve)
