@@ -476,6 +476,7 @@ rp.createPayment(data: {
   failureRedirectURL?: string;
   recharge?: boolean;
   chargeImmediately?: boolean;
+  currency?: string;
 })
 ```
 

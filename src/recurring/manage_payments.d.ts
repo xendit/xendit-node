@@ -25,6 +25,7 @@ export function createPayment(data: {
   failureRedirectURL?: string;
   recharge?: boolean;
   chargeImmediately?: boolean;
+  currency?: string;
 }): Promise<object>;
 
 export function getPayment(data: { id: string }): Promise<object>;

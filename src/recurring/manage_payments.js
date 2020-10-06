@@ -35,6 +35,7 @@ function createPayment(data) {
         failure_redirect_url: data.failureRedirectURL,
         recharge: data.recharge,
         charge_immediately: data.chargeImmediately,
+        currency: data.currency,
       }),
     })
       .then(resolve)
