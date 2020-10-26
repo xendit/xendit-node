@@ -8,6 +8,7 @@ const { EWalletService } = require('./ewallet');
 const { BalanceServices } = require('./balance');
 const { RetailOutletService } = require('./retail_outlet');
 const { QrCode } = require('./qr_code');
+const { PlatformService } = require('./platform');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -36,6 +37,7 @@ function Xendit(options) {
     this.opts,
   );
   this.QrCode = QrCode._constructorWithInjectedXenditOpts(this.opts);
+  this.Platform = PlatformService._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;

@@ -1,3 +1,4 @@
+import Errors from './errors';
 import { CardService } from './card';
 import { VAService } from './va';
 import { DisbursementService } from './disbursement';
@@ -9,10 +10,11 @@ import { EWalletService } from './ewallet';
 import { BalanceServices } from './balance';
 import { RetailOutletService } from './retail_outlet';
 import { QrCode } from './qr_code';
+import { PlatformService } from './platform';
 
 declare class Xendit {
   constructor(opts: XenditOptions);
-  static Errors;
+  static Errors: typeof Errors;
   Card: typeof CardService;
   VirtualAcc: typeof VAService;
   Disbursement: typeof DisbursementService;
@@ -23,5 +25,6 @@ declare class Xendit {
   Balance: typeof BalanceServices;
   RetailOutlet: typeof RetailOutletService;
   QrCode: typeof QrCode;
+  Platform: typeof PlatformService;
 }
 export = Xendit;
