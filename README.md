@@ -63,6 +63,11 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Create code](#create-code)
     + [Get code](#get-code)
     + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
+  * [XenPlatform Service](#xenplatform-service)
+    + [Create sub-accounts](#create-sub-accounts)
+    + [Set Callback URL](#set-callback-url)
+    + [Create transfers](#create-transfers)
+    + [Create fee rules](#create-fee-rules)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -754,6 +759,80 @@ q.getCode(data: { externalID: string });
 
 ```ts
 q.simulate(data: { externalID: string; amount?: number });
+```
+
+### XenPlatform Service
+
+Instanitiate Platform service using constructor that has been injected with Xendit keys
+
+```js
+const { Platform } = x;
+const platformSpecificOptions = {};
+const p = new Platform(platformSpecificOptions);
+```
+
+Example: Creating a sub-account
+
+```js
+p.createAccount({
+  accountEmail: 'example@gmail.com',
+  type: 'MANAGED',
+})
+  .then(({ user_id }) => {
+    console.log(`Account created with ID: ${user_id}`);
+  })
+  .catch(e => {
+    console.error(`Account creation failed with message: ${e.message}`);
+  });
+```
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#credit-cards) for more info about methods' parameters
+
+#### Create sub-accounts
+
+```ts
+p.createAccount(data: {
+  accountEmail: string;
+  type: AccountTypes;
+  businessProfile?: {
+    businessName: string;
+  };
+})
+```
+
+#### Set Callback URL
+
+```ts
+p.setCallbackURL(data: {
+  type: string;
+  url: string;
+  forUserID?: string;
+})
+```
+
+#### Create transfers
+
+```ts
+p.createTransfer(data: {
+  reference: string;
+  amount: number;
+  sourceUserID: string;
+  destinationUserID: string;
+})
+```
+
+#### Create fee rules
+
+```ts
+p.createFeeRule(data: {
+  name: string;
+  description?: string;
+  routes: Array<{
+    unit: string;
+    amount: number;
+    currency: string;
+  }>;
+})
 ```
 
 ## Contributing
