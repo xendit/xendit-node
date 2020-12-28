@@ -9,7 +9,10 @@
     "prettier/prettier": "warn",
     "no-console": "error",
     "new-cap": "warn",
-    "max-len": ["warn", { "code": 80, "ignoreUrls": true }],
+    "max-len": ["warn", {
+      "code": 80,
+      "ignoreUrls": true
+    }],
     "curly": ["error", "multi-line"],
     "no-unused-vars": "error"
   },
@@ -17,27 +20,30 @@
     "Promise": true,
     "process": true
   },
-  "overrides": [
-    {
-      "files": ["**/*.ts"],
-      "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
-        "prettier"
-      ],
-      "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": { "modules": true }
-      },
-      "rules": {
-        "prettier/prettier": "warn",
-        "no-console": "error",
-        "new-cap": "warn",
-        "max-len": ["warn", { "code": 80, "ignoreUrls": true }],
-        "curly": ["error", "multi-line"],
-        "no-unused-vars": "error"
+  "overrides": [{
+    "files": ["**/*.ts"],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint",
+      "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "modules": true
       }
+    },
+    "rules": {
+      "prettier/prettier": "warn",
+      "no-console": "error",
+      "new-cap": "warn",
+      "max-len": ["warn", {
+        "code": 80,
+        "ignoreUrls": true
+      }],
+      "curly": ["error", "multi-line"],
+      "no-unused-vars": "error"
     }
-  ]
+  }]
 }

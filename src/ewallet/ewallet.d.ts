@@ -11,11 +11,19 @@ enum GetSupportWalletTypes {
   Dana = 'DANA',
 }
 
+enum CreateSupportChargesTypes {
+  IdShopeePay = 'ID_SHOPEEPAY',
+}
+
 interface PaymentItem {
   id: string;
   name: string;
   price: number;
   quantity: number;
+}
+
+interface ChannelProperties {
+  success_redirect_url: string;
 }
 
 export = class EWallet {
@@ -27,6 +35,7 @@ export = class EWallet {
     OVO: string;
     Dana: string;
     LinkAja: string;
+    ShopeePay: string;
   };
   createPayment(data: {
     externalID: string;
@@ -43,4 +52,17 @@ export = class EWallet {
     externalID: string;
     ewalletType: GetSupportWalletTypes;
   }): Promise<object>;
+  createCharges(data: {
+    referenceID: string;
+    currency: string;
+    amount: number;
+    checkoutMethod: string;
+    channelCode: CreateSupportChargesTypes;
+    channelProperties?: ChannelProperties;
+    customerID?: string;
+    basket?: object[];
+    metadata?: object[];
+    callbackURL?: string;
+  }): Promise<object>;
+  getCharges(data: { chargeID: string }): Promise<object>;
 };
