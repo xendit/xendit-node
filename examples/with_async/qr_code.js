@@ -21,28 +21,12 @@ const q = new QrCode({});
 
     let payments = await q.getPayments({
       externalID: qrcode.external_id,
-      to: qrcode.created,
-    });
-    console.log('retrieved payments', payments); // eslint-disable-line no-console
-
-    payments = await q.getPayments({
-      externalID: qrcode.external_id,
-      from: qrcode.created,
-    });
-    console.log('retrieved payments', payments); // eslint-disable-line no-console
-
-    payments = await q.getPayments({
-      externalID: qrcode.external_id,
       from: '2021-01-04T08:09:30.000Z',
       to: new Date().toISOString(),
+      limit: 10,
     });
-    console.log('retrieved payments', payments); // eslint-disable-line no-console
-
-    payments = await q.getPayments({
-      externalID: qrcode.external_id,
-      limit: 0,
-    });
-    console.log('retrieved payments', payments); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('retrieved payments', payments);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);
