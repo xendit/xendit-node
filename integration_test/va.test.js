@@ -11,6 +11,8 @@ module.exports = function() {
         externalID: '123',
         bankCode: banks[0].code,
         name: 'Stanley Nguyen',
+        isClosed: true,
+        expectedAmt: 15,
       });
     })
     .then(({ id }) => va.getFixedVA({ id }))
