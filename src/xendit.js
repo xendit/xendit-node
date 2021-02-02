@@ -9,6 +9,8 @@ const { BalanceServices } = require('./balance');
 const { RetailOutletService } = require('./retail_outlet');
 const { QrCode } = require('./qr_code');
 const { PlatformService } = require('./platform');
+const { CustomerService } = require('./customer');
+const { DirectDebitService } = require('./direct_debit');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -38,6 +40,10 @@ function Xendit(options) {
   );
   this.QrCode = QrCode._constructorWithInjectedXenditOpts(this.opts);
   this.Platform = PlatformService._constructorWithInjectedXenditOpts(this.opts);
+  this.Customer = CustomerService._constructorWithInjectedXenditOpts(this.opts);
+  this.DirectDebit = DirectDebitService._constructorWithInjectedXenditOpts(
+    this.opts,
+  );
 }
 
 Xendit.Errors = Errors;
