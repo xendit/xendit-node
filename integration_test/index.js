@@ -11,6 +11,7 @@ Promise.all([
   require('./ewallet.test')(),
   require('./qr_code.test')(),
   require('./platform.test')(),
+  require('./customer.test')(),
 ])
   .then(() => {
     // eslint-disable-next-line no-console
