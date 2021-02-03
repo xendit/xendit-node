@@ -22,23 +22,6 @@ const VALID_CREATE_CUSTOMER_RESPONSE = {
   addresses: null,
   source_of_wealth: null,
 };
-const pls = {
-  id: 'd3dcf57e-5785-478f-bc35-1de162b7242d',
-  reference_id: 'customer-reference-id-example',
-  given_names: 'customer 1',
-  email: 'customer@website.com',
-  mobile_number: '+6281212345678',
-  description: 'dummy customer',
-  middle_name: 'middle',
-  surname: 'surname',
-  phone_number: null,
-  nationality: null,
-  date_of_birth: null,
-  metadata: null,
-  employment: null,
-  addresses: null,
-  source_of_wealth: null,
-};
 const VALID_CUSTOMER = {
   id: CUSTOMER_ID,
   reference_id: REFERENCE_ID,
@@ -104,5 +87,4 @@ module.exports = {
   VALID_CREATE_CUSTOMER_RESPONSE,
   VALID_CUSTOMER,
   VALID_CUSTOMER_ARRAY,
-  pls,
 };

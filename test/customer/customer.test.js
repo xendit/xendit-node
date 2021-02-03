@@ -29,7 +29,7 @@ before(function() {
       surname: TestConstants.SURNAME,
       addresses: [],
     })
-    .reply(200, TestConstants.pls);
+    .reply(200, TestConstants.VALID_CREATE_CUSTOMER_RESPONSE);
   nock(customer.API_ENDPOINT)
     .get(`/customers/${TestConstants.CUSTOMER_ID}`)
     .reply(200, TestConstants.VALID_CREATE_CUSTOMER_RESPONSE);
@@ -73,7 +73,7 @@ describe('Customer Service', function() {
           addresses: [],
         }),
       )
-        .to.eventually.deep.equal(TestConstants.pls)
+        .to.eventually.deep.equal(TestConstants.VALID_CREATE_CUSTOMER_RESPONSE)
         .and.notify(done);
     });
     it('should report missing required fields', done => {
@@ -137,7 +137,7 @@ describe('Customer Service', function() {
   });
 
   describe('getCustomerByReferenceID', () => {
-    it('should get a customer by reference ID', done => {
+    it('should get customers by reference ID', done => {
       expect(
         customer.getCustomerByReferenceID({
           referenceID: TestConstants.REFERENCE_ID,
