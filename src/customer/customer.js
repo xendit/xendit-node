@@ -1,5 +1,7 @@
 const { promWithJsErr, fetchWithHTTPErr, Auth, Validate } = require('../utils');
 
+const CUSTOMER_PATH = '';
+
 function Customer(options) {
   let aggOpts = options;
   if (
@@ -10,7 +12,7 @@ function Customer(options) {
   }
 
   this.opts = aggOpts;
-  this.API_ENDPOINT = this.opts.xenditURL;
+  this.API_ENDPOINT = this.opts.xenditURL + CUSTOMER_PATH;
 }
 
 Customer._injectedOpts = {};

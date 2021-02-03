@@ -18,12 +18,14 @@ const c = new Customer({});
     console.log('created customer', customer); // eslint-disable-line no-console
 
     customer = await c.getCustomer({ id: customer.id });
-    console.log('retrieved customer', customer); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('retrieved customer', customer);
 
     const customers = await c.getCustomerByReferenceID({
       referenceID: customer.reference_id,
     });
-    console.log('retrieved customers', customers); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('retrieved customers', customers);
 
     customer = await c.updateCustomer({
       id: customer.id,
