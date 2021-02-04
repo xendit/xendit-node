@@ -78,4 +78,37 @@ QrCode.prototype.simulate = function(data) {
   });
 };
 
+QrCode.prototype.getPayments = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['externalID'], data, reject);
+
+    fetchWithHTTPErr(
+      `${this.API_ENDPOINT}/payments?external_id=${
+        data.externalID
+      }${getPaymentsOptionalRequestParameters(data)}`,
+      {
+        method: 'GET',
+        headers: { Authorization: Auth.basicAuthHeader(this.opts.secretKey) },
+      },
+    )
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+function getPaymentsOptionalRequestParameters(data) {
+  let url = '';
+  if (data.from) {
+    url += `&from=${data.from}`;
+  }
+  if (data.to) {
+    url += `&to=${data.to}`;
+  }
+  if (data.limit != null) {
+    url += `&limit=${data.limit}`;
+  }
+
+  return url;
+}
+
 module.exports = QrCode;

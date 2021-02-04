@@ -25,6 +25,21 @@ q.createCode({
     console.log('simulated payment', r); // eslint-disable-line no-console
     return externalID;
   })
+  .then(r =>
+    Promise.all([
+      r,
+      q.getPayments({
+        externalID: r,
+        from: '2021-01-04T08:09:30.000Z',
+        to: new Date().toISOString(),
+        limit: 10,
+      }),
+    ]),
+  )
+  .then(([externalID, r]) => {
+    console.log('retrieved payments', r); // eslint-disable-line no-console
+    return externalID;
+  })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);

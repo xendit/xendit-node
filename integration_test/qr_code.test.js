@@ -15,6 +15,17 @@ module.exports = function() {
     .then(r =>
       Promise.all([r.external_id, q.simulate({ externalID: r.external_id })]),
     )
+    .then(([externalId, r]) =>
+      Promise.all([
+        externalId,
+        q.getPayments({
+          externalID: externalId,
+          from: r.created_at,
+          to: new Date().toISOString(),
+          limit: 10,
+        }),
+      ]),
+    )
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('QR Code integration test done...');

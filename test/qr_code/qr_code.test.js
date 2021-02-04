@@ -32,6 +32,9 @@ before(function() {
   nock(qrcode.API_ENDPOINT)
     .post(`/${TestConstants.EXT_ID}/payments/simulate`)
     .reply(200, TestConstants.VALID_PAYMENT);
+  nock(qrcode.API_ENDPOINT)
+    .get(`/payments?external_id=${TestConstants.EXT_ID}`)
+    .reply(200, TestConstants.VALID_PAYMENT_ARRAY);
 });
 
 describe('QrCode Service', function() {
@@ -88,6 +91,25 @@ describe('QrCode Service', function() {
     });
     it('should report missing required fields', done => {
       expect(qrcode.simulate({}))
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+  });
+
+  describe('getPaymentsByExternalID', () => {
+    it('should get list of payments', done => {
+      expect(qrcode.getPayments({ externalID: TestConstants.EXT_ID }))
+        .to.eventually.deep.equal(TestConstants.VALID_PAYMENT_ARRAY)
+        .and.notify(done);
+    });
+    it('should report missing required fields', done => {
+      expect(qrcode.getPayments({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
