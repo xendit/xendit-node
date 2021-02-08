@@ -63,6 +63,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Create code](#create-code)
     + [Get code](#get-code)
     + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
+    + [Get payments by external ID](#get-payments-by-external-id)
   * [Customer services](#customer-services)
     + [Create customer](#create-customer)
     + [Get customer](#get-customer)
@@ -776,6 +777,17 @@ q.getCode(data: { externalID: string });
 q.simulate(data: { externalID: string; amount?: number });
 ```
 
+#### Get payments by external ID
+
+```ts
+q.getPayments(data: {
+  externalID: string;
+  from?: string;
+  to?: string;
+  limit?: number;
+});
+```
+
 ### Customer services
 
 Instanitiate customer service using constructor that has been injected with Xendit keys
@@ -977,7 +989,6 @@ dd.getDirectDebitPaymentStatusByID(data: {
 ```ts
 dd.getDirectDebitPaymentStatusByReferenceID(data: {
   referenceID: string;
-});
 ```
 
 ### XenPlatform Service
