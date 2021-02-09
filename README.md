@@ -51,8 +51,8 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Get a payout](#get-a-payout)
     + [Void a payout](#void-a-payout)
   * [EWallet Services](#ewallet-services)
-    + [Create an ewallet payment](#create-an-ewallet-payment)
-    + [Get an ewallet Payment Status](#get-an-ewallet-payment-status)
+    + [Create an ewallet charge](#create-an-ewallet-charge)
+    + [Get an ewallet charge status](#get-an-ewallet-charge-status)
   * [Balance Services](#balance-services)
     + [Get balance](#get-balance)
   * [Retail Outlet Services](#retail-outlet-services)
@@ -581,48 +581,47 @@ const ewalletSpecificOptions = {};
 const ew = new EWallet(ewalletSpecificOptions);
 ```
 
-Example: Create an ewallet payment
+Example: Create an ewallet charge
 
 ```js
 ew.createPayment({
-  externalID: 'my-ovo-payment',
-  amount: 1,
-  phone: '081234567890',
-  ewalletType: EWallet.Type.OVO,
+  referenceID: 'test-reference-id',
+  currency: 'IDR',
+  amount: 50000,
+  checkoutMethod: 'ONE_TIME_PAYMENT',
+  channelCode: 'ID_SHOPEEPAY',
+  channelProperties: {
+    successRedirectURL: 'https://yourwebsite.com/order/123',
+  },
 }).then(r => {
-  console.log('create ewallet payment detail:', r);
+  console.log('created ewallet payment charge:', r);
   return r;
 });
 ```
 
 Refer to [Xendit API Reference](https://xendit.github.io/apireference/#ewallets) for more info about methods' parameters
 
-#### Create an ewallet payment
+#### Create an ewallet charge
 
 ```ts
 ew.createPayment(data: {
-  externalID: string;
+  referenceID: string;
+  currency: Currency;
   amount: number;
-  phone?: string;
-  expirationDate?: Date;
-  callbackURL?: string;
-  redirectURL?: string;
-  items?: Array<{
-    id: string;
-    name: string;
-    price: number;
-    quantity: number;
-  }>;
-  ewalletType: CreateSupportWalletTypes;
+  checkoutMethod: string;
+  channelCode?: ChannelCode;
+  channelProperties?: OVOChannelProps | PaymayaChannelProps | OtherChannelProps;
+  customerID?: string;
+  basket?: Basket[];
+  metadata?: object;
 })
 ```
 
-#### Get an ewallet Payment Status
+#### Get an ewallet charge status
 
 ```ts
 ew.getPayment(data: {
-  externalID: string:
-  ewalletType: GetSupportWalletTypes;
+  chargeID: string;
 })
 ```
 
