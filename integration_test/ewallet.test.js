@@ -18,7 +18,7 @@ module.exports = function() {
       }),
     )
     .then(() =>
-      ew.createPayment({
+      ew.createEWalletCharge({
         referenceID: 'test-reference-id',
         currency: 'IDR',
         amount: 1688,
@@ -48,7 +48,7 @@ module.exports = function() {
       }),
     )
     .then(r =>
-      ew.getPayment({
+      ew.getEWalletChargeStatus({
         chargeID: r.id,
       }),
     )

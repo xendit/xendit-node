@@ -51,7 +51,7 @@ before(function() {
 });
 
 describe('EWallet Service', function() {
-  describe('createPayment old ver', () => {
+  describe('createPayment', () => {
     it('should create an OVO Payment', done => {
       expect(
         ewallet.createPayment({
@@ -132,7 +132,7 @@ describe('EWallet Service', function() {
     });
   });
 
-  describe('getPayment old ver', () => {
+  describe('getPayment', () => {
     it('should get OVO Payment Status', done => {
       expect(
         ewallet.getPayment({
@@ -159,10 +159,10 @@ describe('EWallet Service', function() {
     });
   });
 
-  describe('createPayment', () => {
+  describe('createEWalletCharge', () => {
     it('should create a ewallet payment charge', done => {
       expect(
-        ewallet.createPayment({
+        ewallet.createEWalletCharge({
           referenceID: TestConstants.REFERENCE_ID,
           currency: TestConstants.CURRENCY,
           amount: TestConstants.AMOUNT,
@@ -179,7 +179,7 @@ describe('EWallet Service', function() {
     });
 
     it('should report missing required fields', done => {
-      expect(ewallet.createPayment({}))
+      expect(ewallet.createEWalletCharge({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
@@ -191,10 +191,10 @@ describe('EWallet Service', function() {
     });
   });
 
-  describe('getPayment', () => {
+  describe('getEWalletChargeStatus', () => {
     it('should get ewallet payment charge', done => {
       expect(
-        ewallet.getPayment({
+        ewallet.getEWalletChargeStatus({
           chargeID: TestConstants.CHARGE_ID,
         }),
       )
@@ -203,7 +203,7 @@ describe('EWallet Service', function() {
         .catch(e => done(e));
     });
     it('should report missing required fields', done => {
-      expect(ewallet.getPayment({}))
+      expect(ewallet.getEWalletChargeStatus({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

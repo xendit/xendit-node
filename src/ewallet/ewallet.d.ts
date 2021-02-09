@@ -18,18 +18,6 @@ interface PaymentItem {
   quantity: number;
 }
 
-interface CreatePaymentProps {
-  externalID: string;
-  amount: number;
-  phone?: string;
-  expirationDate?: Date;
-  callbackURL?: string;
-  redirectURL?: string;
-  items?: PaymentItem[];
-  ewalletType: CreateSupportWalletTypes;
-  xApiVersion?: string;
-}
-
 enum Currency {
   IDR = 'IDR',
   PHP = 'PHP',
@@ -71,27 +59,6 @@ interface Basket {
   metadata?: object;
 }
 
-interface CreateEwalletChargeProps {
-  referenceID: string;
-  currency: Currency;
-  amount: number;
-  checkoutMethod: string;
-  channelCode?: ChannelCode;
-  channelProperties?: OVOChannelProps | PaymayaChannelProps | OtherChannelProps;
-  customerID?: string;
-  basket?: Basket[];
-  metadata?: object;
-}
-
-interface GetPaymentProps {
-  externalID: string;
-  ewalletType: GetSupportWalletTypes;
-}
-
-interface GetEwalletChargeStatusProps {
-  chargeID: string;
-}
-
 export = class EWallet {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
@@ -102,10 +69,34 @@ export = class EWallet {
     Dana: string;
     LinkAja: string;
   };
-  createPayment(
-    data: CreatePaymentProps | CreateEwalletChargeProps,
-  ): Promise<object>;
-  getPayment(
-    data: GetPaymentProps | GetEwalletChargeStatusProps,
-  ): Promise<object>;
+  createPayment(data: {
+    externalID: string;
+    amount: number;
+    phone?: string;
+    expirationDate?: Date;
+    callbackURL?: string;
+    redirectURL?: string;
+    items?: PaymentItem[];
+    ewalletType: CreateSupportWalletTypes;
+    xApiVersion?: string;
+  }): Promise<object>;
+  getPayment(data: {
+    externalID: string;
+    ewalletType: GetSupportWalletTypes;
+  }): Promise<object>;
+  createEWalletCharge(data: {
+    referenceID: string;
+    currency: Currency;
+    amount: number;
+    checkoutMethod: string;
+    channelCode?: ChannelCode;
+    channelProperties?:
+      | OVOChannelProps
+      | PaymayaChannelProps
+      | OtherChannelProps;
+    customerID?: string;
+    basket?: Basket[];
+    metadata?: object;
+  }): Promise<object>;
+  getEWalletChargeStatus(data: { chargeID: string }): Promise<object>;
 };

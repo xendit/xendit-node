@@ -31,176 +31,169 @@ EWallet.Type = {
 };
 
 EWallet.prototype.createPayment = function(data) {
-  if (data.referenceID) {
-    return promWithJsErr((resolve, reject) => {
-      let compulsoryFields = [
-        'referenceID',
-        'currency',
-        'amount',
-        'checkoutMethod',
-      ];
-      Validate.rejectOnMissingFields(compulsoryFields, data, reject);
+  return promWithJsErr((resolve, reject) => {
+    let compulsoryFields = ['ewalletType'];
 
-      fetchWithHTTPErr(`${this.API_ENDPOINT}/charges`, {
-        method: 'POST',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          reference_id: data.referenceID,
-          currency: data.currency,
-          amount: data.amount,
-          checkout_method: data.checkoutMethod,
-          channel_code: data.channelCode,
-          channel_properties:
-            data.channelCode === 'ID_OVO'
-              ? {
-                  mobile_number: data.channelProperties.mobileNumber,
-                }
-              : data.channelCode === 'PH_PAYMAYA'
-              ? {
-                  success_redirect_url:
-                    data.channelProperties.successRedirectURL,
-                  failure_redirect_url:
-                    data.channelProperties.failureRedirectURL,
-                  cancel_redirect_url: data.channelProperties.cancelRedirectURL,
-                }
-              : {
-                  success_redirect_url:
-                    data.channelProperties.successRedirectURL,
-                },
-          customer_id: data.customerID,
-          basket: data.basket
-            ? data.basket.map(product => ({
-                reference_id: product.referenceID,
-                name: product.name,
-                category: product.category,
-                currency: product.currency,
-                price: product.price,
-                quantity: product.quantity,
-                type: product.type,
-                url: product.url,
-                description: product.description,
-                sub_category: product.subCategory,
-                metadata: product.metadata,
-              }))
-            : null,
-          metadata: data.metadata,
-        }),
-      })
-        .then(resolve)
-        .catch(reject);
-    });
-  } else {
-    return promWithJsErr((resolve, reject) => {
-      let compulsoryFields = ['ewalletType'];
-
-      if (data.ewalletType) {
-        switch (data.ewalletType) {
-          case EWallet.Type.OVO:
-            compulsoryFields = ['externalID', 'amount', 'phone', 'ewalletType'];
-            break;
-          case EWallet.Type.Dana:
-            compulsoryFields = [
-              'externalID',
-              'amount',
-              'callbackURL',
-              'redirectURL',
-              'ewalletType',
-            ];
-            break;
-          case EWallet.Type.LinkAja:
-            compulsoryFields = [
-              'externalID',
-              'phone',
-              'amount',
-              'items',
-              'callbackURL',
-              'redirectURL',
-              'ewalletType',
-            ];
-            break;
-          default:
-            reject({
-              status: 400,
-              code: errors.API_VALIDATION_ERROR,
-              message: 'Invalid EWallet Type',
-            });
-        }
+    if (data.ewalletType) {
+      switch (data.ewalletType) {
+        case EWallet.Type.OVO:
+          compulsoryFields = ['externalID', 'amount', 'phone', 'ewalletType'];
+          break;
+        case EWallet.Type.Dana:
+          compulsoryFields = [
+            'externalID',
+            'amount',
+            'callbackURL',
+            'redirectURL',
+            'ewalletType',
+          ];
+          break;
+        case EWallet.Type.LinkAja:
+          compulsoryFields = [
+            'externalID',
+            'phone',
+            'amount',
+            'items',
+            'callbackURL',
+            'redirectURL',
+            'ewalletType',
+          ];
+          break;
+        default:
+          reject({
+            status: 400,
+            code: errors.API_VALIDATION_ERROR,
+            message: 'Invalid EWallet Type',
+          });
       }
+    }
 
-      Validate.rejectOnMissingFields(compulsoryFields, data, reject);
+    Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      };
-      if (data.xApiVersion) {
-        headers['X-API-VERSION'] = data.xApiVersion;
-      }
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+    if (data.xApiVersion) {
+      headers['X-API-VERSION'] = data.xApiVersion;
+    }
 
-      fetchWithHTTPErr(this.API_ENDPOINT, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          external_id: data.externalID,
-          amount: data.amount,
-          phone: data.phone,
-          expiration_date: data.expirationDate
-            ? data.expirationDate.toISOString()
-            : undefined,
-          callback_url: data.callbackURL,
-          redirect_url: data.redirectURL,
-          items: data.items,
-          ewallet_type: data.ewalletType,
-        }),
-      })
-        .then(resolve)
-        .catch(reject);
-    });
-  }
+    fetchWithHTTPErr(this.API_ENDPOINT, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        external_id: data.externalID,
+        amount: data.amount,
+        phone: data.phone,
+        expiration_date: data.expirationDate
+          ? data.expirationDate.toISOString()
+          : undefined,
+        callback_url: data.callbackURL,
+        redirect_url: data.redirectURL,
+        items: data.items,
+        ewallet_type: data.ewalletType,
+      }),
+    })
+      .then(resolve)
+      .catch(reject);
+  });
 };
 
 EWallet.prototype.getPayment = function(data) {
-  if (data.chargeID) {
-    return promWithJsErr((resolve, reject) => {
-      Validate.rejectOnMissingFields(['chargeID'], data, reject);
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['externalID', 'ewalletType'], data, reject);
 
-      fetchWithHTTPErr(`${this.API_ENDPOINT}/charges/${data.chargeID}`, {
-        method: 'GET',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
-      })
-        .then(resolve)
-        .catch(reject);
-    });
-  } else {
-    return promWithJsErr((resolve, reject) => {
-      Validate.rejectOnMissingFields(
-        ['externalID', 'ewalletType'],
-        data,
-        reject,
-      );
+    const queryStr = data
+      ? queryStringWithoutUndefined({
+          external_id: data.externalID,
+          ewallet_type: data.ewalletType,
+        })
+      : '';
 
-      const queryStr = data
-        ? queryStringWithoutUndefined({
-            external_id: data.externalID,
-            ewallet_type: data.ewalletType,
-          })
-        : '';
+    fetchWithHTTPErr(`${this.API_ENDPOINT}?${queryStr}`, {
+      method: 'GET',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
 
-      fetchWithHTTPErr(`${this.API_ENDPOINT}?${queryStr}`, {
-        method: 'GET',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
-      })
-        .then(resolve)
-        .catch(reject);
-    });
-  }
+EWallet.prototype.createEWalletCharge = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    let compulsoryFields = [
+      'referenceID',
+      'currency',
+      'amount',
+      'checkoutMethod',
+    ];
+    Validate.rejectOnMissingFields(compulsoryFields, data, reject);
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/charges`, {
+      method: 'POST',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        reference_id: data.referenceID,
+        currency: data.currency,
+        amount: data.amount,
+        checkout_method: data.checkoutMethod,
+        channel_code: data.channelCode,
+        channel_properties:
+          data.channelCode === 'ID_OVO'
+            ? {
+                mobile_number: data.channelProperties.mobileNumber,
+              }
+            : data.channelCode === 'PH_PAYMAYA'
+            ? {
+                success_redirect_url: data.channelProperties.successRedirectURL,
+                failure_redirect_url: data.channelProperties.failureRedirectURL,
+                cancel_redirect_url: data.channelProperties.cancelRedirectURL,
+              }
+            : {
+                success_redirect_url: data.channelProperties.successRedirectURL,
+              },
+        customer_id: data.customerID,
+        basket: data.basket
+          ? data.basket.map(product => ({
+              reference_id: product.referenceID,
+              name: product.name,
+              category: product.category,
+              currency: product.currency,
+              price: product.price,
+              quantity: product.quantity,
+              type: product.type,
+              url: product.url,
+              description: product.description,
+              sub_category: product.subCategory,
+              metadata: product.metadata,
+            }))
+          : null,
+        metadata: data.metadata,
+      }),
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+EWallet.prototype.getEWalletChargeStatus = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['chargeID'], data, reject);
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/charges/${data.chargeID}`, {
+      method: 'GET',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+    })
+      .then(resolve)
+      .catch(reject);
+  });
 };
 
 module.exports = EWallet;

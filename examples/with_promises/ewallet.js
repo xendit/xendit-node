@@ -11,7 +11,7 @@ ew.createPayment({
 })
   .then(r => {
     // eslint-disable-next-line no-console
-    console.log('created payment detail old ver:', r);
+    console.log('created payment detail:', r);
     return r;
   })
   .then(({ external_id, ewallet_type }) =>
@@ -22,11 +22,11 @@ ew.createPayment({
   )
   .then(r => {
     // eslint-disable-next-line no-console
-    console.log('EWallet payment detail old ver:', r);
+    console.log('EWallet payment detail:', r);
     return r;
   })
   .then(() =>
-    ew.createPayment({
+    ew.createEWalletCharge({
       referenceID: 'test-reference-id',
       currency: 'IDR',
       amount: 1688,
@@ -61,7 +61,7 @@ ew.createPayment({
     return r;
   })
   .then(r =>
-    ew.getPayment({
+    ew.getEWalletChargeStatus({
       chargeID: r.id,
     }),
   )
