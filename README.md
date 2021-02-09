@@ -584,7 +584,7 @@ const ew = new EWallet(ewalletSpecificOptions);
 Example: Create an ewallet charge
 
 ```js
-ew.createPayment({
+ew.createEWalletCharge({
   referenceID: 'test-reference-id',
   currency: 'IDR',
   amount: 50000,
@@ -604,7 +604,7 @@ Refer to [Xendit API Reference](https://xendit.github.io/apireference/#ewallets)
 #### Create an ewallet charge
 
 ```ts
-ew.createPayment(data: {
+ew.createEWalletCharge(data: {
   referenceID: string;
   currency: Currency;
   amount: number;
@@ -620,7 +620,7 @@ ew.createPayment(data: {
 #### Get an ewallet charge status
 
 ```ts
-ew.getPayment(data: {
+ew.getEWalletChargeStatus(data: {
   chargeID: string;
 })
 ```
