@@ -46,7 +46,7 @@ const VALID_GET_OVO_PAYMENT_STATUS_RESPONSE = {
 
 const VALID_EWALLET_PAYMENT_CHARGE = {
   id: CHARGE_ID,
-  business_id: '5b45b040331f555b4aebbcb2',
+  business_id: 'business-id-example',
   reference_id: REFERENCE_ID,
   status: 'PENDING',
   currency: CURRENCY,
