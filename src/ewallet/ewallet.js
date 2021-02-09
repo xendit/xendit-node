@@ -64,7 +64,7 @@ EWallet.prototype.createPayment = function(data) {
                     data.channelProperties.successRedirectURL,
                   failure_redirect_url:
                     data.channelProperties.failureRedirectURL,
-                  cancel_redirect_url: data.channelProperties.redirectURL,
+                  cancel_redirect_url: data.channelProperties.cancelRedirectURL,
                 }
               : {
                   success_redirect_url:
