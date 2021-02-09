@@ -60,8 +60,7 @@ const VALID_EWALLET_PAYMENT_CHARGE = {
   actions: {
     desktop_web_checkout_url: null,
     mobile_web_checkout_url: null,
-    mobile_deeplink_checkout_url:
-      'https://ewallet-mock-connector.xendit.co/v1/ewallet_connector/checkouts?token=YTUzNmVlNGFmNjE4MmNiYTdhMGU3M2M1OTZlYzg4YTc6NGQ0MzI4NDQwZmY4NmJhNzI4ZDk3YzMwMzM4MDJkNWUzY2Y2MmNiMmZjNzBlMTIwODQ1YWQyYmVkZDdkNTk3OTY4M2YwNGE2M2Q3MzVkZWJjZjk5OWM5ZDViNjc1Mjg4NDA3MjEyYzZhNTY3ZDg1Y2NjM2FiYTMwY2UzYmUyOTU4OGQ2NDMwOTBmNjNkNDgzYWNiMTc4ZDMwOGNmZGM1NjYzMmE2MTcyYThiN2E3NGEyOWFhNWRkYzNhOTZiN2NlYmYzYmQ5NmIxZDQxYTg0N2E0OTdlNjFjZGQxNTY0OTljMTA4YTIzM2I5ZTI0MmVlYjk3Yjg2NjZlOGYzMjM3N2EyMmE5MjIzYTZiYzMyOTZmM2JhMjRkMDVmZjMxMzg3MGQ4MjBhMDJjNGFiNmFhZmVjOTc4ZjhiNzZiNzlhY2ZmYWM1M2ZiNmM0MTNmODIzMDU4NDM0ZmEwZjI3M2E5ZmM2NjVmZDI5MjdmYTU4YzYzYzgxNzJhMjU2Y2VmNDA2',
+    mobile_deeplink_checkout_url: 'https://mobile.deeplink.checkout.url',
     qr_checkout_string: 'test-qr-string',
   },
   is_redirect_required: true,

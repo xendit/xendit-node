@@ -33,8 +33,7 @@ ew.createPayment({
       checkoutMethod: 'ONE_TIME_PAYMENT',
       channelCode: 'ID_SHOPEEPAY',
       channelProperties: {
-        successRedirectURL:
-          'https://webhook.site/a2f9bcf0-4d92-4882-a8c5-65a86462050c',
+        successRedirectURL: 'https://yourwebsite.com/order/123',
       },
       basket: [
         {
