@@ -64,6 +64,21 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Get code](#get-code)
     + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
     + [Get payments by external ID](#get-payments-by-external-id)
+  * [Customer services](#customer-services)
+    + [Create customer](#create-customer)
+    + [Get customer](#get-customer)
+    + [Get customer by reference ID](#get-customer-by-reference-id)
+    + [Update customer](#update-customer)
+  * [Direct debit services](#direct-debit-services)
+    + [Initialize linked account tokenization](#initialize-linked-account-tokenization)
+    + [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
+    + [Retrieve accessible accounts by linked account token](#retrieve-accessible-accounts-by-linked-account-token)
+    + [Create payment method](#create-payment-method)
+    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id)
+    + [Create direct debit payment](#create-direct-debit-payment)
+    + [Validate OTP for direct debit payment](#validate-otp-for-direct-debit-payment)
+    + [Get direct debit payment status by ID](#get-direct-debit-payment-status-by-id)
+    + [Get direct debit payment status by reference ID](#get-direct-debit-payment-status-by-reference-id)
   * [XenPlatform Service](#xenplatform-service)
     + [Create sub-accounts](#create-sub-accounts)
     + [Set Callback URL](#set-callback-url)
@@ -771,6 +786,209 @@ q.getPayments(data: {
   to?: string;
   limit?: number;
 });
+```
+
+### Customer services
+
+Instanitiate customer service using constructor that has been injected with Xendit keys
+
+```js
+const { Customer } = x;
+const customerSpecificOptions = {};
+const c = new Customer(customerSpecificOptions);
+```
+
+Example: create a customer
+
+```js
+c.createCustomer({
+  referenceID: 'ref-id-example-1',
+  givenNames: 'customer 1',
+  email: 'customer@website.com',
+  mobileNumber: '+6281212345678',
+  description: 'dummy customer',
+  middleName: 'middle',
+  surname: 'surname',
+  addresses: [],
+})
+  .then(({ id }) => {
+    console.log(`Customer created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(`Customer creation failed with message: ${e.message}`);
+  });
+```
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#customers) for more info about methods' parameters
+
+#### Create customer
+
+```ts
+c.createCustomer(data: {
+  referenceID: string;
+  mobileNumber?: string;
+  email?: string;
+  givenNames: string;
+  middleName?: string;
+  surname?: string;
+  description?: string;
+  phoneNumber?: string;
+  nationality?: string;
+  addresses?: Address[];
+  dateOfBirth?: string;
+  metadata?: object;
+});
+```
+
+#### Get customer
+
+```ts
+c.getCustomer(data: { id: string });
+```
+
+#### Get customer by reference ID
+
+```ts
+c.getCustomerByReferenceID(data: { referenceID: string });
+```
+
+#### Update customer
+
+```ts
+c.updateCustomer(data: {
+  id: string;
+  referenceID?: string;
+  givenNames?: string;
+  mobileNumber?: string;
+  addresses?: Address[];
+  description?: string;
+  middleName?: string;
+  surname?: string;
+  phoneNumber?: string;
+  nationality?: string;
+  dateOfBirth?: string;
+  metadata?: object;
+  })
+```
+
+### Direct debit services
+
+Instanitiate direct debit service using constructor that has been injected with Xendit keys
+
+```js
+const { DirectDebit } = x;
+const directDebitSpecificOptions = {};
+const dd = new DirectDebit(directDebitSpecificOptions);
+```
+
+Example: create a direct debit payment
+
+```js
+dd.createDirectDebitPayment({
+  idempotencyKey: '7960e3fd-9a1d-469d-8b3e-2f88df139c50',
+  referenceID: 'merchant-ref-id-ex-1',
+  paymentMethodID: 'pm-8c09656d-09fe-4bdd-bd8d-87495a71d231',
+  currency: 'IDR',
+  amount: 15000,
+  callbackURL: 'https://payment-callback-listener/',
+  enableOTP: true,
+})
+  .then(({ id }) => {
+    console.log(`Direct debit payment created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(`Direct debit creation failed with message: ${e.message}`);
+  });
+```
+
+Refer to [Xendit API Reference](https://xendit.github.io/apireference/#direct-debit) for more info about methods' parameters
+
+#### Initialize linked account tokenization
+
+```ts
+dd.initializeTokenization(data: {
+  customerID: string;
+  channelCode: ChannelCode;
+  properties?: DebitCardProperties | OnlineBankingAccessProperties;
+  metadata?: object;
+});
+```
+
+#### Validate OTP for Linked Account Token
+
+```ts
+dd.validateOTPforLinkedAccount(data: {
+  tokenID: string;
+  otpCode: string;
+});
+```
+
+#### Retrieve accessible accounts by linked account token
+
+```ts
+dd.retrieveAccountsByTokenID(data: {
+  tokenID: string;
+});
+```
+
+#### Create payment method
+
+```ts
+dd.createPaymentMethod(data: {
+  customerID: string;
+  type: PaymentMethodType;
+  properties: PaymentMethodProperties;
+  metadata?: object;
+});
+```
+
+#### Get payment methods by customer ID
+
+```ts
+dd.getPaymentMethodsByCustomerID(data: {
+  customerID: string;
+});
+```
+
+#### Create direct debit payment
+
+```ts
+dd.createDirectDebitPayment(data: {
+  idempotencyKey: string;
+  referenceID: string;
+  paymentMethodID: string;
+  currency: string;
+  amount: number;
+  callbackURL: string;
+  enableOTP?: boolean;
+  description?: string;
+  basket?: Basket[];
+  metadata?: object;
+});
+```
+
+#### Validate OTP for direct debit payment
+
+```ts
+dd.validateOTPforPayment(data: {
+  directDebitID: string;
+  otpCode: string;
+})
+```
+
+#### Get direct debit payment status by ID
+
+```ts
+dd.getDirectDebitPaymentStatusByID(data: {
+  directDebitID: string;
+});
+```
+
+#### Get direct debit payment status by reference ID
+
+```ts
+dd.getDirectDebitPaymentStatusByReferenceID(data: {
+  referenceID: string;
 ```
 
 ### XenPlatform Service
