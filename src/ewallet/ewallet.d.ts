@@ -97,6 +97,11 @@ export = class EWallet {
     customerID?: string;
     basket?: Basket[];
     metadata?: object;
+    forUserID?: string;
+    withFeeRule?: string;
   }): Promise<object>;
-  getEWalletChargeStatus(data: { chargeID: string }): Promise<object>;
+  getEWalletChargeStatus(data: {
+    chargeID: string;
+    forUserID?: string;
+  }): Promise<object>;
 };

@@ -131,12 +131,22 @@ EWallet.prototype.createEWalletCharge = function(data) {
     ];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
+    if (data.withFeeRule) {
+      headers['with-fee-rule'] = data.withFeeRule;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/charges`, {
       method: 'POST',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-      },
+      headers: headers,
       body: JSON.stringify({
         reference_id: data.referenceID,
         currency: data.currency,
@@ -185,11 +195,17 @@ EWallet.prototype.getEWalletChargeStatus = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['chargeID'], data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/charges/${data.chargeID}`, {
       method: 'GET',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      },
+      headers: headers,
     })
       .then(resolve)
       .catch(reject);
