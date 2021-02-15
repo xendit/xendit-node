@@ -614,6 +614,8 @@ ew.createEWalletCharge(data: {
   customerID?: string;
   basket?: Basket[];
   metadata?: object;
+  forUserID?: string;
+  withFeeRule?: string;
 })
 ```
 
@@ -622,6 +624,7 @@ ew.createEWalletCharge(data: {
 ```ts
 ew.getEWalletChargeStatus(data: {
   chargeID: string;
+  forUserID?: string;
 })
 ```
 
