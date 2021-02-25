@@ -19,6 +19,11 @@ function createCharge(data) {
         card_cvn: data.cardCVN,
         capture: data.capture,
         descriptor: data.descriptor,
+        currency: data.currency,
+        mid_label: data.midLabel,
+        billing_details: data.billingDetails,
+        promotion: data.promotion,
+        installment: data.installment,
       }),
     })
       .then(resolve)
