@@ -5,6 +5,11 @@ export function createAuthorization(data: {
   authID?: string;
   cardCVN?: string;
   descriptor?: string;
+  currency?: string;
+  midLabel?: string;
+  billingDetails?: object;
+  promotion?: object;
+  installment?: object;
 }): Promise<object>;
 
 export function reverseAuthorization(data: {
