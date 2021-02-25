@@ -10,7 +10,8 @@ ew.createPayment({
   ewalletType: EWallet.Type.OVO,
 })
   .then(r => {
-    console.log('create payment detail:', r); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('created payment detail:', r);
     return r;
   })
   .then(({ external_id, ewallet_type }) =>
@@ -20,7 +21,53 @@ ew.createPayment({
     }),
   )
   .then(r => {
-    console.log('EWallet payment detail:', r); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('EWallet payment detail:', r);
+    return r;
+  })
+  .then(() =>
+    ew.createEWalletCharge({
+      referenceID: 'test-reference-id',
+      currency: 'IDR',
+      amount: 1688,
+      checkoutMethod: 'ONE_TIME_PAYMENT',
+      channelCode: 'ID_SHOPEEPAY',
+      channelProperties: {
+        successRedirectURL: 'https://yourwebsite.com/order/123',
+      },
+      basket: [
+        {
+          referenceID: 'basket-product-ref-id',
+          name: 'product name',
+          category: 'mechanics',
+          currency: 'IDR',
+          price: 50000,
+          quantity: 5,
+          type: 'wht',
+          subCategory: 'evr',
+          metadata: {
+            meta: 'data',
+          },
+        },
+      ],
+      metadata: {
+        meta2: 'data2',
+      },
+    }),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('created ewallet payment charge:', r);
+    return r;
+  })
+  .then(r =>
+    ew.getEWalletChargeStatus({
+      chargeID: r.id,
+    }),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('retrieved ewallet payment charge:', r);
     return r;
   })
   .catch(e => {

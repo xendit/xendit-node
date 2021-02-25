@@ -18,6 +18,47 @@ interface PaymentItem {
   quantity: number;
 }
 
+enum Currency {
+  IDR = 'IDR',
+  PHP = 'PHP',
+}
+
+enum ChannelCode {
+  ID_OVO = 'ID_OVO',
+  ID_DANA = 'ID_DANA',
+  ID_LINKAJA = 'ID_LINKAJA',
+  ID_SHOPEEPAY = 'ID_SHOPEEPAY',
+  PH_PAYMAYA = 'PH_PAYMAYA',
+}
+
+interface OVOChannelProps {
+  mobileNumber: string;
+}
+
+interface PaymayaChannelProps {
+  successRedirectURL: string;
+  failureRedirectURL: string;
+  cancelRedirectURL: string;
+}
+
+interface OtherChannelProps {
+  successRedirectURL: string;
+}
+
+interface Basket {
+  referenceID: string;
+  name: string;
+  category: string;
+  currency: string;
+  price: number;
+  quantity: number;
+  type: string;
+  url?: string;
+  description?: string;
+  subCategory?: string;
+  metadata?: object;
+}
+
 export = class EWallet {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
@@ -42,5 +83,25 @@ export = class EWallet {
   getPayment(data: {
     externalID: string;
     ewalletType: GetSupportWalletTypes;
+  }): Promise<object>;
+  createEWalletCharge(data: {
+    referenceID: string;
+    currency: Currency;
+    amount: number;
+    checkoutMethod: string;
+    channelCode?: ChannelCode;
+    channelProperties?:
+      | OVOChannelProps
+      | PaymayaChannelProps
+      | OtherChannelProps;
+    customerID?: string;
+    basket?: Basket[];
+    metadata?: object;
+    forUserID?: string;
+    withFeeRule?: string;
+  }): Promise<object>;
+  getEWalletChargeStatus(data: {
+    chargeID: string;
+    forUserID?: string;
   }): Promise<object>;
 };

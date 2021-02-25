@@ -32,6 +32,22 @@ before(function() {
       `/ewallets?external_id=${TestConstants.EXT_ID}&ewallet_type=${TestConstants.OVO_EWALLET_TYPE}`,
     )
     .reply(200, TestConstants.VALID_GET_OVO_PAYMENT_STATUS_RESPONSE);
+  nock(x.opts.xenditURL)
+    .post('/ewallets/charges', {
+      reference_id: TestConstants.REFERENCE_ID,
+      currency: TestConstants.CURRENCY,
+      amount: TestConstants.AMOUNT,
+      checkout_method: TestConstants.CHECKOUT_METHOD,
+      channel_code: TestConstants.CHANNEL_CODE,
+      channel_properties: {
+        success_redirect_url: TestConstants.REDIRECT_URL,
+      },
+      basket: null,
+    })
+    .reply(200, TestConstants.VALID_EWALLET_PAYMENT_CHARGE);
+  nock(x.opts.xenditURL)
+    .get(`/ewallets/charges/${TestConstants.CHARGE_ID}`)
+    .reply(200, TestConstants.VALID_EWALLET_PAYMENT_CHARGE);
 });
 
 describe('EWallet Service', function() {
@@ -132,6 +148,62 @@ describe('EWallet Service', function() {
     });
     it('should report missing required fields', done => {
       expect(ewallet.getPayment({}))
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+  });
+
+  describe('createEWalletCharge', () => {
+    it('should create a ewallet payment charge', done => {
+      expect(
+        ewallet.createEWalletCharge({
+          referenceID: TestConstants.REFERENCE_ID,
+          currency: TestConstants.CURRENCY,
+          amount: TestConstants.AMOUNT,
+          checkoutMethod: TestConstants.CHECKOUT_METHOD,
+          channelCode: TestConstants.CHANNEL_CODE,
+          channelProperties: {
+            successRedirectURL: TestConstants.REDIRECT_URL,
+          },
+        }),
+      )
+        .to.eventually.deep.equal(TestConstants.VALID_EWALLET_PAYMENT_CHARGE)
+        .then(() => done())
+        .catch(e => done(e));
+    });
+
+    it('should report missing required fields', done => {
+      expect(ewallet.createEWalletCharge({}))
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+  });
+
+  describe('getEWalletChargeStatus', () => {
+    it('should get ewallet payment charge', done => {
+      expect(
+        ewallet.getEWalletChargeStatus({
+          chargeID: TestConstants.CHARGE_ID,
+        }),
+      )
+        .to.eventually.deep.equal(TestConstants.VALID_EWALLET_PAYMENT_CHARGE)
+        .then(() => done())
+        .catch(e => done(e));
+    });
+    it('should report missing required fields', done => {
+      expect(ewallet.getEWalletChargeStatus({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
