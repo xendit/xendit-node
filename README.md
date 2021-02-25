@@ -153,6 +153,11 @@ card.createCharge(data: {
   cardCVN?: string;
   capture?: boolean;
   descriptor?: string;
+  currency?: string;
+  mid_label?: string;
+  billing_details?: object;
+  promotion?: object;
+  installment?: object;
 })
 ```
 
@@ -181,6 +186,11 @@ card.createAuthorization(data: {
   authID?: string;
   cardCVN?: string;
   descriptor?: string;
+  currency?: string;
+  mid_label?: string;
+  billing_details?: object;
+  promotion?: object;
+  installment?: object;
 })
 ```
 

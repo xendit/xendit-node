@@ -6,6 +6,11 @@ export function createCharge(data: {
   cardCVN?: string;
   capture?: boolean;
   descriptor?: string;
+  currency?: string;
+  mid_label?: string;
+  billing_details?: object;
+  promotion?: object;
+  installment?: object;
 }): Promise<object>;
 
 export function captureCharge(data: {
