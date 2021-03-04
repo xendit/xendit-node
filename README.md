@@ -419,19 +419,23 @@ i.createInvoice(data: {
   paymentMethods?: string[];
   currency?: string;
   midLabel?: string;
+  forUserID?: string;
 })
 ```
 
 #### Get an invoice
 
 ```ts
-i.getInvoice(data: { invoiceID: string })
+i.getInvoice(data: { invoiceID: string; forUserID?: string })
 ```
 
 #### Expire an invoice
 
 ```ts
-i.expireInvoice(data: { invoiceID: string })
+i.expireInvoice(data: {
+  invoiceID: string;
+  forUserID?: string;
+})
 ```
 
 #### Get all invoices
@@ -451,6 +455,7 @@ i.getAllInvoices(data?: {
   paymentChannels?: string[];
   onDemandLink?: string;
   recurringPaymentID?: string;
+  forUserID?: string;
 })
 ```
 
