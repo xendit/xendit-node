@@ -32,12 +32,18 @@ Invoice.prototype.createInvoice = function(data) {
       reject,
     );
 
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/invoices`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      },
+      headers,
       body: JSON.stringify({
         external_id: data.externalID,
         payer_email: data.payerEmail,
@@ -63,11 +69,17 @@ Invoice.prototype.getInvoice = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['invoiceID'], data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/invoices/${data.invoiceID}`, {
       method: 'GET',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      },
+      headers,
     })
       .then(resolve)
       .catch(reject);
@@ -78,13 +90,19 @@ Invoice.prototype.expireInvoice = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['invoiceID'], data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/invoices/${data.invoiceID}/expire!`,
       {
         method: 'POST',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
+        headers,
       },
     )
       .then(resolve)
@@ -124,13 +142,19 @@ Invoice.prototype.getAllInvoices = function(data) {
       : '';
     const queryStrWithQuestionMark = queryStr ? `?${queryStr}` : '';
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/v2/invoices${queryStrWithQuestionMark}`,
       {
         method: 'GET',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
+        headers,
       },
     )
       .then(resolve)

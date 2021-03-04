@@ -18,9 +18,13 @@ export = class Invoice {
     paymentMethods?: string[];
     currency?: string;
     midLabel?: string;
+    forUserID?: string;
   }): Promise<object>;
-  getInvoice(data: { invoiceID: string }): Promise<object>;
-  expireInvoice(data: { invoiceID: string }): Promise<object>;
+  getInvoice(data: { invoiceID: string; forUserID?: string }): Promise<object>;
+  expireInvoice(data: {
+    invoiceID: string;
+    forUserID?: string;
+  }): Promise<object>;
   getAllInvoices(data?: {
     statuses?: string[];
     limit?: number;
@@ -35,5 +39,6 @@ export = class Invoice {
     paymentChannels?: string[];
     onDemandLink?: string;
     recurringPaymentID?: string;
+    forUserID?: string;
   }): Promise<object>;
 };
