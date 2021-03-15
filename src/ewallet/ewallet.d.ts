@@ -104,4 +104,8 @@ export = class EWallet {
     chargeID: string;
     forUserID?: string;
   }): Promise<object>;
+  voidEWalletCharge(data: {
+    chargeID: string;
+    forUserID?: string;
+  }): Promise<object>;
 };
