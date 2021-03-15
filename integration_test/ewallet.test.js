@@ -52,6 +52,11 @@ module.exports = function() {
         chargeID: r.id,
       }),
     )
+    .then(r =>
+      ew.voidEWalletCharge({
+        chargeID: r.id,
+      }),
+    )
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('EWallet integration test done...');
