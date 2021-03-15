@@ -58,6 +58,12 @@ const ew = new EWallet({});
     // eslint-disable-next-line no-console
     console.log('retrieved ewallet payment charge:', retrievedCharge);
 
+    const voidedCharge = await ew.voidEWalletCharge({
+      chargeID: charge.id,
+    });
+    // eslint-disable-next-line no-console
+    console.log('voided ewallet payment charge:', voidedCharge);
+
     process.exit(0);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console

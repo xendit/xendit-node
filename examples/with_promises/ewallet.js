@@ -70,6 +70,16 @@ ew.createPayment({
     console.log('retrieved ewallet payment charge:', r);
     return r;
   })
+  .then(r =>
+    ew.voidEWalletCharge({
+      chargeID: r.id,
+    }),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('voided ewallet payment charge:', r);
+    return r;
+  })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);
