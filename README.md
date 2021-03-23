@@ -9,7 +9,7 @@ This library is the abstraction of Xendit API for access from applications writt
 [![NPM](https://nodei.co/npm/xendit-node.png)](https://nodei.co/npm/xendit-node/)
 
 **Note**: This library is only meant for usage from server-side with Xendit secret API key.
-For PCI compliance to be maintained, tokenization of credit cards info should be done on client side with [Xendit.js](https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html).
+For PCI compliance to be maintained, tokenization of credit cards info should be done on client side with [Xendit.js](https://docs.xendit.co/credit-cards/integrations/tokenization).
 
 <!-- toc -->
 
@@ -140,7 +140,7 @@ card
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#credit-cards) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#credit-cards) for more info about methods' parameters
 
 #### Create charge
 
@@ -240,7 +240,7 @@ va.createFixedVA({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#virtual-accounts) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#virtual-accounts) for more info about methods' parameters
 
 #### Get banks with available virtual account service
 
@@ -321,7 +321,7 @@ d.create({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#disbursements) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#disbursements) for more info about methods' parameters
 
 #### Get banks with available disbursement service
 
@@ -401,7 +401,7 @@ i.createInvoice({
 });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#invoices) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#invoices) for more info about methods' parameters
 
 #### Create an invoice
 
@@ -490,7 +490,7 @@ rp.createPayment({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#recurring-payments) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recurring-payments) for more info about methods' parameters
 
 #### Create recurring payment
 
@@ -577,7 +577,7 @@ p.createPayout({
 });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#payouts) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#payouts) for more info about methods' parameters
 
 #### Create a payout
 
@@ -629,7 +629,7 @@ ew.createEWalletCharge({
 });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#ewallets) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#ewallets) for more info about methods' parameters
 
 #### Create an ewallet charge
 
@@ -678,7 +678,7 @@ b.getBalance({
 });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#balances) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#balances) for more info about methods' parameters
 
 #### Get balance
 
@@ -709,7 +709,7 @@ ro.createFixedPaymentCode({
 });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#retail-outlets) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#retail-outlets) for more info about methods' parameters
 
 #### Create fixed payment code
 
@@ -769,7 +769,7 @@ q.createCode({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#qr-codes) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#qr-codes) for more info about methods' parameters
 
 #### Create code
 
@@ -836,7 +836,7 @@ c.createCustomer({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#customers) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#customers) for more info about methods' parameters
 
 #### Create customer
 
@@ -918,7 +918,7 @@ dd.createDirectDebitPayment({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#direct-debit) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#direct-debit) for more info about methods' parameters
 
 #### Initialize linked account tokenization
 
@@ -1033,7 +1033,7 @@ p.createAccount({
   });
 ```
 
-Refer to [Xendit API Reference](https://xendit.github.io/apireference/#credit-cards) for more info about methods' parameters
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#xenplatform) for more info about methods' parameters
 
 #### Create sub-accounts
 
