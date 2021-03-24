@@ -620,9 +620,9 @@ ew.createEWalletCharge({
   currency: 'IDR',
   amount: 50000,
   checkoutMethod: 'ONE_TIME_PAYMENT',
-  channelCode: 'ID_SHOPEEPAY',
+  channelCode: 'ID_OVO',
   channelProperties: {
-    successRedirectURL: 'https://yourwebsite.com/order/123',
+    mobileNumber: '+6281234567890',
   },
 }).then(r => {
   console.log('created ewallet payment charge:', r);

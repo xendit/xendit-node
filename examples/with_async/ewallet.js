@@ -22,13 +22,13 @@ const ew = new EWallet({});
     console.log('EWallet payment detail:', retrievedPayment);
 
     const charge = await ew.createEWalletCharge({
-      referenceID: 'test-reference-id',
+      referenceID: Date.now().toString(),
       currency: 'IDR',
       amount: 1688,
       checkoutMethod: 'ONE_TIME_PAYMENT',
-      channelCode: 'ID_SHOPEEPAY',
+      channelCode: 'ID_OVO',
       channelProperties: {
-        successRedirectURL: 'https://yourwebsite.com/order/123',
+        mobileNumber: '+6281234567890',
       },
       basket: [
         {

@@ -40,7 +40,7 @@ before(function() {
       checkout_method: TestConstants.CHECKOUT_METHOD,
       channel_code: TestConstants.CHANNEL_CODE,
       channel_properties: {
-        success_redirect_url: TestConstants.REDIRECT_URL,
+        mobile_number: TestConstants.PHONE,
       },
       basket: null,
     })
@@ -172,7 +172,7 @@ describe('EWallet Service', function() {
           checkoutMethod: TestConstants.CHECKOUT_METHOD,
           channelCode: TestConstants.CHANNEL_CODE,
           channelProperties: {
-            successRedirectURL: TestConstants.REDIRECT_URL,
+            mobileNumber: TestConstants.PHONE,
           },
         }),
       )

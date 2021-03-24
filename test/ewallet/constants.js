@@ -10,7 +10,7 @@ const REDIRECT_URL = 'https://yourwebsite.com/order/123';
 const REFERENCE_ID = 'test-reference-id';
 const CURRENCY = 'IDR';
 const CHECKOUT_METHOD = 'ONE_TIME_PAYMENT';
-const CHANNEL_CODE = 'ID_SHOPEEPAY';
+const CHANNEL_CODE = 'ID_OVO';
 const CHARGE_ID = 'ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c';
 const ITEMS = [
   {
@@ -55,7 +55,7 @@ const VALID_EWALLET_PAYMENT_CHARGE = {
   checkout_method: CHECKOUT_METHOD,
   channel_code: CHANNEL_CODE,
   channel_properties: {
-    success_redirect_url: REDIRECT_URL,
+    mobile_number: PHONE,
   },
   actions: {
     desktop_web_checkout_url: null,
