@@ -25,7 +25,7 @@ module.exports = function() {
         checkoutMethod: 'ONE_TIME_PAYMENT',
         channelCode: 'ID_OVO',
         channelProperties: {
-          successRedirectURL: 'https://yourwebsite.com/order/123',
+          mobileNumber: 'https://yourwebsite.com/order/123',
         },
         basket: [
           {
