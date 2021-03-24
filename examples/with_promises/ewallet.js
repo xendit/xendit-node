@@ -27,13 +27,13 @@ ew.createPayment({
   })
   .then(() =>
     ew.createEWalletCharge({
-      referenceID: 'test-reference-id',
+      referenceID: Date.now().toString(),
       currency: 'IDR',
       amount: 1688,
       checkoutMethod: 'ONE_TIME_PAYMENT',
-      channelCode: 'ID_SHOPEEPAY',
+      channelCode: 'ID_OVO',
       channelProperties: {
-        successRedirectURL: 'https://yourwebsite.com/order/123',
+        mobileNumber: '+6281234567890',
       },
       basket: [
         {
@@ -68,6 +68,16 @@ ew.createPayment({
   .then(r => {
     // eslint-disable-next-line no-console
     console.log('retrieved ewallet payment charge:', r);
+    return r;
+  })
+  .then(r =>
+    ew.voidEWalletCharge({
+      chargeID: r.id,
+    }),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('voided ewallet payment charge:', r);
     return r;
   })
   .catch(e => {

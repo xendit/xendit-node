@@ -53,6 +53,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
   * [EWallet Services](#ewallet-services)
     + [Create an ewallet charge](#create-an-ewallet-charge)
     + [Get an ewallet charge status](#get-an-ewallet-charge-status)
+    + [Void an ewallet charge](#void-an-ewallet-charge)
   * [Balance Services](#balance-services)
     + [Get balance](#get-balance)
   * [Retail Outlet Services](#retail-outlet-services)
@@ -619,9 +620,9 @@ ew.createEWalletCharge({
   currency: 'IDR',
   amount: 50000,
   checkoutMethod: 'ONE_TIME_PAYMENT',
-  channelCode: 'ID_SHOPEEPAY',
+  channelCode: 'ID_OVO',
   channelProperties: {
-    successRedirectURL: 'https://yourwebsite.com/order/123',
+    mobileNumber: '+6281234567890',
   },
 }).then(r => {
   console.log('created ewallet payment charge:', r);
@@ -653,6 +654,15 @@ ew.createEWalletCharge(data: {
 
 ```ts
 ew.getEWalletChargeStatus(data: {
+  chargeID: string;
+  forUserID?: string;
+})
+```
+
+#### Void an ewallet charge
+
+```ts
+ew.voidEWalletCharge(data: {
   chargeID: string;
   forUserID?: string;
 })

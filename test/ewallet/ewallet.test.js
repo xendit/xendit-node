@@ -40,13 +40,16 @@ before(function() {
       checkout_method: TestConstants.CHECKOUT_METHOD,
       channel_code: TestConstants.CHANNEL_CODE,
       channel_properties: {
-        success_redirect_url: TestConstants.REDIRECT_URL,
+        mobile_number: TestConstants.PHONE,
       },
       basket: null,
     })
     .reply(200, TestConstants.VALID_EWALLET_PAYMENT_CHARGE);
   nock(x.opts.xenditURL)
     .get(`/ewallets/charges/${TestConstants.CHARGE_ID}`)
+    .reply(200, TestConstants.VALID_EWALLET_PAYMENT_CHARGE);
+  nock(x.opts.xenditURL)
+    .post(`/ewallets/charges/${TestConstants.CHARGE_ID}/void`)
     .reply(200, TestConstants.VALID_EWALLET_PAYMENT_CHARGE);
 });
 
@@ -169,7 +172,7 @@ describe('EWallet Service', function() {
           checkoutMethod: TestConstants.CHECKOUT_METHOD,
           channelCode: TestConstants.CHANNEL_CODE,
           channelProperties: {
-            successRedirectURL: TestConstants.REDIRECT_URL,
+            mobileNumber: TestConstants.PHONE,
           },
         }),
       )
@@ -204,6 +207,31 @@ describe('EWallet Service', function() {
     });
     it('should report missing required fields', done => {
       expect(ewallet.getEWalletChargeStatus({}))
+        .to.eventually.to.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+  });
+
+  describe('voidEWalletCharge', () => {
+    it('should void an ewallet payment charge', done => {
+      expect(
+        ewallet.voidEWalletCharge({
+          chargeID: TestConstants.CHARGE_ID,
+        }),
+      )
+        .to.eventually.deep.equal(TestConstants.VALID_EWALLET_PAYMENT_CHARGE)
+        .then(() => done())
+        .catch(e => done(e));
+    });
+
+    it('should report missing required fields', done => {
+      expect(ewallet.voidEWalletCharge({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

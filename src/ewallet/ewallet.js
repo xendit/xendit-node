@@ -212,4 +212,26 @@ EWallet.prototype.getEWalletChargeStatus = function(data) {
   });
 };
 
+EWallet.prototype.voidEWalletCharge = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['chargeID'], data, reject);
+
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/charges/${data.chargeID}/void`, {
+      method: 'POST',
+      headers: headers,
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 module.exports = EWallet;
