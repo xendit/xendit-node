@@ -19,7 +19,7 @@ module.exports = function() {
     )
     .then(() =>
       ew.createEWalletCharge({
-        referenceID: 'test-reference-id',
+        referenceID: Date.now().toString(),
         currency: 'IDR',
         amount: 1688,
         checkoutMethod: 'ONE_TIME_PAYMENT',
