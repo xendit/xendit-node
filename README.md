@@ -159,6 +159,7 @@ card.createCharge(data: {
   billingDetails?: object;
   promotion?: object;
   installment?: object;
+  forUserID?: string;
 })
 ```
 
@@ -168,6 +169,7 @@ card.createCharge(data: {
 card.captureCharge(data: {
   chargeID: string;
   amount: number;
+  forUserID?: string;
 })
 ```
 
@@ -192,6 +194,7 @@ card.createAuthorization(data: {
   billingDetails?: object;
   promotion?: object;
   installment?: object;
+  forUserID?: string;
 })
 ```
 
@@ -201,6 +204,7 @@ card.createAuthorization(data: {
 card.reverseAuthorization(data: {
   chargeID: string;
   externalID: string;
+  forUserID?: string;
 })
 ```
 
@@ -212,6 +216,7 @@ card.createRefund(data: {
   amount: number;
   externalID: string;
   xIdempotencyKey?: string;
+  forUserID?: string;
 })
 ```
 
@@ -246,7 +251,9 @@ Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#virt
 #### Get banks with available virtual account service
 
 ```ts
-va.getVABanks();
+va.getVABanks(data?: {
+  forUserID?: string;
+});
 ```
 
 #### Create a fixed virtual account
@@ -263,13 +270,17 @@ va.createFixedVA(data: {
   expirationDate?: Date;
   isSingleUse?: boolean;
   description?: string;
+  forUserID?: string;
 })
 ```
 
 #### Get details of your fixed virtual account
 
 ```ts
-va.getFixedVA(data: { id: string })
+va.getFixedVA(data: {
+  id: string;
+  forUserID?: string;
+})
 ```
 
 #### Update details of your fixed virtual account
@@ -282,13 +293,17 @@ va.updateFixedVA(data: {
   expirationDate?: Date;
   isSingleUse?: boolean;
   description?: string;
+  forUserID?: string;
 })
 ```
 
 #### Get details of a VA payment
 
 ```ts
-va.getVAPayment(data: { paymentID: string })
+va.getVAPayment(data: {
+  paymentID: string;
+  forUserID?: string;
+})
 ```
 
 `paymentID`: ID of the payment that you obtained from your callback
