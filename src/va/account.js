@@ -48,6 +48,7 @@ function getFixedVA(data) {
     if (data && data.forUserID) {
       headers['for-user-id'] = data.forUserID;
     }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/callback_virtual_accounts/${data.id}`,
       {

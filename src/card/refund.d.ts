@@ -3,4 +3,5 @@ export function createRefund(data: {
   amount: number;
   externalID: string;
   xIdempotencyKey?: string;
+  forUserID?: string;
 }): Promise<object>;

@@ -11,11 +11,13 @@ export function createCharge(data: {
   billingDetails?: object;
   promotion?: object;
   installment?: object;
+  forUserID?: string;
 }): Promise<object>;
 
 export function captureCharge(data: {
   chargeID: string;
   amount: number;
+  forUserID?: string;
 }): Promise<object>;
 
 export function getCharge(data: { chargeID: string }): Promise<object>;
