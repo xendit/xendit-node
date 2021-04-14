@@ -1,1 +1,4 @@
-export function getVAPayment(data: { paymentID: string }): Promise<object>;
+export function getVAPayment(data: {
+  paymentID: string;
+  forUserID?: string;
+}): Promise<object>;

@@ -5,14 +5,20 @@ function getVAPayment(data) {
     const compulsoryFields = ['paymentID'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       // eslint-disable-next-line max-len
       `${this.API_ENDPOINT}/callback_virtual_account_payments/payment_id=${data.paymentID}`,
       {
         method: 'GET',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
+        headers,
       },
     )
       .then(resolve)

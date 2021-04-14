@@ -1,1 +1,1 @@
-export function getVABanks(): Promise<object>;
+export function getVABanks(data?: { forUserID?: string }): Promise<object>;
