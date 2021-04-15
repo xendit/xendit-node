@@ -9,9 +9,13 @@ export function createFixedVA(data: {
   expirationDate?: Date;
   isSingleUse?: boolean;
   description?: string;
+  forUserID?: string;
 }): Promise<object>;
 
-export function getFixedVA(data: { id: string }): Promise<object>;
+export function getFixedVA(data: {
+  id: string;
+  forUserID?: string;
+}): Promise<object>;
 
 export function updateFixedVA(data: {
   id: string;
@@ -20,4 +24,5 @@ export function updateFixedVA(data: {
   expirationDate?: Date;
   isSingleUse?: boolean;
   description?: string;
+  forUserID?: string;
 }): Promise<object>;

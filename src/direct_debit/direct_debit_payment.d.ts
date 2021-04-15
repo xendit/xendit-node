@@ -9,7 +9,7 @@ interface Basket {
   price?: string;
   url?: string;
   metadata?: object;
-  quantity?: string;
+  quantity?: number;
 }
 
 export function createDirectDebitPayment(data: {

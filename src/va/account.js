@@ -5,12 +5,18 @@ function createFixedVA(data) {
     const compulsoryFields = ['externalID', 'bankCode', 'name'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/callback_virtual_accounts`, {
       method: 'POST',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         external_id: data.externalID,
         bank_code: data.bankCode,
@@ -34,13 +40,20 @@ function createFixedVA(data) {
 function getFixedVA(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['id'], data, reject);
+
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/callback_virtual_accounts/${data.id}`,
       {
         method: 'GET',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        },
+        headers,
       },
     )
       .then(resolve)
@@ -51,14 +64,21 @@ function getFixedVA(data) {
 function updateFixedVA(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['id'], data, reject);
+
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/callback_virtual_accounts/${data.id}`,
       {
         method: 'PATCH',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           suggested_amount: data.suggestedAmt,
           expected_amount: data.expectedAmt,

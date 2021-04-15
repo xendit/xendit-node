@@ -77,7 +77,7 @@ module.exports = function() {
             metadata: {
               meta: 'data',
             },
-            quantity: '15',
+            quantity: 15,
           },
           {
             referenceID: 'product-ref-id-ex-2',

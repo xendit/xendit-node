@@ -5,12 +5,18 @@ function createCharge(data) {
     const compulsoryFields = ['tokenID', 'externalID', 'amount'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/credit_card_charges`, {
       method: 'POST',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         token_id: data.tokenID,
         external_id: data.externalID,
@@ -36,14 +42,20 @@ function captureCharge(data) {
     const compulsoryFields = ['chargeID', 'amount'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/credit_card_charges/${data.chargeID}/capture`,
       {
         method: 'POST',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({ amount: data.amount }),
       },
     )

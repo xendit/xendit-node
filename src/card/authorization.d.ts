@@ -10,9 +10,11 @@ export function createAuthorization(data: {
   billingDetails?: object;
   promotion?: object;
   installment?: object;
+  forUserID?: string;
 }): Promise<object>;
 
 export function reverseAuthorization(data: {
   chargeID: string;
   externalID: string;
+  forUserID?: string;
 }): Promise<object>;

@@ -10,15 +10,21 @@ function reverseAuthorization(data) {
     const compulsoryFields = ['chargeID', 'externalID'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       // eslint-disable-next-line max-len
       `${this.API_ENDPOINT}/credit_card_charges/${data.chargeID}/auth_reversal`,
       {
         method: 'POST',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({ external_id: data.externalID }),
       },
     )
