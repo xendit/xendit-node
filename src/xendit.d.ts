@@ -11,6 +11,8 @@ import { BalanceServices } from './balance';
 import { RetailOutletService } from './retail_outlet';
 import { QrCode } from './qr_code';
 import { PlatformService } from './platform';
+import { CustomerService } from './customer';
+import { DirectDebitService } from './direct_debit';
 
 declare class Xendit {
   constructor(opts: XenditOptions);
@@ -26,5 +28,7 @@ declare class Xendit {
   RetailOutlet: typeof RetailOutletService;
   QrCode: typeof QrCode;
   Platform: typeof PlatformService;
+  Customer: typeof CustomerService;
+  DirectDebit: typeof DirectDebitService;
 }
 export = Xendit;

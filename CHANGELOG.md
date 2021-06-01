@@ -1,9 +1,14 @@
 # CHANGELOG
 
+## 2021-06-01
+
+- Add missing Customer and DirectDebit services types to index definition file
+
 ## 2021-04-14
 
 - Enable forUserId for Virtual Accounts product
 - Enable forUserId for Cards product
+
 ## 2020-03-05
 
 - Hotfix wrong data mapped for startDate recurring payment
