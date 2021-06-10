@@ -1,3 +1,3 @@
 import VAService from './va';
 
-export = VAService;
+export { VAService };

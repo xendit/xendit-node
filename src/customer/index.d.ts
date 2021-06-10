@@ -1,3 +1,3 @@
 import CustomerService from './customer';
 
-export = CustomerService;
+export { CustomerService };

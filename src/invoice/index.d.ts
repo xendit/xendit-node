@@ -1,3 +1,3 @@
 import InvoiceService from './invoice';
 
-export = InvoiceService;
+export { InvoiceService };

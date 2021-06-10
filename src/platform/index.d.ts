@@ -1,3 +1,3 @@
 import PlatformService from './platform';
 
-export = PlatformService;
+export { PlatformService };

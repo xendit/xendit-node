@@ -1,18 +1,18 @@
 import Errors from './errors';
-import CardService from './card';
-import VAService from './va';
-import DisbursementService from './disbursement';
-import InvoiceService from './invoice';
-import PayoutService from './payout/payout';
-import RecurringPayment from './recurring';
+import { CardService } from './card';
+import { VAService } from './va';
+import { DisbursementService } from './disbursement';
+import { InvoiceService } from './invoice';
+import { PayoutService } from './payout';
+import { RecurringPayment } from './recurring';
 import { XenditOptions } from './xendit_opts';
-import EWalletService from './ewallet';
-import BalanceServices from './balance';
-import RetailOutletService from './retail_outlet';
-import QrCode from './qr_code';
-import PlatformService from './platform';
-import CustomerService from './customer';
-import DirectDebitService from './direct_debit';
+import { EWalletService } from './ewallet';
+import { BalanceServices } from './balance';
+import { RetailOutletService } from './retail_outlet';
+import { QrCode } from './qr_code';
+import { PlatformService } from './platform';
+import { CustomerService } from './customer';
+import { DirectDebitService } from './direct_debit';
 
 declare class Xendit {
   constructor(opts: XenditOptions);

@@ -1,3 +1,3 @@
 import BalanceServices = require('./balance');
 
-export = BalanceServices;
+export { BalanceServices };

@@ -1,3 +1,3 @@
 import DisbursementService from './disbursement';
 
-export = DisbursementService;
+export { DisbursementService };

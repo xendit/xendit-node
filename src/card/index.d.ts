@@ -1,3 +1,3 @@
 import CardService from './card';
 
-export = CardService;
+export { CardService };

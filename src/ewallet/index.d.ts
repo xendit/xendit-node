@@ -1,3 +1,3 @@
 import EWalletService from './ewallet';
 
-export = EWalletService;
+export { EWalletService };
