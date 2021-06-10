@@ -1,0 +1,4 @@
+export enum Errors {
+  JS_ERROR = 'JS_ERROR',
+  API_VALIDATION_ERROR = 'API_VALIDATION_ERROR',
+}
