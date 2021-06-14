@@ -36,6 +36,7 @@ function createPayment(data) {
         recharge: data.recharge,
         charge_immediately: data.chargeImmediately,
         currency: data.currency,
+        reschedule_at: data.rescheduleAt,
       }),
     })
       .then(resolve)
