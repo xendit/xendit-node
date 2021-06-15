@@ -26,6 +26,7 @@ export function createPayment(data: {
   recharge?: boolean;
   chargeImmediately?: boolean;
   currency?: string;
+  rescheduleAt?: Date;
 }): Promise<object>;
 
 export function getPayment(data: { id: string }): Promise<object>;

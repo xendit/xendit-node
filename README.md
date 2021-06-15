@@ -529,6 +529,7 @@ rp.createPayment(data: {
   recharge?: boolean;
   chargeImmediately?: boolean;
   currency?: string;
+  rescheduleAt?: Date;
 })
 ```
 
