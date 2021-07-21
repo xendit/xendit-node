@@ -176,7 +176,7 @@ card.captureCharge(data: {
 #### Get charge
 
 ```ts
-card.getCharge(data: { chargeID: string })
+card.getCharge(data: { chargeID: string; forUserID?: string })
 ```
 
 #### Create authorization
