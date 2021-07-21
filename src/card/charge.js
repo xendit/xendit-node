@@ -69,11 +69,20 @@ function getCharge(data) {
     const compulsoryFields = ['chargeID'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/credit_card_charges/${data.chargeID}`,
       {
         method: 'GET',
-        headers: { Authorization: Auth.basicAuthHeader(this.opts.secretKey) },
+        headers,
       },
     )
       .then(resolve)

@@ -20,4 +20,7 @@ export function captureCharge(data: {
   forUserID?: string;
 }): Promise<object>;
 
-export function getCharge(data: { chargeID: string }): Promise<object>;
+export function getCharge(data: {
+  chargeID: string;
+  forUserID?: string;
+}): Promise<object>;
