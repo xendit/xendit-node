@@ -153,20 +153,15 @@ EWallet.prototype.createEWalletCharge = function(data) {
         amount: data.amount,
         checkout_method: data.checkoutMethod,
         channel_code: data.channelCode,
-        channel_properties:
-          data.channelCode === 'ID_OVO'
-            ? {
-                mobile_number: data.channelProperties.mobileNumber,
-              }
-            : data.channelCode === 'PH_PAYMAYA'
-            ? {
-                success_redirect_url: data.channelProperties.successRedirectURL,
-                failure_redirect_url: data.channelProperties.failureRedirectURL,
-                cancel_redirect_url: data.channelProperties.cancelRedirectURL,
-              }
-            : {
-                success_redirect_url: data.channelProperties.successRedirectURL,
-              },
+        channel_properties: data.channelProperties
+          ? {
+              mobile_number: data.channelProperties.mobileNumber,
+              success_redirect_url: data.channelProperties.successRedirectURL,
+              failure_redirect_url: data.channelProperties.failureRedirectURL,
+              cancel_redirect_url: data.channelProperties.cancelRedirectURL,
+              redeem_points: data.channelProperties.redeemPoints,
+            }
+          : data.channelProperties,
         customer_id: data.customerID,
         basket: data.basket
           ? data.basket.map(product => ({

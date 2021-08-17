@@ -31,18 +31,12 @@ enum ChannelCode {
   PH_PAYMAYA = 'PH_PAYMAYA',
 }
 
-interface OVOChannelProps {
-  mobileNumber: string;
-}
-
-interface PaymayaChannelProps {
-  successRedirectURL: string;
-  failureRedirectURL: string;
-  cancelRedirectURL: string;
-}
-
-interface OtherChannelProps {
-  successRedirectURL: string;
+interface ChannelProps {
+  mobileNumber?: string;
+  successRedirectURL?: string;
+  failureRedirectURL?: string;
+  cancelRedirectURL?: string;
+  redeemPoints?: string;
 }
 
 interface Basket {
@@ -90,10 +84,7 @@ export = class EWallet {
     amount: number;
     checkoutMethod: string;
     channelCode?: ChannelCode;
-    channelProperties?:
-      | OVOChannelProps
-      | PaymayaChannelProps
-      | OtherChannelProps;
+    channelProperties?: ChannelProps;
     customerID?: string;
     basket?: Basket[];
     metadata?: object;
