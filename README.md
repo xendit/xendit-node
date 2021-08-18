@@ -657,7 +657,7 @@ ew.createEWalletCharge(data: {
   amount: number;
   checkoutMethod: string;
   channelCode?: ChannelCode;
-  channelProperties?: OVOChannelProps | PaymayaChannelProps | OtherChannelProps;
+  channelProperties?: ChannelProps;
   customerID?: string;
   basket?: Basket[];
   metadata?: object;
