@@ -77,6 +77,9 @@ function editPayment(data) {
         should_send_email: data.shouldSendEmail,
         invoice_duration: data.invoiceDuration,
         missed_payment_action: data.missedPaymentAction,
+        reschedule_at: data.rescheduleAt
+          ? data.rescheduleAt.toISOString()
+          : undefined,
       }),
     })
       .then(resolve)

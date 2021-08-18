@@ -40,4 +40,5 @@ export function editPayment(data: {
   shouldSendEmail?: boolean;
   invoiceDuration?: number;
   missedPaymentAction?: Action;
+  rescheduleAt?: Date;
 }): Promise<object>;
