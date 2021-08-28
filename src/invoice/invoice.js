@@ -54,6 +54,8 @@ Invoice.prototype.createInvoice = function(data) {
         mid_label: data.midLabel,
         currency: data.currency,
         fixed_va: data.fixedVA,
+        customer: data.customer,
+        customer_notification_preference: data.customerNotificationPreference,
       }),
     })
       .then(resolve)
