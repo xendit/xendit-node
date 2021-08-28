@@ -7,9 +7,9 @@ export = class Invoice {
   ) => typeof Invoice;
   createInvoice(data: {
     externalID: string;
-    payerEmail: string;
-    description: string;
     amount: number;
+    payerEmail?: string;
+    description?: string;
     shouldSendEmail?: boolean;
     callbackVirtualAccountID?: string;
     invoiceDuration?: number;
