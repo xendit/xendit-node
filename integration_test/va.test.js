@@ -12,15 +12,15 @@ module.exports = function() {
         bankCode: banks[0].code,
         name: 'Stanley Nguyen',
         isClosed: true,
-        expectedAmt: 15,
+        expectedAmt: 10000,
       });
     })
     .then(({ id }) => va.getFixedVA({ id }))
     .then(({ id }) => {
       return va.updateFixedVA({
         id,
-        suggestedAmt: 20,
-        expectedAmt: 30,
+        suggestedAmt: 10000,
+        expectedAmt: 10000,
       });
     })
     .then(() => {
