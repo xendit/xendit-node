@@ -13,6 +13,8 @@ export = class Invoice {
     shouldSendEmail?: boolean;
     customer?: object;
     customerNotificationPreference?: object;
+    items?: object[];
+    fees?: object[];
     callbackVirtualAccountID?: string;
     invoiceDuration?: number;
     successRedirectURL?: string;

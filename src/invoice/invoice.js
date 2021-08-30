@@ -56,6 +56,8 @@ Invoice.prototype.createInvoice = function(data) {
         fixed_va: data.fixedVA,
         customer: data.customer,
         customer_notification_preference: data.customerNotificationPreference,
+        items: data.items,
+        fees: data.fees,
       }),
     })
       .then(resolve)
