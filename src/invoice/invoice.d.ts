@@ -11,6 +11,8 @@ export = class Invoice {
     payerEmail?: string;
     description?: string;
     shouldSendEmail?: boolean;
+    customer?: object;
+    customerNotificationPreference?: object;
     callbackVirtualAccountID?: string;
     invoiceDuration?: number;
     successRedirectURL?: string;
