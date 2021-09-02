@@ -26,11 +26,7 @@ Invoice._constructorWithInjectedXenditOpts = function(options) {
 
 Invoice.prototype.createInvoice = function(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(
-      ['externalID', 'payerEmail', 'description', 'amount'],
-      data,
-      reject,
-    );
+    Validate.rejectOnMissingFields(['externalID', 'amount'], data, reject);
 
     let headers = {
       'Content-Type': 'application/json',
@@ -58,6 +54,10 @@ Invoice.prototype.createInvoice = function(data) {
         mid_label: data.midLabel,
         currency: data.currency,
         fixed_va: data.fixedVA,
+        customer: data.customer,
+        customer_notification_preference: data.customerNotificationPreference,
+        items: data.items,
+        fees: data.fees,
       }),
     })
       .then(resolve)

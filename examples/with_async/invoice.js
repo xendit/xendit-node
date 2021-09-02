@@ -10,6 +10,13 @@ const i = new Invoice({});
       payerEmail: 'example@gmail.com',
       description: 'Invoice for Shoes Purchase',
       amount: 100000,
+      customer: {
+        given_names: 'xen customer',
+        email: 'example@gmail.com',
+      },
+      customerNotificationPreference: {
+        invoice_created: ['email'],
+      },
     });
     console.log('created invoice', invoice); // eslint-disable-line no-console
 
