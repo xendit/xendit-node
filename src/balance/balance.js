@@ -36,6 +36,10 @@ Balance.prototype.getBalance = function(data) {
       : '';
     const queryStrWithQuestionMark = queryStr ? `?${queryStr}` : '';
 
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
     if (data && data.forUserID) {
       headers['for-user-id'] = data.forUserID;
     }
@@ -43,9 +47,6 @@ Balance.prototype.getBalance = function(data) {
     fetchWithHTTPErr(`${this.API_ENDPOINT}${queryStrWithQuestionMark}`, {
       method: 'GET',
       headers,
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      },
     })
       .then(resolve)
       .catch(reject);
