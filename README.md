@@ -709,7 +709,10 @@ Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#bala
 #### Get balance
 
 ```ts
-b.getBalance(data: { accountType: AccountType })
+b.getBalance(data: {
+  accountType: AccountType;
+  forUserID?: string;
+})
 ```
 
 ### Retail Outlet Services
