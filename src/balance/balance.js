@@ -35,11 +35,18 @@ Balance.prototype.getBalance = function(data) {
       ? queryStringWithoutUndefined({ account_type: data.accountType })
       : '';
     const queryStrWithQuestionMark = queryStr ? `?${queryStr}` : '';
+
+    let headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+    };
+
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}${queryStrWithQuestionMark}`, {
       method: 'GET',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-      },
+      headers,
     })
       .then(resolve)
       .catch(reject);
