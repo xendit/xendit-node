@@ -658,6 +658,7 @@ ew.createEWalletCharge(data: {
   checkoutMethod: string;
   channelCode?: ChannelCode;
   channelProperties?: ChannelProps;
+  paymentMethodId?: string;
   customerID?: string;
   basket?: Basket[];
   metadata?: object;

@@ -162,6 +162,7 @@ EWallet.prototype.createEWalletCharge = function(data) {
               redeem_points: data.channelProperties.redeemPoints,
             }
           : data.channelProperties,
+        payment_method_id: data.paymentMethodId,
         customer_id: data.customerID,
         basket: data.basket
           ? data.basket.map(product => ({
