@@ -1,6 +1,6 @@
 {
   "name": "xendit-node",
-  "version": "1.16.1",
+  "version": "1.17.0",
   "description": "NodeJS client for Xendit API",
   "main": "index.js",
   "types": "index.d.ts",
