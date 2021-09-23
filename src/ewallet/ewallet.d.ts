@@ -85,6 +85,7 @@ export = class EWallet {
     checkoutMethod: string;
     channelCode?: ChannelCode;
     channelProperties?: ChannelProps;
+    paymentMethodId?: string;
     customerID?: string;
     basket?: Basket[];
     metadata?: object;
