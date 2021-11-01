@@ -23,6 +23,7 @@ module.exports = function(x) {
         interval: TestConstants.INTERVAL,
         interval_count: TestConstants.INTERVAL_COUNT,
         start_date: TestConstants.START_DATE,
+        customer: TestConstants.CUSTOMER,
       })
       .reply(201, TestConstants.PAYMENT_DETAILS);
     nock(rp.API_ENDPOINT)
@@ -46,6 +47,7 @@ module.exports = function(x) {
           interval: RecurringPayment.Interval.Month,
           intervalCount: TestConstants.INTERVAL_COUNT,
           startDate: new Date(TestConstants.PAYMENT_DETAILS.start_date),
+          customer: TestConstants.CUSTOMER,
         }),
       )
         .to.eventually.deep.equal(TestConstants.PAYMENT_DETAILS)
