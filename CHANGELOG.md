@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2021-11-01
+
+- Add missing recurring payment properties
+
 ## 2021-06-01
 
 - Add missing Customer and DirectDebit services types to index definition file
