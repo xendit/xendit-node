@@ -1,5 +1,5 @@
 const EXT_ID = '123';
-const PAYER_EMAIL = 'stanley@xendit.co';
+const PAYER_EMAIL = 'dummy@email.co';
 const DESCRIPTION = 'Payment for something';
 const AMOUNT = 10000;
 const INTERVAL = 'MONTH';
@@ -8,7 +8,7 @@ const PAYMENT_ID = '5e0577bdf4d38b20d542009b';
 const START_DATE = '2020-01-31T17:00:00.000Z';
 const CUSTOMER = {
   given_names: 'stan',
-  email: 'stanley@xendit.co',
+  email: 'dummy@email.co',
   mobile_number: '',
   address: '',
 };
