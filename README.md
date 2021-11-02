@@ -513,8 +513,8 @@ Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recu
 ```ts
 rp.createPayment(data: {
   externalID: string;
-  payerEmail: string;
-  description: string;
+  payerEmail?: string;
+  description?: string;
   amount: number;
   interval: Interval;
   intervalCount: number;
@@ -530,6 +530,11 @@ rp.createPayment(data: {
   chargeImmediately?: boolean;
   currency?: string;
   rescheduleAt?: Date;
+  customer?: object;
+  customerNotificationPreference?: object;
+  reminderTimeUnit?: string;
+  reminderTime?: number;
+  paymentMethodId?: string;
 })
 ```
 
@@ -551,6 +556,11 @@ rp.editPayment(data: {
   shouldSendEmail?: boolean;
   invoiceDuration?: number;
   missedPaymentAction?: Action;
+  rescheduleAt?: Date;
+  customerId?: string;
+  reminderTimeUnit?: string;
+  reminderTime?: number;
+  paymentMethodId?: string;
 })
 ```
 

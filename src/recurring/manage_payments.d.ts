@@ -10,8 +10,8 @@ enum Action {
 
 export function createPayment(data: {
   externalID: string;
-  payerEmail: string;
-  description: string;
+  payerEmail?: string;
+  description?: string;
   amount: number;
   interval: Interval;
   intervalCount: number;
@@ -27,6 +27,11 @@ export function createPayment(data: {
   chargeImmediately?: boolean;
   currency?: string;
   rescheduleAt?: Date;
+  customer?: object;
+  customerNotificationPreference?: object;
+  reminderTimeUnit?: string;
+  reminderTime?: number;
+  paymentMethodId?: string;
 }): Promise<object>;
 
 export function getPayment(data: { id: string }): Promise<object>;
@@ -41,4 +46,8 @@ export function editPayment(data: {
   invoiceDuration?: number;
   missedPaymentAction?: Action;
   rescheduleAt?: Date;
+  customerId?: string;
+  reminderTimeUnit?: string;
+  reminderTime?: number;
+  paymentMethodId?: string;
 }): Promise<object>;

@@ -4,8 +4,6 @@ function createPayment(data) {
   return promWithJsErr((resolve, reject) => {
     const compulsoryFields = [
       'externalID',
-      'payerEmail',
-      'description',
       'amount',
       'interval',
       'intervalCount',
@@ -39,6 +37,11 @@ function createPayment(data) {
         reschedule_at: data.rescheduleAt
           ? data.rescheduleAt.toISOString()
           : undefined,
+        customer: data.customer,
+        customer_notification_preference: data.customerNotificationPreference,
+        reminder_time_unit: data.reminderTimeUnit,
+        reminder_time: data.reminderTime,
+        payment_method_id: data.paymentMethodId,
       }),
     })
       .then(resolve)
@@ -80,6 +83,10 @@ function editPayment(data) {
         reschedule_at: data.rescheduleAt
           ? data.rescheduleAt.toISOString()
           : undefined,
+        customer_id: data.customerId,
+        reminder_time_unit: data.reminderTimeUnit,
+        reminder_time: data.reminderTime,
+        payment_method_id: data.paymentMethodId,
       }),
     })
       .then(resolve)
