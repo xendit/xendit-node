@@ -14,6 +14,7 @@ const VALID_CREATE_CODE_RESPONSE = {
   merchant_callback_url: CALLBACK_URL,
   type: TYPE,
   status: 'ACTIVE',
+  metadata: null,
   created: '2020-01-08T18:18:18.661Z',
   updated: '2020-01-08T18:18:18.661Z',
 };
@@ -32,6 +33,7 @@ const VALID_PAYMENT = {
     type: TYPE,
   },
   status: 'COMPLETED',
+  metadata: null,
 };
 const VALID_PAYMENT_ARRAY = [VALID_PAYMENT, VALID_PAYMENT];
 

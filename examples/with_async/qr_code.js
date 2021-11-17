@@ -10,6 +10,9 @@ const q = new QrCode({});
       type: QrCode.Type.Dynamic,
       callbackURL: 'https://httpstat.us/200',
       amount: 10000,
+      metadata: {
+        meta2: 'data2',
+      },
     });
     console.log('created QR code', qrcode); // eslint-disable-line no-console
 

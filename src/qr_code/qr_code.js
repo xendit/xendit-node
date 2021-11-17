@@ -41,6 +41,7 @@ QrCode.prototype.createCode = function(data) {
         type: data.type,
         callback_url: data.callbackURL,
         amount: data.amount,
+        metadata: data.metadata,
       }),
     })
       .then(resolve)
