@@ -19,6 +19,7 @@ export = class QrCode {
     type: QrCodeTypes;
     callbackURL: string;
     amount?: number;
+    metadata?: object;
   }): Promise<object>;
   getCode(data: { externalID: string }): Promise<object>;
   getPayments(data: {

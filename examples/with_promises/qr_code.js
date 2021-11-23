@@ -8,6 +8,9 @@ q.createCode({
   type: QrCode.Type.Dynamic,
   callbackURL: 'https://httpstat.us/200',
   amount: 10000,
+  metadata: {
+    meta2: 'data2',
+  },
 })
   .then(r => {
     console.log('created QR code', r); // eslint-disable-line no-console
