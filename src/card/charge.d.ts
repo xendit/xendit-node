@@ -12,6 +12,7 @@ export function createCharge(data: {
   promotion?: object;
   installment?: object;
   forUserID?: string;
+  metadata?: object;
 }): Promise<object>;
 
 export function captureCharge(data: {

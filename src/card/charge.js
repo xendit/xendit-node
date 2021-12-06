@@ -30,6 +30,7 @@ function createCharge(data) {
         billing_details: data.billingDetails,
         promotion: data.promotion,
         installment: data.installment,
+        metadata: data.metadata,
       }),
     })
       .then(resolve)
