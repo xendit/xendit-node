@@ -160,6 +160,7 @@ card.createCharge(data: {
   promotion?: object;
   installment?: object;
   forUserID?: string;
+  metadata?: object;
 })
 ```
 

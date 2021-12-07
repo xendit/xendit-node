@@ -8,7 +8,7 @@ module.exports = function() {
     .getVABanks()
     .then(banks => {
       return va.createFixedVA({
-        externalID: '123',
+        externalID: new Date().toLocaleString(),
         bankCode: banks[0].code,
         name: 'Stanley Nguyen',
         isClosed: true,

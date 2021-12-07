@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2021-12-07
+
+- Added metadata to credit card charge request
+
 ## 2021-11-01
 
 - Add missing recurring payment properties
