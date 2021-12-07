@@ -25,4 +25,4 @@ jobs:
       - run: npm test
       - run: npm run test:integration
         env:
-          SECRET_KEY: xnd_development_XY2rHKsV2LGwUlZwVmAewGrLVyA1dNFUaO9anpjFuFMveMH4GvrQU8l8JrBX6QZ
+          SECRET_KEY: xnd_development_chBDpzjQZEI8nncBLrWtwau5r7rgiuunCJ4JCqsd68rXemDd74BnRpdO0bIZAMK
