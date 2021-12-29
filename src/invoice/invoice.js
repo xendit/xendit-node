@@ -37,6 +37,10 @@ Invoice.prototype.createInvoice = function(data) {
       headers['for-user-id'] = data.forUserID;
     }
 
+    if (data && data.withFeeRule) {
+      headers['with-fee-rule'] = data.withFeeRule;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/invoices`, {
       method: 'POST',
       headers,
