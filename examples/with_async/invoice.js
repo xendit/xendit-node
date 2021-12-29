@@ -17,10 +17,6 @@ const i = new Invoice({});
       customerNotificationPreference: {
         invoice_created: ['email'],
       },
-      reminderTimeUnit: 'days',
-      remiderTime: 12,
-      locale: "en",
-      shouldAuthenticateCreditCard: true
     });
     console.log('created invoice', invoice); // eslint-disable-line no-console
 
