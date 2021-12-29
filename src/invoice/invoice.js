@@ -65,7 +65,7 @@ Invoice.prototype.createInvoice = function(data) {
         reminder_time_unit: data.reminderTimeUnit,
         reminder_time: data.reminderTime,
         locale: data.locale,
-        should_authenticate_credit_card: data.shouldAuthenticateCreditCard
+        should_authenticate_credit_card: data.shouldAuthenticateCreditCard,
       }),
     })
       .then(resolve)
