@@ -15,7 +15,7 @@ module.exports = function() {
         expectedAmt: 10000,
       });
     })
-    .then(({ id }) => va.getFixedVA({ id }))
+    .then(({ id }) => va.getFixedVA({ id: id }))
     .then(({ id }) => {
       return va.updateFixedVA({
         id,
