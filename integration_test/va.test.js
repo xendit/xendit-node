@@ -23,7 +23,6 @@ module.exports = function () {
       return va.getFixedVA({ id })
     })
     .then(({ id }) => {
-      console.log(id);
       return va.updateFixedVA({
         id,
         suggestedAmt: 10000,
