@@ -4,8 +4,8 @@ const RegionalRetailOutlet = x.RegionalRetailOutlet;
 const ro = new RegionalRetailOutlet();
 
 ro.createPaymentCode({
-  referenceId: 'test_dharma_3',
-  channelCode: '7ELEVEN',
+  referenceId: 'test_dharma_4',
+  channelCode: 'CEBUANA',
   customerName: 'Dharma',
   amount: 50,
   currency: 'PHP',
@@ -25,7 +25,7 @@ ro.createPaymentCode({
   .then(({ id }) => {
     return ro.updatePaymentCode({
       id,
-      amount: 30,
+      customerName: "DharmaLain",
     });
   })
   .then(r => {

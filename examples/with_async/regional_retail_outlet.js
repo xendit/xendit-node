@@ -7,7 +7,7 @@ const ro = new RegionalRetailOutlet({});
   try {
     const pmCode = await ro.createPaymentCode({
       referenceId: 'test_dharma_61',
-      channelCode: '7ELEVEN',
+      channelCode: 'CEBUANA',
       customerName: 'Dharma',
       amount: 50,
       currency: 'PHP',
@@ -23,7 +23,7 @@ const ro = new RegionalRetailOutlet({});
 
     const updatedPmCode = await ro.updatePaymentCode({
       id,
-      expectedAmt: 12000,
+      customerName: "DharmaLain",
     });
     // eslint-disable-next-line no-console
     console.log('updated payment code details:', updatedPmCode);
