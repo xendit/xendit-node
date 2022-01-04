@@ -14,15 +14,20 @@ const c = new Customer({});
       middleName: 'middle',
       surname: 'surname',
       addresses: [],
+      apiVersion: '2020-05-19',
     });
     console.log('created customer', customer); // eslint-disable-line no-console
 
-    customer = await c.getCustomer({ id: customer.id });
+    customer = await c.getCustomer({
+      id: customer.id,
+      apiVersion: '2020-05-19',
+    });
     // eslint-disable-next-line no-console
     console.log('retrieved customer', customer);
 
     const customers = await c.getCustomerByReferenceID({
       referenceID: customer.reference_id,
+      apiVersion: '2020-05-19',
     });
     // eslint-disable-next-line no-console
     console.log('retrieved customers', customers);
@@ -45,6 +50,7 @@ const c = new Customer({});
           city: 'Jakarta',
         },
       ],
+      apiVersion: '2020-05-19',
     });
     console.log('updated customer', customer); //eslint-disable-line no-console
   } catch (e) {

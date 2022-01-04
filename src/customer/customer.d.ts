@@ -28,9 +28,13 @@ export = class Customer {
     addresses?: Address[];
     dateOfBirth?: string;
     metadata?: object;
+    apiVersion?: string;
   }): Promise<object>;
-  getCustomer(data: { id: string }): Promise<object>;
-  getCustomerByReferenceID(data: { referenceID: string }): Promise<object>;
+  getCustomer(data: { id: string; apiVersion?: string }): Promise<object>;
+  getCustomerByReferenceID(data: {
+    referenceID: string;
+    apiVersion?: string;
+  }): Promise<object>;
   updateCustomer(data: {
     id: string;
     referenceID?: string;
@@ -44,5 +48,6 @@ export = class Customer {
     nationality?: string;
     dateOfBirth?: string;
     metadata?: object;
+    apiVersion?: string;
   }): Promise<object>;
 };
