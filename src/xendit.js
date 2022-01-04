@@ -11,6 +11,7 @@ const { QrCode } = require('./qr_code');
 const { PlatformService } = require('./platform');
 const { CustomerService } = require('./customer');
 const { DirectDebitService } = require('./direct_debit');
+const { RegionalRetailOutletService } = require('./regional_retail_outlet');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -36,6 +37,9 @@ function Xendit(options) {
   this.EWallet = EWalletService._constructorWithInjectedXenditOpts(this.opts);
   this.Balance = BalanceServices._constructorWithInjectedXenditOpts(this.opts);
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
+    this.opts,
+  );
+  this.RegionalRetailOutlet = RegionalRetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
   this.QrCode = QrCode._constructorWithInjectedXenditOpts(this.opts);
