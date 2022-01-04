@@ -7,7 +7,16 @@ const {
 } = require('../utils');
 const errors = require('../errors');
 
-const EWALLET_PATH = '/ewallets';
+const {
+  initializeTokenization,
+  unlinkTokenization,
+} = require('./linked_account');
+const {
+  createPaymentMethod,
+  getPaymentMethodsByCustomerID,
+} = require('./payment_method');
+
+const EWALLET_PATH = '';
 
 function EWallet(options) {
   let aggOpts = options;
@@ -78,7 +87,7 @@ EWallet.prototype.createPayment = function(data) {
       headers['X-API-VERSION'] = data.xApiVersion;
     }
 
-    fetchWithHTTPErr(this.API_ENDPOINT, {
+    fetchWithHTTPErr(this.API_ENDPOINT + '/ewallets', {
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -110,7 +119,7 @@ EWallet.prototype.getPayment = function(data) {
         })
       : '';
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}?${queryStr}`, {
+    fetchWithHTTPErr(this.API_ENDPOINT + `/ewallets?${queryStr}`, {
       method: 'GET',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
@@ -144,7 +153,7 @@ EWallet.prototype.createEWalletCharge = function(data) {
       headers['with-fee-rule'] = data.withFeeRule;
     }
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}/charges`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/ewallets/charges`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
@@ -199,7 +208,7 @@ EWallet.prototype.getEWalletChargeStatus = function(data) {
       headers['for-user-id'] = data.forUserID;
     }
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}/charges/${data.chargeID}`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/ewallets/charges/${data.chargeID}`, {
       method: 'GET',
       headers: headers,
     })
@@ -221,13 +230,21 @@ EWallet.prototype.voidEWalletCharge = function(data) {
       headers['for-user-id'] = data.forUserID;
     }
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT}/charges/${data.chargeID}/void`, {
-      method: 'POST',
-      headers: headers,
-    })
+    fetchWithHTTPErr(
+      `${this.API_ENDPOINT}/ewallets/charges/${data.chargeID}/void`,
+      {
+        method: 'POST',
+        headers: headers,
+      },
+    )
       .then(resolve)
       .catch(reject);
   });
 };
+
+EWallet.prototype.initializeTokenization = initializeTokenization;
+EWallet.prototype.unlinkTokenization = unlinkTokenization;
+EWallet.prototype.createPaymentMethod = createPaymentMethod;
+EWallet.prototype.getPaymentMethodsByCustomerID = getPaymentMethodsByCustomerID;
 
 module.exports = EWallet;

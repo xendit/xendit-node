@@ -1,4 +1,9 @@
 import { XenditOptions } from '../xendit_opts';
+import { initializeTokenization, unlinkTokenization } from './linked_account';
+import {
+  createPaymentMethod,
+  getPaymentMethodsByCustomerID,
+} from require('./payment_method');
 
 enum CreateSupportWalletTypes {
   OVO = 'OVO',
@@ -100,4 +105,8 @@ export = class EWallet {
     chargeID: string;
     forUserID?: string;
   }): Promise<object>;
+  initializeTokenization = initializeTokenization;
+  unlinkTokenization = unlinkTokenization;
+  createPaymentMethod = createPaymentMethod;
+  getPaymentMethodsByCustomerID = getPaymentMethodsByCustomerID;
 };
