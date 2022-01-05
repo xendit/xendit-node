@@ -1,4 +1,4 @@
-const x = require('./xendit.test');
+const x = require('./xendit_ph.test');
 
 const RegionalRetailOutlet = x.RegionalRetailOutlet;
 const ro = new RegionalRetailOutlet({});
