@@ -23,6 +23,11 @@ export = class Invoice {
     currency?: string;
     midLabel?: string;
     forUserID?: string;
+    reminderTimeUnit?: string;
+    reminderTime?: number;
+    locale?: string;
+    shouldAuthenticateCreditCard?: boolean;
+    withFeeRule?: string;
   }): Promise<object>;
   getInvoice(data: { invoiceID: string; forUserID?: string }): Promise<object>;
   expireInvoice(data: {

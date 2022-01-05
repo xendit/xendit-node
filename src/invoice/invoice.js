@@ -37,6 +37,10 @@ Invoice.prototype.createInvoice = function(data) {
       headers['for-user-id'] = data.forUserID;
     }
 
+    if (data && data.withFeeRule) {
+      headers['with-fee-rule'] = data.withFeeRule;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/invoices`, {
       method: 'POST',
       headers,
@@ -58,6 +62,10 @@ Invoice.prototype.createInvoice = function(data) {
         customer_notification_preference: data.customerNotificationPreference,
         items: data.items,
         fees: data.fees,
+        reminder_time_unit: data.reminderTimeUnit,
+        reminder_time: data.reminderTime,
+        locale: data.locale,
+        should_authenticate_credit_card: data.shouldAuthenticateCreditCard,
       }),
     })
       .then(resolve)
