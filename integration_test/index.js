@@ -13,6 +13,7 @@ Promise.all([
   require('./platform.test')(),
   require('./customer.test')(),
   require('./direct_debit.test')(),
+  require('./regional_retail_outlet.test')(),
 ])
   .then(() => {
     // eslint-disable-next-line no-console
