@@ -18,7 +18,7 @@ const authID = '5e0461a96113354249aab7ee';
       externalID: Date.now().toString(), // use your system's ID of the transaction
       capture: false,
       metadata: {
-        test: "data",
+        test: `data`,
       },
     });
     console.log('charge created:', charge); // eslint-disable-line no-console
