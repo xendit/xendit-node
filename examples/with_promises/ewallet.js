@@ -1,7 +1,8 @@
 const x = require('../xendit');
 
-const EWallet = x.EWallet;
+const { EWallet, Customer } = x;
 const ew = new EWallet({});
+const c = new Customer({});
 
 ew.createPayment({
   externalID: Date.now().toString(),
@@ -78,6 +79,40 @@ ew.createPayment({
   .then(r => {
     // eslint-disable-next-line no-console
     console.log('voided ewallet payment charge:', r);
+    return r;
+  })
+  .then(() =>
+    c.createCustomer({
+      referenceID: new Date().toISOString(),
+      givenNames: 'customer 1',
+      email: 'customer@website.com',
+      mobileNumber: '+6281212345678',
+      description: 'dummy customer',
+      middleName: 'middle',
+      surname: 'surname',
+      addresses: [],
+      apiVersion: '2020-05-19',
+    }),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('created customer:', r);
+    return r;
+  })
+  .then(r =>
+    ew.initializeTokenization({
+      customerID: r.id,
+      channelCode: 'PH_GRABPAY',
+      properties: {
+        successRedirectURL: 'https://www.google.com',
+        failureRedirectURL: 'https://www.google.com',
+        callbackURL: 'https://www.google.com',
+      },
+    }),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('initialized tokenization:', r);
     return r;
   })
   .catch(e => {
