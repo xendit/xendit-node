@@ -4,6 +4,17 @@ const { EWallet, Customer } = x;
 const ew = new EWallet({});
 const c = new Customer({});
 
+/*
+ * The entire EWallet tokenization flow, at this time,
+ *    cannot be replicated through an example
+ * This is because of the system design,
+ *    once a token is created it has
+ *    to be verified manually by using the authorizer url.
+ *    Subsequent methods `create payment method`,
+ *    `get payment by ID`, and `unlink tokenization`
+ *    can only be carried out after the manual authorization
+ */
+
 (async function() {
   try {
     const payment = await ew.createPayment({
@@ -90,18 +101,6 @@ const c = new Customer({});
     });
     // eslint-disable-next-line no-console
     console.log('initialized tokenization', tokenization);
-
-    /*
-     * The entire EWallet tokenization flow, at this time,
-     *    cannot be replicated through an example
-     * This is because of a limitation with the system,
-     *    once a token is created it has
-     *    to be verified manually by using the authorizer url.
-     *    Subsequent methods `create payment method`,
-     *    `get payment by ID`, and `unlink tokenization`
-     *    can only be carried out after the manual authorization
-     */
-
     process.exit(0);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console

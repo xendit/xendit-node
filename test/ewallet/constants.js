@@ -109,7 +109,10 @@ const VALID_INITIALIZE_TOKENIZATION_RESPONSE = {
   metadata: null,
 };
 
-const VALID_UNLINK_TOKENIZATION_RESPONSE = {};
+const VALID_UNLINK_TOKENIZATION_RESPONSE = {
+  id: LINKED_ACCOUNT_TOKEN_ID,
+  is_deleted: true,
+};
 
 module.exports = {
   OVO_EWALLET_TYPE,

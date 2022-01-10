@@ -7,13 +7,14 @@ const c = new Customer({});
 /*
  * The entire EWallet tokenization flow, at this time,
  *    cannot be replicated through an integration test
- * This is because of a limitation with the system,
+ * This is because of the system design,
  *    once a token is created it has
  *    to be verified manually by using the authorizer url.
  *    Subsequent methods `create payment method`,
  *    `get payment by ID`, and `unlink tokenization`
  *    can only be carried out after the manual authorization
  */
+
 module.exports = function() {
   return ew
     .createPayment({
