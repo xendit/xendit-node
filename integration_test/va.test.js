@@ -13,7 +13,7 @@ module.exports = function() {
     .getVABanks()
     .then(banks => {
       return va.createFixedVA({
-        externalID: 'VA-' + new Date().toLocaleString(),
+        externalID: 'VA-xendit-node-js998877',
         bankCode: banks[0].code,
         name: 'Stanley Nguyen',
         isClosed: true,
@@ -25,10 +25,10 @@ module.exports = function() {
       return va.getFixedVA({ id });
     })
     .then(({ id }) => {
+      sleepFor(5000);
       return va.updateFixedVA({
         id,
-        suggestedAmt: 10000,
-        expectedAmt: 10000,
+        expectedAmt: 12000,
       });
     })
     .then(() => {
