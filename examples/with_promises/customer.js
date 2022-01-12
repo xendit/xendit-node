@@ -12,17 +12,23 @@ c.createCustomer({
   middleName: 'middle',
   surname: 'surname',
   addresses: [],
+  apiVersion: '2020-05-19',
 })
   .then(r => {
     console.log('created customer', r); // eslint-disable-line no-console
     return r;
   })
-  .then(r => c.getCustomer({ id: r.id }))
+  .then(r => c.getCustomer({ id: r.id, apiVersion: '2020-05-19' }))
   .then(r => {
     console.log('retrieved customer', r); // eslint-disable-line no-console
     return r;
   })
-  .then(r => c.getCustomerByReferenceID({ referenceID: r.reference_id }))
+  .then(r =>
+    c.getCustomerByReferenceID({
+      referenceID: r.reference_id,
+      apiVersion: '2020-05-19',
+    }),
+  )
   .then(r => {
     console.log('retrieved customers', r); // eslint-disable-line no-console
     return r[0];
@@ -46,6 +52,7 @@ c.createCustomer({
           city: 'Jakarta',
         },
       ],
+      apiVersion: '2020-05-19',
     }),
   )
   .then(r => {

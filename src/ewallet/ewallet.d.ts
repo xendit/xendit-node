@@ -1,57 +1,15 @@
 import { XenditOptions } from '../xendit_opts';
-
-enum CreateSupportWalletTypes {
-  OVO = 'OVO',
-  Dana = 'DANA',
-  Linkaja = 'LINKAJA',
-}
-
-enum GetSupportWalletTypes {
-  OVO = 'OVO',
-  Dana = 'DANA',
-}
-
-interface PaymentItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-enum Currency {
-  IDR = 'IDR',
-  PHP = 'PHP',
-}
-
-enum ChannelCode {
-  ID_OVO = 'ID_OVO',
-  ID_DANA = 'ID_DANA',
-  ID_LINKAJA = 'ID_LINKAJA',
-  ID_SHOPEEPAY = 'ID_SHOPEEPAY',
-  PH_PAYMAYA = 'PH_PAYMAYA',
-}
-
-interface ChannelProps {
-  mobileNumber?: string;
-  successRedirectURL?: string;
-  failureRedirectURL?: string;
-  cancelRedirectURL?: string;
-  redeemPoints?: string;
-}
-
-interface Basket {
-  referenceID: string;
-  name: string;
-  category: string;
-  currency: string;
-  price: number;
-  quantity: number;
-  type: string;
-  url?: string;
-  description?: string;
-  subCategory?: string;
-  metadata?: object;
-}
+import {
+  createEWalletCharge,
+  getEWalletChargeStatus,
+  voidEWalletCharge,
+} from './ewallet_charge';
+import { createPayment, getPayment } from './ewallet_payment';
+import { initializeTokenization, unlinkTokenization } from './linked_account';
+import {
+  createPaymentMethod,
+  getPaymentMethodsByCustomerID,
+} from require('./payment_method');
 
 export = class EWallet {
   constructor({});
@@ -63,41 +21,13 @@ export = class EWallet {
     Dana: string;
     LinkAja: string;
   };
-  createPayment(data: {
-    externalID: string;
-    amount: number;
-    phone?: string;
-    expirationDate?: Date;
-    callbackURL?: string;
-    redirectURL?: string;
-    items?: PaymentItem[];
-    ewalletType: CreateSupportWalletTypes;
-    xApiVersion?: string;
-  }): Promise<object>;
-  getPayment(data: {
-    externalID: string;
-    ewalletType: GetSupportWalletTypes;
-  }): Promise<object>;
-  createEWalletCharge(data: {
-    referenceID: string;
-    currency: Currency;
-    amount: number;
-    checkoutMethod: string;
-    channelCode?: ChannelCode;
-    channelProperties?: ChannelProps;
-    paymentMethodId?: string;
-    customerID?: string;
-    basket?: Basket[];
-    metadata?: object;
-    forUserID?: string;
-    withFeeRule?: string;
-  }): Promise<object>;
-  getEWalletChargeStatus(data: {
-    chargeID: string;
-    forUserID?: string;
-  }): Promise<object>;
-  voidEWalletCharge(data: {
-    chargeID: string;
-    forUserID?: string;
-  }): Promise<object>;
+  createPayment = createPayment;
+  getPayment = getPayment;
+  createEWalletCharge = createEWalletCharge;
+  getEWalletChargeStatus = getEWalletChargeStatus;
+  voidEWalletCharge = voidEWalletCharge;
+  initializeTokenization = initializeTokenization;
+  unlinkTokenization = unlinkTokenization;
+  createPaymentMethod = createPaymentMethod;
+  getPaymentMethodsByCustomerID = getPaymentMethodsByCustomerID;
 };

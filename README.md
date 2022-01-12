@@ -1,7 +1,7 @@
 # Xendit API Node.js Client
 
-![](https://github.com/xendit/xendit-node/workflows/Code%20Linting/badge.svg)
-![](https://github.com/xendit/xendit-node/workflows/Integration%20Tests/badge.svg)
+![Code Linting Badge](https://github.com/xendit/xendit-node/workflows/Code%20Linting/badge.svg)
+![Integration Tests Badge](https://github.com/xendit/xendit-node/workflows/Integration%20Tests/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/xendit/xendit-node/badge.svg)](https://coveralls.io/github/xendit/xendit-node)
 
 This library is the abstraction of Xendit API for access from applications written with server-side Javascript.
@@ -51,9 +51,15 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Get a payout](#get-a-payout)
     + [Void a payout](#void-a-payout)
   * [EWallet Services](#ewallet-services)
+    + [Create payment](#create-payment)
+    + [Get payment](#get-payment)
     + [Create an ewallet charge](#create-an-ewallet-charge)
     + [Get an ewallet charge status](#get-an-ewallet-charge-status)
     + [Void an ewallet charge](#void-an-ewallet-charge)
+    + [Initialize tokenization](#initialize-tokenization)
+    + [Unlink tokenization](#unlink-tokenization)
+    + [Create payment method](#create-payment-method)
+    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id)
   * [Balance Services](#balance-services)
     + [Get balance](#get-balance)
   * [Retail Outlet Services](#retail-outlet-services)
@@ -74,8 +80,8 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Initialize linked account tokenization](#initialize-linked-account-tokenization)
     + [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
     + [Retrieve accessible accounts by linked account token](#retrieve-accessible-accounts-by-linked-account-token)
-    + [Create payment method](#create-payment-method)
-    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id)
+    + [Create payment method](#create-payment-method-1)
+    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id-1)
     + [Create direct debit payment](#create-direct-debit-payment)
     + [Validate OTP for direct debit payment](#validate-otp-for-direct-debit-payment)
     + [Get direct debit payment status by ID](#get-direct-debit-payment-status-by-id)
@@ -659,6 +665,31 @@ ew.createEWalletCharge({
 
 Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#ewallets) for more info about methods' parameters
 
+#### Create payment
+
+```ts
+ew.createPayment(data: {
+  externalID: string;
+  amount: number;
+  phone?: string;
+  expirationDate?: Date;
+  callbackURL?: string;
+  redirectURL?: string;
+  items?: PaymentItem[];
+  ewalletType: CreateSupportWalletTypes;
+  xApiVersion?: string;
+})
+```
+
+#### Get payment
+
+```ts
+ew.getPayment(data: {
+  externalID: string;
+  ewalletType: GetSupportWalletTypes;
+})
+```
+
 #### Create an ewallet charge
 
 ```ts
@@ -693,6 +724,44 @@ ew.getEWalletChargeStatus(data: {
 ew.voidEWalletCharge(data: {
   chargeID: string;
   forUserID?: string;
+})
+```
+
+#### Initialize tokenization
+
+```ts
+ew.initializeTokenization(data: {
+  customerID: string;
+  channelCode: ChannelCode;
+  properties?: OnlineBankingAccessProperties;
+  metadata?: object;
+})
+```
+
+#### Unlink tokenization
+
+```ts
+ew.unlinkTokenization(data: {
+  linkedAccTokenID: string;
+})
+```
+
+#### Create payment method
+
+```ts
+ew.createPaymentMethod(data: {
+  customerID: string;
+  type: PaymentMethodType;
+  properties: PaymentMethodProperties;
+  metadata?: object;
+})
+```
+
+#### Get payment methods by customer ID
+
+```ts
+ew.getPaymentMethodsByCustomerID(data: {
+    customerID: string;
 })
 ```
 
