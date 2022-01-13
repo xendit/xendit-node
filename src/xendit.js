@@ -12,6 +12,7 @@ const { PlatformService } = require('./platform');
 const { CustomerService } = require('./customer');
 const { DirectDebitService } = require('./direct_debit');
 const { RegionalRetailOutletService } = require('./regional_retail_outlet');
+const { ReportService } = require('./report');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -48,6 +49,7 @@ function Xendit(options) {
   this.DirectDebit = DirectDebitService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  this.Report = ReportService._constructorWithInjectedXenditOpts(this.opts);
 }
 
 Xendit.Errors = Errors;
