@@ -22,7 +22,7 @@ function sleepFor(sleepDuration) {
     // eslint-disable-next-line no-console
     console.log('generate report:', genReport);
 
-    sleepFor(1000);
+    sleepFor(3000);
 
     const getReport = await r.getReport({
       id: genReport.id,

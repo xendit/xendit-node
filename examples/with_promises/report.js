@@ -23,7 +23,7 @@ r.generateReport({
     return r;
   })
   .then(r => {
-    sleepFor(1000);
+    sleepFor(3000);
     return r;
   })
   .then(({ id }) => r.getReport({ id }))
@@ -33,6 +33,7 @@ r.generateReport({
     return r;
   })
   .catch(e => {
+    // throw new Error(`Report integration tests failed with error: ${e.message}`);
     console.error(e); // eslint-disable-line no-console
     process.exit(1);
   });
