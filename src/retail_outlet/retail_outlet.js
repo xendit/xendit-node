@@ -90,4 +90,19 @@ RetailOutlet.prototype.getFixedPaymentCode = function(data) {
   });
 };
 
+RetailOutlet.prototype.getPaymentsByFixedPaymentCodeId = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['id'], data, reject);
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}/payments`, {
+      method: 'GET',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 module.exports = RetailOutlet;

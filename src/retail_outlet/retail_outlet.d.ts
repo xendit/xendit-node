@@ -21,4 +21,5 @@ export = class RetailOutlet {
     expirationDate?: Date;
   }): Promise<object>;
   getFixedPaymentCode(data: { id: string }): Promise<object>;
+  getPaymentsByFixedPaymentCodeId(data: { id: string }): Promise<object>;
 };
