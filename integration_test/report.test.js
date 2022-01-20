@@ -3,16 +3,14 @@ const x = require('./xendit.test');
 const { Report } = x;
 const r = new Report({});
 
-// function sleepFor(sleepDuration) {
-//   var now = new Date().getTime();
-//   while (new Date().getTime() < now + sleepDuration) {
-//     /* Do nothing */
-//   }
-// }
+function sleepFor(sleepDuration) {
+  var now = new Date().getTime();
+  while (new Date().getTime() < now + sleepDuration) {
+    /* Do nothing */
+  }
+}
 
 module.exports = function() {
-  // console.log('testest');
-  // return true;
   return r
     .generateReport({
       type: 'BALANCE_HISTORY',
@@ -22,11 +20,12 @@ module.exports = function() {
       currency: 'IDR',
     })
     .then(res => {
-      // eslint-disable-next-line no-console
-      console.log('response is: ', res);
+      sleepFor(3000);
       return res;
     })
-    .then(res => r.getReport({ id: res.id }))
+    .then(res => {
+      r.getReport({ id: res.id });
+    })
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Report integration test done...');
