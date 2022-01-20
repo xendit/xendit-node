@@ -4,6 +4,8 @@ const NAME = 'Uvuvwevwevwe Osas';
 const ALFMART_RETAIL_OUTLET_NAME = 'ALFAMART';
 const FIXED_PAYMENT_CODE_ID = '5e0ed8797bc384e60435ec62';
 const UPDATED_AMOUNT = 12000;
+const API_ENDPOINT = 'https://api.xendit.co';
+const AFTER_ID = '61c53c4f6';
 
 const FIXED_PAYMENT_CODE_DETAILS = {
   owner_id: '12121212',
@@ -24,10 +26,12 @@ const PAYMENTS_BY_FIXED_PAYMENT_CODE_ID = {
   data: [FIXED_PAYMENT_CODE_DETAILS],
   has_more: true,
   links: {
-    href: "https://api.xendit.co/fixed_payment_code/5e0ed8797bc384e60435ec62/payments?limit=1&after_id=61c53c4f6",
-    rel: "next",
-    method: "GET"
-  }
+    href:
+      `${API_ENDPOINT}/fixed_payment_code/` +
+      `${FIXED_PAYMENT_CODE_ID}/payments?after_id=${AFTER_ID}`,
+    rel: 'next',
+    method: 'GET',
+  },
 };
 
 const UPDATED_FIXED_PAYMENT_CODE_DETAILS = Object.assign(
