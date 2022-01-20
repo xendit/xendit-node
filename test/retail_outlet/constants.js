@@ -20,6 +20,16 @@ const FIXED_PAYMENT_CODE_DETAILS = {
   id: FIXED_PAYMENT_CODE_ID,
 };
 
+const PAYMENTS_BY_FIXED_PAYMENT_CODE_ID = {
+  data: [FIXED_PAYMENT_CODE_DETAILS],
+  has_more: true,
+  links: {
+    href: "https://api.xendit.co/fixed_payment_code/5e0ed8797bc384e60435ec62/payments?limit=1&after_id=61c53c4f6",
+    rel: "next",
+    method: "GET"
+  }
+};
+
 const UPDATED_FIXED_PAYMENT_CODE_DETAILS = Object.assign(
   {},
   FIXED_PAYMENT_CODE_DETAILS,
@@ -36,5 +46,6 @@ module.exports = {
   FIXED_PAYMENT_CODE_ID,
   UPDATED_AMOUNT,
   FIXED_PAYMENT_CODE_DETAILS,
+  PAYMENTS_BY_FIXED_PAYMENT_CODE_ID,
   UPDATED_FIXED_PAYMENT_CODE_DETAILS,
 };
