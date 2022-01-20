@@ -39,6 +39,7 @@ function Xendit(options) {
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  // eslint-disable-next-line max-len
   this.RegionalRetailOutlet = RegionalRetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
