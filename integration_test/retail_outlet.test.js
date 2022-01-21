@@ -12,6 +12,7 @@ module.exports = function() {
       expectedAmt: 10000,
     })
     .then(({ id }) => ro.getFixedPaymentCode({ id }))
+    .then(({ id }) => ro.getPaymentsByFixedPaymentCodeId({ id }))
     .then(({ id }) => ro.updateFixedPaymentCode({ id: id, expectedAmt: 12000 }))
     .then(() => {
       // eslint-disable-next-line no-console
