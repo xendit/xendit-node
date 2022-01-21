@@ -23,8 +23,10 @@ Report.prototype.generateReport = function(data) {
     Validate.rejectOnMissingFields(['type'], data, reject);
 
     const filterOpts = {};
-    // prettier-ignore
-    if (data.filterDateFrom) filterOpts.from = data.filterDateFrom.toISOString();
+    // eslint-disable-next-line
+    if (data.filterDateFrom) {
+      filterOpts.from = data.filterDateFrom.toISOString();
+    }
     if (data.filterDateTo) filterOpts.to = data.filterDateTo.toISOString();
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}`, {

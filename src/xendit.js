@@ -40,6 +40,7 @@ function Xendit(options) {
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  // eslint-disable-next-line
   this.RegionalRetailOutlet = RegionalRetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );

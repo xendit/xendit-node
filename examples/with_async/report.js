@@ -14,7 +14,8 @@ function sleepFor(sleepDuration) {
   try {
     const genReport = await r.generateReport({
       type: 'BALANCE_HISTORY',
-      filterDateFrom: new Date(new Date().getTime() - 24 * 60 * 60 * 1000), // Yesterday's Date
+      // yesterday's date
+      filterDateFrom: new Date(new Date().getTime() - 24 * 60 * 60 * 1000),
       filterDateTo: new Date(),
       format: 'CSV',
       currency: 'IDR',

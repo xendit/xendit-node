@@ -11,7 +11,7 @@ const ro = new RegionalRetailOutlet({});
       customerName: 'Dharma',
       amount: 50,
       currency: 'PHP',
-      market: 'PH'
+      market: 'PH',
     });
     // eslint-disable-next-line no-console
     console.log('fixed payment code created:', pmCode);
@@ -23,7 +23,7 @@ const ro = new RegionalRetailOutlet({});
 
     const updatedPmCode = await ro.updatePaymentCode({
       id,
-      customerName: "DharmaLain",
+      customerName: 'DharmaLain',
     });
     // eslint-disable-next-line no-console
     console.log('updated payment code details:', updatedPmCode);

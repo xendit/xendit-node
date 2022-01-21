@@ -12,7 +12,8 @@ function sleepFor(sleepDuration) {
 
 r.generateReport({
   type: 'BALANCE_HISTORY',
-  filterDateFrom: new Date(new Date().getTime() - 24 * 60 * 60 * 1000), // Yesterday's Date
+  // Yesterday's Date
+  filterDateFrom: new Date(new Date().getTime() - 24 * 60 * 60 * 1000),
   filterDateTo: new Date(),
   format: 'CSV',
   currency: 'IDR',
@@ -33,7 +34,6 @@ r.generateReport({
     return r;
   })
   .catch(e => {
-    // throw new Error(`Report integration tests failed with error: ${e.message}`);
     console.error(e); // eslint-disable-line no-console
     process.exit(1);
   });
