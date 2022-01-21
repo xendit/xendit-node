@@ -89,9 +89,13 @@ describe('Retaiil Outlet Service', () => {
   describe('getPaymentsByFixedPaymentCodeId', () => {
     it('should retrieve payments by fixed payment code id', done => {
       expect(
-        ro.getPaymentsByFixedPaymentCodeId({ id: TestConstants.FIXED_PAYMENT_CODE_ID }),
+        ro.getPaymentsByFixedPaymentCodeId({
+          id: TestConstants.FIXED_PAYMENT_CODE_ID,
+        }),
       )
-        .to.eventually.deep.equal(TestConstants.PAYMENTS_BY_FIXED_PAYMENT_CODE_ID)
+        .to.eventually.deep.equal(
+          TestConstants.PAYMENTS_BY_FIXED_PAYMENT_CODE_ID,
+        )
         .and.notify(done);
     });
 
