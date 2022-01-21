@@ -105,4 +105,29 @@ RetailOutlet.prototype.getPaymentsByFixedPaymentCodeId = function(data) {
   });
 };
 
+RetailOutlet.prototype.simulatePayment = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(
+      ['retailOutletName', 'paymentCode', 'transferAmount'],
+      data,
+      reject,
+    );
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/simulate_payment`, {
+      method: 'POST',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        retail_outlet_name: data.retailOutletName,
+        payment_code: data.paymentCode,
+        transfer_amount: data.transferAmount,
+      }),
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 module.exports = RetailOutlet;
