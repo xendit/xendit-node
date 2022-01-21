@@ -58,8 +58,8 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Void an ewallet charge](#void-an-ewallet-charge)
     + [Initialize tokenization](#initialize-tokenization)
     + [Unlink tokenization](#unlink-tokenization)
-    + [Create payment method](#create-payment-method)
-    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id)
+    + [Create payment method (E-Wallet)](#create-payment-method-e-wallet)
+    + [Get payment methods by customer ID (E-Wallet)](#get-payment-methods-by-customer-id-e-wallet)
   * [Balance Services](#balance-services)
     + [Get balance](#get-balance)
   * [Retail Outlet Services](#retail-outlet-services)
@@ -80,12 +80,15 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Initialize linked account tokenization](#initialize-linked-account-tokenization)
     + [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
     + [Retrieve accessible accounts by linked account token](#retrieve-accessible-accounts-by-linked-account-token)
-    + [Create payment method](#create-payment-method-1)
-    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id-1)
+    + [Create payment method (Direct Debit)](#create-payment-method-direct-debit)
+    + [Get payment methods by customer ID (Direct Debit)](#get-payment-methods-by-customer-id-direct-debit)
     + [Create direct debit payment](#create-direct-debit-payment)
     + [Validate OTP for direct debit payment](#validate-otp-for-direct-debit-payment)
     + [Get direct debit payment status by ID](#get-direct-debit-payment-status-by-id)
     + [Get direct debit payment status by reference ID](#get-direct-debit-payment-status-by-reference-id)
+  * [Report Service](#report-service)
+    + [Generate Report](#generate-report)
+    + [Get Report](#get-report)
   * [XenPlatform Service](#xenplatform-service)
     + [Create sub-accounts](#create-sub-accounts)
     + [Set Callback URL](#set-callback-url)
@@ -746,7 +749,7 @@ ew.unlinkTokenization(data: {
 })
 ```
 
-#### Create payment method
+#### Create payment method (E-Wallet)
 
 ```ts
 ew.createPaymentMethod(data: {
@@ -757,7 +760,7 @@ ew.createPaymentMethod(data: {
 })
 ```
 
-#### Get payment methods by customer ID
+#### Get payment methods by customer ID (E-Wallet)
 
 ```ts
 ew.getPaymentMethodsByCustomerID(data: {
@@ -1058,7 +1061,7 @@ dd.retrieveAccountsByTokenID(data: {
 });
 ```
 
-#### Create payment method
+#### Create payment method (Direct Debit)
 
 ```ts
 dd.createPaymentMethod(data: {
@@ -1069,7 +1072,7 @@ dd.createPaymentMethod(data: {
 });
 ```
 
-#### Get payment methods by customer ID
+#### Get payment methods by customer ID (Direct Debit)
 
 ```ts
 dd.getPaymentMethodsByCustomerID(data: {
@@ -1116,6 +1119,54 @@ dd.getDirectDebitPaymentStatusByID(data: {
 ```ts
 dd.getDirectDebitPaymentStatusByReferenceID(data: {
   referenceID: string;
+```
+
+### Report Service
+
+Instantiate the Report service using a constructor which has been injected with Xendit keys.
+
+```js
+const { Report } = x;
+const reportSpecificOptions = {};
+const r = new Report(reportSpecificOptions);
+```
+
+Example: Generating a report
+
+```js
+r.generateReport({
+  type: 'BALANCE_HISTORY',
+  filterDateFrom: new Date(new Date().getTime() - 24 * 60 * 60 * 1000), // Yesterday's Date
+  filterDateTo: new Date(),
+  format: 'CSV',
+  currency: 'IDR',
+})
+  .then(res => {
+    console.log('Generated report:', res);
+  })
+  .catch(e => {
+    console.error(`Generate Report Failed with Error: ${e.message}`);
+  })
+```
+
+#### Generate Report
+
+```ts
+r.generateReport(data: {
+  type: reportTypes;
+  filterDateFrom?: Date;
+  filterDateTo?: Date;
+  format?: formatTypes;
+  currency?: currencyTypes;
+})
+```
+
+#### Get Report
+
+```ts
+r.getReport(data: {
+  id: string
+})
 ```
 
 ### XenPlatform Service

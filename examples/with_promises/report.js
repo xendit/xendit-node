@@ -19,7 +19,7 @@ r.generateReport({
 })
   .then(r => {
     // eslint-disable-next-line no-console
-    console.log('generate report:', r);
+    console.log('generated report:', r);
     return r;
   })
   .then(r => {
