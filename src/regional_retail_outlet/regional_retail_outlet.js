@@ -17,14 +17,21 @@ function RegionalRetailOutlet(options) {
 
 RegionalRetailOutlet._injectedOpts = {};
 RegionalRetailOutlet._constructorWithInjectedXenditOpts = function(options) {
-    RegionalRetailOutlet._injectedOpts = options;
+  RegionalRetailOutlet._injectedOpts = options;
   return RegionalRetailOutlet;
 };
 
 RegionalRetailOutlet.prototype.createPaymentCode = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(
-      ['referenceId', 'channelCode', 'amount', 'currency', 'customerName', 'market'],
+      [
+        'referenceId',
+        'channelCode',
+        'amount',
+        'currency',
+        'customerName',
+        'market',
+      ],
       data,
       reject,
     );
@@ -45,9 +52,7 @@ RegionalRetailOutlet.prototype.createPaymentCode = function(data) {
         payment_code: data.paymentCode,
         description: data.description,
         metadata: data.metadata,
-        expires_at: data.expiresAt
-          ? data.expiresAt.toISOString()
-          : undefined,
+        expires_at: data.expiresAt ? data.expiresAt.toISOString() : undefined,
         is_single_use: data.isSingleUse,
       }),
     })
@@ -69,7 +74,7 @@ RegionalRetailOutlet.prototype.updatePaymentCode = function(data) {
       body: JSON.stringify({
         amount: data.amount,
         currency: data.amount,
-        customer_name: data.customerName
+        customer_name: data.customerName,
       }),
     })
       .then(resolve)
