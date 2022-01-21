@@ -1,4 +1,5 @@
 const { createCharge, captureCharge, getCharge } = require('./charge');
+const { createPromotion } = require('./promotion');
 const {
   createAuthorization,
   reverseAuthorization,
@@ -32,5 +33,6 @@ Card.prototype.getCharge = getCharge;
 Card.prototype.createAuthorization = createAuthorization;
 Card.prototype.reverseAuthorization = reverseAuthorization;
 Card.prototype.createRefund = createRefund;
+Card.prototype.createPromotion = createPromotion;
 
 module.exports = Card;
