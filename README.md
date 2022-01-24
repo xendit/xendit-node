@@ -66,7 +66,9 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
   * [Retail Outlet Services](#retail-outlet-services)
     + [Create fixed payment code](#create-fixed-payment-code)
     + [Get fixed payment code](#get-fixed-payment-code)
+    + [Get payments by fixed payment code ID](#get-payments-by-fixed-payment-code-id)
     + [Update fixed payment code](#update-fixed-payment-code)
+    + [Simulate payment (only in dev mode)](#simulate-payment)
   * [QR Code Services](#qr-code-services)
     + [Create code](#create-code)
     + [Get code](#get-code)
@@ -864,6 +866,12 @@ ro.createFixedPaymentCode(data: {
 ro.getFixedPaymentCode(data: { id: string })
 ```
 
+#### Get payments by fixed payment code ID
+
+```ts
+ro.getPaymentsByFixedPaymentCodeId(data: { id: string })
+```
+
 #### Update fixed payment code
 
 ```ts
@@ -872,6 +880,16 @@ ro.updateFixedPaymentCode(data: {
   name?: string;
   expectedAmt?: number;
   expirationDate?: Date;
+})
+```
+
+#### Simulate payment
+
+```ts
+ro.simulatePayment(data: {
+  retailOutletName: string;
+  paymentCode: string;
+  transferAmount: number;
 })
 ```
 
