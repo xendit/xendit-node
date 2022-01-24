@@ -36,6 +36,21 @@ const authID = '5e0461a96113354249aab7ee';
     });
     console.log('refund created:', refund); // eslint-disable-line no-console
 
+    const promotion = await card.createPromotion({
+      referenceId: Date.now().toString(),
+      description: '20% discount applied for all BRI cards',
+      binList: ['400000', '460000'],
+      discountPercent: 20,
+      channelCode: 'BRI',
+      currency: 'IDR',
+      minOriginalAmount: 25000,
+      maxDiscountAmount: 5000,
+      startTime: '2022-03-25T00:00:00.000Z',
+      endTime: '2022-05-25T00:00:00.000Z',
+    });
+    // eslint-disable-next-line max-len
+    console.log('promotion created:', promotion); // eslint-disable-line no-console
+
     process.exit(0);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console
