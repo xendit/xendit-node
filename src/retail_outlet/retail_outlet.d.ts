@@ -21,4 +21,10 @@ export = class RetailOutlet {
     expirationDate?: Date;
   }): Promise<object>;
   getFixedPaymentCode(data: { id: string }): Promise<object>;
+  getPaymentsByFixedPaymentCodeId(data: { id: string }): Promise<object>;
+  simulatePayment(data: {
+    retailOutletName: string;
+    paymentCode: string;
+    transferAmount: number;
+  }): Promise<object>;
 };

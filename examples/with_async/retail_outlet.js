@@ -26,6 +26,18 @@ const ro = new RetailOutlet({});
     // eslint-disable-next-line no-console
     console.log('updated payment code details:', updatedPmCode);
 
+    await ro.simulatePayment({
+      retailOutletName: 'ALFAMART',
+      paymentCode: updatedPmCode.payment_code,
+      transferAmount: 12000,
+    });
+    // eslint-disable-next-line no-console
+    console.log('simulated payment:', updatedPmCode);
+
+    const paymentsByCodeId = await ro.getPaymentsByFixedPaymentCodeId({ id });
+    // eslint-disable-next-line no-console
+    console.log('payments by fixed payment code ID:', paymentsByCodeId);
+
     process.exit(0);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console

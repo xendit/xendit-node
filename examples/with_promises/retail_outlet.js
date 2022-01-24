@@ -31,6 +31,27 @@ ro.createFixedPaymentCode({
     console.log('updated payment code details:', r);
     return r;
   })
+  .then(({ id, payment_code }) =>
+    Promise.all([
+      id,
+      ro.simulatePayment({
+        retailOutletName: 'ALFAMART',
+        paymentCode: payment_code,
+        transferAmount: 12000,
+      }),
+    ]),
+  )
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('simulated payment:', r);
+    return r;
+  })
+  .then(([id]) => ro.getPaymentsByFixedPaymentCodeId({ id }))
+  .then(r => {
+    // eslint-disable-next-line no-console
+    console.log('payments by fixed payment code ID:', r);
+    return r;
+  })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);

@@ -28,6 +28,8 @@ before(function() {
     .reply(200, TestConstants.FIXED_PAYMENT_CODE_DETAILS)
     .get(`/${TestConstants.FIXED_PAYMENT_CODE_ID}`)
     .reply(200, TestConstants.FIXED_PAYMENT_CODE_DETAILS)
+    .get(`/${TestConstants.FIXED_PAYMENT_CODE_ID}/payments`)
+    .reply(200, TestConstants.PAYMENTS_BY_FIXED_PAYMENT_CODE_ID)
     .patch(`/${TestConstants.FIXED_PAYMENT_CODE_ID}`, {
       expected_amount: TestConstants.UPDATED_AMOUNT,
     })
@@ -73,6 +75,32 @@ describe('Retaiil Outlet Service', () => {
 
     it('should report missing required fields', done => {
       expect(ro.getFixedPaymentCode({}))
+        .to.eventually.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(e => done(e));
+    });
+  });
+
+  describe('getPaymentsByFixedPaymentCodeId', () => {
+    it('should retrieve payments by fixed payment code id', done => {
+      expect(
+        ro.getPaymentsByFixedPaymentCodeId({
+          id: TestConstants.FIXED_PAYMENT_CODE_ID,
+        }),
+      )
+        .to.eventually.deep.equal(
+          TestConstants.PAYMENTS_BY_FIXED_PAYMENT_CODE_ID,
+        )
+        .and.notify(done);
+    });
+
+    it('should report missing required fields', done => {
+      expect(ro.getPaymentsByFixedPaymentCodeId({}))
         .to.eventually.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
