@@ -1,5 +1,6 @@
 import { createCharge, captureCharge, getCharge } from './charge';
 import { createRefund } from './refund';
+import { createPromotion } from './promotion';
 import { createAuthorization, reverseAuthorization } from './authorization';
 import CardStatus from './card_status';
 import { XenditOptions } from '../xendit_opts';
@@ -16,4 +17,5 @@ export = class Card {
   createAuthorization = createAuthorization;
   reverseAuthorization = reverseAuthorization;
   createRefund = createRefund;
+  createPromotion = createPromotion;
 };

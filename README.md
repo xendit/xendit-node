@@ -23,6 +23,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Create authorization](#create-authorization)
     + [Reverse authorization](#reverse-authorization)
     + [Create refund](#create-refund)
+    + [Create promotion](#create-promotion)
   * [Virtual Account Services](#virtual-account-services)
     + [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
     + [Create a fixed virtual account](#create-a-fixed-virtual-account)
@@ -229,6 +230,25 @@ card.createRefund(data: {
   externalID: string;
   xIdempotencyKey?: string;
   forUserID?: string;
+})
+```
+
+#### Create promotion
+
+```ts
+card.createPromotion(data: {
+  referenceId: string;
+  description: string;
+  promoCode?: string;
+  binList?: string[];
+  channelCode?: string;
+  discountPercent?: number;
+  discountAmount?: number;
+  currency: string;
+  startTime: Date;
+  endTime: Date;
+  minOriginalAmount?: number;
+  maxDiscountAmount?: number;
 })
 ```
 
