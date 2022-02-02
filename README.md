@@ -68,11 +68,11 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Get fixed payment code](#get-fixed-payment-code)
     + [Get payments by fixed payment code ID](#get-payments-by-fixed-payment-code-id)
     + [Update fixed payment code](#update-fixed-payment-code)
-    + [Simulate payment](#simulate-payment)
+    + [Simulate payment for RO (only in dev mode)](#simulate-payment-for-ro-only-in-dev-mode)
   * [QR Code Services](#qr-code-services)
     + [Create code](#create-code)
     + [Get code](#get-code)
-    + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
+    + [Simulate payment for QR (only in dev mode)](#simulate-payment-for-qr-only-in-dev-mode)
     + [Get payments by external ID](#get-payments-by-external-id)
   * [Customer services](#customer-services)
     + [Create customer](#create-customer)
@@ -886,7 +886,7 @@ ro.updateFixedPaymentCode(data: {
 })
 ```
 
-#### Simulate payment
+#### Simulate payment for RO (only in dev mode)
 
 ```ts
 ro.simulatePayment(data: {
@@ -942,7 +942,7 @@ q.createCode(data: {
 q.getCode(data: { externalID: string });
 ```
 
-#### Simulate payment (only in dev mode)
+#### Simulate payment for QR (only in dev mode)
 
 ```ts
 q.simulate(data: { externalID: string; amount?: number });
