@@ -58,13 +58,9 @@ Transaction.prototype.listTransactions = function(data) {
       }
     }
     QUERY_STRING = QUERY_STRING.slice(0, -1);
-    // // eslint-disable-next-line no-console
-    // console.log(QUERY_STRING);
-    // // eslint-disable-next-line no-console
-    // console.log(`${this.API_ENDPOINT}${QUERY_STRING}`);
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}${QUERY_STRING}`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
         'Content-Type': 'application/json',
