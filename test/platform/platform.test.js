@@ -43,6 +43,22 @@ before(function() {
       routes: TestConstants.ROUTES,
     })
     .reply(200, TestConstants.VALID_CREATE_FEE_RULE_RESPONSE);
+  nock(x.opts.xenditURL)
+    .post('/v2/accounts', {
+      email: TestConstants.ACCOUNT_EMAIL,
+      type: TestConstants.TYPE,
+      public_profile: TestConstants.PUBLIC_PROFILE,
+    })
+    .reply(200, TestConstants.VALID_CREATE_V2_ACCOUNT_RESPONSE);
+  nock(x.opts.xenditURL)
+    .get(`/v2/accounts/${TestConstants.ID}`)
+    .reply(200, TestConstants.VALID_GET_ACCOUNT_RESPONSE);
+  nock(x.opts.xenditURL)
+    .patch(`/v2/accounts/${TestConstants.ID}`, {
+      email: TestConstants.UPDATED_EMAIL,
+      public_profile: TestConstants.UPDATED_PUBLIC_PROFILE,
+    })
+    .reply(200, TestConstants.VALID_UPDATE_ACCOUNT_RESPONSE);
 });
 
 describe('Platform Service', function() {
@@ -60,6 +76,83 @@ describe('Platform Service', function() {
     });
     it('should report missing required fields', done => {
       expect(platform.createAccount({}))
+        .to.eventually.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(done);
+    });
+  });
+  describe('createV2Account', () => {
+    it('should create a sub-account using the V2 endpoint', done => {
+      expect(
+        platform.createV2Account({
+          email: TestConstants.ACCOUNT_EMAIL,
+          type: TestConstants.TYPE,
+          publicProfile: {
+            businessName: TestConstants.BUSINESS_NAME,
+          },
+        }),
+      )
+        .to.eventually.deep.eq(TestConstants.VALID_CREATE_V2_ACCOUNT_RESPONSE)
+        .then(() => done())
+        .catch(done);
+    });
+    it('should report missing required fields', done => {
+      expect(platform.createV2Account({}))
+        .to.eventually.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(done);
+    });
+  });
+  describe('getAccountByID', () => {
+    it('should get a sub-account using the V2 endpoint', done => {
+      expect(
+        platform.getAccountByID({
+          id: TestConstants.ID,
+        }),
+      )
+        .to.eventually.deep.eq(TestConstants.VALID_GET_ACCOUNT_RESPONSE)
+        .then(() => done())
+        .catch(done);
+    });
+    it('should report missing required fields', done => {
+      expect(platform.getAccountByID({}))
+        .to.eventually.be.rejected.then(e =>
+          Promise.all([
+            expect(e).to.have.property('status', 400),
+            expect(e).to.have.property('code', Errors.API_VALIDATION_ERROR),
+          ]),
+        )
+        .then(() => done())
+        .catch(done);
+    });
+  });
+  describe('updateAccount', () => {
+    it('should update a sub-account using the V2 endpoint', done => {
+      expect(
+        platform.updateAccount({
+          id: TestConstants.ID,
+          email: TestConstants.UPDATED_EMAIL,
+          publicProfile: {
+            businessName: TestConstants.UPDATED_BUSINESS_NAME,
+          },
+        }),
+      )
+        .to.eventually.deep.eq(TestConstants.VALID_UPDATE_ACCOUNT_RESPONSE)
+        .then(() => done())
+        .catch(done);
+    });
+    it('should report missing required fields', done => {
+      expect(platform.updateAccount({}))
         .to.eventually.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

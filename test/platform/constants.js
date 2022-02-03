@@ -1,4 +1,8 @@
 const ACCOUNT_EMAIL = 'angie@pinkpanther.com';
+const ID = '61fb6d4d92b2ff75d2b45059';
+const BUSINESS_NAME = 'angies pink panther';
+const UPDATED_EMAIL = 'angie_updated@pinkpanther.com';
+const UPDATED_BUSINESS_NAME = 'angies updated pink panther';
 const TYPE = 'MANAGED';
 const URL = 'https://www.xendit.co/callback_catcher';
 const CALLBACK_TYPE = 'invoice';
@@ -14,6 +18,14 @@ const ROUTES = [
     currency: 'IDR',
   },
 ];
+
+const PUBLIC_PROFILE = {
+  business_name: BUSINESS_NAME,
+};
+
+const UPDATED_PUBLIC_PROFILE = {
+  business_name: UPDATED_BUSINESS_NAME,
+};
 
 const VALID_CREATE_ACCOUNT_RESPONSE = {
   created: '2019-01-01T08:51:44.484Z',
@@ -51,9 +63,54 @@ const VALID_CREATE_FEE_RULE_RESPONSE = {
   metadata: {},
 };
 
+const VALID_CREATE_V2_ACCOUNT_RESPONSE = {
+  id: ID,
+  created: '2022-02-01T07:00:00.000Z',
+  updated: '2022-02-01T07:00:00.000Z',
+  email: ACCOUNT_EMAIL,
+  type: TYPE,
+  public_profile: {
+    business_name: BUSINESS_NAME,
+  },
+  country: 'ID',
+  status: 'REGISTERED',
+};
+
+const VALID_GET_ACCOUNT_RESPONSE = {
+  id: ID,
+  created: '2022-02-01T07:00:00.000Z',
+  updated: '2022-02-01T07:00:00.000Z',
+  email: ACCOUNT_EMAIL,
+  type: TYPE,
+  public_profile: {
+    business_name: BUSINESS_NAME,
+  },
+  country: 'ID',
+  status: 'REGISTERED',
+};
+
+const VALID_UPDATE_ACCOUNT_RESPONSE = {
+  id: ID,
+  created: '2022-02-01T07:00:00.000Z',
+  updated: '2022-02-01T07:00:00.000Z',
+  email: UPDATED_EMAIL,
+  type: TYPE,
+  public_profile: {
+    business_name: UPDATED_BUSINESS_NAME,
+  },
+  country: 'ID',
+  status: 'REGISTERED',
+};
+
 module.exports = {
+  ID,
   ACCOUNT_EMAIL,
   TYPE,
+  UPDATED_EMAIL,
+  BUSINESS_NAME,
+  UPDATED_BUSINESS_NAME,
+  PUBLIC_PROFILE,
+  UPDATED_PUBLIC_PROFILE,
   URL,
   CALLBACK_TYPE,
   REFERENCE,
@@ -66,4 +123,7 @@ module.exports = {
   VALID_SET_CALLBACK_URL_RESPONSE,
   VALID_CREATE_TRANSFER_RESPONSE,
   VALID_CREATE_FEE_RULE_RESPONSE,
+  VALID_CREATE_V2_ACCOUNT_RESPONSE,
+  VALID_GET_ACCOUNT_RESPONSE,
+  VALID_UPDATE_ACCOUNT_RESPONSE,
 };

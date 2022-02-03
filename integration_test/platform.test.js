@@ -40,6 +40,29 @@ module.exports = function() {
         ],
       }),
     )
+    .then(() =>
+      p.createV2Account({
+        email: `example+${Date.now().toString()}@gmail.com`,
+        type: 'OWNED',
+        publicProfile: {
+          businessName: `example+${Date.now().toString()}`,
+        },
+      }),
+    )
+    .then(r =>
+      p.getAccountByID({
+        id: r.id,
+      }),
+    )
+    .then(r =>
+      p.updateAccount({
+        id: r.id,
+        email: `example_updated+${Date.now().toString()}@gmail.com`,
+        publicProfile: {
+          businessName: `example_updated+${Date.now().toString()}`,
+        },
+      }),
+    )
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Platform integration test done...');
