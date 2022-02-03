@@ -96,7 +96,10 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Get Transaction](#get-transaction)
     + [List Transactions](#list-transactions)
   * [XenPlatform Service](#xenplatform-service)
-    + [Create sub-accounts](#create-sub-accounts)
+    + [Create sub-account](#create-sub-account)
+    + [Create sub-account using V2](#create-sub-account-using-v2)
+    + [Get sub-account by ID](#get-sub-account-by-id)
+    + [Update sub-account](#update-sub-account)
     + [Set Callback URL](#set-callback-url)
     + [Create transfers](#create-transfers)
     + [Create fee rules](#create-fee-rules)
@@ -1291,13 +1294,45 @@ p.createAccount({
 
 Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#xenplatform) for more info about methods' parameters
 
-#### Create sub-accounts
+#### Create sub-account
 
 ```ts
 p.createAccount(data: {
   accountEmail: string;
   type: AccountTypes;
   businessProfile?: {
+    businessName: string;
+  };
+})
+```
+
+#### Create sub-account using V2
+
+```ts
+p.createV2Account(data: {
+  email: string;
+  type: string;
+  publicProfile?: {
+    businessName: string;
+  };
+})
+```
+
+#### Get sub-account by ID
+
+```ts
+p.getAccountByID(data: {
+  id: string;
+})
+```
+
+#### Update sub-account
+
+```ts
+p.updateAccount(data: {
+  id: string;
+  email: string;
+  publicProfile?: {
     businessName: string;
   };
 })
