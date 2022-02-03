@@ -49,6 +49,35 @@ const p = new Platform({});
     // eslint-disable-next-line no-console
     console.log('created fee rule detail:', feeRule);
 
+    const accountV2 = await p.createV2Account({
+      email: `example+${Date.now().toString()}@gmail.com`,
+      type: 'OWNED',
+      publicProfile: {
+        businessName: `example+${Date.now().toString()}`,
+      },
+    });
+
+    // eslint-disable-next-line no-console
+    console.log('created account details (using V2):', accountV2);
+
+    const getAccount = await p.getAccountByID({
+      id: accountV2.id,
+    });
+
+    // eslint-disable-next-line no-console
+    console.log('get account details: ', getAccount);
+
+    const updateAccount = await p.updateAccount({
+      id: accountV2.id,
+      email: `example_updated+${Date.now().toString()}@gmail.com`,
+      publicProfile: {
+        businessName: `example_updated+${Date.now().toString()}`,
+      },
+    });
+
+    // eslint-disable-next-line no-console
+    console.log('update account details: ', updateAccount);
+
     process.exit(0);
   } catch (e) {
     console.error(e); // eslint-disable-line no-console
