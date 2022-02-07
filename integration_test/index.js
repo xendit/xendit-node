@@ -14,6 +14,7 @@ Promise.all([
   require('./customer.test')(),
   require('./direct_debit.test')(),
   require('./report.test')(),
+  require('./transaction.test')(),
 ])
   .then(() => {
     Promise.all([require('./regional_retail_outlet.test')()]).then(() =>

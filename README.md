@@ -68,11 +68,11 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Get fixed payment code](#get-fixed-payment-code)
     + [Get payments by fixed payment code ID](#get-payments-by-fixed-payment-code-id)
     + [Update fixed payment code](#update-fixed-payment-code)
-    + [Simulate payment (only in dev mode)](#simulate-payment)
+    + [Simulate payment for RO (only in dev mode)](#simulate-payment-for-ro-only-in-dev-mode)
   * [QR Code Services](#qr-code-services)
     + [Create code](#create-code)
     + [Get code](#get-code)
-    + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
+    + [Simulate payment for QR (only in dev mode)](#simulate-payment-for-qr-only-in-dev-mode)
     + [Get payments by external ID](#get-payments-by-external-id)
   * [Customer services](#customer-services)
     + [Create customer](#create-customer)
@@ -92,6 +92,9 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
   * [Report Service](#report-service)
     + [Generate Report](#generate-report)
     + [Get Report](#get-report)
+  * [Transaction Service](#transaction-service)
+    + [Get Transaction](#get-transaction)
+    + [List Transactions](#list-transactions)
   * [XenPlatform Service](#xenplatform-service)
     + [Create sub-accounts](#create-sub-accounts)
     + [Set Callback URL](#set-callback-url)
@@ -883,7 +886,7 @@ ro.updateFixedPaymentCode(data: {
 })
 ```
 
-#### Simulate payment
+#### Simulate payment for RO (only in dev mode)
 
 ```ts
 ro.simulatePayment(data: {
@@ -939,7 +942,7 @@ q.createCode(data: {
 q.getCode(data: { externalID: string });
 ```
 
-#### Simulate payment (only in dev mode)
+#### Simulate payment for QR (only in dev mode)
 
 ```ts
 q.simulate(data: { externalID: string; amount?: number });
@@ -1204,6 +1207,60 @@ r.generateReport(data: {
 ```ts
 r.getReport(data: {
   id: string
+})
+```
+
+### Transaction Service
+
+Instantiate the Transaction service using a constructor which has been injected with Xendit keys.
+
+```js
+const { Transaction } = x;
+const transactionSpecificOptions = {};
+const t = new Transaction(transactionSpecificOptions);
+```
+
+Example: Getting a transaction
+
+```js
+t.getTransaction({
+  id: "txn_123"
+})
+  .then(res => {
+    console.log('Get Transaction:', res);
+  })
+  .catch(e => {
+    console.error(`Get Transaction Failed with Error: ${e.message}`);
+  })
+```
+
+#### Get Transaction
+
+```ts
+t.getTransaction(data: {
+  id: string;
+})
+```
+
+#### List Transactions
+
+```ts
+t.listTransactions(data: {
+  types?: Array<string>;
+  statuses?: Array<string>;
+  channelCategories?: Array<string>;
+  referenceId?: string;
+  productId?: string;
+  accountIdentifier?: string;
+  currency?: string;
+  amount?: number;
+  limit?: number;
+  afterId?: string;
+  beforeId?: string;
+  createdDateFrom?: Date;
+  createdDateTo?: Date;
+  updatedDateFrom?: Date;
+  updatedDateTo?: Date;
 })
 ```
 

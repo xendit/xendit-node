@@ -14,6 +14,7 @@ import { PlatformService } from './platform';
 import { CustomerService } from './customer';
 import { DirectDebitService } from './direct_debit';
 import { ReportService } from './report';
+import { TransactionService } from './transaction';
 
 declare class Xendit {
   constructor(opts: XenditOptions);
@@ -32,5 +33,6 @@ declare class Xendit {
   Customer: typeof CustomerService;
   DirectDebit: typeof DirectDebitService;
   Report: typeof ReportService;
+  Transaction: typeof TransactionService;
 }
 export = Xendit;
