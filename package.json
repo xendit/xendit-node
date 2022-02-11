@@ -9,7 +9,7 @@
     "test:integration": "node integration_test",
     "lint": "eslint index.js ./**/*.{js,ts}",
     "format": "prettier --config .prettierrc --write index.js ./**/*.{js,json,ts}",
-    "gentoc": "markdown-toc -i README.md",
+    "gentoc": "markdown-toc -i --bullets=- README.md",
     "release": "np",
     "report": "nyc -r text -r lcov npm run test",
     "coveralls": "cat coverage/lcov.info | coveralls"
@@ -34,7 +34,7 @@
       "git add"
     ],
     "README.md": [
-      "markdown-toc -i",
+      "markdown-toc -i --bullets=-",
       "git add"
     ]
   },

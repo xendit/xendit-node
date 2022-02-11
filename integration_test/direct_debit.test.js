@@ -15,6 +15,7 @@ module.exports = function() {
       middleName: 'middle',
       surname: 'surname',
       addresses: [],
+      apiVersion: '2020-05-19',
     })
     .then(r =>
       dd.initializeTokenization({
