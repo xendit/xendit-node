@@ -49,6 +49,73 @@ Platform.prototype.createAccount = function(data) {
   });
 };
 
+Platform.prototype.createV2Account = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    let validationFields = ['email', 'type'];
+    if (data.type === 'OWNED') {
+      validationFields.push('publicProfile');
+    }
+    Validate.rejectOnMissingFields(validationFields, data, reject);
+    const body = { email: data.email, type: data.type };
+    if (data.publicProfile) {
+      body.public_profile = {
+        business_name: data.publicProfile.businessName,
+      };
+    }
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/accounts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+      body: JSON.stringify(body),
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+Platform.prototype.getAccountByID = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['id'], data, reject);
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/accounts/${data.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+Platform.prototype.updateAccount = function(data) {
+  return promWithJsErr((resolve, reject) => {
+    let validationFields = ['email', 'id'];
+    if (data.type === 'OWNED') {
+      validationFields.push('publicProfile');
+    }
+    Validate.rejectOnMissingFields(validationFields, data, reject);
+    const body = { email: data.email };
+    if (data.publicProfile) {
+      body.public_profile = {
+        business_name: data.publicProfile.businessName,
+      };
+    }
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/v2/accounts/${data.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+      body: JSON.stringify(body),
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 Platform.prototype.setCallbackURL = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['type', 'url'], data, reject);
