@@ -15,7 +15,7 @@ const c = new Customer({});
  *    can only be carried out after the manual authorization
  */
 
-module.exports = function () {
+module.exports = function() {
   return ew
     .createEWalletCharge({
       referenceID: Date.now().toString(),

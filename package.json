@@ -8,6 +8,7 @@
     "test": "mocha test/**/*.test.js",
     "test:integration": "node integration_test",
     "lint": "eslint index.js ./**/*.{js,ts}",
+    "lint:fix": "eslint index.js ./**/*.{js,ts} --fix",
     "format": "prettier --config .prettierrc --write index.js ./**/*.{js,json,ts}",
     "gentoc": "markdown-toc -i README.md",
     "release": "np",
