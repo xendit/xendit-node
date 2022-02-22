@@ -23,6 +23,9 @@ function create(data) {
       headers['for-user-id'] = data.forUserID;
     }
 
+    if (data && data.withFeeRule) {
+      headers['with-fee-rule'] = data.withFeeRule;
+    }
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/disbursements`, {
       method: 'POST',
@@ -63,6 +66,10 @@ function createBatch(data) {
     
     if (data && data.forUserID) {
       headers['for-user-id'] = data.forUserID;
+    }
+
+    if (data && data.withFeeRule) {
+      headers['with-fee-rule'] = data.withFeeRule;
     }
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/batch_disbursements`, {
