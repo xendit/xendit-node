@@ -397,6 +397,7 @@ d.create(data: {
   emailCC?: string[];
   emailBCC?: string[];
   xIdempotencyKey?: string;
+  forUserID?: string;
 })
 ```
 
@@ -415,6 +416,7 @@ d.createBatch(data: {
     emailTo?: string[];
     emailCC?: string[];
     emailBCC?: string[];
+    forUserID?: string;
   }>;
   xIdempotencyKey?: string;
 })

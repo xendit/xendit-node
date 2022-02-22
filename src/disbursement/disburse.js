@@ -19,6 +19,11 @@ function create(data) {
       data.xIdempotencyKey,
     );
 
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
+
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/disbursements`, {
       method: 'POST',
       headers,
@@ -55,6 +60,10 @@ function createBatch(data) {
       this.opts.secretKey,
       data.xIdempotencyKey,
     );
+    
+    if (data && data.forUserID) {
+      headers['for-user-id'] = data.forUserID;
+    }
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/batch_disbursements`, {
       method: 'POST',
