@@ -63,7 +63,6 @@ function createBatch(data) {
       this.opts.secretKey,
       data.xIdempotencyKey,
     );
-    
     if (data && data.forUserID) {
       headers['for-user-id'] = data.forUserID;
     }
