@@ -1,45 +1,41 @@
-const { createPayment, getPayment, editPayment } = require('./manage_payments');
 const {
-  stopPayment,
-  pausePayment,
-  resumePayment,
-} = require('./operate_payments');
+  createSchedule,
+  getSchedule,
+  updateSchedule,
+} = require('./recurring_schedule');
 
-const RECURRING_PATH = '/recurring_payments';
+const RECURRING_PATH = '/recurring';
 
-function RecurringPayment(options) {
+function Recurring(options) {
   let aggOpts = options;
   if (
-    RecurringPayment._injectedOpts &&
-    Object.keys(RecurringPayment._injectedOpts).length > 0
+    Recurring._injectedOpts &&
+    Object.keys(Recurring._injectedOpts).length > 0
   ) {
-    aggOpts = Object.assign({}, options, RecurringPayment._injectedOpts);
+    aggOpts = Object.assign({}, options, Recurring._injectedOpts);
   }
 
   this.opts = aggOpts;
-  this.API_ENDPOINT = this.opts.xenditURL + RECURRING_PATH;
+  this.API_RECURRING = this.opts.xenditURL + RECURRING_PATH;
 }
 
-RecurringPayment._injectedOpts = {};
-RecurringPayment._constructorWithInjectedXenditOpts = function(options) {
-  RecurringPayment._injectedOpts = options;
-  return RecurringPayment;
+Recurring._injectedOpts = {};
+Recurring._constructorWithInjectedXenditOpts = function(options) {
+  Recurring._injectedOpts = options;
+  return Recurring;
 };
-RecurringPayment.Interval = {
+Recurring.Interval = {
   Day: 'DAY',
   Week: 'WEEK',
   Month: 'MONTH',
 };
-RecurringPayment.Action = {
+Recurring.Action = {
   Stop: 'STOP',
   Ignore: 'IGNORE',
 };
 
-RecurringPayment.prototype.createPayment = createPayment;
-RecurringPayment.prototype.getPayment = getPayment;
-RecurringPayment.prototype.editPayment = editPayment;
-RecurringPayment.prototype.stopPayment = stopPayment;
-RecurringPayment.prototype.pausePayment = pausePayment;
-RecurringPayment.prototype.resumePayment = resumePayment;
+Recurring.prototype.createSchedule = createSchedule;
+Recurring.prototype.getSchedule = getSchedule;
+Recurring.prototype.updateSchedule = updateSchedule;
 
-module.exports = RecurringPayment;
+module.exports = Recurring;
