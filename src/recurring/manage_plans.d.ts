@@ -1,23 +1,23 @@
 export interface CreatePlanRequest {
-  reference_id: string;
-  customer_id: string;
-  recurring_action: RecurringAction;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
   currency: Currency;
   amount: number;
-  payment_methods?: Array<PaymentMethodIdRanked>;
-  schedule_id: string;
-  immediate_action_type?: ImmediateActionType | null;
-  notification_config?: NotificationConfig | null;
-  failed_cycle_action?: FailingCycleAction;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  scheduleId: string;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
   metadata?: object | null;
 }
 
 export interface UpdatePlanRequest {
-  customer_id?: string;
+  customerId?: string;
   currency?: Currency;
   amount?: number;
-  payment_methods?: Array<PaymentMethodIdRanked>;
-  notification_config?: NotificationConfig | null;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  notificationConfig?: NotificationConfig | null;
   metadata?: object | null;
   description?: string;
 }
@@ -51,9 +51,9 @@ export enum ImmediateActionType {
   FULL_AMOUNT = 'FULL_AMOUNT',
 }
 export interface NotificationConfig {
-  recurring_created?: Array<NotificationChannel>;
-  recurring_succeeded?: Array<NotificationChannel>;
-  recurring_failed?: Array<NotificationChannel>;
+  recurringCreated?: Array<NotificationChannel>;
+  recurringSucceeded?: Array<NotificationChannel>;
+  recurringFailed?: Array<NotificationChannel>;
   locale?: NotificationConfigLocale;
 }
 export enum NotificationChannel {
@@ -79,7 +79,7 @@ export enum RecurringPlanStatus {
   PENDING = 'PENDING',
 }
 export interface PaymentMethodIdRanked {
-  payment_method_id: string;
+  paymentMethodId: string;
   rank: number;
 }
 

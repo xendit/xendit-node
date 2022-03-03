@@ -47,7 +47,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Stop recurring payment](#stop-recurring-payment)
     + [Pause recurring payment](#pause-recurring-payment)
     + [Resume recurring payment](#resume-recurring-payment)
-  * [Recurring Plan Services](#recurring-plan-services)
+  * [Recurring Plans Services](#recurring-plans-services)
     + [Create recurring plan](#create-recurring-plan)
     + [Get recurring plan](#get-recurring-plan)
     + [Edit recurring plan](#edit-recurring-plan)
@@ -628,7 +628,7 @@ rp.pausePayment(data: { id: string })
 ```ts
 rp.resumePayment(data: { id: string })
 ```
-### Recurring Plan Services
+### Recurring Plans Services
 
 Instanitiate Recurring Plans service using constructor that has been injected with Xendit keys
 
@@ -675,16 +675,16 @@ Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recu
 
 ```ts
 rp.createPlan(data: {
-  reference_id: string;
-  customer_id: string;
-  recurring_action: RecurringAction;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
   currency: Currency;
   amount: number;
-  payment_methods?: Array<PaymentMethodIdRanked>;
-  schedule_id: string;
-  immediate_action_type?: ImmediateActionType | null;
-  notification_config?: NotificationConfig | null;
-  failed_cycle_action?: FailingCycleAction;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  scheduleId: string;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
   metadata?: object | null;
 })
 ```
@@ -699,11 +699,11 @@ rp.getPlan(data: { id: string })
 
 ```ts
 rp.editPlan(data: {
-  customer_id?: string;
+  customerId?: string;
   currency?: Currency;
   amount?: number;
-  payment_methods?: Array<PaymentMethodIdRanked>;
-  notification_config?: NotificationConfig | null;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  notificationConfig?: NotificationConfig | null;
   metadata?: object | null;
   description?: string;
 })

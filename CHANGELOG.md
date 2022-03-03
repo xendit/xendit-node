@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2022-03-03
+
+- [#142](https://github.com/xendit/xendit-node/pull/142) (feature) Recurring Plans
+
 ## 2021-12-07
 
 - Added metadata to credit card charge request
