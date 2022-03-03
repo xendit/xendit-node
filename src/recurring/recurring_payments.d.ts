@@ -6,7 +6,7 @@ import {
 import { createPayment, getPayment, editPayment } from './manage_payments';
 import { stopPayment, pausePayment, resumePayment } from './operate_payments';
 
-export = class RecurringPayment {
+export default class RecurringPayment {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
@@ -20,10 +20,10 @@ export = class RecurringPayment {
     Stop: ActionEnum;
     Ignore: ActionEnum;
   };
-  createPayment = createPayment;
-  getPayment = getPayment;
-  editPayment = editPayment;
-  stopPayment = stopPayment;
-  pausePayment = pausePayment;
-  resumePayment = resumePayment;
-};
+  createPayment: typeof createPayment;
+  getPayment: typeof getPayment;
+  editPayment: typeof editPayment;
+  stopPayment: typeof stopPayment;
+  pausePayment: typeof pausePayment;
+  resumePayment: typeof resumePayment;
+}

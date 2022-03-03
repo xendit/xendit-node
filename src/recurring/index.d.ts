@@ -1,3 +1,4 @@
-import RecurringPayment from './recurring';
+import RecurringPayment from './recurring_payments';
+import RecurringPlan from './recurring_plans';
 
-export { RecurringPayment };
+export { RecurringPayment, RecurringPlan };
