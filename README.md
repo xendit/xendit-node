@@ -47,6 +47,11 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Stop recurring payment](#stop-recurring-payment)
     + [Pause recurring payment](#pause-recurring-payment)
     + [Resume recurring payment](#resume-recurring-payment)
+  * [Recurring Plan Services](#recurring-plan-services)
+    + [Create recurring plan](#create-recurring-plan)
+    + [Get recurring plan](#get-recurring-plan)
+    + [Edit recurring plan](#edit-recurring-plan)
+    + [Deactivate recurring plan](#deactivate-recurring-plan)
   * [Payout Services](#payout-services)
     + [Create a payout](#create-a-payout)
     + [Get a payout](#get-a-payout)
@@ -622,6 +627,92 @@ rp.pausePayment(data: { id: string })
 
 ```ts
 rp.resumePayment(data: { id: string })
+```
+### Recurring Plan Services
+
+Instanitiate Recurring Plans service using constructor that has been injected with Xendit keys
+
+```js
+const { RecurringPlan } = x;
+const rpSpecificOptions = {};
+const rp = new RecurringPlan(rpSpecificOptions);
+```
+
+Example: Create a recurring plan
+
+```js
+rp.createPlan({
+  referenceId: 'ref-123',
+  customerId: 'cus-123',
+  recurringAction: 'PAYMENT',
+  currency: 'IDR',
+  amount: 1000,
+  paymentMethods: [
+    { paymentMethodId: 'pm-123', rank: 1 },
+  ],
+  scheduleId: 'resc-123',
+  immediateActionType: 'FULL_AMOUNT',
+  notificationConfig: {
+    recurringCreated: ['EMAIL'],
+    recurringSucceeded: ['SMS'],
+    recurringFailed: ['WHATSAPP']
+  },
+  failedCycleAction: 'RESUME'
+})
+  .then(({ id }) => {
+    console.log(`Recurring plan created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(
+      `Recurring plan creation failed with message: ${e.message}`,
+    );
+  });
+```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recurring-plans) for more info about methods' parameters
+
+#### Create recurring plan
+
+```ts
+rp.createPlan(data: {
+  reference_id: string;
+  customer_id: string;
+  recurring_action: RecurringAction;
+  currency: Currency;
+  amount: number;
+  payment_methods?: Array<PaymentMethodIdRanked>;
+  schedule_id: string;
+  immediate_action_type?: ImmediateActionType | null;
+  notification_config?: NotificationConfig | null;
+  failed_cycle_action?: FailingCycleAction;
+  metadata?: object | null;
+})
+```
+
+#### Get recurring plan
+
+```ts
+rp.getPlan(data: { id: string })
+```
+
+#### Edit recurring plan
+
+```ts
+rp.editPlan(data: {
+  customer_id?: string;
+  currency?: Currency;
+  amount?: number;
+  payment_methods?: Array<PaymentMethodIdRanked>;
+  notification_config?: NotificationConfig | null;
+  metadata?: object | null;
+  description?: string;
+})
+```
+
+#### Deactivate recurring plan
+
+```ts
+rp.deactivatePlan(data: { id: string })
 ```
 
 ### Payout Services
