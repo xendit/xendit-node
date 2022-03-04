@@ -47,6 +47,9 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Stop recurring payment](#stop-recurring-payment)
     + [Pause recurring payment](#pause-recurring-payment)
     + [Resume recurring payment](#resume-recurring-payment)
+    + [Get Recurring Schedule](#get-recurring-schedule)
+    + [Create Recurring Schedule](#create-recurring-schedule)
+    + [Update Recurring Schedule](#update-recurring-schedule)
   * [Payout Services](#payout-services)
     + [Create a payout](#create-a-payout)
     + [Get a payout](#get-a-payout)
@@ -624,6 +627,55 @@ rp.pausePayment(data: { id: string })
 rp.resumePayment(data: { id: string })
 ```
 
+#### Get Recurring Schedule
+
+```js
+rp.getSchedule(
+  (data: {
+    id: 'test_reference_id_31545373-82c7-45c6-ae00-c69d2aadfeab',
+    business_id: 'da7s98d7a9s87d9as978'
+  }),
+);
+```
+
+#### Create Recurring Schedule
+
+```js
+rp.createSchedule(
+  (data: {
+    reference_id: 'test_reference_id_31545373-82c7-45c6-ae00-c69d2aadfeab',
+    business_id: 'da7s98d7a9s87d9as978',
+    interval: 'DAY',
+    interval_count: 1,
+    total_recurrence: 3,
+    anchor_date: '2022-01-01T00:00:00.000Z',
+    retry_interval: 'DAY',
+    retry_interval_count: 1,
+    total_retry: 1,
+    failed_attempt_notifications: [1],
+  }),
+);
+```
+
+#### Update Recurring Schedule
+
+```js
+rp.updateSchedule(
+  (data: {
+    reference_id: 'test_reference_id_31545373-82c7-45c6-ae00-c69d2aadfeab',
+    business_id: 'da7s98d7a9s87d9as978',
+    interval: 'DAY',
+    interval_count: 1,
+    total_recurrence: 3,
+    anchor_date: '2022-01-01T00:00:00.000Z',
+    retry_interval: 'DAY',
+    retry_interval_count: 1,
+    total_retry: 1,
+    failed_attempt_notifications: [1],
+  }),
+);
+```
+
 ### Payout Services
 
 Instanitiate Payout service using constructor that has been injected with Xendit keys
@@ -1194,7 +1246,7 @@ r.generateReport({
   })
   .catch(e => {
     console.error(`Generate Report Failed with Error: ${e.message}`);
-  })
+  });
 ```
 
 #### Generate Report
