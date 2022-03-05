@@ -30,6 +30,8 @@ function createSchedule(data) {
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
+    debugger;
+
     fetchWithHTTPErr(`${this.API_RECURRING}/schedules`, {
       method: 'POST',
       headers: {
@@ -57,14 +59,7 @@ function createSchedule(data) {
 
 function updateSchedule(data) {
   return promWithJsErr((resolve, reject) => {
-    const requiredFields = [
-      'id',
-      'business_id',
-      'reference_id',
-      'interval',
-      'interval_count',
-      'total_recurrence',
-    ];
+    const requiredFields = ['id', 'business_id'];
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
