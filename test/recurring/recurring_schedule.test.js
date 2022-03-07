@@ -17,6 +17,7 @@ module.exports = function(x) {
 
   before(() => {
     nock(recurring.API_ENDPOINT_SCHEDULES)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .post('/', {
         reference_id: TestConstants.REF_ID,
         interval: TestConstants.INTERVAL,
@@ -31,10 +32,12 @@ module.exports = function(x) {
       .reply(201, TestConstants.SCHEDULE_DETAILS);
 
     nock(recurring.API_ENDPOINT_SCHEDULES)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .get(`/${TestConstants.SCHEDULE_ID}`)
       .reply(200, TestConstants.SCHEDULE_DETAILS);
 
     nock(recurring.API_ENDPOINT_SCHEDULES)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .patch(`/${TestConstants.SCHEDULE_ID}`, {
         interval: TestConstants.INTERVAL,
         interval_count: TestConstants.INTERVAL_COUNT + 1,

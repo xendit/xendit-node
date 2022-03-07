@@ -1,11 +1,14 @@
+import { CreateScheduleRequest } from './manage_schedules';
 export interface CreatePlanRequest {
+  businessId: string;
   referenceId: string;
   customerId: string;
   recurringAction: RecurringAction;
   currency: Currency;
   amount: number;
   paymentMethods?: Array<PaymentMethodIdRanked>;
-  scheduleId: string;
+  scheduleId?: string;
+  schedule?: Omit<CreateScheduleRequest, 'businessId'>;
   immediateActionType?: ImmediateActionType | null;
   notificationConfig?: NotificationConfig | null;
   failedCycleAction?: FailingCycleAction;
@@ -13,6 +16,7 @@ export interface CreatePlanRequest {
 }
 
 export interface UpdatePlanRequest {
+  businessId: string;
   customerId?: string;
   currency?: Currency;
   amount?: number;
