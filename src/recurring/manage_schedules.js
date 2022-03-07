@@ -54,7 +54,7 @@ function createSchedule(data) {
   });
 }
 
-function updateSchedule(data) {
+function editSchedule(data) {
   return promWithJsErr((resolve, reject) => {
     const requiredFields = ['id', 'businessId', 'interval', 'intervalCount'];
 
@@ -85,4 +85,4 @@ function updateSchedule(data) {
   });
 }
 
-module.exports = { createSchedule, getSchedule, updateSchedule };
+module.exports = { createSchedule, getSchedule, editSchedule };

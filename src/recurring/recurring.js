@@ -7,7 +7,7 @@ const {
 const {
   createSchedule,
   getSchedule,
-  updateSchedule,
+  editSchedule,
 } = require('./manage_schedules');
 const {
   getCycle,
@@ -82,7 +82,7 @@ Object.assign(Recurring.prototype, {
   deactivatePlan,
   createSchedule,
   getSchedule,
-  updateSchedule,
+  editSchedule,
   getCycle,
   getAllCycles,
   editCycle,

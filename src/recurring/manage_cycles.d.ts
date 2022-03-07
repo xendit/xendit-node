@@ -2,6 +2,7 @@ import { RecurringAction, Currency } from './manage_plans';
 
 export interface UpdateCycleRequest {
   id: string;
+  businessId: string;
   planId: string;
   scheduled_timestamp: string;
   currency: Currency;

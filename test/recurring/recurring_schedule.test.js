@@ -103,10 +103,10 @@ module.exports = function(x) {
     });
   });
 
-  describe('updateSchedule', () => {
+  describe('editSchedule', () => {
     it('should be able to update schedule details', done => {
       expect(
-        recurring.updateSchedule({
+        recurring.editSchedule({
           id: TestConstants.SCHEDULE_ID,
           businessId: TestConstants.BUSINESS_ID,
           interval: TestConstants.INTERVAL,
@@ -117,7 +117,7 @@ module.exports = function(x) {
         .and.notify(done);
     });
     it('should report missing required fields', done => {
-      expect(recurring.updateSchedule({}))
+      expect(recurring.editSchedule({}))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),

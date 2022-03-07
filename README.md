@@ -47,14 +47,18 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Stop recurring payment](#stop-recurring-payment)
     + [Pause recurring payment](#pause-recurring-payment)
     + [Resume recurring payment](#resume-recurring-payment)
-  * [Recurring Plans Services](#recurring-plans-services)
-    + [Create recurring plan](#create-recurring-plan)
-    + [Get recurring plan](#get-recurring-plan)
-    + [Edit recurring plan](#edit-recurring-plan)
-    + [Deactivate recurring plan](#deactivate-recurring-plan)
-    + [Get Recurring Schedule](#get-recurring-schedule)
+  * [Recurring Services](#recurring-services)
     + [Create Recurring Schedule](#create-recurring-schedule)
-    + [Update Recurring Schedule](#update-recurring-schedule)
+    + [Edit Recurring Schedule](#edit-recurring-schedule)
+    + [Get Recurring Schedule](#get-recurring-schedule)
+    + [Create recurring plan](#create-recurring-plan)
+    + [Edit recurring plan](#edit-recurring-plan)
+    + [Get recurring plan](#get-recurring-plan)
+    + [Deactivate recurring plan](#deactivate-recurring-plan)
+    + [Edit recurring cycle](#edit-recurring-cycle)
+    + [Get recurring cycle](#get-recurring-cycle)
+    + [Get all recurring cycles](#get-all-recurring-cycles)
+    + [Cancel recurring cycle](#cancel-recurring-cycle)
   * [Payout Services](#payout-services)
     + [Create a payout](#create-a-payout)
     + [Get a payout](#get-a-payout)
@@ -631,20 +635,21 @@ rp.pausePayment(data: { id: string })
 ```ts
 rp.resumePayment(data: { id: string })
 ```
-### Recurring Plans Services
+### Recurring Services
 
-Instanitiate Recurring Plans service using constructor that has been injected with Xendit keys
+Instanitiate Recurring service using constructor that has been injected with Xendit keys
 
 ```js
-const { RecurringPlan } = x;
-const rpSpecificOptions = {};
-const rp = new RecurringPlan(rpSpecificOptions);
+const { Recurring } = x;
+const rSpecificOptions = {};
+const r = new Recurring(rSpecificOptions);
 ```
 
 Example: Create a recurring plan
 
 ```js
-rp.createPlan({
+r.createPlan({
+  businessId: '6066ebf68204c740b61aa3c6',
   referenceId: 'ref-123',
   customerId: 'cus-123',
   recurringAction: 'PAYMENT',
@@ -674,10 +679,55 @@ rp.createPlan({
 
 Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recurring-plans) for more info about methods' parameters
 
+#### Create Recurring Schedule
+
+```js
+r.createSchedule(data: {
+  referenceId: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
+});
+```
+
+#### Edit Recurring Schedule
+
+```js
+r.editSchedule(data: {
+  id: string;
+  referenceId: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
+});
+```
+
+#### Get Recurring Schedule
+
+```js
+r.getSchedule(data: {
+  id: string;
+  businessId: string;
+});
+```
+
 #### Create recurring plan
 
 ```ts
-rp.createPlan(data: {
+r.createPlan(data: {
+  businessId: string;
   referenceId: string;
   customerId: string;
   recurringAction: RecurringAction;
@@ -692,16 +742,11 @@ rp.createPlan(data: {
 })
 ```
 
-#### Get recurring plan
-
-```ts
-rp.getPlan(data: { id: string })
-```
-
 #### Edit recurring plan
 
 ```ts
-rp.editPlan(data: {
+r.editPlan(data: {
+  businessId: string;
   customerId?: string;
   currency?: Currency;
   amount?: number;
@@ -712,59 +757,62 @@ rp.editPlan(data: {
 })
 ```
 
+#### Get recurring plan
+
+```ts
+r.getPlan(data: { id: string; businessId: string; })
+```
+
 #### Deactivate recurring plan
 
 ```ts
-rp.deactivatePlan(data: { id: string })
+r.deactivatePlan(data: { id: string; businessId: string; })
 ```
 
-#### Get Recurring Schedule
+#### Edit recurring cycle
 
-```js
-rp.getSchedule(
-  (data: {
-    id: 'test_reference_id_31545373-82c7-45c6-ae00-c69d2aadfeab',
-    business_id: 'da7s98d7a9s87d9as978'
-  }),
-);
+```ts
+r.editCycle(data: {
+  id: string;
+  businessId: string;
+  planId: string;
+  scheduled_timestamp: string;
+  currency: Currency;
+  amount: number;
+  metadata?: object | null;
+})
 ```
 
-#### Create Recurring Schedule
+#### Get recurring cycle
 
-```js
-rp.createSchedule(
-  (data: {
-    reference_id: 'test_reference_id_31545373-82c7-45c6-ae00-c69d2aadfeab',
-    business_id: 'da7s98d7a9s87d9as978',
-    interval: 'DAY',
-    interval_count: 1,
-    total_recurrence: 3,
-    anchor_date: '2022-01-01T00:00:00.000Z',
-    retry_interval: 'DAY',
-    retry_interval_count: 1,
-    total_retry: 1,
-    failed_attempt_notifications: [1],
-  }),
-);
+```ts
+r.getCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
+})
 ```
 
-#### Update Recurring Schedule
+#### Get all recurring cycles
 
-```js
-rp.updateSchedule(
-  (data: {
-    reference_id: 'test_reference_id_31545373-82c7-45c6-ae00-c69d2aadfeab',
-    business_id: 'da7s98d7a9s87d9as978',
-    interval: 'DAY',
-    interval_count: 1,
-    total_recurrence: 3,
-    anchor_date: '2022-01-01T00:00:00.000Z',
-    retry_interval: 'DAY',
-    retry_interval_count: 1,
-    total_retry: 1,
-    failed_attempt_notifications: [1],
-  }),
-);
+```ts
+r.getAllCycles(data: {
+  planId: string;
+  businessId: string;
+  limit?: number;
+  beforeId?: string;
+  afterId?: string;
+})
+```
+
+#### Cancel recurring cycle
+
+```ts
+r.cancelCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
+})
 ```
 
 ### Payout Services

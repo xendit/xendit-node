@@ -61,6 +61,6 @@ export function getSchedule(data: {
   businessId: string;
 }): Promise<RecurringSchedule>;
 
-export function updateSchedule(
+export function editSchedule(
   data: UpdateScheduleRequest,
 ): Promise<RecurringSchedule>;
