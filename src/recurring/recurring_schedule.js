@@ -25,12 +25,9 @@ function createSchedule(data) {
       'reference_id',
       'interval',
       'interval_count',
-      'total_recurrence',
     ];
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
-
-    debugger;
 
     fetchWithHTTPErr(`${this.API_RECURRING}/schedules`, {
       method: 'POST',
@@ -59,7 +56,7 @@ function createSchedule(data) {
 
 function updateSchedule(data) {
   return promWithJsErr((resolve, reject) => {
-    const requiredFields = ['id', 'business_id'];
+    const requiredFields = ['id', 'business_id', 'interval', 'interval_count'];
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 

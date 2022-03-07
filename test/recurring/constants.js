@@ -46,7 +46,8 @@ const UPDATED_PAYMENT_DETAILS = Object.assign({}, PAYMENT_DETAILS, {
   amount: UPDATED_AMOUNT,
 });
 const UPDATED_SCHEDULE_DETAILS = Object.assign({}, SCHEDULE_DETAILS, {
-  interval: INTERVAL + 1,
+  interval: INTERVAL,
+  interval_count: INTERVAL_COUNT,
 });
 
 module.exports = {

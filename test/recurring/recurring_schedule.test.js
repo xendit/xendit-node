@@ -39,7 +39,8 @@ module.exports = function(x) {
 
     nock(recurring.API_RECURRING)
       .patch(`/schedules/${TestConstants.SCHEDULE_ID}`, {
-        interval: TestConstants.INTERVAL + 1,
+        interval: TestConstants.INTERVAL,
+        interval_count: TestConstants.INTERVAL_COUNT,
       })
       .reply(200, TestConstants.UPDATED_SCHEDULE_DETAILS);
   });
@@ -108,7 +109,8 @@ module.exports = function(x) {
         recurring.updateSchedule({
           id: TestConstants.SCHEDULE_ID,
           business_id: TestConstants.BUSINESS_ID,
-          interval: TestConstants.INTERVAL + 1,
+          interval: TestConstants.INTERVAL,
+          interval_count: TestConstants.INTERVAL_COUNT,
         }),
       )
         .to.eventually.deep.equal(TestConstants.UPDATED_SCHEDULE_DETAILS)
