@@ -17,20 +17,17 @@ module.exports = function(x) {
 
   before(() => {
     nock(recurring.API_ENDPOINT_SCHEDULES)
-      .post(
-        '/',
-        JSON.stringify({
-          reference_id: TestConstants.REF_ID,
-          interval: TestConstants.INTERVAL,
-          interval_count: TestConstants.INTERVAL_COUNT,
-          total_recurrence: TestConstants.INTERVAL_COUNT + 2,
-          anchor_date: TestConstants.ANCHOR_DATE,
-          retry_interval: TestConstants.INTERVAL,
-          retry_interval_count: TestConstants.INTERVAL_COUNT,
-          total_retry: TestConstants.INTERVAL_COUNT,
-          failed_attempt_notifications: [TestConstants.INTERVAL_COUNT],
-        }),
-      )
+      .post('/', {
+        reference_id: TestConstants.REF_ID,
+        interval: TestConstants.INTERVAL,
+        interval_count: TestConstants.INTERVAL_COUNT,
+        total_recurrence: TestConstants.INTERVAL_COUNT + 2,
+        anchor_date: TestConstants.ANCHOR_DATE,
+        retry_interval: TestConstants.INTERVAL,
+        retry_interval_count: TestConstants.INTERVAL_COUNT,
+        total_retry: TestConstants.INTERVAL_COUNT,
+        failed_attempt_notifications: [TestConstants.INTERVAL_COUNT],
+      })
       .reply(201, TestConstants.SCHEDULE_DETAILS);
 
     nock(recurring.API_ENDPOINT_SCHEDULES)
@@ -49,16 +46,16 @@ module.exports = function(x) {
     it('should create a recurring schedule', done => {
       expect(
         recurring.createSchedule({
-          reference_id: TestConstants.REF_ID,
+          referenceId: TestConstants.REF_ID,
           interval: TestConstants.INTERVAL,
-          business_id: TestConstants.BUSINESS_ID,
-          interval_count: TestConstants.INTERVAL_COUNT,
-          total_recurrence: TestConstants.INTERVAL_COUNT + 2,
-          anchor_date: TestConstants.ANCHOR_DATE,
-          retry_interval: TestConstants.INTERVAL,
-          retry_interval_count: TestConstants.INTERVAL_COUNT,
-          total_retry: TestConstants.INTERVAL_COUNT,
-          failed_attempt_notifications: [TestConstants.INTERVAL_COUNT],
+          businessId: TestConstants.BUSINESS_ID,
+          intervalCount: TestConstants.INTERVAL_COUNT,
+          totalRecurrence: TestConstants.INTERVAL_COUNT + 2,
+          anchorDate: TestConstants.ANCHOR_DATE,
+          retryInterval: TestConstants.INTERVAL,
+          retryIntervalCount: TestConstants.INTERVAL_COUNT,
+          totalRetry: TestConstants.INTERVAL_COUNT,
+          failedAttemptNotifications: [TestConstants.INTERVAL_COUNT],
         }),
       )
         .to.eventually.deep.equal(TestConstants.SCHEDULE_DETAILS)
@@ -83,7 +80,7 @@ module.exports = function(x) {
       expect(
         recurring.getSchedule({
           id: TestConstants.SCHEDULE_ID,
-          business_id: TestConstants.BUSINESS_ID,
+          businessId: TestConstants.BUSINESS_ID,
         }),
       )
         .to.eventually.deep.equal(TestConstants.SCHEDULE_DETAILS)
@@ -108,9 +105,9 @@ module.exports = function(x) {
       expect(
         recurring.updateSchedule({
           id: TestConstants.SCHEDULE_ID,
-          business_id: TestConstants.BUSINESS_ID,
+          businessId: TestConstants.BUSINESS_ID,
           interval: TestConstants.INTERVAL,
-          interval_count: TestConstants.INTERVAL_COUNT + 1,
+          intervalCount: TestConstants.INTERVAL_COUNT + 1,
         }),
       )
         .to.eventually.deep.equal(TestConstants.UPDATED_SCHEDULE_DETAILS)

@@ -63,6 +63,7 @@ const PLAN_DETAILS = {
   metadata: { foo: 'bar' },
   description: 'baz',
 };
+
 const UPDATED_PLAN_DETAILS = Object.assign({}, PLAN_DETAILS, {
   amount: UPDATED_AMOUNT,
 });

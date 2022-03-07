@@ -2,7 +2,7 @@ const { promWithJsErr, Validate, fetchWithHTTPErr, Auth } = require('../utils');
 
 function getSchedule(data) {
   return promWithJsErr((resolve, reject) => {
-    const requiredFields = ['id', 'business_id'];
+    const requiredFields = ['id', 'businessId'];
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
@@ -10,7 +10,7 @@ function getSchedule(data) {
       method: 'GET',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'business-id': data.business_id,
+        'business-id': data.businessId,
       },
     })
       .then(resolve)
@@ -21,10 +21,10 @@ function getSchedule(data) {
 function createSchedule(data) {
   return promWithJsErr((resolve, reject) => {
     const requiredFields = [
-      'business_id',
-      'reference_id',
+      'businessId',
+      'referenceId',
       'interval',
-      'interval_count',
+      'intervalCount',
     ];
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
@@ -33,20 +33,20 @@ function createSchedule(data) {
       method: 'POST',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'business-id': data.business_id,
+        'business-id': data.businessId,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        reference_id: data.reference_id,
+        reference_id: data.referenceId,
         interval: data.interval,
-        interval_count: data.interval_count,
-        total_recurrence: data.total_recurrence,
-        anchor_date: data.anchor_date,
-        retry_interval: data.retry_interval,
-        retry_interval_count: data.retry_interval_count,
-        total_retry: data.total_retry,
-        failed_attempt_notifications: data.failed_attempt_notifications,
-        failed_cycle_action: data.failed_cycle_action,
+        interval_count: data.intervalCount,
+        total_recurrence: data.totalRecurrence,
+        anchor_date: data.anchorDate,
+        retry_interval: data.retryInterval,
+        retry_interval_count: data.retryIntervalCount,
+        total_retry: data.totalRetry,
+        failed_attempt_notifications: data.failedAttemptNotifications,
+        failed_cycle_action: data.failedCycleAction,
       }),
     })
       .then(resolve)
@@ -56,7 +56,7 @@ function createSchedule(data) {
 
 function updateSchedule(data) {
   return promWithJsErr((resolve, reject) => {
-    const requiredFields = ['id', 'business_id', 'interval', 'interval_count'];
+    const requiredFields = ['id', 'businessId', 'interval', 'intervalCount'];
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
@@ -64,20 +64,20 @@ function updateSchedule(data) {
       method: 'PATCH',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'business-id': data.business_id,
+        'business-id': data.businessId,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        reference_id: data.reference_id,
+        reference_id: data.referenceId,
         interval: data.interval,
-        interval_count: data.interval_count,
-        total_recurrence: data.total_recurrence,
-        anchor_date: data.anchor_date,
-        retry_interval: data.retry_interval,
-        retry_interval_count: data.retry_interval_count,
-        total_retry: data.total_retry,
-        failed_attempt_notifications: data.failed_attempt_notifications,
-        failed_cycle_action: data.failed_cycle_action,
+        interval_count: data.intervalCount,
+        total_recurrence: data.totalRecurrence,
+        anchor_date: data.anchorDate,
+        retry_interval: data.retryInterval,
+        retry_interval_count: data.retryIntervalCount,
+        total_retry: data.totalRetry,
+        failed_attempt_notifications: data.failedAttemptNotifications,
+        failed_cycle_action: data.failedCycleAction,
       }),
     })
       .then(resolve)
