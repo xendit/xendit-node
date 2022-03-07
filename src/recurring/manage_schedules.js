@@ -29,7 +29,7 @@ function createSchedule(data) {
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
-    fetchWithHTTPErr(`${this.API_ENDPOINT_SCHEDULES}`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT_SCHEDULES}/`, {
       method: 'POST',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
