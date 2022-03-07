@@ -4,7 +4,7 @@ import { VAService } from './va';
 import { DisbursementService } from './disbursement';
 import { InvoiceService } from './invoice';
 import { PayoutService } from './payout';
-import { RecurringPayment } from './recurring';
+import { RecurringPayment, RecurringPlan } from './recurring';
 import { XenditOptions } from './xendit_opts';
 import { EWalletService } from './ewallet';
 import { BalanceServices } from './balance';
@@ -25,6 +25,7 @@ declare class Xendit {
   Invoice: typeof InvoiceService;
   Payout: typeof PayoutService;
   RecurringPayment: typeof RecurringPayment;
+  RecurringPlan: typeof RecurringPlan;
   EWallet: typeof EWalletService;
   Balance: typeof BalanceServices;
   RetailOutlet: typeof RetailOutletService;

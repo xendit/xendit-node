@@ -1,41 +1,82 @@
 const {
+  createPlan,
+  editPlan,
+  getPlan,
+  deactivatePlan,
+} = require('./manage_plans');
+const {
   createSchedule,
   getSchedule,
   updateSchedule,
-} = require('./recurring_schedule');
+} = require('./manage_schedules');
 
 const RECURRING_PATH = '/recurring';
 
-function Recurring(options) {
-  let aggOpts = options;
-  if (
-    Recurring._injectedOpts &&
-    Object.keys(Recurring._injectedOpts).length > 0
-  ) {
-    aggOpts = Object.assign({}, options, Recurring._injectedOpts);
+class Recurring {
+  constructor(options) {
+    let aggOpts = Object.assign({}, options);
+    if (Object.keys(Recurring._injectedOpts || {}).length) {
+      aggOpts = Object.assign({}, options, Recurring._injectedOpts);
+    }
+
+    this.opts = aggOpts;
+    this.API_ENDPOINT_PLANS = this.opts.xenditURL + `${RECURRING_PATH}/plans`;
+    this.API_ENDPOINT_SCHEDULES =
+      this.opts.xenditURL + `${RECURRING_PATH}/schedules`;
   }
 
-  this.opts = aggOpts;
-  this.API_RECURRING = this.opts.xenditURL + RECURRING_PATH;
+  static _constructorWithInjectedXenditOpts(options) {
+    Recurring._injectedOpts = options;
+    return Recurring;
+  }
 }
 
-Recurring._injectedOpts = {};
-Recurring._constructorWithInjectedXenditOpts = function(options) {
-  Recurring._injectedOpts = options;
-  return Recurring;
-};
-Recurring.Interval = {
-  Day: 'DAY',
-  Week: 'WEEK',
-  Month: 'MONTH',
-};
-Recurring.Action = {
-  Stop: 'STOP',
-  Ignore: 'IGNORE',
-};
+Object.assign(Recurring, {
+  _injectedOpts: {},
+  Interval: {
+    Day: 'DAY',
+    Week: 'WEEK',
+    Month: 'MONTH',
+  },
+  Action: {
+    Stop: 'STOP',
+    Ignore: 'IGNORE',
+  },
+  recurringAction: {
+    payment: 'PAYMENT',
+    disbursment: 'DISBURSEMENT',
+  },
+  immediateActionType: {
+    fullAmount: 'FULL_AMOUNT',
+  },
+  notificationChannel: {
+    whatsapp: 'WHATSAPP',
+    sms: 'SMS',
+    email: 'EMAIL',
+  },
+  locale: {
+    en: 'en',
+    id: 'id',
+  },
+  failedCycleAction: {
+    resume: 'RESUME',
+    stop: 'STOP',
+  },
+  status: {
+    active: 'ACTIVE',
+    inactive: 'INACTIVE',
+    pending: 'PENDING',
+  },
+});
 
-Recurring.prototype.createSchedule = createSchedule;
-Recurring.prototype.getSchedule = getSchedule;
-Recurring.prototype.updateSchedule = updateSchedule;
+Object.assign(Recurring.prototype, {
+  createPlan,
+  editPlan,
+  getPlan,
+  deactivatePlan,
+  createSchedule,
+  getSchedule,
+  updateSchedule,
+});
 
 module.exports = Recurring;

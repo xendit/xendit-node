@@ -1,3 +1,3 @@
-import RecurringPayment from './recurring_payment';
+import Recurring from './recurring';
 
-export { RecurringPayment };
+export { Recurring };

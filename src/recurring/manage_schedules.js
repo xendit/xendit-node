@@ -6,7 +6,7 @@ function getSchedule(data) {
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
-    fetchWithHTTPErr(`${this.API_RECURRING}/schedules/${data.id}`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT_SCHEDULES}/${data.id}`, {
       method: 'GET',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
@@ -29,7 +29,7 @@ function createSchedule(data) {
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
-    fetchWithHTTPErr(`${this.API_RECURRING}/schedules`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT_SCHEDULES}`, {
       method: 'POST',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
@@ -60,7 +60,7 @@ function updateSchedule(data) {
 
     Validate.rejectOnMissingFields(requiredFields, data, reject);
 
-    fetchWithHTTPErr(`${this.API_RECURRING}/schedules/${data.id}`, {
+    fetchWithHTTPErr(`${this.API_ENDPOINT_SCHEDULES}/${data.id}`, {
       method: 'PATCH',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),

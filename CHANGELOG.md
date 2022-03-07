@@ -1,9 +1,5 @@
 # CHANGELOG
 
-## 2022-03-04
-
-- [#143](https://github.com/xendit/xendit-node/pull/143) (feature) Recurring Schedule
-
 ## 2021-12-07
 
 - Added metadata to credit card charge request

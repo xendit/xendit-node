@@ -16,9 +16,9 @@ module.exports = function(x) {
   });
 
   before(() => {
-    nock(recurring.API_RECURRING)
+    nock(recurring.API_ENDPOINT_SCHEDULES)
       .post(
-        '/schedules',
+        '/',
         JSON.stringify({
           reference_id: TestConstants.REF_ID,
           interval: TestConstants.INTERVAL,
@@ -33,14 +33,14 @@ module.exports = function(x) {
       )
       .reply(201, TestConstants.SCHEDULE_DETAILS);
 
-    nock(recurring.API_RECURRING)
-      .get(`/schedules/${TestConstants.SCHEDULE_ID}`)
+    nock(recurring.API_ENDPOINT_SCHEDULES)
+      .get(`/${TestConstants.SCHEDULE_ID}`)
       .reply(200, TestConstants.SCHEDULE_DETAILS);
 
-    nock(recurring.API_RECURRING)
-      .patch(`/schedules/${TestConstants.SCHEDULE_ID}`, {
+    nock(recurring.API_ENDPOINT_SCHEDULES)
+      .patch(`/${TestConstants.SCHEDULE_ID}`, {
         interval: TestConstants.INTERVAL,
-        interval_count: TestConstants.INTERVAL_COUNT,
+        interval_count: TestConstants.INTERVAL_COUNT + 1,
       })
       .reply(200, TestConstants.UPDATED_SCHEDULE_DETAILS);
   });
@@ -110,7 +110,7 @@ module.exports = function(x) {
           id: TestConstants.SCHEDULE_ID,
           business_id: TestConstants.BUSINESS_ID,
           interval: TestConstants.INTERVAL,
-          interval_count: TestConstants.INTERVAL_COUNT,
+          interval_count: TestConstants.INTERVAL_COUNT + 1,
         }),
       )
         .to.eventually.deep.equal(TestConstants.UPDATED_SCHEDULE_DETAILS)
