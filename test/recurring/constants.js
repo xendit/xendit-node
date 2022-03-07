@@ -18,7 +18,6 @@ const CUSTOMER = {
   mobile_number: '',
   address: '',
 };
-const PLAN_ID = 'repl-123';
 const PAYMENT_METHOD_ID = 'pm-123';
 const UPDATED_AMOUNT = 20000;
 
@@ -38,6 +37,8 @@ const SCHEDULE_DETAILS = {
 const UPDATED_SCHEDULE_DETAILS = Object.assign({}, SCHEDULE_DETAILS, {
   interval_count: INTERVAL_COUNT + 1,
 });
+
+const PLAN_ID = 'repl-123';
 
 const PLAN_DETAILS = {
   id: PLAN_ID,
@@ -68,6 +69,37 @@ const UPDATED_PLAN_DETAILS = Object.assign({}, PLAN_DETAILS, {
   amount: UPDATED_AMOUNT,
 });
 
+const CYCLE_ID = 'recy-1234';
+const SCHEDULED_TIMESTAMP = new Date('2022-03-07T16:08:58.697Z').toISOString();
+const CYCLE_DETAILS = {
+  id: CYCLE_ID,
+  type: 'IMMEDIATE',
+  reference_id: REF_ID,
+  plan_id: PLAN_ID,
+  customer_id: CUSTOMER_ID,
+  recurring_action: 'PAYMENT',
+  attempt_count: 1,
+  cycle_number: 1,
+  attempt_details: [],
+  status: 'PENDING',
+  scheduled_timestamp: new Date().toISOString(),
+  created: new Date().toISOString(),
+  updated: new Date().toISOString(),
+  currency: CURRENCY,
+  amount: AMOUNT,
+  metadata: { foo: 'bar' },
+};
+
+const UPDATED_CYCLE_DETAILS = Object.assign({}, CYCLE_DETAILS, {
+  amount: UPDATED_AMOUNT,
+});
+
+const CYCLES_FILTER = {
+  limit: 10,
+  afterId: 'recy-987',
+  beforeId: 'recy-087',
+};
+
 module.exports = {
   CUSTOMER_ID,
   CURRENCY,
@@ -91,4 +123,9 @@ module.exports = {
   ANCHOR_DATE,
   SCHEDULE_DETAILS,
   UPDATED_SCHEDULE_DETAILS,
+  CYCLE_ID,
+  CYCLE_DETAILS,
+  SCHEDULED_TIMESTAMP,
+  UPDATED_CYCLE_DETAILS,
+  CYCLES_FILTER,
 };

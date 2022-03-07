@@ -12,6 +12,7 @@ export interface CreateScheduleRequest {
 }
 
 export interface UpdateScheduleRequest {
+  id: string;
   businessId: string;
   interval: Interval | null;
   intervalCount: number;
