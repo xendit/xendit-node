@@ -1,3 +1,4 @@
+const querystring = require('querystring');
 const { promWithJsErr, Validate, fetchWithHTTPErr, Auth } = require('../utils');
 
 function getCycle(data) {
@@ -26,10 +27,11 @@ function getAllCycles(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['businessId', 'planId'], data, reject);
 
-    const urlSearchParams = new URLSearchParams();
-    data.limit && urlSearchParams.append('limit', data.limit);
-    data.beforeId && urlSearchParams.append('before_id', data.beforeId);
-    data.afterId && urlSearchParams.append('after_id', data.afterId);
+    const urlSearchParams = querystring.stringify({
+      limit: data.limit,
+      before_id: data.beforeId,
+      after_id: data.afterId,
+    });
 
     fetchWithHTTPErr(
       `${this.API_ENDPOINT_PLANS}/${
