@@ -7,8 +7,14 @@ const {
 const {
   createSchedule,
   getSchedule,
-  updateSchedule,
+  editSchedule,
 } = require('./manage_schedules');
+const {
+  getCycle,
+  getAllCycles,
+  cancelCycle,
+  editCycle,
+} = require('./manage_cycles');
 
 const RECURRING_PATH = '/recurring';
 
@@ -76,7 +82,11 @@ Object.assign(Recurring.prototype, {
   deactivatePlan,
   createSchedule,
   getSchedule,
-  updateSchedule,
+  editSchedule,
+  getCycle,
+  getAllCycles,
+  editCycle,
+  cancelCycle,
 });
 
 module.exports = Recurring;

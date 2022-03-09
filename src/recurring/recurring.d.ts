@@ -8,11 +8,8 @@ import {
   RecurringPlanStatus,
 } from './manage_plans';
 import { createPlan, editPlan, getPlan, deactivatePlan } from './manage_plans';
-import {
-  createSchedule,
-  getSchedule,
-  updateSchedule,
-} from './manage_schedules';
+import { getCycle, getAllCycles, cancelCycle } from './manage_cycles';
+import { createSchedule, getSchedule, editSchedule } from './manage_schedules';
 
 export default class RecurringPlan {
   constructor({});
@@ -30,7 +27,13 @@ export default class RecurringPlan {
   editPlan: typeof editPlan;
   getPlan: typeof getPlan;
   deactivatePlan: typeof deactivatePlan;
+
   createSchedule: typeof createSchedule;
   getSchedule: typeof getSchedule;
-  updateSchedule: typeof updateSchedule;
+  editSchedule: typeof editSchedule;
+
+  getCycle: typeof getCycle;
+  getAllCycles: typeof getAllCycles;
+  cancelCycle: typeof cancelCycle;
+  editCycle: typeof editCycle;
 }

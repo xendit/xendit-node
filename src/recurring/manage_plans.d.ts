@@ -16,6 +16,7 @@ export interface CreatePlanRequest {
 }
 
 export interface UpdatePlanRequest {
+  id: string;
   businessId: string;
   customerId?: string;
   currency?: Currency;
@@ -89,5 +90,11 @@ export interface PaymentMethodIdRanked {
 
 export function createPlan(data: CreatePlanRequest): Promise<RecurringPlan>;
 export function editPlan(data: UpdatePlanRequest): Promise<RecurringPlan>;
-export function getPlan(data: { id: string }): Promise<RecurringPlan>;
-export function deactivatePlan(data: { id: string }): Promise<RecurringPlan>;
+export function getPlan(data: {
+  id: string;
+  businessId: string;
+}): Promise<RecurringPlan>;
+export function deactivatePlan(data: {
+  id: string;
+  businessId: string;
+}): Promise<RecurringPlan>;

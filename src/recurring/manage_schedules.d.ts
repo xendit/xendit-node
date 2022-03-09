@@ -12,6 +12,7 @@ export interface CreateScheduleRequest {
 }
 
 export interface UpdateScheduleRequest {
+  id: string;
   businessId: string;
   interval: Interval | null;
   intervalCount: number;
@@ -60,6 +61,6 @@ export function getSchedule(data: {
   businessId: string;
 }): Promise<RecurringSchedule>;
 
-export function updateSchedule(
+export function editSchedule(
   data: UpdateScheduleRequest,
 ): Promise<RecurringSchedule>;
