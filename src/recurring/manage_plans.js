@@ -4,6 +4,7 @@ function createPlan(data) {
   return promWithJsErr((resolve, reject) => {
     const compulsoryFields = [
       'referenceId',
+      'businessId',
       'customerId',
       'recurringAction',
       'currency',
@@ -16,6 +17,7 @@ function createPlan(data) {
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
         'Content-Type': 'application/json',
+        'business-id': data.businessId,
       },
       body: JSON.stringify({
         reference_id: data.referenceId,
@@ -30,8 +32,20 @@ function createPlan(data) {
           }),
         ),
         schedule_id: data.scheduleId,
+        schedule: data.schedule && {
+          reference_id: data.schedule.referenceId,
+          interval: data.schedule.interval,
+          interval_count: data.schedule.intervalCount,
+          total_recurrence: data.schedule.totalRecurrence,
+          anchor_date: data.schedule.anchorDate,
+          retry_interval: data.schedule.retryInterval,
+          retry_interval_count: data.schedule.retryIntervalCount,
+          total_retry: data.schedule.totalRetry,
+          failed_attempt_notifications:
+            data.schedule.failedAttemptNotifications,
+        },
         immediate_action_type: data.immediateActionType,
-        notification_config: {
+        notification_config: data.notificationConfig && {
           recurring_created: data.notificationConfig.recurringCreated,
           recurring_succeeded: data.notificationConfig.recurringSucceeded,
           recurring_failed: data.notificationConfig.recurringFailed,
@@ -49,11 +63,12 @@ function createPlan(data) {
 
 function getPlan(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(['id'], data, reject);
+    Validate.rejectOnMissingFields(['id', 'businessId'], data, reject);
     fetchWithHTTPErr(`${this.API_ENDPOINT_PLANS}/${data.id}`, {
       method: 'GET',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'business-id': data.businessId,
       },
     })
       .then(resolve)
@@ -63,11 +78,12 @@ function getPlan(data) {
 
 function deactivatePlan(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(['id'], data, reject);
+    Validate.rejectOnMissingFields(['id', 'businessId'], data, reject);
     fetchWithHTTPErr(`${this.API_ENDPOINT_PLANS}/${data.id}/deactivate`, {
       method: 'POST',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'business-id': data.businessId,
       },
     })
       .then(resolve)
@@ -77,12 +93,13 @@ function deactivatePlan(data) {
 
 function editPlan(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(['id'], data, reject);
+    Validate.rejectOnMissingFields(['id', 'businessId'], data, reject);
     fetchWithHTTPErr(`${this.API_ENDPOINT_PLANS}/${data.id}`, {
       method: 'PATCH',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
         'Content-Type': 'application/json',
+        'business-id': data.businessId,
       },
       body: JSON.stringify({
         customer_id: data.customerId,

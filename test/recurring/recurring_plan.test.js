@@ -15,6 +15,7 @@ module.exports = function(x) {
   });
   before(function() {
     nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .post('/', {
         reference_id: TestConstants.REF_ID,
         customer_id: TestConstants.CUSTOMER_ID,
@@ -38,23 +39,45 @@ module.exports = function(x) {
       })
       .reply(201, TestConstants.PLAN_DETAILS);
     nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
+      .post('/', {
+        reference_id: TestConstants.REF_ID,
+        customer_id: TestConstants.CUSTOMER_ID,
+        recurring_action: Recurring.recurringAction.payment,
+        currency: TestConstants.CURRENCY,
+        amount: TestConstants.AMOUNT,
+        payment_methods: [
+          { payment_method_id: TestConstants.PAYMENT_METHOD_ID, rank: 1 },
+        ],
+        schedule: {
+          reference_id: `schedule-${TestConstants.REF_ID}`,
+          interval: TestConstants.INTERVAL,
+          interval_count: TestConstants.INTERVAL_COUNT,
+        },
+      })
+      .reply(201, TestConstants.PLAN_DETAILS);
+    nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .get(`/${TestConstants.PLAN_ID}`)
       .reply(200, TestConstants.PLAN_DETAILS);
     nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .patch(`/${TestConstants.PLAN_ID}`, {
         amount: TestConstants.UPDATED_AMOUNT,
       })
       .reply(200, TestConstants.UPDATED_PLAN_DETAILS);
     nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .post(`/${TestConstants.PLAN_ID}/deactivate`)
       .reply(200, TestConstants.PLAN_DETAILS);
   });
 
   describe('createPlan', () => {
-    it('should create a recurring plan', done => {
+    it('should create a recurring plan with schedule_id', done => {
       expect(
         rp.createPlan({
           referenceId: TestConstants.REF_ID,
+          businessId: TestConstants.BUSINESS_ID,
           customerId: TestConstants.CUSTOMER_ID,
           recurringAction: Recurring.recurringAction.payment,
           currency: TestConstants.CURRENCY,
@@ -78,6 +101,29 @@ module.exports = function(x) {
         .to.eventually.deep.equal(TestConstants.PLAN_DETAILS)
         .and.notify(done);
     });
+    it('should create a recurring plan with schedule', done => {
+      expect(
+        rp.createPlan({
+          referenceId: TestConstants.REF_ID,
+          businessId: TestConstants.BUSINESS_ID,
+          customerId: TestConstants.CUSTOMER_ID,
+          recurringAction: Recurring.recurringAction.payment,
+          currency: TestConstants.CURRENCY,
+          amount: TestConstants.AMOUNT,
+          paymentMethods: [
+            { paymentMethodId: TestConstants.PAYMENT_METHOD_ID, rank: 1 },
+          ],
+          schedule: {
+            referenceId: `schedule-${TestConstants.REF_ID}`,
+            businessId: TestConstants.BUSINESS_ID,
+            interval: TestConstants.INTERVAL,
+            intervalCount: TestConstants.INTERVAL_COUNT,
+          },
+        }),
+      )
+        .to.eventually.deep.equal(TestConstants.PLAN_DETAILS)
+        .and.notify(done);
+    });
     it('should report missing required fields', done => {
       expect(rp.createPlan({}))
         .to.eventually.to.be.rejected.then(e =>
@@ -93,12 +139,17 @@ module.exports = function(x) {
 
   describe('getPlan', () => {
     it('should be able to retrieve plan details', done => {
-      expect(rp.getPlan({ id: TestConstants.PLAN_ID }))
+      expect(
+        rp.getPlan({
+          id: TestConstants.PLAN_ID,
+          businessId: TestConstants.BUSINESS_ID,
+        }),
+      )
         .to.eventually.deep.equal(TestConstants.PLAN_DETAILS)
         .and.notify(done);
     });
     it('should report missing required fields', done => {
-      expect(rp.getPlan({}))
+      expect(rp.getPlan({ id: TestConstants.PLAN_ID }))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
@@ -112,12 +163,17 @@ module.exports = function(x) {
 
   describe('deactivatePlan', () => {
     it('should be able to deactivate plan', done => {
-      expect(rp.deactivatePlan({ id: TestConstants.PLAN_ID }))
+      expect(
+        rp.deactivatePlan({
+          id: TestConstants.PLAN_ID,
+          businessId: TestConstants.BUSINESS_ID,
+        }),
+      )
         .to.eventually.deep.equal(TestConstants.PLAN_DETAILS)
         .and.notify(done);
     });
     it('should report missing required fields', done => {
-      expect(rp.deactivatePlan({}))
+      expect(rp.deactivatePlan({ id: TestConstants.PLAN_ID }))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
@@ -135,13 +191,14 @@ module.exports = function(x) {
         rp.editPlan({
           id: TestConstants.PLAN_ID,
           amount: TestConstants.UPDATED_AMOUNT,
+          businessId: TestConstants.BUSINESS_ID,
         }),
       )
         .to.eventually.deep.equal(TestConstants.UPDATED_PLAN_DETAILS)
         .and.notify(done);
     });
     it('should report missing required fields', done => {
-      expect(rp.editPlan({}))
+      expect(rp.editPlan({ id: TestConstants.PLAN_ID }))
         .to.eventually.to.be.rejected.then(e =>
           Promise.all([
             expect(e).to.have.property('status', 400),
