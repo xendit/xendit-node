@@ -1,10 +1,6 @@
 import { XenditOptions } from '../xendit_opts';
 
-enum QrCodeTypes {
-  Dynamic = 'DYNAMIC',
-  Static = 'STATIC',
-}
-
+type QrCodeTypes = 'STATIC' | 'DYNAMIC';
 export = class QrCode {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
