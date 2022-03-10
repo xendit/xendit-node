@@ -1,5 +1,10 @@
 import { RecurringAction, Currency } from './manage_plans';
 
+export interface List<T> {
+  data: T[];
+  has_more: boolean;
+}
+
 export interface UpdateCycleRequest {
   id: string;
   businessId: string;
@@ -75,4 +80,4 @@ export function getAllCycles(data: {
   limit?: number;
   beforeId?: string;
   afterId?: string;
-}): Promise<RecurringCycle[]>;
+}): Promise<List<RecurringCycle>>;

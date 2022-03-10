@@ -682,186 +682,155 @@ Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recu
 
 #### Create recurring schedule
 
-```js
-r.createSchedule({
-  referenceId: 'b288cb04-9214-48a0-b679-5214670e7197',
-  businessId: '6066ebf68204c740b61aa3c7',
-  interval: 'DAY',
-  intervalCount: 1,
-  totalRecurrence: 3,
-  anchorDate: '2022-01-01T00:00:00.001Z',
-  retryInterval: 'DAY',
-  retryIntervalCount: 1,
-  totalRetry: 1,
-  failedAttemptNotifications: [1],
+```ts
+r.createSchedule(data: {
+  referenceId: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
 });
 ```
 
 #### Edit recurring schedule
 
-```js
-r.editSchedule({
-  id: 'resc_6a16636c-43d6-4749-8d61-16203b68a16f',
-  referenceId: 'b288cb04-9214-48a0-b679-5214670e7197',
-  businessId: '6066ebf68204c740b61aa3c7',
-  interval: 'DAY',
-  intervalCount: 1,
-  totalRecurrence: 3,
-  anchorDate: '2022-01-01T00:00:00.001Z',
-  retryInterval: 'DAY',
-  retryIntervalCount: 1,
-  totalRetry: 1,
-  failedAttemptNotifications: [1],
+```ts
+r.editSchedule(data: {
+  id: string;
+  referenceId: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
 });
 ```
 
 #### Get recurring schedule
 
-```js
-r.getSchedule({
-  id: 'resc_6a16636c-43d6-4749-8d61-16203b68a16f',
-  businessId: '6066ebf68204c740b61aa3c7',
+```ts
+r.getSchedule(data: {
+  id: string;
+  businessId: string;
 });
 ```
 
 #### Create recurring plan
 
-```js
-r.createPlan({
-  businessId: '6066ebf68204c740b61aa3c7',
-  referenceId: 'b288cb04-9214-48a0-b679-5214670e7197',
-  customerId: '25d0af86-a376-46d8-94b3-f0b0e919a1d0',
-  recurringAction: 'PAYMENT',
-  currency: 'IDR',
-  amount: 1000,
-  paymentMethods: [{
-    payment_method_id: 'pm-60d5e209-4e2a-42da-bae1-aa7d499d61ae',
-    rank: 1
-  }],
-  scheduleId: 'resc_6a16636c-43d6-4749-8d61-16203b68a16f',
-  immediateActionType: null,
-  notification_config: {
-    recurring_created: ['SMS'],
-    recurring_succeeded: ['SMS'],
-    recurring_failed: ['SMS']
-  },
-  failedCycleAction: 'STOP',
-  metadata: null,
+```ts
+r.createPlan(data: {
+  businessId: string;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
+  currency: Currency;
+  amount: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  scheduleId: string;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
+  metadata?: object | null;
 })
 ```
 
 #### Create recurring plan with schedule
-```js
-r.createPlan({
-  businessId: '6066ebf68204c740b61aa3c7',
-  referenceId: 'b288cb04-9214-48a0-b679-5214670e7197',
-  customerId: '25d0af86-a376-46d8-94b3-f0b0e919a1d0',
-  recurringAction: 'PAYMENT',
-  currency: 'IDR',
-  amount: 1000,
-  paymentMethods: [{
-    payment_method_id: 'pm-60d5e209-4e2a-42da-bae1-aa7d499d61ae',
-    rank: 1
-  }],
-  schedule: {
-    reference_id: 'b288cb04-9214-48a0-b679-5214670e7197',
-    interval: 'MONTH',
-    interval_count: 1,
-    total_recurrence: 12,
-    anchor_date: '2021-12-28T09:44:19.546Z',
-    retry_interval: 'DAY',
-    retry_interval_count: 5,
-    total_retry: 5,
-    failed_attempt_notifications: [2, 4]
-  },
-  immediateActionType: null,
-  notification_config: {
-    recurring_created: ['SMS'],
-    recurring_succeeded: ['SMS'],
-    recurring_failed: ['SMS']
-  },
-  failedCycleAction: 'STOP',
-  metadata: null,
+```ts
+r.createPlan(data: {
+  businessId: string;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
+  currency: Currency;
+  amount: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  schedule: RecurringSchedule;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
+  metadata?: object | null;
 })
 ```
 
 #### Edit recurring plan
 
-```js
-r.editPlan({
-  businessId: '6066ebf68204c740b61aa3c7',
-  customerId: '25d0af86-a376-46d8-94b3-f0b0e919a1d0',
-  currency: 'IDR',
-  amount: 1000,
-  paymentMethods: [{
-    payment_method_id: 'pm-60d5e209-4e2a-42da-bae1-aa7d499d61aa',
-    rank: 1
-  }],
-  notification_config: {
-    recurring_created: ['SMS'],
-    recurring_succeeded: ['SMS'],
-    recurring_failed: ['SMS']
-  },
-  metadata: null,
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+```ts
+r.editPlan(data: {
+  businessId: string;
+  customerId?: string;
+  currency?: Currency;
+  amount?: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  notificationConfig?: NotificationConfig | null;
+  metadata?: object | null;
+  description?: string;
 })
 ```
 
 #### Get recurring plan
 
-```js
-r.getPlan({ id: 'repl_1422128c-3767-4c00-aefa-a3b2c9cc49d8', businessId: '6066ebf68204c740b61aa3c1' })
+```ts
+r.getPlan(data: { id: string; businessId: string; })
 ```
 
 #### Deactivate recurring plan
 
-```js
-r.deactivatePlan({ id: 'repl_1422128c-3767-4c00-aefa-a3b2c9cc49d8', businessId: '6066ebf68204c740b61aa3c1' })
+```ts
+r.deactivatePlan(data: { id: string; businessId: string; })
 ```
 
 #### Edit recurring cycle
 
-```js
-r.editCycle({
-  id: 'recy_96301c03-bdda-4a57-b85a-2faf2bf134r1',
-  planId: 'repl_1422128c-3767-4c00-aefa-a3b2c9cc49d8',
-  businessId: '6066ebf68204c740b61aa3c1',
-  scheduled_timestamp: '2022-01-01T00:00:00.001Z',
-  currency: 'IDR',
-  amount: 1000,
-  metadata: null,
+```ts
+r.editCycle(data: {
+  id: string;
+  businessId: string;
+  planId: string;
+  scheduled_timestamp: string;
+  currency: Currency;
+  amount: number;
+  metadata?: object | null;
 })
 ```
 
 #### Get recurring cycle
 
-```js
-r.getCycle({
-  id: 'recy_96301c03-bdda-4a57-b85a-2faf2bf134r1',
-  planId: 'repl_1422128c-3767-4c00-aefa-a3b2c9cc49d8',
-  businessId: '6066ebf68204c740b61aa3c1',
+```ts
+r.getCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
 })
 ```
 
 #### Get all recurring cycles
 
-```js
-r.getAllCycles({
-  planId: 'repl_1422128c-3767-4c00-aefa-a3b2c9cc49d8',
-  businessId: '6066ebf68204c740b61aa3c1',
-  limit: 5,
-  beforeId: 'recy_96301c03-bdda-4a57-b85a-2faf2bf134r1',
-  afterId: 'recy_f5214905-5a32-4302-9528-077bdc0d7d56',
+```ts
+r.getAllCycles(data: {
+  planId: string;
+  businessId: string;
+  limit?: number;
+  beforeId?: string;
+  afterId?: string;
 })
 ```
 
 #### Cancel recurring cycle
 
-```js
-r.cancelCycle({
-  id: 'recy_96301c03-bdda-4a57-b85a-2faf2bf134r1',
-  planId: 'repl_1422128c-3767-4c00-aefa-a3b2c9cc49d8',
-  businessId: '6066ebf68204c740b61aa3c1',
+```ts
+r.cancelCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
 })
 ```
 
