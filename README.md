@@ -702,7 +702,6 @@ r.createSchedule(data: {
 ```ts
 r.editSchedule(data: {
   id: string;
-  referenceId: string;
   businessId: string;
   interval: string;
   intervalCount: number;

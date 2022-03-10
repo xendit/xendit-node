@@ -46,7 +46,6 @@ function createSchedule(data) {
         retry_interval_count: data.retryIntervalCount,
         total_retry: data.totalRetry,
         failed_attempt_notifications: data.failedAttemptNotifications,
-        failed_cycle_action: data.failedCycleAction,
       }),
     })
       .then(resolve)
@@ -68,7 +67,6 @@ function editSchedule(data) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        reference_id: data.referenceId,
         interval: data.interval,
         interval_count: data.intervalCount,
         total_recurrence: data.totalRecurrence,
@@ -77,7 +75,6 @@ function editSchedule(data) {
         retry_interval_count: data.retryIntervalCount,
         total_retry: data.totalRetry,
         failed_attempt_notifications: data.failedAttemptNotifications,
-        failed_cycle_action: data.failedCycleAction,
       }),
     })
       .then(resolve)

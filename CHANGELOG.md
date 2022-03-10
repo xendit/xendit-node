@@ -2,9 +2,10 @@
 
 ## 2022-03-09
 
-- Added recurring schedules service
-- Added recurring plans service
-- Added recurring cycles service
+- Added recurring service
+  - recurring schedules
+  - recurring plans
+  - recurring cycles
 
 ## 2021-12-07
 
