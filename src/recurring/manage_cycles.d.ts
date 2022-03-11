@@ -9,7 +9,7 @@ export interface UpdateCycleRequest {
   id: string;
   businessId: string;
   planId: string;
-  scheduled_timestamp: string;
+  scheduledTimestamp: string;
   currency: Currency;
   amount: number;
   metadata?: object | null;
