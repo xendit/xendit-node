@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2022-03-09
+## 2022-03-11
 
 - Added recurring service
   - recurring schedules
