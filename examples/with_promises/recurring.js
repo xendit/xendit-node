@@ -4,15 +4,19 @@ const x = require('../xendit');
 const Recurring = x.Recurring;
 const r = new Recurring({});
 
-const exampledBusinessId = '6066ebf68204c740b61aa3c1';
+const exampleBusinessId = '6066ebf68204c740b61aa3c1';
+const exampleReferenceId = 'cf53cdbb-f92d-4220-835d-b907915d9551';
+const exampleCustomerId = 'ba0e4584-4fc4-4cb2-a835-6191500540ef';
+const examplePaymentMethodId = 'pm-fb182048-7448-4ffe-877a-a29efa3d7195';
+const scheduledTimestamp = new Date(Date.now() + 3600 * 1000).toISOString();
 
 let scheduleId;
 let planId;
 
 function runSchedules() {
   r.createSchedule({
-    referenceId: exampledReferenceId,
-    businessId: exampledBusinessId,
+    referenceId: exampleReferenceId,
+    businessId: exampleBusinessId,
     interval: 'DAY',
     intervalCount: 1,
     totalRecurrence: 3,
@@ -30,7 +34,7 @@ function runSchedules() {
     .then(createdSchedule => {
       return r.getSchedule({
         id: createdSchedule.id,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
       });
     })
     .then(schedule => {
@@ -40,8 +44,9 @@ function runSchedules() {
     .then(schedule => {
       return r.editSchedule({
         id: schedule.id,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
         interval: 'MONTH',
+        intervalCount: 1,
       });
     })
     .then(editedSchedule => {
@@ -51,15 +56,15 @@ function runSchedules() {
 
 function runPlans() {
   r.createPlan({
-    businessId: exampledBusinessId,
-    referenceId: exampledReferenceId,
-    customerId: exampledCustomerId,
+    businessId: exampleBusinessId,
+    referenceId: exampleReferenceId,
+    customerId: exampleCustomerId,
     recurringAction: 'PAYMENT',
     currency: 'IDR',
     amount: 1000,
     paymentMethods: [
       {
-        payment_method_id: exampledPaymentMethodId,
+        paymentMethodId: examplePaymentMethodId,
         rank: 1,
       },
     ],
@@ -81,7 +86,7 @@ function runPlans() {
     .then(createdPlan => {
       return r.getPlan({
         id: createdPlan.id,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
       });
     })
     .then(plan => {
@@ -91,7 +96,7 @@ function runPlans() {
     .then(plan => {
       return r.editPlan({
         id: plan.id,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
         amount: 1000,
       });
     })
@@ -102,7 +107,7 @@ function runPlans() {
     .then(plan => {
       return r.deactivatePlan({
         id: plan.id,
-        businessId: plan.business_id,
+        businessId: exampleBusinessId,
       });
     })
     .then(deactivatedPlan => {
@@ -113,7 +118,7 @@ function runPlans() {
 function runCycles() {
   r.getAllCycles({
     planId: planId,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
     limit: 2,
   })
     .then(() => {
@@ -124,7 +129,7 @@ function runCycles() {
       return r.getCycle({
         id: response.data[0].id,
         planId: planId,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
       });
     })
     .then(cycle => {
@@ -135,8 +140,10 @@ function runCycles() {
       return r.editCycle({
         id: cycle.id,
         planId: planId,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
         amount: 1000,
+        currency: 'IDR',
+        scheduledTimestamp: scheduledTimestamp,
       });
     })
     .then(editedCycle => {
@@ -147,7 +154,7 @@ function runCycles() {
       return r.cancelCycle({
         id: editedCycle.id,
         planId: planId,
-        businessId: exampledBusinessId,
+        businessId: exampleBusinessId,
       });
     })
     .then(canceledCycle => {

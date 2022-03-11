@@ -4,15 +4,19 @@ const x = require('../xendit');
 const Recurring = x.Recurring;
 const r = new Recurring({});
 
-const exampledBusinessId = '6066ebf68204c740b61aa3c1';
+const exampleBusinessId = '6066ebf68204c740b61aa3c1';
+const exampleReferenceId = 'cf53cdbb-f92d-4220-835d-b907915d9551';
+const exampleCustomerId = 'ba0e4584-4fc4-4cb2-a835-6191500540ef';
+const examplePaymentMethodId = 'pm-fb182048-7448-4ffe-877a-a29efa3d7195';
+const scheduledTimestamp = new Date(Date.now() + 3600 * 1000).toISOString();
 
 let scheduleId;
 let planId;
 
 async function runSchedules() {
   const createdSchedule = await r.createSchedule({
-    referenceId: exampledReferenceId,
-    businessId: exampledBusinessId,
+    referenceId: exampleReferenceId,
+    businessId: exampleBusinessId,
     interval: 'DAY',
     intervalCount: 1,
     totalRecurrence: 3,
@@ -28,7 +32,7 @@ async function runSchedules() {
 
   const schedule = await r.getSchedule({
     id: createdSchedule.id,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
   });
 
   // eslint-disable-next-line no-console
@@ -36,8 +40,9 @@ async function runSchedules() {
 
   const editedSchedule = await r.editSchedule({
     id: schedule.id,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
     interval: 'MONTH',
+    intervalCount: 1,
   });
 
   // eslint-disable-next-line no-console
@@ -46,15 +51,15 @@ async function runSchedules() {
 
 async function runPlans() {
   const createdPlan = await r.createPlan({
-    businessId: exampledBusinessId,
-    referenceId: exampledReferenceId,
-    customerId: exampledCustomerId,
+    businessId: exampleBusinessId,
+    referenceId: exampleReferenceId,
+    customerId: exampleCustomerId,
     recurringAction: 'PAYMENT',
     currency: 'IDR',
     amount: 1000,
     paymentMethods: [
       {
-        payment_method_id: exampledPaymentMethodId,
+        paymentMethodId: examplePaymentMethodId,
         rank: 1,
       },
     ],
@@ -75,7 +80,7 @@ async function runPlans() {
 
   const plan = await r.getPlan({
     id: createdPlan.id,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
   });
 
   // eslint-disable-next-line no-console
@@ -83,7 +88,7 @@ async function runPlans() {
 
   const editedPlan = await r.editPlan({
     id: plan.id,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
     amount: 1000,
   });
 
@@ -92,7 +97,7 @@ async function runPlans() {
 
   const deactivatedPlan = await r.deactivatePlan({
     id: plan.id,
-    businessId: plan.business_id,
+    businessId: exampleBusinessId,
   });
 
   // eslint-disable-next-line no-console
@@ -102,7 +107,7 @@ async function runPlans() {
 async function runCycles() {
   const response = await r.getAllCycles({
     planId: planId,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
     limit: 2,
   });
 
@@ -114,7 +119,7 @@ async function runCycles() {
   const cycle = await r.getCycle({
     id: response.data[0].id,
     planId: planId,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
   });
 
   // eslint-disable-next-line no-console
@@ -123,8 +128,10 @@ async function runCycles() {
   const editedCycle = await r.editCycle({
     id: cycle.id,
     planId: planId,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
     amount: 1000,
+    currency: 'IDR',
+    scheduledTimestamp: scheduledTimestamp,
   });
 
   // eslint-disable-next-line no-console
@@ -133,7 +140,7 @@ async function runCycles() {
   const canceledCycle = await r.cancelCycle({
     id: cycle.id,
     planId: cycle.plan_id,
-    businessId: exampledBusinessId,
+    businessId: exampleBusinessId,
   });
 
   // eslint-disable-next-line no-console

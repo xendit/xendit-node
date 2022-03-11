@@ -26,12 +26,18 @@ function getCycle(data) {
 function getAllCycles(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['businessId', 'planId'], data, reject);
+    const query = {};
+    if (data.limit) {
+      query.limit = data.limit;
+    }
+    if (data.beforeId) {
+      query.before_id = data.beforeId;
+    }
+    if (data.afterId) {
+      query.after_id = data.afterId;
+    }
 
-    const urlSearchParams = querystring.stringify({
-      limit: data.limit,
-      before_id: data.beforeId,
-      after_id: data.afterId,
-    });
+    const urlSearchParams = querystring.stringify(query);
 
     fetchWithHTTPErr(
       `${this.API_ENDPOINT_PLANS}/${
