@@ -35,7 +35,6 @@ async function runSchedules() {
     businessId: exampleBusinessId,
   });
 
-  // eslint-disable-next-line no-console
   console.log('recurring schedule:', schedule);
 
   const editedSchedule = await r.editSchedule({
@@ -45,7 +44,6 @@ async function runSchedules() {
     intervalCount: 1,
   });
 
-  // eslint-disable-next-line no-console
   console.log('edited recurring schedule:', editedSchedule);
 }
 
@@ -75,7 +73,6 @@ async function runPlans() {
   });
   planId = createdPlan.id;
 
-  // eslint-disable-next-line no-console
   console.log('created recurring plan:', createdPlan);
 
   const plan = await r.getPlan({
@@ -83,7 +80,6 @@ async function runPlans() {
     businessId: exampleBusinessId,
   });
 
-  // eslint-disable-next-line no-console
   console.log('recurring plan:', plan);
 
   const editedPlan = await r.editPlan({
@@ -92,7 +88,6 @@ async function runPlans() {
     amount: 1000,
   });
 
-  // eslint-disable-next-line no-console
   console.log('edited recurring plan:', editedPlan);
 
   const deactivatedPlan = await r.deactivatePlan({
@@ -100,7 +95,6 @@ async function runPlans() {
     businessId: exampleBusinessId,
   });
 
-  // eslint-disable-next-line no-console
   console.log('deactivated recurring plan:', deactivatedPlan);
 }
 
@@ -111,9 +105,7 @@ async function runCycles() {
     limit: 2,
   });
 
-  // eslint-disable-next-line no-console
   console.log('recurring cycles:', response.data);
-  // eslint-disable-next-line no-console
   console.log('has more recurring cycles:', response.has_more);
 
   const cycle = await r.getCycle({
@@ -122,7 +114,6 @@ async function runCycles() {
     businessId: exampleBusinessId,
   });
 
-  // eslint-disable-next-line no-console
   console.log('recurring cycle:', cycle);
 
   const editedCycle = await r.editCycle({
@@ -134,7 +125,6 @@ async function runCycles() {
     scheduledTimestamp: scheduledTimestamp,
   });
 
-  // eslint-disable-next-line no-console
   console.log('edited recurring cycle:', editedCycle);
 
   const canceledCycle = await r.cancelCycle({
@@ -143,7 +133,6 @@ async function runCycles() {
     businessId: exampleBusinessId,
   });
 
-  // eslint-disable-next-line no-console
   console.log('canceled recurring cycle:', canceledCycle);
 }
 
@@ -153,7 +142,7 @@ async function runCycles() {
     await runPlans();
     await runCycles();
   } catch (e) {
-    console.error(e); // eslint-disable-line no-console
+    console.error(e);
     process.exit(1);
   }
 })();
