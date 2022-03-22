@@ -20,18 +20,19 @@ let scheduleId;
 let planId;
 
 function runSchedules() {
-  r.createSchedule({
-    referenceId: exampleReferenceId,
-    businessId: exampleBusinessId,
-    interval: 'DAY',
-    intervalCount: 1,
-    totalRecurrence: 3,
-    anchorDate: '2022-01-01T00:00:00.001Z',
-    retryInterval: 'DAY',
-    retryIntervalCount: 1,
-    totalRetry: 1,
-    failedAttemptNotifications: [1],
-  })
+  return r
+    .createSchedule({
+      referenceId: exampleReferenceId,
+      businessId: exampleBusinessId,
+      interval: 'DAY',
+      intervalCount: 1,
+      totalRecurrence: 3,
+      anchorDate: '2022-01-01T00:00:00.001Z',
+      retryInterval: 'DAY',
+      retryIntervalCount: 1,
+      totalRetry: 1,
+      failedAttemptNotifications: [1],
+    })
     .then(createdSchedule => {
       scheduleId = createdSchedule.id;
       console.log('created recurring schedule:', createdSchedule);
@@ -61,29 +62,30 @@ function runSchedules() {
 }
 
 function runPlans() {
-  r.createPlan({
-    businessId: exampleBusinessId,
-    referenceId: exampleReferenceId,
-    customerId: exampleCustomerId,
-    recurringAction: 'PAYMENT',
-    currency: 'IDR',
-    amount: 1000,
-    paymentMethods: [
-      {
-        paymentMethodId: examplePaymentMethodId,
-        rank: 1,
+  return r
+    .createPlan({
+      businessId: exampleBusinessId,
+      referenceId: exampleReferenceId,
+      customerId: exampleCustomerId,
+      recurringAction: 'PAYMENT',
+      currency: 'IDR',
+      amount: 1000,
+      paymentMethods: [
+        {
+          paymentMethodId: examplePaymentMethodId,
+          rank: 1,
+        },
+      ],
+      scheduleId: scheduleId,
+      immediateActionType: null,
+      notification_config: {
+        recurring_created: ['SMS'],
+        recurring_succeeded: ['SMS'],
+        recurring_failed: ['SMS'],
       },
-    ],
-    scheduleId: scheduleId,
-    immediateActionType: null,
-    notification_config: {
-      recurring_created: ['SMS'],
-      recurring_succeeded: ['SMS'],
-      recurring_failed: ['SMS'],
-    },
-    failedCycleAction: 'STOP',
-    metadata: null,
-  })
+      failedCycleAction: 'STOP',
+      metadata: null,
+    })
     .then(createdPlan => {
       planId = createdPlan.id;
       console.log('created recurring plan:', createdPlan);
@@ -109,29 +111,32 @@ function runPlans() {
     .then(editedPlan => {
       console.log('edited recurring plan:', editedPlan);
       return editedPlan;
-    })
-    .then(plan => {
-      return r.deactivatePlan({
-        id: plan.id,
-        businessId: exampleBusinessId,
-      });
-    })
-    .then(deactivatedPlan => {
-      console.log('deactivated recurring plan:', deactivatedPlan);
     });
+  /** This is commented out to allow cycle "edit" and "cancel" actions */
+  // .then(plan => {
+  //   return r.deactivatePlan({
+  //     id: plan.id,
+  //     businessId: exampleBusinessId,
+  //   });
+  // })
+  // .then(deactivatedPlan => {
+  //   console.log('deactivated recurring plan:', deactivatedPlan);
+  // })
 }
 
 function runCycles() {
-  r.getAllCycles({
-    planId: planId,
-    businessId: exampleBusinessId,
-    limit: 2,
-  })
-    .then(() => {
+  return r
+    .getAllCycles({
+      planId: planId,
+      businessId: exampleBusinessId,
+      limit: 2,
+    })
+    .then(response => {
       console.log('recurring cycles:', response.data);
       console.log('has more recurring cycles:', response.has_more);
+      return response;
     })
-    .then(() => {
+    .then(response => {
       return r.getCycle({
         id: response.data[0].id,
         planId: planId,

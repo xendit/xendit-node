@@ -96,12 +96,13 @@ async function runPlans() {
 
   console.log('edited recurring plan:', editedPlan);
 
-  const deactivatedPlan = await r.deactivatePlan({
-    id: plan.id,
-    businessId: exampleBusinessId,
-  });
+  /** This is commented out to allow cycle "edit" and "cancel" actions */
+  // const deactivatedPlan = await r.deactivatePlan({
+  //   id: plan.id,
+  //   businessId: exampleBusinessId,
+  // });
 
-  console.log('deactivated recurring plan:', deactivatedPlan);
+  // console.log('deactivated recurring plan:', deactivatedPlan);
 }
 
 async function runCycles() {
