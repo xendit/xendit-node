@@ -4,6 +4,12 @@ const x = require('../xendit');
 const Recurring = x.Recurring;
 const r = new Recurring({});
 
+/**
+ * Before running this example consider the following
+ * 1. make sure to use a valid exampleCustomerId and examplePaymentMethodId
+ * 2. After plan has been deactivated - it's scheduled cycles become cancelled
+ *    which makes impossible to be edit or cancel them
+ */
 const exampleBusinessId = '6066ebf68204c740b61aa3c1';
 const exampleReferenceId = 'cf53cdbb-f92d-4220-835d-b907915d9551';
 const exampleCustomerId = 'ba0e4584-4fc4-4cb2-a835-6191500540ef';

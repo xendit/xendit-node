@@ -16,7 +16,7 @@ import {
 } from './manage_cycles';
 import { createSchedule, getSchedule, editSchedule } from './manage_schedules';
 
-export default class RecurringPlan {
+export default class Recurring {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
