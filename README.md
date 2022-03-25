@@ -64,7 +64,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Create a payout](#create-a-payout)
     - [Get a payout](#get-a-payout)
     - [Void a payout](#void-a-payout)
-  - [EWallet Services](#ewallet-services)
+  - [EWallet Services [SOON TO BE DEPRECATED - MAR 31 2022]](#ewallet-services-soon-to-be-deprecated---mar-31-2022)
     - [Create payment](#create-payment)
     - [Get payment](#get-payment)
     - [Create an ewallet charge](#create-an-ewallet-charge)
@@ -881,7 +881,10 @@ p.getPayout(data: { id: string })
 p.voidPayout(data: { id: string })
 ```
 
-### EWallet Services
+### EWallet Services [SOON TO BE DEPRECATED - MAR 31 2022]
+
+Deprecation notice here: <https://docs.xendit.co/api-deprecation/2019-ewallet>
+We will continue working on developing the SDK to support the new EWallet service
 
 Instanitiate EWallet service using constructor that has been injected with Xendit keys
 
