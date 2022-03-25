@@ -8,8 +8,8 @@ const card = new Card({});
 // You can generate sample token/authentication data and replace it below
 // https://js.xendit.co/test_tokenize.html
 // https://js.xendit.co/test_authenticate.html
-const tokenID = '6201f056382ab2001b4bc3d6';
-const authID = '6201f324382ab2001b4bc3eb';
+const tokenID = '623d394d672113001b79c1a1';
+const authID = '623d394d672113001b79c1a2';
 
 function sleepFor(sleepDuration) {
   var now = new Date().getTime();

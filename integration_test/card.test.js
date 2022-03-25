@@ -2,10 +2,10 @@ const x = require('./xendit.test');
 
 const Card = x.Card;
 const card = new Card({});
-
+//  5e046a736113354249aab8bd old charge
 module.exports = function() {
   return card
-    .getCharge({ chargeID: '5e046a736113354249aab8bd' })
+    .getCharge({ chargeID: '623d397a360c32001b0aeeda' })
     .then(() =>
       card.createPromotion({
         referenceId: Date.now().toString(),

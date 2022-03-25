@@ -27,7 +27,7 @@ const p = new Platform({});
     const transfer = await p.createTransfer({
       reference: `example+${Date.now().toString()}`,
       amount: 1,
-      sourceUserID: '5df358652ebad7084a70ac6c',
+      sourceUserID: '623d3cda7012f7478e9a7e69',
       destinationUserID: account.user_id,
     });
 

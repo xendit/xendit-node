@@ -31,28 +31,6 @@ const c = new Customer({});
     });
     // eslint-disable-next-line no-console
     console.log('retrieved customers', customers);
-
-    customer = await c.updateCustomer({
-      id: customer.id,
-      description: 'customer dummy',
-      phoneNumber: '+628987654321',
-      nationality: 'ID',
-      dateOfBirth: '2000-06-13',
-      addresses: [
-        {
-          streetLine1: 'jalan raya',
-          country: 'ID',
-          city: 'Jakarta',
-        },
-        {
-          streetLine1: 'jalan raya 2',
-          country: 'ID',
-          city: 'Jakarta',
-        },
-      ],
-      apiVersion: '2020-05-19',
-    });
-    console.log('updated customer', customer); //eslint-disable-line no-console
   } catch (e) {
     console.error(e); // eslint-disable-line no-console
     process.exit(1);
