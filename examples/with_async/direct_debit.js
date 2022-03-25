@@ -15,6 +15,7 @@ const c = new Customer({});
       middleName: 'middle',
       surname: 'surname',
       addresses: [],
+      apiVersion: '2020-05-19',
     });
 
     let tokenization = await dd.initializeTokenization({

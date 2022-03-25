@@ -5,8 +5,18 @@ const card = new Card({});
 
 // These IDs should be obtained using Xendit.js
 // https://docs.xendit.co/xenpayments/payments-credit-cards-overview/credit-cards-integration-and-testing/collecting-card-details-tokenization/index.html
-const tokenID = '5e0461a86113354249aab7ec';
-const authID = '5e0461a96113354249aab7ee';
+// You can generate sample token/authentication data and replace it below
+// https://js.xendit.co/test_tokenize.html
+// https://js.xendit.co/test_authenticate.html
+const tokenID = '6201f056382ab2001b4bc3d6';
+const authID = '6201f324382ab2001b4bc3eb';
+
+function sleepFor(sleepDuration) {
+  var now = new Date().getTime();
+  while (new Date().getTime() < now + sleepDuration) {
+    /* Do nothing */
+  }
+}
 
 (async function() {
   try {
@@ -24,14 +34,16 @@ const authID = '5e0461a96113354249aab7ee';
     console.log('charge created:', charge); // eslint-disable-line no-console
 
     const capture = await card.captureCharge({
-      chargeID: id,
+      chargeID: charge.id,
       amount: 10000,
     });
     console.log('charge captured:', capture); // eslint-disable-line no-console
 
+    sleepFor(3000);
+
     const refund = await card.createRefund({
-      chargeID: id,
-      externalID: external_id,
+      chargeID: charge.id,
+      externalID: charge.external_id,
       amount: 5000,
     });
     console.log('refund created:', refund); // eslint-disable-line no-console
@@ -45,8 +57,8 @@ const authID = '5e0461a96113354249aab7ee';
       currency: 'IDR',
       minOriginalAmount: 25000,
       maxDiscountAmount: 5000,
-      startTime: '2022-03-25T00:00:00.000Z',
-      endTime: '2022-05-25T00:00:00.000Z',
+      startTime: '2022-01-25T00:00:00.000Z',
+      endTime: '2023-01-25T00:00:00.000Z',
     });
     // eslint-disable-next-line max-len
     console.log('promotion created:', promotion); // eslint-disable-line no-console
