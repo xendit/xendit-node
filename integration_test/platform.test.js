@@ -12,19 +12,19 @@ module.exports = function() {
         businessName: `example+${Date.now().toString()}`,
       },
     })
-    .then(({ user_id }) =>
+    .then(r =>
       p.setCallbackURL({
-        forUserID: user_id,
+        forUserID: r.user_id,
         type: 'invoice',
         url: 'https://httpstat.us/200',
       }),
     )
-    .then(({ user_id }) =>
+    .then(r =>
       p.createTransfer({
         reference: `example+${Date.now().toString()}`,
         amount: 1,
-        sourceUserID: '5df358652ebad7084a70ac6c',
-        destinationUserID: user_id,
+        sourceUserID: '623d3cda7012f7478e9a7e69',
+        destinationUserID: r.user_id,
       }),
     )
     .then(() =>

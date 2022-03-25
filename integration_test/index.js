@@ -8,7 +8,7 @@ Promise.all([
   require('./recurring.test')(),
   require('./balance.test')(),
   require('./retail_outlet.test')(),
-  require('./ewallet.test')(),
+  // require('./ewallet.test')(),
   require('./qr_code.test')(),
   require('./platform.test')(),
   require('./customer.test')(),
