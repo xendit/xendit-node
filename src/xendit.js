@@ -3,7 +3,8 @@ const { VAService } = require('./va');
 const { DisbursementService } = require('./disbursement');
 const { InvoiceService } = require('./invoice');
 const { PayoutService } = require('./payout');
-const { RecurringPayment } = require('./recurring');
+const { Recurring } = require('./recurring');
+const { RecurringPayment } = require('./recurring_payment');
 const { EWalletService } = require('./ewallet');
 const { BalanceServices } = require('./balance');
 const { RetailOutletService } = require('./retail_outlet');
@@ -33,6 +34,7 @@ function Xendit(options) {
   );
   this.Invoice = InvoiceService._constructorWithInjectedXenditOpts(this.opts);
   this.Payout = PayoutService._constructorWithInjectedXenditOpts(this.opts);
+  this.Recurring = Recurring._constructorWithInjectedXenditOpts(this.opts);
   this.RecurringPayment = RecurringPayment._constructorWithInjectedXenditOpts(
     this.opts,
   );

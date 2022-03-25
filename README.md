@@ -47,6 +47,19 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     + [Stop recurring payment](#stop-recurring-payment)
     + [Pause recurring payment](#pause-recurring-payment)
     + [Resume recurring payment](#resume-recurring-payment)
+  * [Recurring Services](#recurring-services)
+    + [Create recurring schedule](#create-recurring-schedule)
+    + [Edit recurring schedule](#edit-recurring-schedule)
+    + [Get recurring schedule](#get-recurring-schedule)
+    + [Create recurring plan](#create-recurring-plan)
+    + [Create recurring plan with schedule](#create-recurring-plan-with-schedule)
+    + [Edit recurring plan](#edit-recurring-plan)
+    + [Get recurring plan](#get-recurring-plan)
+    + [Deactivate recurring plan](#deactivate-recurring-plan)
+    + [Edit recurring cycle](#edit-recurring-cycle)
+    + [Get recurring cycle](#get-recurring-cycle)
+    + [Get all recurring cycles](#get-all-recurring-cycles)
+    + [Cancel recurring cycle](#cancel-recurring-cycle)
   * [Payout Services](#payout-services)
     + [Create a payout](#create-a-payout)
     + [Get a payout](#get-a-payout)
@@ -623,10 +636,206 @@ rp.pausePayment(data: { id: string })
 ```ts
 rp.resumePayment(data: { id: string })
 ```
+### Recurring Services
+
+Instantiate Recurring service using constructor that has been injected with Xendit keys
+
+```js
+const { Recurring } = x;
+const rSpecificOptions = {};
+const r = new Recurring(rSpecificOptions);
+```
+
+Example: Create a recurring plan
+
+```js
+r.createPlan({
+  businessId: '6066ebf68204c740b61aa3c6',
+  referenceId: 'ref-123',
+  customerId: 'cus-123',
+  recurringAction: 'PAYMENT',
+  currency: 'IDR',
+  amount: 1000,
+  paymentMethods: [
+    { paymentMethodId: 'pm-123', rank: 1 },
+  ],
+  scheduleId: 'resc-123',
+  immediateActionType: 'FULL_AMOUNT',
+  notificationConfig: {
+    recurringCreated: ['EMAIL'],
+    recurringSucceeded: ['SMS'],
+    recurringFailed: ['WHATSAPP']
+  },
+  failedCycleAction: 'RESUME'
+})
+  .then(({ id }) => {
+    console.log(`Recurring plan created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(
+      `Recurring plan creation failed with message: ${e.message}`,
+    );
+  });
+```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recurring-plans) for more info about methods' parameters
+
+#### Create recurring schedule
+
+```ts
+r.createSchedule(data: {
+  referenceId: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
+});
+```
+
+#### Edit recurring schedule
+
+```ts
+r.editSchedule(data: {
+  id: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
+});
+```
+
+#### Get recurring schedule
+
+```ts
+r.getSchedule(data: {
+  id: string;
+  businessId: string;
+});
+```
+
+#### Create recurring plan
+
+```ts
+r.createPlan(data: {
+  businessId: string;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
+  currency: Currency;
+  amount: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  scheduleId: string;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
+  metadata?: object | null;
+})
+```
+
+#### Create recurring plan with schedule
+```ts
+r.createPlan(data: {
+  businessId: string;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
+  currency: Currency;
+  amount: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  schedule: RecurringSchedule;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
+  metadata?: object | null;
+})
+```
+
+#### Edit recurring plan
+
+```ts
+r.editPlan(data: {
+  businessId: string;
+  customerId?: string;
+  currency?: Currency;
+  amount?: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  notificationConfig?: NotificationConfig | null;
+  metadata?: object | null;
+  description?: string;
+})
+```
+
+#### Get recurring plan
+
+```ts
+r.getPlan(data: { id: string; businessId: string; })
+```
+
+#### Deactivate recurring plan
+
+```ts
+r.deactivatePlan(data: { id: string; businessId: string; })
+```
+
+#### Edit recurring cycle
+
+```ts
+r.editCycle(data: {
+  id: string;
+  businessId: string;
+  planId: string;
+  scheduledTimestamp: string;
+  currency: Currency;
+  amount: number;
+  metadata?: object | null;
+})
+```
+
+#### Get recurring cycle
+
+```ts
+r.getCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
+})
+```
+
+#### Get all recurring cycles
+
+```ts
+r.getAllCycles(data: {
+  planId: string;
+  businessId: string;
+  limit?: number;
+  beforeId?: string;
+  afterId?: string;
+})
+```
+
+#### Cancel recurring cycle
+
+```ts
+r.cancelCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
+})
+```
 
 ### Payout Services
 
-Instanitiate Payout service using constructor that has been injected with Xendit keys
+Instantiate Payout service using constructor that has been injected with Xendit keys
 
 ```js
 const { Payout } = x;
@@ -1194,7 +1403,7 @@ r.generateReport({
   })
   .catch(e => {
     console.error(`Generate Report Failed with Error: ${e.message}`);
-  })
+  });
 ```
 
 #### Generate Report

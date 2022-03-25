@@ -1,45 +1,92 @@
-const { createPayment, getPayment, editPayment } = require('./manage_payments');
 const {
-  stopPayment,
-  pausePayment,
-  resumePayment,
-} = require('./operate_payments');
+  createPlan,
+  editPlan,
+  getPlan,
+  deactivatePlan,
+} = require('./manage_plans');
+const {
+  createSchedule,
+  getSchedule,
+  editSchedule,
+} = require('./manage_schedules');
+const {
+  getCycle,
+  getAllCycles,
+  cancelCycle,
+  editCycle,
+} = require('./manage_cycles');
 
-const RECURRING_PATH = '/recurring_payments';
+const RECURRING_PATH = '/recurring';
 
-function RecurringPayment(options) {
-  let aggOpts = options;
-  if (
-    RecurringPayment._injectedOpts &&
-    Object.keys(RecurringPayment._injectedOpts).length > 0
-  ) {
-    aggOpts = Object.assign({}, options, RecurringPayment._injectedOpts);
+class Recurring {
+  constructor(options) {
+    let aggOpts = Object.assign({}, options);
+    if (Object.keys(Recurring._injectedOpts || {}).length) {
+      aggOpts = Object.assign({}, options, Recurring._injectedOpts);
+    }
+
+    this.opts = aggOpts;
+    this.API_ENDPOINT_PLANS = this.opts.xenditURL + `${RECURRING_PATH}/plans`;
+    this.API_ENDPOINT_SCHEDULES =
+      this.opts.xenditURL + `${RECURRING_PATH}/schedules`;
   }
 
-  this.opts = aggOpts;
-  this.API_ENDPOINT = this.opts.xenditURL + RECURRING_PATH;
+  static _constructorWithInjectedXenditOpts(options) {
+    Recurring._injectedOpts = options;
+    return Recurring;
+  }
 }
 
-RecurringPayment._injectedOpts = {};
-RecurringPayment._constructorWithInjectedXenditOpts = function(options) {
-  RecurringPayment._injectedOpts = options;
-  return RecurringPayment;
-};
-RecurringPayment.Interval = {
-  Day: 'DAY',
-  Week: 'WEEK',
-  Month: 'MONTH',
-};
-RecurringPayment.Action = {
-  Stop: 'STOP',
-  Ignore: 'IGNORE',
-};
+Object.assign(Recurring, {
+  _injectedOpts: {},
+  Interval: {
+    Day: 'DAY',
+    Week: 'WEEK',
+    Month: 'MONTH',
+  },
+  Action: {
+    Stop: 'STOP',
+    Ignore: 'IGNORE',
+  },
+  recurringAction: {
+    payment: 'PAYMENT',
+    disbursment: 'DISBURSEMENT',
+  },
+  immediateActionType: {
+    fullAmount: 'FULL_AMOUNT',
+  },
+  notificationChannel: {
+    whatsapp: 'WHATSAPP',
+    sms: 'SMS',
+    email: 'EMAIL',
+  },
+  locale: {
+    en: 'en',
+    id: 'id',
+  },
+  failedCycleAction: {
+    resume: 'RESUME',
+    stop: 'STOP',
+  },
+  status: {
+    active: 'ACTIVE',
+    inactive: 'INACTIVE',
+    pending: 'PENDING',
+  },
+});
 
-RecurringPayment.prototype.createPayment = createPayment;
-RecurringPayment.prototype.getPayment = getPayment;
-RecurringPayment.prototype.editPayment = editPayment;
-RecurringPayment.prototype.stopPayment = stopPayment;
-RecurringPayment.prototype.pausePayment = pausePayment;
-RecurringPayment.prototype.resumePayment = resumePayment;
+Object.assign(Recurring.prototype, {
+  createPlan,
+  editPlan,
+  getPlan,
+  deactivatePlan,
+  createSchedule,
+  getSchedule,
+  editSchedule,
+  getCycle,
+  getAllCycles,
+  editCycle,
+  cancelCycle,
+});
 
-module.exports = RecurringPayment;
+module.exports = Recurring;

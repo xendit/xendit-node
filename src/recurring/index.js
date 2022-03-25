@@ -1,3 +1,3 @@
-const RecurringPayment = require('./recurring');
+const Recurring = require('./recurring');
 
-module.exports = { RecurringPayment };
+module.exports = { Recurring };

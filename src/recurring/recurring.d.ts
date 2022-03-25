@@ -1,29 +1,44 @@
 import { XenditOptions } from '../xendit_opts';
 import {
-  Interval as IntervalEnum,
-  Action as ActionEnum,
-} from './manage_payments';
-import { createPayment, getPayment, editPayment } from './manage_payments';
-import { stopPayment, pausePayment, resumePayment } from './operate_payments';
+  ImmediateActionType,
+  NotificationChannel,
+  NotificationConfigLocale,
+  RecurringAction,
+  FailingCycleAction,
+  RecurringPlanStatus,
+} from './manage_plans';
+import { createPlan, editPlan, getPlan, deactivatePlan } from './manage_plans';
+import {
+  getCycle,
+  editCycle,
+  getAllCycles,
+  cancelCycle,
+} from './manage_cycles';
+import { createSchedule, getSchedule, editSchedule } from './manage_schedules';
 
-export = class RecurringPayment {
+export default class Recurring {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
-  ) => typeof RecurringPayment;
-  static Interval: {
-    Day: IntervalEnum;
-    Week: IntervalEnum;
-    Month: IntervalEnum;
-  };
-  static Action: {
-    Stop: ActionEnum;
-    Ignore: ActionEnum;
-  };
-  createPayment = createPayment;
-  getPayment = getPayment;
-  editPayment = editPayment;
-  stopPayment = stopPayment;
-  pausePayment = pausePayment;
-  resumePayment = resumePayment;
-};
+  ) => typeof RecurringPlan;
+  static recurringAction: RecurringAction;
+  static immediateActionType: ImmediateActionType;
+  static notificationChannel: NotificationChannel;
+  static locale: NotificationConfigLocale;
+  static failedCycleAction: FailingCycleAction;
+  static status: RecurringPlanStatus;
+
+  createPlan: typeof createPlan;
+  editPlan: typeof editPlan;
+  getPlan: typeof getPlan;
+  deactivatePlan: typeof deactivatePlan;
+
+  createSchedule: typeof createSchedule;
+  getSchedule: typeof getSchedule;
+  editSchedule: typeof editSchedule;
+
+  getCycle: typeof getCycle;
+  editCycle: typeof editCycle;
+  getAllCycles: typeof getAllCycles;
+  cancelCycle: typeof cancelCycle;
+}
