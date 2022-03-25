@@ -70,7 +70,7 @@ const UPDATED_PLAN_DETAILS = Object.assign({}, PLAN_DETAILS, {
 });
 
 const CYCLE_ID = 'recy-1234';
-const SCHEDULED_TIMESTAMP = new Date('2022-03-07T16:08:58.697Z').toISOString();
+const SCHEDULED_TIMESTAMP = new Date(Date.now() + 60 * 1000).toISOString();
 const CYCLE_DETAILS = {
   id: CYCLE_ID,
   type: 'IMMEDIATE',
