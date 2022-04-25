@@ -1302,6 +1302,7 @@ dd.initializeTokenization(data: {
   customerID: string;
   channelCode: ChannelCode;
   properties?: DebitCardProperties | OnlineBankingAccessProperties;
+  device?: object;
   metadata?: object;
 });
 ```
@@ -1355,6 +1356,7 @@ dd.createDirectDebitPayment(data: {
   enableOTP?: boolean;
   description?: string;
   basket?: Basket[];
+  device?: object;
   metadata?: object;
 });
 ```

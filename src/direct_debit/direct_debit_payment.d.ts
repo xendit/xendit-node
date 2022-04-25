@@ -22,6 +22,7 @@ export function createDirectDebitPayment(data: {
   enableOTP?: boolean;
   description?: string;
   basket?: Basket[];
+  device?: object;
   metadata?: object;
 }): Promise<object>;
 
