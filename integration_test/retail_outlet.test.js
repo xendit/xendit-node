@@ -8,7 +8,7 @@ function sleepFor(sleepDuration) {
     /* Do nothing */
   }
 }
-module.exports = function () {
+module.exports = function() {
   return ro
     .createFixedPaymentCode({
       externalID: '123',
@@ -18,11 +18,11 @@ module.exports = function () {
     })
     .then(({ id }) => {
       sleepFor(3000);
-      return ro.getFixedPaymentCode({ id })
+      return ro.getFixedPaymentCode({ id });
     })
     .then(({ id }) => {
       sleepFor(3000);
-      return ro.updateFixedPaymentCode({ id: id, expectedAmt: 12000 })
+      return ro.updateFixedPaymentCode({ id: id, expectedAmt: 12000 });
     })
     .then(({ id, payment_code }) =>
       Promise.all([
@@ -34,9 +34,9 @@ module.exports = function () {
         }),
       ]),
     )
-    .then(([id]) => { 
+    .then(([id]) => {
       sleepFor(3000);
-      return ro.getPaymentsByFixedPaymentCodeId({ id }) 
+      return ro.getPaymentsByFixedPaymentCodeId({ id });
     })
     .then(() => {
       // eslint-disable-next-line no-console
