@@ -27,6 +27,7 @@ function createDirectDebitPayment(data) {
         callback_url: data.callbackURL,
         enable_otp: data.enableOTP,
         description: data.description,
+        device: data.channelCode === 'BCA_ONEKLIK' ? data.device : null,
         basket: data.basket
           ? data.basket.map(product => ({
               reference_id: product.referenceID,
