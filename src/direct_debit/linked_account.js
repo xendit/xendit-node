@@ -41,6 +41,7 @@ function getProperties(data) {
     };
   } else {
     return {
+      account_mobile_number: data.properties.accountMobileNumber,
       success_redirect_url: data.properties.successRedirectURL,
       failure_redirect_url: data.properties.failureRedirectURL,
       callback_url: data.properties.callbackURL,
