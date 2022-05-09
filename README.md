@@ -881,10 +881,7 @@ p.getPayout(data: { id: string })
 p.voidPayout(data: { id: string })
 ```
 
-### EWallet Services [SOON TO BE DEPRECATED - MAR 31 2022]
-
-Deprecation notice here: <https://docs.xendit.co/api-deprecation/2019-ewallet>
-We will continue working on developing the SDK to support the new EWallet service
+### EWallet Services
 
 Instanitiate EWallet service using constructor that has been injected with Xendit keys
 
