@@ -64,7 +64,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Create a payout](#create-a-payout)
     - [Get a payout](#get-a-payout)
     - [Void a payout](#void-a-payout)
-  - [EWallet Services [SOON TO BE DEPRECATED - MAR 31 2022]](#ewallet-services-soon-to-be-deprecated---mar-31-2022)
+  - [EWallet Services](#ewallet-services)
     - [Create payment](#create-payment)
     - [Get payment](#get-payment)
     - [Create an ewallet charge](#create-an-ewallet-charge)
