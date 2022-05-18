@@ -19,6 +19,7 @@ export interface UpdateScheduleRequest {
   totalRecurrence?: number;
   anchorDate?: string;
   retryInterval?: Interval | null;
+  updateScheduledCycles?: boolean;
   retryIntervalCount?: number;
   totalRetry?: number | null;
   failedAttemptNotifications?: Array<number>;

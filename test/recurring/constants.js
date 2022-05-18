@@ -12,6 +12,7 @@ const PAYMENT_ID = '5e0577bdf4d38b20d542009b';
 const SCHEDULE_ID = '5e0577bdf4d38b20d542009b';
 const ANCHOR_DATE = new Date().toISOString();
 const START_DATE = '2020-01-31T17:00:00.000Z';
+const UPDATE_SCHEDULED_CYCLES = 'false';
 const CUSTOMER = {
   given_names: 'stan',
   email: 'dummy@email.co',
@@ -98,6 +99,10 @@ const CYCLES_FILTER = {
   limit: 10,
   afterId: 'recy-987',
   beforeId: 'recy-087',
+  search_type_id: 'id',
+  search_type_reference_id: 'reference_id',
+  search_value_id: CYCLE_ID,
+  search_value_reference_id: REF_ID,
 };
 
 module.exports = {
@@ -127,5 +132,6 @@ module.exports = {
   CYCLE_DETAILS,
   SCHEDULED_TIMESTAMP,
   UPDATED_CYCLE_DETAILS,
+  UPDATE_SCHEDULED_CYCLES,
   CYCLES_FILTER,
 };

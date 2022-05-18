@@ -65,6 +65,7 @@ function editSchedule(data) {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
         'business-id': data.businessId,
         'Content-Type': 'application/json',
+        'update-scheduled-cycles': data.updateScheduledCycles || false,
       },
       body: JSON.stringify({
         interval: data.interval,

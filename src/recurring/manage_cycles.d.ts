@@ -63,6 +63,11 @@ export enum RecurringCycleStatus {
   CANCELLED = 'CANCELLED',
 }
 
+export enum CycleDashboardSearchType {
+  CYCLE_ID = 'id',
+  REFERENCE_ID = 'reference_id',
+}
+
 export function editCycle(data: UpdateCycleRequest): Promise<RecurringCycle>;
 export function getCycle(data: {
   id: string;
@@ -80,4 +85,6 @@ export function getAllCycles(data: {
   limit?: number;
   beforeId?: string;
   afterId?: string;
+  searchType?: CycleDashboardSearchType;
+  searchValue?: string;
 }): Promise<List<RecurringCycle>>;
