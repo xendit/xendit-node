@@ -38,6 +38,10 @@ module.exports = function(x) {
 
     nock(recurring.API_ENDPOINT_SCHEDULES)
       .matchHeader('business-id', TestConstants.BUSINESS_ID)
+      .matchHeader(
+        'update-scheduled-cycles',
+        TestConstants.UPDATE_SCHEDULED_CYCLES,
+      )
       .patch(`/${TestConstants.SCHEDULE_ID}`, {
         interval: TestConstants.INTERVAL,
         interval_count: TestConstants.INTERVAL_COUNT + 1,

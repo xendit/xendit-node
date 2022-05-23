@@ -23,6 +23,7 @@ export interface UpdatePlanRequest {
   amount?: number;
   paymentMethods?: Array<PaymentMethodIdRanked>;
   notificationConfig?: NotificationConfig | null;
+  updateScheduledCycles?: boolean;
   metadata?: object | null;
   description?: string;
 }

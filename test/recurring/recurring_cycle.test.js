@@ -27,6 +27,20 @@ module.exports = function(x) {
       .reply(200, [TestConstants.CYCLE_DETAILS]);
     nock(rp.API_ENDPOINT_PLANS)
       .matchHeader('business-id', TestConstants.BUSINESS_ID)
+      .get(
+        // eslint-disable-next-line max-len
+        `/${TestConstants.PLAN_ID}/cycles?search_type=${TestConstants.CYCLES_FILTER.search_type_id}&search_value=${TestConstants.CYCLES_FILTER.search_value_id}`,
+      )
+      .reply(200, [TestConstants.CYCLE_DETAILS]);
+    nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
+      .get(
+        // eslint-disable-next-line max-len
+        `/${TestConstants.PLAN_ID}/cycles?search_type=${TestConstants.CYCLES_FILTER.search_type_reference_id}&search_value=${TestConstants.CYCLES_FILTER.search_value_reference_id}`,
+      )
+      .reply(200, [TestConstants.CYCLE_DETAILS]);
+    nock(rp.API_ENDPOINT_PLANS)
+      .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .patch(`/${TestConstants.PLAN_ID}/cycles/${TestConstants.CYCLE_ID}`, {
         scheduled_timestamp: TestConstants.SCHEDULED_TIMESTAMP,
         currency: TestConstants.CURRENCY,
@@ -75,6 +89,32 @@ module.exports = function(x) {
           limit: TestConstants.CYCLES_FILTER.limit,
           beforeId: TestConstants.CYCLES_FILTER.beforeId,
           afterId: TestConstants.CYCLES_FILTER.afterId,
+        }),
+      )
+        .to.eventually.deep.equal([TestConstants.CYCLE_DETAILS])
+        .and.notify(done);
+    });
+    it('should be able to search cycles by id', done => {
+      expect(
+        rp.getAllCycles({
+          id: TestConstants.CYCLE_ID,
+          businessId: TestConstants.BUSINESS_ID,
+          planId: TestConstants.PLAN_ID,
+          searchType: TestConstants.CYCLES_FILTER.search_type_id,
+          searchValue: TestConstants.CYCLES_FILTER.search_value_id,
+        }),
+      )
+        .to.eventually.deep.equal([TestConstants.CYCLE_DETAILS])
+        .and.notify(done);
+    });
+    it('should be able to search cycles by reference_id', done => {
+      expect(
+        rp.getAllCycles({
+          id: TestConstants.CYCLE_ID,
+          businessId: TestConstants.BUSINESS_ID,
+          planId: TestConstants.PLAN_ID,
+          searchType: TestConstants.CYCLES_FILTER.search_type_reference_id,
+          searchValue: TestConstants.CYCLES_FILTER.search_value_reference_id,
         }),
       )
         .to.eventually.deep.equal([TestConstants.CYCLE_DETAILS])

@@ -14,4 +14,6 @@ module.exports = {
   limit: 'limit',
   afterId: 'after_id',
   beforeId: 'before_id',
+  searchType: 'search_type',
+  searchValue: 'search_value',
 };

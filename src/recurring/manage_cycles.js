@@ -36,6 +36,12 @@ function getAllCycles(data) {
     if (data.afterId) {
       query.after_id = data.afterId;
     }
+    if (data.searchType) {
+      query.search_type = data.searchType;
+    }
+    if (data.searchValue) {
+      query.search_value = data.searchValue;
+    }
 
     const urlSearchParams = querystring.stringify(query);
 
