@@ -709,7 +709,7 @@ r.editSchedule(data: {
   totalRecurrence?: number;
   anchorDate?: string;
   retryInterval?: string;
-  updateScheduledCycles?: boolean;
+  updateScheduledCycle?: boolean;
   retryIntervalCount?: number;
   totalRetry?: number;
   failedAttemptNotifications?: number[];
@@ -773,7 +773,7 @@ r.editPlan(data: {
   amount?: number;
   paymentMethods?: Array<PaymentMethodIdRanked>;
   notificationConfig?: NotificationConfig | null;
-  updateScheduledCycles?: boolean;
+  updateScheduledCycle?: boolean;
   metadata?: object | null;
   description?: string;
 })
