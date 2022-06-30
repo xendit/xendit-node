@@ -709,6 +709,7 @@ r.editSchedule(data: {
   totalRecurrence?: number;
   anchorDate?: string;
   retryInterval?: string;
+  updateScheduledCycle?: boolean;
   retryIntervalCount?: number;
   totalRetry?: number;
   failedAttemptNotifications?: number[];
@@ -772,6 +773,7 @@ r.editPlan(data: {
   amount?: number;
   paymentMethods?: Array<PaymentMethodIdRanked>;
   notificationConfig?: NotificationConfig | null;
+  updateScheduledCycle?: boolean;
   metadata?: object | null;
   description?: string;
 })
@@ -822,6 +824,8 @@ r.getAllCycles(data: {
   limit?: number;
   beforeId?: string;
   afterId?: string;
+  searchType?: CycleDashboardSearchType;
+  searchValue?: string;
 })
 ```
 

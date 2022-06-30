@@ -63,8 +63,8 @@ module.exports = function(x) {
     nock(rp.API_ENDPOINT_PLANS)
       .matchHeader('business-id', TestConstants.BUSINESS_ID)
       .matchHeader(
-        'update-scheduled-cycles',
-        TestConstants.UPDATE_SCHEDULED_CYCLES,
+        'update-scheduled-cycle',
+        TestConstants.UPDATE_SCHEDULED_CYCLE,
       )
       .patch(`/${TestConstants.PLAN_ID}`, {
         amount: TestConstants.UPDATED_AMOUNT,

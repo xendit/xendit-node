@@ -100,7 +100,7 @@ function editPlan(data) {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
         'Content-Type': 'application/json',
         'business-id': data.businessId,
-        'update-scheduled-cycles': data.updateScheduledCycles || false,
+        'update-scheduled-cycle': data.updateScheduledCycle || false,
       },
       body: JSON.stringify({
         customer_id: data.customerId,
