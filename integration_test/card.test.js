@@ -17,7 +17,7 @@ module.exports = function() {
         minOriginalAmount: 25000,
         maxDiscountAmount: 5000,
         startTime: '2022-03-25T00:00:00.000Z',
-        endTime: '2022-05-25T00:00:00.000Z',
+        endTime: '2025-05-25T00:00:00.000Z',
       }),
     )
     .then(() => {
