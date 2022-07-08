@@ -24,6 +24,8 @@ export function createDirectDebitPayment(data: {
   basket?: Basket[];
   device?: object;
   metadata?: object;
+  successRedirectUrl?: string;
+  failureRedirectUrl?: string;
 }): Promise<object>;
 
 export function validateOTPforPayment(data: {

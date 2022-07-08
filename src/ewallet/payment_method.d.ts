@@ -3,7 +3,8 @@ enum PaymentMethodType {
 }
 
 interface PaymentMethodProperties {
-  id: string;
+  id?: string;
+  channelCode?: string;
 }
 
 export function createPaymentMethod(data: {
