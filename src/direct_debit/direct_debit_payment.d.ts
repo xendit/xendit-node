@@ -14,6 +14,7 @@ interface Basket {
 
 export function createDirectDebitPayment(data: {
   idempotencyKey: string;
+  apiVersion?: string;
   referenceID: string;
   paymentMethodID: string;
   currency: string;
@@ -31,6 +32,7 @@ export function createDirectDebitPayment(data: {
 export function validateOTPforPayment(data: {
   directDebitID: string;
   otpCode: string;
+  apiVersion?: string;
 }): Promise<object>;
 
 export function getDirectDebitPaymentStatusByID(data: {

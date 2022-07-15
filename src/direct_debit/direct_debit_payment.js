@@ -12,13 +12,18 @@ function createDirectDebitPayment(data) {
     ];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    const headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+      'Idempotency-key': data.idempotencyKey,
+    };
+    if (data.apiVersion !== null) {
+      headers['Api-Version'] = data.apiVersion;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/direct_debits`, {
       method: 'POST',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-        'Idempotency-key': data.idempotencyKey,
-      },
+      headers,
       body: JSON.stringify({
         reference_id: data.referenceID,
         payment_method_id: data.paymentMethodID,
@@ -58,14 +63,19 @@ function validateOTPforPayment(data) {
     const compulsoryFields = ['directDebitID', 'otpCode'];
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
+    const headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+    if (data.apiVersion !== null) {
+      headers['Api-Version'] = data.apiVersion;
+    }
+
     fetchWithHTTPErr(
       `${this.API_ENDPOINT}/direct_debits/${data.directDebitID}/validate_otp/`,
       {
         method: 'POST',
-        headers: {
-          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           otp_code: data.otpCode,
         }),

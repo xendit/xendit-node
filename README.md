@@ -1349,6 +1349,7 @@ dd.getPaymentMethodsByCustomerID(data: {
 ```ts
 dd.createDirectDebitPayment(data: {
   idempotencyKey: string;
+  apiVersion?: string;
   referenceID: string;
   paymentMethodID: string;
   currency: string;
@@ -1370,6 +1371,7 @@ dd.createDirectDebitPayment(data: {
 dd.validateOTPforPayment(data: {
   directDebitID: string;
   otpCode: string;
+  apiVersion?: string;
 })
 ```
 
