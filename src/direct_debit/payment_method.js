@@ -16,6 +16,7 @@ function createPaymentMethod(data) {
         type: data.type,
         properties: {
           id: data.properties.id,
+          channel_code: data.properties.channelCode,
         },
         metadata: data.metadata,
       }),
