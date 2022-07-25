@@ -99,4 +99,19 @@ RegionalRetailOutlet.prototype.getPaymentCode = function(data) {
   });
 };
 
+RegionalRetailOutlet.prototype.getPayments = function (data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['id'], data, reject);
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}/payments`, {
+      method: 'GET',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 module.exports = RegionalRetailOutlet;

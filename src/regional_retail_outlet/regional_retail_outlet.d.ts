@@ -33,4 +33,7 @@ export = class RegionalRetailOutlet {
   getPaymentCode(data: {
     id: string;
   }): Promise<object>;
+  getPayments(data: {
+    id: string;
+  }): Promise<object>;
 };
