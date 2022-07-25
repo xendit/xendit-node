@@ -26,6 +26,7 @@ const d = new Disbursement({});
       accountNumber: '1234567890',
       description: `purchase paid from ${banks[0].name}`,
       amount: 10000,
+      forUserID: 'for-user-id-test',
     });
     // eslint-disable-next-line no-console
     console.log('disbursement created:', disb);

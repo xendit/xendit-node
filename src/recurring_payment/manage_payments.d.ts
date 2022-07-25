@@ -1,9 +1,10 @@
-enum Interval {
+export enum Interval {
   Day = 'DAY',
   Week = 'WEEK',
   Month = 'MONTH',
 }
-enum Action {
+
+export enum Action {
   Stop = 'STOP',
   Ignore = 'IGNORE',
 }

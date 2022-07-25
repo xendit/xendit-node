@@ -21,6 +21,21 @@ export = class Platform {
       businessName: string;
     };
   }): Promise<object>;
+  createV2Account(data: {
+    email: string;
+    type: string;
+    publicProfile?: {
+      businessName: string;
+    };
+  }): Promise<object>;
+  getAccountByID(data: { id: string }): Promise<object>;
+  updateAccount(data: {
+    id: string;
+    email: string;
+    publicProfile?: {
+      businessName: string;
+    };
+  }): Promise<object>;
   setCallbackURL(data: {
     type: string;
     url: string;

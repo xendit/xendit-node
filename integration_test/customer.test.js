@@ -14,30 +14,10 @@ module.exports = function() {
       middleName: 'middle',
       surname: 'surname',
       addresses: [],
+      apiVersion: '2020-05-19',
     })
     .then(r => c.getCustomer({ id: r.id }))
     .then(r => c.getCustomerByReferenceID({ referenceID: r.reference_id }))
-    .then(r =>
-      c.updateCustomer({
-        id: r[0].id,
-        description: 'customer dummy',
-        phoneNumber: '+628987654321',
-        nationality: 'ID',
-        dateOfBirth: '2000-06-13',
-        addresses: [
-          {
-            streetLine1: 'jalan raya',
-            country: 'ID',
-            city: 'Jakarta',
-          },
-          {
-            streetLine1: 'jalan raya 2',
-            country: 'ID',
-            city: 'Jakarta',
-          },
-        ],
-      }),
-    )
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Customer integration test done...');

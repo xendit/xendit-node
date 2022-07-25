@@ -15,6 +15,7 @@ module.exports = function() {
       middleName: 'middle',
       surname: 'surname',
       addresses: [],
+      apiVersion: '2020-05-19',
     })
     .then(r =>
       dd.initializeTokenization({
@@ -57,6 +58,7 @@ module.exports = function() {
     .then(r =>
       dd.createDirectDebitPayment({
         idempotencyKey: new Date().toISOString(),
+        apiVersion: null,
         referenceID: 'merchant-ref-id-ex-1',
         paymentMethodID: r[0].id,
         currency: 'IDR',
@@ -95,6 +97,7 @@ module.exports = function() {
       dd.validateOTPforPayment({
         directDebitID: r.id,
         otpCode: '222000',
+        apiVersion: null,
       }),
     )
     .then(r =>

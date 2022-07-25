@@ -9,7 +9,7 @@ ro.createPaymentCode({
   customerName: 'Dharma',
   amount: 50,
   currency: 'PHP',
-  market: 'PH'
+  market: 'PH',
 })
   .then(r => {
     // eslint-disable-next-line no-console
@@ -25,7 +25,7 @@ ro.createPaymentCode({
   .then(({ id }) => {
     return ro.updatePaymentCode({
       id,
-      customerName: "DharmaLain",
+      customerName: 'DharmaLain',
     });
   })
   .then(r => {

@@ -3,7 +3,8 @@ const { VAService } = require('./va');
 const { DisbursementService } = require('./disbursement');
 const { InvoiceService } = require('./invoice');
 const { PayoutService } = require('./payout');
-const { RecurringPayment } = require('./recurring');
+const { Recurring } = require('./recurring');
+const { RecurringPayment } = require('./recurring_payment');
 const { EWalletService } = require('./ewallet');
 const { BalanceServices } = require('./balance');
 const { RetailOutletService } = require('./retail_outlet');
@@ -12,6 +13,8 @@ const { PlatformService } = require('./platform');
 const { CustomerService } = require('./customer');
 const { DirectDebitService } = require('./direct_debit');
 const { RegionalRetailOutletService } = require('./regional_retail_outlet');
+const { ReportService } = require('./report');
+const { TransactionService } = require('./transaction');
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -31,6 +34,7 @@ function Xendit(options) {
   );
   this.Invoice = InvoiceService._constructorWithInjectedXenditOpts(this.opts);
   this.Payout = PayoutService._constructorWithInjectedXenditOpts(this.opts);
+  this.Recurring = Recurring._constructorWithInjectedXenditOpts(this.opts);
   this.RecurringPayment = RecurringPayment._constructorWithInjectedXenditOpts(
     this.opts,
   );
@@ -39,6 +43,7 @@ function Xendit(options) {
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  // eslint-disable-next-line
   this.RegionalRetailOutlet = RegionalRetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
@@ -46,6 +51,10 @@ function Xendit(options) {
   this.Platform = PlatformService._constructorWithInjectedXenditOpts(this.opts);
   this.Customer = CustomerService._constructorWithInjectedXenditOpts(this.opts);
   this.DirectDebit = DirectDebitService._constructorWithInjectedXenditOpts(
+    this.opts,
+  );
+  this.Report = ReportService._constructorWithInjectedXenditOpts(this.opts);
+  this.Transaction = TransactionService._constructorWithInjectedXenditOpts(
     this.opts,
   );
 }

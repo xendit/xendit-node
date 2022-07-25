@@ -2,11 +2,13 @@ const x = require('./xendit.test');
 
 const VirtualAcc = x.VirtualAcc;
 const va = new VirtualAcc({});
-function sleepFor(sleepDuration){
+function sleepFor(sleepDuration) {
   var now = new Date().getTime();
-  while(new Date().getTime() < now + sleepDuration){ /* Do nothing */ }
+  while (new Date().getTime() < now + sleepDuration) {
+    /* Do nothing */
+  }
 }
-module.exports = function () {
+module.exports = function() {
   return va
     .getVABanks()
     .then(banks => {
@@ -20,7 +22,7 @@ module.exports = function () {
     })
     .then(({ id }) => {
       sleepFor(3000);
-      return va.getFixedVA({ id })
+      return va.getFixedVA({ id });
     })
     .then(({ id }) => {
       sleepFor(5000);

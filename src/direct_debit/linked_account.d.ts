@@ -12,6 +12,7 @@ interface DebitCardProperties {
 
 interface OnlineBankingAccessProperties {
   successRedirectURL: string;
+  accountMobileNumber?: string;
   failureRedirectURL?: string;
   callbackURL?: string;
 }
@@ -20,6 +21,7 @@ export function initializeTokenization(data: {
   customerID: string;
   channelCode: ChannelCode;
   properties?: DebitCardProperties | OnlineBankingAccessProperties;
+  device?: object;
   metadata?: object;
 }): Promise<object>;
 

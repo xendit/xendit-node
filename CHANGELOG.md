@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2022-03-11
+
+- Added recurring service
+  - recurring schedules
+  - recurring plans
+  - recurring cycles
+
 ## 2021-12-07
 
 - Added metadata to credit card charge request

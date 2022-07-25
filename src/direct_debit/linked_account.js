@@ -14,25 +14,39 @@ function initializeTokenization(data) {
       body: JSON.stringify({
         customer_id: data.customerID,
         channel_code: data.channelCode,
-        properties:
-          data.channelCode === 'DC_BRI'
-            ? {
-                account_mobile_number: data.properties.accountMobileNumber,
-                card_last_four: data.properties.cardLastFour,
-                card_expiry: data.properties.cardExpiry,
-                account_email: data.properties.accountEmail,
-              }
-            : {
-                success_redirect_url: data.properties.successRedirectURL,
-                failure_redirect_url: data.properties.failureRedirectURL,
-                callback_url: data.properties.callbackURL,
-              },
+        properties: getProperties(data),
         metadata: data.metadata,
+        device: data.device,
       }),
     })
       .then(resolve)
       .catch(reject);
   });
+}
+
+function getProperties(data) {
+  if (data.channelCode === 'DC_BRI') {
+    return {
+      account_mobile_number: data.properties.accountMobileNumber,
+      card_last_four: data.properties.cardLastFour,
+      card_expiry: data.properties.cardExpiry,
+      account_email: data.properties.accountEmail,
+    };
+  } else if (data.channelCode === 'BCA_ONEKLIK') {
+    return {
+      account_mobile_number: data.properties.accountMobileNumber,
+      success_redirect_url: data.properties.successRedirectURL,
+      failure_redirect_url: data.properties.failureRedirectURL,
+      callback_url: data.properties.callbackURL,
+    };
+  } else {
+    return {
+      account_mobile_number: data.properties.accountMobileNumber,
+      success_redirect_url: data.properties.successRedirectURL,
+      failure_redirect_url: data.properties.failureRedirectURL,
+      callback_url: data.properties.callbackURL,
+    };
+  }
 }
 
 function validateOTPforLinkedAccount(data) {

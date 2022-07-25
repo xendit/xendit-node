@@ -1,6 +1,6 @@
 {
   "name": "xendit-node",
-  "version": "1.19.3",
+  "version": "1.21.5",
   "description": "NodeJS client for Xendit API",
   "main": "index.js",
   "types": "index.d.ts",
@@ -8,8 +8,9 @@
     "test": "mocha test/**/*.test.js",
     "test:integration": "node integration_test",
     "lint": "eslint index.js ./**/*.{js,ts}",
+    "lint:fix": "eslint index.js ./**/*.{js,ts} --fix",
     "format": "prettier --config .prettierrc --write index.js ./**/*.{js,json,ts}",
-    "gentoc": "markdown-toc -i README.md",
+    "gentoc": "markdown-toc -i --bullets=- README.md",
     "release": "np",
     "report": "nyc -r text -r lcov npm run test",
     "coveralls": "cat coverage/lcov.info | coveralls"
@@ -34,7 +35,7 @@
       "git add"
     ],
     "README.md": [
-      "markdown-toc -i",
+      "markdown-toc -i --bullets=-",
       "git add"
     ]
   },

@@ -37,6 +37,7 @@ Customer.prototype.createCustomer = function(data) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'API-VERSION': data.apiVersion ? data.apiVersion : '',
       },
       body: JSON.stringify({
         reference_id: data.referenceID,
@@ -74,7 +75,10 @@ Customer.prototype.getCustomer = function(data) {
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/customers/${data.id}`, {
       method: 'GET',
-      headers: { Authorization: Auth.basicAuthHeader(this.opts.secretKey) },
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'API-VERSION': data.apiVersion ? data.apiVersion : '',
+      },
     })
       .then(resolve)
       .catch(reject);
@@ -89,7 +93,10 @@ Customer.prototype.getCustomerByReferenceID = function(data) {
       `${this.API_ENDPOINT}/customers?reference_id=${data.referenceID}`,
       {
         method: 'GET',
-        headers: { Authorization: Auth.basicAuthHeader(this.opts.secretKey) },
+        headers: {
+          Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+          'API-VERSION': data.apiVersion ? data.apiVersion : '',
+        },
       },
     )
       .then(resolve)
@@ -104,6 +111,7 @@ Customer.prototype.updateCustomer = function(data) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+        'API-VERSION': data.apiVersion ? data.apiVersion : '',
       },
       body: JSON.stringify({
         reference_id: data.referenceID,

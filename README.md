@@ -1,7 +1,7 @@
 # Xendit API Node.js Client
 
-![](https://github.com/xendit/xendit-node/workflows/Code%20Linting/badge.svg)
-![](https://github.com/xendit/xendit-node/workflows/Integration%20Tests/badge.svg)
+![Code Linting Badge](https://github.com/xendit/xendit-node/workflows/Code%20Linting/badge.svg)
+![Integration Tests Badge](https://github.com/xendit/xendit-node/workflows/Integration%20Tests/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/xendit/xendit-node/badge.svg)](https://coveralls.io/github/xendit/xendit-node)
 
 This library is the abstraction of Xendit API for access from applications written with server-side Javascript.
@@ -16,75 +16,106 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
-  * [Card Services](#card-services)
-    + [Create charge](#create-charge)
-    + [Capture charge](#capture-charge)
-    + [Get charge](#get-charge)
-    + [Create authorization](#create-authorization)
-    + [Reverse authorization](#reverse-authorization)
-    + [Create refund](#create-refund)
-  * [Virtual Account Services](#virtual-account-services)
-    + [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
-    + [Create a fixed virtual account](#create-a-fixed-virtual-account)
-    + [Get details of your fixed virtual account](#get-details-of-your-fixed-virtual-account)
-    + [Update details of your fixed virtual account](#update-details-of-your-fixed-virtual-account)
-    + [Get details of a VA payment](#get-details-of-a-va-payment)
-  * [Disbursement Services](#disbursement-services)
-    + [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
-    + [Create a disbursement](#create-a-disbursement)
-    + [Create a batch of disbursements](#create-a-batch-of-disbursements)
-    + [Get a disbursement by ID](#get-a-disbursement-by-id)
-  * [Invoice Services](#invoice-services)
-    + [Create an invoice](#create-an-invoice)
-    + [Get an invoice](#get-an-invoice)
-    + [Expire an invoice](#expire-an-invoice)
-    + [Get all invoices](#get-all-invoices)
-  * [Recurring Payments Services](#recurring-payments-services)
-    + [Create recurring payment](#create-recurring-payment)
-    + [Get recurring payment](#get-recurring-payment)
-    + [Edit recurring payment](#edit-recurring-payment)
-    + [Stop recurring payment](#stop-recurring-payment)
-    + [Pause recurring payment](#pause-recurring-payment)
-    + [Resume recurring payment](#resume-recurring-payment)
-  * [Payout Services](#payout-services)
-    + [Create a payout](#create-a-payout)
-    + [Get a payout](#get-a-payout)
-    + [Void a payout](#void-a-payout)
-  * [EWallet Services](#ewallet-services)
-    + [Create an ewallet charge](#create-an-ewallet-charge)
-    + [Get an ewallet charge status](#get-an-ewallet-charge-status)
-    + [Void an ewallet charge](#void-an-ewallet-charge)
-  * [Balance Services](#balance-services)
-    + [Get balance](#get-balance)
-  * [Retail Outlet Services](#retail-outlet-services)
-    + [Create fixed payment code](#create-fixed-payment-code)
-    + [Get fixed payment code](#get-fixed-payment-code)
-    + [Update fixed payment code](#update-fixed-payment-code)
-  * [QR Code Services](#qr-code-services)
-    + [Create code](#create-code)
-    + [Get code](#get-code)
-    + [Simulate payment (only in dev mode)](#simulate-payment-only-in-dev-mode)
-    + [Get payments by external ID](#get-payments-by-external-id)
-  * [Customer services](#customer-services)
-    + [Create customer](#create-customer)
-    + [Get customer](#get-customer)
-    + [Get customer by reference ID](#get-customer-by-reference-id)
-    + [Update customer](#update-customer)
-  * [Direct debit services](#direct-debit-services)
-    + [Initialize linked account tokenization](#initialize-linked-account-tokenization)
-    + [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
-    + [Retrieve accessible accounts by linked account token](#retrieve-accessible-accounts-by-linked-account-token)
-    + [Create payment method](#create-payment-method)
-    + [Get payment methods by customer ID](#get-payment-methods-by-customer-id)
-    + [Create direct debit payment](#create-direct-debit-payment)
-    + [Validate OTP for direct debit payment](#validate-otp-for-direct-debit-payment)
-    + [Get direct debit payment status by ID](#get-direct-debit-payment-status-by-id)
-    + [Get direct debit payment status by reference ID](#get-direct-debit-payment-status-by-reference-id)
-  * [XenPlatform Service](#xenplatform-service)
-    + [Create sub-accounts](#create-sub-accounts)
-    + [Set Callback URL](#set-callback-url)
-    + [Create transfers](#create-transfers)
-    + [Create fee rules](#create-fee-rules)
+  - [Card Services](#card-services)
+    - [Create charge](#create-charge)
+    - [Capture charge](#capture-charge)
+    - [Get charge](#get-charge)
+    - [Create authorization](#create-authorization)
+    - [Reverse authorization](#reverse-authorization)
+    - [Create refund](#create-refund)
+    - [Create promotion](#create-promotion)
+  - [Virtual Account Services](#virtual-account-services)
+    - [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
+    - [Create a fixed virtual account](#create-a-fixed-virtual-account)
+    - [Get details of your fixed virtual account](#get-details-of-your-fixed-virtual-account)
+    - [Update details of your fixed virtual account](#update-details-of-your-fixed-virtual-account)
+    - [Get details of a VA payment](#get-details-of-a-va-payment)
+  - [Disbursement Services](#disbursement-services)
+    - [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
+    - [Create a disbursement](#create-a-disbursement)
+    - [Create a batch of disbursements](#create-a-batch-of-disbursements)
+    - [Get a disbursement by ID](#get-a-disbursement-by-id)
+  - [Invoice Services](#invoice-services)
+    - [Create an invoice](#create-an-invoice)
+    - [Get an invoice](#get-an-invoice)
+    - [Expire an invoice](#expire-an-invoice)
+    - [Get all invoices](#get-all-invoices)
+  - [Recurring Payments Services](#recurring-payments-services)
+    - [Create recurring payment](#create-recurring-payment)
+    - [Get recurring payment](#get-recurring-payment)
+    - [Edit recurring payment](#edit-recurring-payment)
+    - [Stop recurring payment](#stop-recurring-payment)
+    - [Pause recurring payment](#pause-recurring-payment)
+    - [Resume recurring payment](#resume-recurring-payment)
+  - [Recurring Services](#recurring-services)
+    - [Create recurring schedule](#create-recurring-schedule)
+    - [Edit recurring schedule](#edit-recurring-schedule)
+    - [Get recurring schedule](#get-recurring-schedule)
+    - [Create recurring plan](#create-recurring-plan)
+    - [Create recurring plan with schedule](#create-recurring-plan-with-schedule)
+    - [Edit recurring plan](#edit-recurring-plan)
+    - [Get recurring plan](#get-recurring-plan)
+    - [Deactivate recurring plan](#deactivate-recurring-plan)
+    - [Edit recurring cycle](#edit-recurring-cycle)
+    - [Get recurring cycle](#get-recurring-cycle)
+    - [Get all recurring cycles](#get-all-recurring-cycles)
+    - [Cancel recurring cycle](#cancel-recurring-cycle)
+  - [Payout Services](#payout-services)
+    - [Create a payout](#create-a-payout)
+    - [Get a payout](#get-a-payout)
+    - [Void a payout](#void-a-payout)
+  - [EWallet Services](#ewallet-services)
+    - [Create payment](#create-payment)
+    - [Get payment](#get-payment)
+    - [Create an ewallet charge](#create-an-ewallet-charge)
+    - [Get an ewallet charge status](#get-an-ewallet-charge-status)
+    - [Void an ewallet charge](#void-an-ewallet-charge)
+    - [Initialize tokenization](#initialize-tokenization)
+    - [Unlink tokenization](#unlink-tokenization)
+    - [Create payment method (E-Wallet)](#create-payment-method-e-wallet)
+    - [Get payment methods by customer ID (E-Wallet)](#get-payment-methods-by-customer-id-e-wallet)
+  - [Balance Services](#balance-services)
+    - [Get balance](#get-balance)
+  - [Retail Outlet Services](#retail-outlet-services)
+    - [Create fixed payment code](#create-fixed-payment-code)
+    - [Get fixed payment code](#get-fixed-payment-code)
+    - [Get payments by fixed payment code ID](#get-payments-by-fixed-payment-code-id)
+    - [Update fixed payment code](#update-fixed-payment-code)
+    - [Simulate payment for RO (only in dev mode)](#simulate-payment-for-ro-only-in-dev-mode)
+  - [QR Code Services](#qr-code-services)
+    - [Create code](#create-code)
+    - [Get code](#get-code)
+    - [Simulate payment for QR (only in dev mode)](#simulate-payment-for-qr-only-in-dev-mode)
+    - [Get payments by external ID](#get-payments-by-external-id)
+  - [Customer services](#customer-services)
+    - [Create customer](#create-customer)
+    - [Get customer](#get-customer)
+    - [Get customer by reference ID](#get-customer-by-reference-id)
+    - [Update customer](#update-customer)
+  - [Direct debit services](#direct-debit-services)
+    - [Initialize linked account tokenization](#initialize-linked-account-tokenization)
+    - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
+    - [Retrieve accessible accounts by linked account token](#retrieve-accessible-accounts-by-linked-account-token)
+    - [Create payment method (Direct Debit)](#create-payment-method-direct-debit)
+    - [Get payment methods by customer ID (Direct Debit)](#get-payment-methods-by-customer-id-direct-debit)
+    - [Create direct debit payment](#create-direct-debit-payment)
+    - [Validate OTP for direct debit payment](#validate-otp-for-direct-debit-payment)
+    - [Get direct debit payment status by ID](#get-direct-debit-payment-status-by-id)
+    - [Get direct debit payment status by reference ID](#get-direct-debit-payment-status-by-reference-id)
+  - [Report Service](#report-service)
+    - [Generate Report](#generate-report)
+    - [Get Report](#get-report)
+  - [Transaction Service](#transaction-service)
+    - [Get Transaction](#get-transaction)
+    - [List Transactions](#list-transactions)
+  - [XenPlatform Service](#xenplatform-service)
+    - [Create sub-account](#create-sub-account)
+    - [Create sub-account using V2](#create-sub-account-using-v2)
+    - [Get sub-account by ID](#get-sub-account-by-id)
+    - [Update sub-account](#update-sub-account)
+    - [Set Callback URL](#set-callback-url)
+    - [Create transfers](#create-transfers)
+    - [Create fee rules](#create-fee-rules)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -218,6 +249,25 @@ card.createRefund(data: {
   externalID: string;
   xIdempotencyKey?: string;
   forUserID?: string;
+})
+```
+
+#### Create promotion
+
+```ts
+card.createPromotion(data: {
+  referenceId: string;
+  description: string;
+  promoCode?: string;
+  binList?: string[];
+  channelCode?: string;
+  discountPercent?: number;
+  discountAmount?: number;
+  currency: string;
+  startTime: Date;
+  endTime: Date;
+  minOriginalAmount?: number;
+  maxDiscountAmount?: number;
 })
 ```
 
@@ -360,6 +410,8 @@ d.create(data: {
   emailCC?: string[];
   emailBCC?: string[];
   xIdempotencyKey?: string;
+  forUserID?: string;
+  withFeeRule?: string;
 })
 ```
 
@@ -378,6 +430,8 @@ d.createBatch(data: {
     emailTo?: string[];
     emailCC?: string[];
     emailBCC?: string[];
+    forUserID?: string;
+    withFeeRule?: string;
   }>;
   xIdempotencyKey?: string;
 })
@@ -583,9 +637,211 @@ rp.pausePayment(data: { id: string })
 rp.resumePayment(data: { id: string })
 ```
 
+### Recurring Services
+
+Instantiate Recurring service using constructor that has been injected with Xendit keys
+
+```js
+const { Recurring } = x;
+const rSpecificOptions = {};
+const r = new Recurring(rSpecificOptions);
+```
+
+Example: Create a recurring plan
+
+```js
+r.createPlan({
+  businessId: '6066ebf68204c740b61aa3c6',
+  referenceId: 'ref-123',
+  customerId: 'cus-123',
+  recurringAction: 'PAYMENT',
+  currency: 'IDR',
+  amount: 1000,
+  paymentMethods: [
+    { paymentMethodId: 'pm-123', rank: 1 },
+  ],
+  scheduleId: 'resc-123',
+  immediateActionType: 'FULL_AMOUNT',
+  notificationConfig: {
+    recurringCreated: ['EMAIL'],
+    recurringSucceeded: ['SMS'],
+    recurringFailed: ['WHATSAPP']
+  },
+  failedCycleAction: 'RESUME'
+})
+  .then(({ id }) => {
+    console.log(`Recurring plan created with ID: ${id}`);
+  })
+  .catch(e => {
+    console.error(
+      `Recurring plan creation failed with message: ${e.message}`,
+    );
+  });
+```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#recurring-plans) for more info about methods' parameters
+
+#### Create recurring schedule
+
+```ts
+r.createSchedule(data: {
+  referenceId: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
+});
+```
+
+#### Edit recurring schedule
+
+```ts
+r.editSchedule(data: {
+  id: string;
+  businessId: string;
+  interval: string;
+  intervalCount: number;
+  totalRecurrence?: number;
+  anchorDate?: string;
+  retryInterval?: string;
+  updateScheduledCycle?: boolean;
+  retryIntervalCount?: number;
+  totalRetry?: number;
+  failedAttemptNotifications?: number[];
+});
+```
+
+#### Get recurring schedule
+
+```ts
+r.getSchedule(data: {
+  id: string;
+  businessId: string;
+});
+```
+
+#### Create recurring plan
+
+```ts
+r.createPlan(data: {
+  businessId: string;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
+  currency: Currency;
+  amount: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  scheduleId: string;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
+  metadata?: object | null;
+})
+```
+
+#### Create recurring plan with schedule
+
+```ts
+r.createPlan(data: {
+  businessId: string;
+  referenceId: string;
+  customerId: string;
+  recurringAction: RecurringAction;
+  currency: Currency;
+  amount: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  schedule: RecurringSchedule;
+  immediateActionType?: ImmediateActionType | null;
+  notificationConfig?: NotificationConfig | null;
+  failedCycleAction?: FailingCycleAction;
+  metadata?: object | null;
+})
+```
+
+#### Edit recurring plan
+
+```ts
+r.editPlan(data: {
+  businessId: string;
+  customerId?: string;
+  currency?: Currency;
+  amount?: number;
+  paymentMethods?: Array<PaymentMethodIdRanked>;
+  notificationConfig?: NotificationConfig | null;
+  updateScheduledCycle?: boolean;
+  metadata?: object | null;
+  description?: string;
+})
+```
+
+#### Get recurring plan
+
+```ts
+r.getPlan(data: { id: string; businessId: string; })
+```
+
+#### Deactivate recurring plan
+
+```ts
+r.deactivatePlan(data: { id: string; businessId: string; })
+```
+
+#### Edit recurring cycle
+
+```ts
+r.editCycle(data: {
+  id: string;
+  businessId: string;
+  planId: string;
+  scheduledTimestamp: string;
+  currency: Currency;
+  amount: number;
+  metadata?: object | null;
+})
+```
+
+#### Get recurring cycle
+
+```ts
+r.getCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
+})
+```
+
+#### Get all recurring cycles
+
+```ts
+r.getAllCycles(data: {
+  planId: string;
+  businessId: string;
+  limit?: number;
+  beforeId?: string;
+  afterId?: string;
+  searchType?: CycleDashboardSearchType;
+  searchValue?: string;
+})
+```
+
+#### Cancel recurring cycle
+
+```ts
+r.cancelCycle(data: {
+  id: string;
+  planId: string;
+  businessId: string;
+})
+```
+
 ### Payout Services
 
-Instanitiate Payout service using constructor that has been injected with Xendit keys
+Instantiate Payout service using constructor that has been injected with Xendit keys
 
 ```js
 const { Payout } = x;
@@ -659,6 +915,31 @@ ew.createEWalletCharge({
 
 Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#ewallets) for more info about methods' parameters
 
+#### Create payment
+
+```ts
+ew.createPayment(data: {
+  externalID: string;
+  amount: number;
+  phone?: string;
+  expirationDate?: Date;
+  callbackURL?: string;
+  redirectURL?: string;
+  items?: PaymentItem[];
+  ewalletType: CreateSupportWalletTypes;
+  xApiVersion?: string;
+})
+```
+
+#### Get payment
+
+```ts
+ew.getPayment(data: {
+  externalID: string;
+  ewalletType: GetSupportWalletTypes;
+})
+```
+
 #### Create an ewallet charge
 
 ```ts
@@ -693,6 +974,44 @@ ew.getEWalletChargeStatus(data: {
 ew.voidEWalletCharge(data: {
   chargeID: string;
   forUserID?: string;
+})
+```
+
+#### Initialize tokenization
+
+```ts
+ew.initializeTokenization(data: {
+  customerID: string;
+  channelCode: ChannelCode;
+  properties?: OnlineBankingAccessProperties;
+  metadata?: object;
+})
+```
+
+#### Unlink tokenization
+
+```ts
+ew.unlinkTokenization(data: {
+  linkedAccTokenID: string;
+})
+```
+
+#### Create payment method (E-Wallet)
+
+```ts
+ew.createPaymentMethod(data: {
+  customerID: string;
+  type: PaymentMethodType;
+  properties: PaymentMethodProperties;
+  metadata?: object;
+})
+```
+
+#### Get payment methods by customer ID (E-Wallet)
+
+```ts
+ew.getPaymentMethodsByCustomerID(data: {
+    customerID: string;
 })
 ```
 
@@ -772,6 +1091,12 @@ ro.createFixedPaymentCode(data: {
 ro.getFixedPaymentCode(data: { id: string })
 ```
 
+#### Get payments by fixed payment code ID
+
+```ts
+ro.getPaymentsByFixedPaymentCodeId(data: { id: string })
+```
+
 #### Update fixed payment code
 
 ```ts
@@ -780,6 +1105,16 @@ ro.updateFixedPaymentCode(data: {
   name?: string;
   expectedAmt?: number;
   expirationDate?: Date;
+})
+```
+
+#### Simulate payment for RO (only in dev mode)
+
+```ts
+ro.simulatePayment(data: {
+  retailOutletName: string;
+  paymentCode: string;
+  transferAmount: number;
 })
 ```
 
@@ -829,7 +1164,7 @@ q.createCode(data: {
 q.getCode(data: { externalID: string });
 ```
 
-#### Simulate payment (only in dev mode)
+#### Simulate payment for QR (only in dev mode)
 
 ```ts
 q.simulate(data: { externalID: string; amount?: number });
@@ -968,6 +1303,7 @@ dd.initializeTokenization(data: {
   customerID: string;
   channelCode: ChannelCode;
   properties?: DebitCardProperties | OnlineBankingAccessProperties;
+  device?: object;
   metadata?: object;
 });
 ```
@@ -989,7 +1325,7 @@ dd.retrieveAccountsByTokenID(data: {
 });
 ```
 
-#### Create payment method
+#### Create payment method (Direct Debit)
 
 ```ts
 dd.createPaymentMethod(data: {
@@ -1000,7 +1336,7 @@ dd.createPaymentMethod(data: {
 });
 ```
 
-#### Get payment methods by customer ID
+#### Get payment methods by customer ID (Direct Debit)
 
 ```ts
 dd.getPaymentMethodsByCustomerID(data: {
@@ -1013,6 +1349,7 @@ dd.getPaymentMethodsByCustomerID(data: {
 ```ts
 dd.createDirectDebitPayment(data: {
   idempotencyKey: string;
+  apiVersion?: string;
   referenceID: string;
   paymentMethodID: string;
   currency: string;
@@ -1021,7 +1358,10 @@ dd.createDirectDebitPayment(data: {
   enableOTP?: boolean;
   description?: string;
   basket?: Basket[];
+  device?: object;
   metadata?: object;
+  successRedirectUrl?: string;
+  failureRedirectUrl?: string;
 });
 ```
 
@@ -1031,6 +1371,7 @@ dd.createDirectDebitPayment(data: {
 dd.validateOTPforPayment(data: {
   directDebitID: string;
   otpCode: string;
+  apiVersion?: string;
 })
 ```
 
@@ -1047,6 +1388,108 @@ dd.getDirectDebitPaymentStatusByID(data: {
 ```ts
 dd.getDirectDebitPaymentStatusByReferenceID(data: {
   referenceID: string;
+```
+
+### Report Service
+
+Instantiate the Report service using a constructor which has been injected with Xendit keys.
+
+```js
+const { Report } = x;
+const reportSpecificOptions = {};
+const r = new Report(reportSpecificOptions);
+```
+
+Example: Generating a report
+
+```js
+r.generateReport({
+  type: 'BALANCE_HISTORY',
+  filterDateFrom: new Date(new Date().getTime() - 24 * 60 * 60 * 1000), // Yesterday's Date
+  filterDateTo: new Date(),
+  format: 'CSV',
+  currency: 'IDR',
+})
+  .then(res => {
+    console.log('Generated report:', res);
+  })
+  .catch(e => {
+    console.error(`Generate Report Failed with Error: ${e.message}`);
+  });
+```
+
+#### Generate Report
+
+```ts
+r.generateReport(data: {
+  type: reportTypes;
+  filterDateFrom?: Date;
+  filterDateTo?: Date;
+  format?: formatTypes;
+  currency?: currencyTypes;
+})
+```
+
+#### Get Report
+
+```ts
+r.getReport(data: {
+  id: string
+})
+```
+
+### Transaction Service
+
+Instantiate the Transaction service using a constructor which has been injected with Xendit keys.
+
+```js
+const { Transaction } = x;
+const transactionSpecificOptions = {};
+const t = new Transaction(transactionSpecificOptions);
+```
+
+Example: Getting a transaction
+
+```js
+t.getTransaction({
+  id: 'txn_123',
+})
+  .then(res => {
+    console.log('Get Transaction:', res);
+  })
+  .catch(e => {
+    console.error(`Get Transaction Failed with Error: ${e.message}`);
+  });
+```
+
+#### Get Transaction
+
+```ts
+t.getTransaction(data: {
+  id: string;
+})
+```
+
+#### List Transactions
+
+```ts
+t.listTransactions(data: {
+  types?: Array<string>;
+  statuses?: Array<string>;
+  channelCategories?: Array<string>;
+  referenceId?: string;
+  productId?: string;
+  accountIdentifier?: string;
+  currency?: string;
+  amount?: number;
+  limit?: number;
+  afterId?: string;
+  beforeId?: string;
+  createdDateFrom?: Date;
+  createdDateTo?: Date;
+  updatedDateFrom?: Date;
+  updatedDateTo?: Date;
+})
 ```
 
 ### XenPlatform Service
@@ -1076,13 +1519,45 @@ p.createAccount({
 
 Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#xenplatform) for more info about methods' parameters
 
-#### Create sub-accounts
+#### Create sub-account
 
 ```ts
 p.createAccount(data: {
   accountEmail: string;
   type: AccountTypes;
   businessProfile?: {
+    businessName: string;
+  };
+})
+```
+
+#### Create sub-account using V2
+
+```ts
+p.createV2Account(data: {
+  email: string;
+  type: string;
+  publicProfile?: {
+    businessName: string;
+  };
+})
+```
+
+#### Get sub-account by ID
+
+```ts
+p.getAccountByID(data: {
+  id: string;
+})
+```
+
+#### Update sub-account
+
+```ts
+p.updateAccount(data: {
+  id: string;
+  email: string;
+  publicProfile?: {
     businessName: string;
   };
 })
