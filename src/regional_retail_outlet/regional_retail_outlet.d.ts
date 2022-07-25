@@ -1,28 +1,36 @@
 import { XenditOptions } from '../xendit_opts';
 
+type ChannelCode = '7ELEVEN' | '7ELEVEN_CLIQQ' | 'CEBUANA' | 'ECPAY' | 'LBC' | 'DP_PALAWAN' | 'DP_MLHUILLIER' | 'DP_ECPAY_LOAN' | 'DP_RD_PAWNSHOP' | 'DP_CVM' | 'DP_ECPAY_SCHOOL';
+
+type Currency = 'PHP';
+
 export = class RegionalRetailOutlet {
   constructor({});
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
   ) => typeof RetailOutlet;
   createPaymentCode(data: {
-    reference_id: string;
-    channel_code: string;
+    referenceId: string;
+    channelCode: ChannelCode;
     amount: number;
-    currency: number;
-    customer_name: string;
+    currency: Currency;
+    customerName: string;
     market: string;
-    payment_code?: string;
-    expires_at?: Date;
-    is_single_use?: boolean;
-    desciption?: string;
-    metadata?: object[];
+    paymentCode?: string;
+    expiresAt?: Date;
+    isSingleUse?: boolean;
+    description?: string;
+    metadata?: object;
   }): Promise<object>;
-  updateFixedPaymentCode(data: {
+  updatePaymentCode(data: {
     id: string;
-    name?: string;
-    expectedAmt?: number;
-    expirationDate?: Date;
+    amount?: number;
+    currency?: Currency;
+    customerName?: string;
+    expiresAt?: Date;
+    description?: string;
   }): Promise<object>;
-  getFixedPaymentCode(data: { id: string }): Promise<object>;
+  getPaymentCode(data: {
+    id: string;
+  }): Promise<object>;
 };
