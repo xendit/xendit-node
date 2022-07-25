@@ -73,8 +73,10 @@ RegionalRetailOutlet.prototype.updatePaymentCode = function(data) {
       },
       body: JSON.stringify({
         amount: data.amount,
-        currency: data.amount,
+        currency: data.currency,
         customer_name: data.customerName,
+        expires_at: data.expiresAt ? data.expiresAt.toISOString() : undefined,
+        description: data.description,
       }),
     })
       .then(resolve)
