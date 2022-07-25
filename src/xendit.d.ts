@@ -9,6 +9,7 @@ import { XenditOptions } from './xendit_opts';
 import { EWalletService } from './ewallet';
 import { BalanceServices } from './balance';
 import { RetailOutletService } from './retail_outlet';
+import { RegionalRetailOutletService } from './regional_retail_outlet';
 import { QrCode } from './qr_code';
 import { PlatformService } from './platform';
 import { CustomerService } from './customer';
@@ -26,6 +27,7 @@ declare class Xendit {
   EWallet: typeof EWalletService;
   Balance: typeof BalanceServices;
   RetailOutlet: typeof RetailOutletService;
+  RegionalRetailOutlet: typeof RegionalRetailOutletService;
   QrCode: typeof QrCode;
   Platform: typeof PlatformService;
   Customer: typeof CustomerService;
