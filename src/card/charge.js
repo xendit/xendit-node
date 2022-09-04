@@ -31,6 +31,7 @@ function createCharge(data) {
         promotion: data.promotion,
         installment: data.installment,
         metadata: data.metadata,
+        is_recurring: data.isRecurring,
       }),
     })
       .then(resolve)

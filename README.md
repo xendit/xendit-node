@@ -192,6 +192,7 @@ card.createCharge(data: {
   installment?: object;
   forUserID?: string;
   metadata?: object;
+  isRecurring?: boolean;
 })
 ```
 

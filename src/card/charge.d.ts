@@ -13,6 +13,7 @@ export function createCharge(data: {
   installment?: object;
   forUserID?: string;
   metadata?: object;
+  isRecurring: boolean;
 }): Promise<object>;
 
 export function captureCharge(data: {
