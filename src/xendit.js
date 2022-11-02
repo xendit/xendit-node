@@ -15,6 +15,7 @@ const { DirectDebitService } = require('./direct_debit');
 const { RegionalRetailOutletService } = require('./regional_retail_outlet');
 const { ReportService } = require('./report');
 const { TransactionService } = require('./transaction');
+const { PaymentMethodV2Service } = require('./payment_method_v2')
 const Errors = require('./errors');
 
 function Xendit(options) {
@@ -43,6 +44,7 @@ function Xendit(options) {
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
+  this.PaymentMethodV2 = PaymentMethodV2Service._constructorWithInjectedXenditOpts(this.opts)
   // eslint-disable-next-line
   this.RegionalRetailOutlet = RegionalRetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
