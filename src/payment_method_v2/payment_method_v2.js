@@ -123,7 +123,7 @@ PaymentMethodV2.prototype.authorizePaymentMethodV2 = function (data) {
         }
 
         fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}/auth`, {
-            method: 'GET',
+            method: 'POST',
             headers,
             body: JSON.stringify({
                 auth_code: data.auth_code
@@ -149,10 +149,7 @@ PaymentMethodV2.prototype.getPaymentMethodByIdV2 = function (data) {
 
         fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}`, {
             method: 'GET',
-            headers,
-            body: JSON.stringify({
-                auth_code: data.auth_code
-            }),
+            headers
         })
             .then(resolve)
             .catch(reject);
@@ -176,13 +173,13 @@ PaymentMethodV2.prototype.updatePaymentMethodV2 = function (data) {
             method: 'PATCH',
             headers,
             body: JSON.stringify({
-                reference_id?: data.reference_id,
-                description?: data.description,
-                metadata?: data.metadata,
-                status?: data.status,
-                reusability?: data.reusability,
-                over_the_counter?: data.over_the_counter,
-                virtual_account?: data.virtual_account
+                reference_id: data.reference_id,
+                description: data.description,
+                metadata: data.metadata,
+                status: data.status,
+                reusability: data.reusability,
+                over_the_counter: data.over_the_counter,
+                virtual_account: data.virtual_account
             }),
         })
             .then(resolve)
