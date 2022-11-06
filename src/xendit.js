@@ -15,7 +15,6 @@ const { DirectDebitService } = require('./direct_debit');
 const { RegionalRetailOutletService } = require('./regional_retail_outlet');
 const { ReportService } = require('./report');
 const { TransactionService } = require('./transaction');
-const { PaymentMethodV2Service } = require('./payment_method_v2');
 const { PaymentRequestService } = require('./payment_request');
 const Errors = require('./errors');
 
