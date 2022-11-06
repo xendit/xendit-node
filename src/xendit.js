@@ -44,9 +44,6 @@ function Xendit(options) {
   this.RetailOutlet = RetailOutletService._constructorWithInjectedXenditOpts(
     this.opts,
   );
-  this.PaymentMethodV2 = PaymentMethodV2Service._constructorWithInjectedXenditOpts(
-    this.opts,
-  );
   this.PaymentRequest = PaymentRequestService._constructorWithInjectedXenditOpts(
     this.opts,
   );
