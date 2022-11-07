@@ -59,9 +59,9 @@ Refund.prototype.createRefund = function(data) {
   });
 };
 
-Refund.prototype.listRefunds = function(data) {
+Refund.prototype.getRefundById = function(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields([], data, reject);
+    Validate.rejectOnMissingFields(['id'], data, reject);
 
     let headers = {
       Authorization: Auth.basicAuthHeader(this.opts.secretKey),
@@ -79,22 +79,13 @@ Refund.prototype.listRefunds = function(data) {
     fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}`, {
       method: 'GET',
       headers,
-      body: JSON.stringify({
-        payment_request_id: data.payment_request_id,
-        invoice_id: data.invoice_id,
-        payment_method_type: data.payment_method_type,
-        channel_code: data.channel_code,
-        limit: data.limit,
-        after_id: data.after_id,
-        before_id: data.before_id,
-      }),
     })
       .then(resolve)
       .catch(reject);
   });
 };
 
-Refund.prototype.getRefundById = function(data) {
+Refund.prototype.listRefunds = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields([], data, reject);
 

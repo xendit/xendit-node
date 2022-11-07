@@ -47,7 +47,7 @@ describe('Refund Service', () => {
   });
   describe('list refunds', () => {
     it('should get a response of refunds', done => {
-      expect(r.listRefunds({}))
+      expect(r.listRefunds())
         .to.eventually.deep.equal(LIST_REFUNDS_SUCCESS_RESPONSE)
         .and.notify(done);
     });
