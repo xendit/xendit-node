@@ -7,7 +7,7 @@ const {
   CREATE_REFUND_SUCCESS_RESPONSE,
   LIST_REFUNDS_SUCCESS_RESPONSE,
   GET_REFUND_BY_ID_RESPONSE,
-} = require('./constants');
+} = require('./constans');
 
 const x = new Xendit({
   secretKey: 'fake_secret_key',
