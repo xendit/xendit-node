@@ -20,7 +20,8 @@ const pm = new PaymentMethodV2({});
         },
       },
     });
-    console.log('created payment method', createdPaymentMethod); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('created payment method', createdPaymentMethod);
 
     const paymentMethodDetailsById = await pm.getPaymentMethodByIdV2({
       id: createdPaymentMethod.id,
