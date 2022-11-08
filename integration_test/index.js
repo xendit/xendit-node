@@ -15,6 +15,7 @@ Promise.all([
   require('./direct_debit.test')(),
   require('./report.test')(),
   require('./transaction.test')(),
+  // require('./refund.test')() //test disabled until refunds endpoint is fixed
 ])
   .then(() => {
     Promise.all([require('./regional_retail_outlet.test')()]).then(() =>
