@@ -116,6 +116,10 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Set Callback URL](#set-callback-url)
     - [Create transfers](#create-transfers)
     - [Create fee rules](#create-fee-rules)
+  - [Refund Services](#refund-services)
+    - [Create refund](#create-refund-1)
+    - [List refunds](#list-refunds)
+    - [Get refund details by ID](#get-refund-details-by-id)
 - [Contributing](#contributing)
 
 <!-- tocstop -->
@@ -1596,6 +1600,68 @@ p.createFeeRule(data: {
     amount: number;
     currency: string;
   }>;
+})
+```
+
+### Refund Services
+
+Instanitiate Refund service using constructor that has been injected with Xendit keys
+
+```js
+const { Refund } = x;
+const r = new Refund();
+```
+
+Example: Create a refund
+
+```js
+r.createRefund({
+      invoice_id: 'your-invoice-id',
+      reason: 'FRAUDULENT',
+      amount: 1000,
+}).then(({ id }) => {
+  console.log(`refund created with ID: ${id}`);
+});
+```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#refunds) for more info about methods' parameters
+
+#### Create refund
+
+```ts
+r.createRefund(data: {
+  payment_request_id?: string;
+  reference_id?: string;
+  invoice_id?: string;
+  currency?: string;
+  amount?: number;
+  reason: RefundReasons;
+  metadata?: object;
+  idempotencty_key?: string;
+  for_user_id?: string;
+})
+```
+
+#### List refunds
+
+```ts
+r.listRefunds(data: {
+  payment_request_id?: string;
+  invoice_id?: string;
+  payment_method_type?: string;
+  channel_code?: string;
+  limit?: number;
+  after_id?: string;
+  before_id?: string;
+  for_user_id?: string;
+})
+```
+
+#### Get refund details by ID
+
+```ts
+r.getRefundById(data: {
+  id: string;
 })
 ```
 
