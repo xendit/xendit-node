@@ -11,17 +11,17 @@ Promise.all([
   // require('./ewallet.test')(),
   require('./qr_code.test')(),
   require('./platform.test')(),
+  require('./regional_retail_outlet.test'),
   require('./customer.test')(),
   require('./direct_debit.test')(),
   require('./report.test')(),
   require('./transaction.test')(),
+  require('./payment_method_v2.test'),
   // require('./refund.test')() //test disabled until refunds endpoint is fixed
 ])
   .then(() => {
-    Promise.all([require('./regional_retail_outlet.test')()]).then(() =>
-      // eslint-disable-next-line no-console
-      console.log('Successful Integration Test!'),
-    );
+    // eslint-disable-next-line no-console
+    console.log('Successful Integration Test!');
   })
   .catch(e => {
     console.error(e); // eslint-disable-line no-console
