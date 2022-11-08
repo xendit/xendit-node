@@ -7,8 +7,7 @@ const { Errors } = require('../../src/xendit');
 const Xendit = require('../../src/xendit');
 
 const x = new Xendit({
-  secretKey:
-    'xnd_production_ypr0UI6148UVBDHMJsHCUgF0Yff4XEjRSAzBvM626qPzHEBo45IRCBdqEHmmql',
+  secretKey: 'fake_secret_key',
 });
 
 chai.use(chaiAsProm);
