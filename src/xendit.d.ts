@@ -17,6 +17,8 @@ import { DirectDebitService } from './direct_debit';
 import { ReportService } from './report';
 import { TransactionService } from './transaction';
 import { PaymentRequestService } from './payment_request';
+import { PaymentMethodV2Service } from './payment_method_v2';
+import { RefundService } from './refund';
 
 declare class Xendit {
   constructor(opts: XenditOptions);
@@ -39,5 +41,7 @@ declare class Xendit {
   Report: typeof ReportService;
   Transaction: typeof TransactionService;
   PaymentRequest: typeof PaymentRequestService;
+  PaymentMethodV2: typeof PaymentMethodV2Service;
+  Refund: typeof RefundService;
 }
 export = Xendit;

@@ -5,9 +5,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const x = new Xendit({
-  secretKey:
-    'xnd_development_QqTql0pzRa2WLK4gvzkVU9uS8MgF7FensRt7eR2atubk2r5ZIky2uuUkc0jkLH3',
-  xenditURL: 'https://api.xendit.co',
+  secretKey: process.env.SECRET_KEY,
+  xenditURL: process.env.XENDIT_URL,
 });
 
 module.exports = x;
