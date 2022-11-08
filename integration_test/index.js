@@ -15,7 +15,7 @@ Promise.all([
   require('./direct_debit.test')(),
   require('./report.test')(),
   require('./transaction.test')(),
-  require('./payment_method_v2.test')
+  // require('./payment_method_v2.test')
 ])
   .then(() => {
     Promise.all([require('./regional_retail_outlet.test')()]).then(() =>
