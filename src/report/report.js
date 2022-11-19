@@ -29,12 +29,18 @@ Report.prototype.generateReport = function(data) {
     }
     if (data.filterDateTo) filterOpts.to = data.filterDateTo.toISOString();
 
+    const headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserId) {
+      headers['for-user-id'] = data.forUserId;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}`, {
       method: 'POST',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         type: data.type,
         filter: filterOpts,
@@ -50,6 +56,15 @@ Report.prototype.generateReport = function(data) {
 Report.prototype.getReport = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['id'], data, reject);
+
+    const headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserId) {
+      headers['for-user-id'] = data.forUserId;
+    }
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}`, {
       method: 'GET',
