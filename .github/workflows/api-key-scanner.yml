@@ -1,0 +1,10 @@
+name: Xendit API Key Scanner
+on: pull_request
+
+jobs:
+  scan_job:
+    runs-on: ubuntu-latest
+    name: Xendit API Key Scanner Action Job
+    steps:
+      - name: Scan action
+        uses: xendit/xendit-api-key-scanner-action@v1.0.0
