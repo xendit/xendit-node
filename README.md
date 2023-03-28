@@ -116,6 +116,19 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Set Callback URL](#set-callback-url)
     - [Create transfers](#create-transfers)
     - [Create fee rules](#create-fee-rules)
+  - [Payment Request](#payment-request)
+    - [Create payment request](#create-payment-request)
+    - [Confirm payment request](#confirm-payment-request)
+    - [Resend payment request auth](#resend-payment-request-auth)
+    - [List payment requests](#list-payment-requests)
+    - [Get payment request by id](#get-payment-request-by-id)
+  - [Payment Method](#payment-method)
+    - [Create payment method](#create-payment-method)
+    - [Update payment method](#update-payment-method)
+    - [Expire payment method](#expire-payment-method)
+    - [Get payment method by id](#get-payment-method-by-id)
+    - [List payment methods](#list-payment-methods)
+    - [Authorize payment method](#authorize-payment-method)
   - [Refund Services](#refund-services)
     - [Create refund](#create-refund-1)
     - [List refunds](#list-refunds)
@@ -1601,7 +1614,142 @@ p.createFeeRule(data: {
     currency: string;
   }>;
 })
+
 ```
+### Payment Request
+
+Instanitiate Payment Request using constructor that has been injected with Xendit keys
+
+```js
+const { PaymentRequest } = x;
+const r = new PaymentRequest();
+```
+
+Example: Create a Payment Request
+
+```js
+r.createPaymentRequest({
+        "amount": 1500,
+        "currency": "PHP",
+        "payment_method": {
+            "type": "EWALLET",
+            "ewallet": {
+                "channel_code" :"GRABPAY",
+                "channel_properties": {
+                    "success_return_url" : "https://redirect.me/goodstuff",
+                    "failure_return_url" : "https://redirect.me/badstuff"
+                }
+            },
+            "reusability": "ONE_TIME_USE"
+        }
+}).then(({ id }) => {
+  console.log(`payment request created with ID: ${id}`);
+});
+```
+
+
+#### Create payment request
+
+```ts
+r.createPaymentRequest(data: {
+  amount?: string;
+  currency?: string;
+  payment_method?: PaymentMethod;
+})
+```
+
+#### List payment requests
+
+```ts
+r.listpaymentrequests(data: {
+  payment_request_id?: string;
+  payment_method_type?: string;
+  channel_code?: string;
+  limit?: number;
+  after_id?: string;
+  before_id?: string;
+  for_user_id?: string;
+})
+```
+
+#### Get payment request details by ID
+
+```ts
+r.getPaymentRequestByID(data: {
+  id: string;
+})
+```
+
+
+```
+### Payment Method 
+
+Instanitiate Payment Method using constructor that has been injected with Xendit keys
+
+```js
+const { PaymentMethod } = x;
+const r = new PaymentMethod();
+```
+
+Example: Create a Payment Method
+
+```js
+r.createPaymentMethod({
+        "type": "EWALLET",
+        "reusability": "ONE_TIME_USE",
+        "ewallet": {
+            "channel_code": "PAYMAYA",
+            "channel_properties": {
+                "success_return_url": "https://redirect.me/goodstuff",
+                "failure_return_url": "https://redirect.me/badstuff",
+                "cancel_return_url": "https://redirect.me/nostuff"
+            }
+        },
+        "metadata": {}
+        }
+}).then(({ id }) => {
+  console.log(`payment method created with ID: ${id}`);
+});
+```
+
+
+#### Create payment method
+
+```ts
+r.createPaymentMethod(data: {
+  type?: string;
+  reusability?: string;
+  ewallet?: ewallet;
+  metadata?: object;
+})
+```
+
+#### List payment methods
+
+```ts
+r.listpaymentmethods(data: {
+  payment_method_id?: string;
+  payment_method_type?: string;
+  channel_code?: string;
+  limit?: number;
+  after_id?: string;
+  before_id?: string;
+  for_user_id?: string;
+})
+```
+
+#### Get payment method details by ID
+
+```ts
+r.getPaymentMethodByID(data: {
+  id: string;
+})
+```
+
+
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#refunds) for more info about methods' parameters
+
 
 ### Refund Services
 
