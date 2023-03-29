@@ -122,6 +122,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Get payment request details by ID](#get-payment-request-details-by-id)
     - [confirm payment request](#confirm-payment-request)
     - [resend payment request](#resend-payment-request)
+  - [Payment Method](#payment-method)
     - [Create payment method](#create-payment-method)
     - [List payment methods](#list-payment-methods)
     - [Get payment method details by ID](#get-payment-method-details-by-id)
@@ -1714,7 +1715,6 @@ r.resendPaymentRequest(data: {
 ```
 
 
-```
 ### Payment Method 
 
 Instanitiate Payment Method using constructor that has been injected with Xendit keys
