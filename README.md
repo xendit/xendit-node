@@ -118,17 +118,11 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Create fee rules](#create-fee-rules)
   - [Payment Request](#payment-request)
     - [Create payment request](#create-payment-request)
-    - [Confirm payment request](#confirm-payment-request)
-    - [Resend payment request auth](#resend-payment-request-auth)
     - [List payment requests](#list-payment-requests)
-    - [Get payment request by id](#get-payment-request-by-id)
-  - [Payment Method](#payment-method)
+    - [Get payment request details by ID](#get-payment-request-details-by-id)
     - [Create payment method](#create-payment-method)
-    - [Update payment method](#update-payment-method)
-    - [Expire payment method](#expire-payment-method)
-    - [Get payment method by id](#get-payment-method-by-id)
     - [List payment methods](#list-payment-methods)
-    - [Authorize payment method](#authorize-payment-method)
+    - [Get payment method details by ID](#get-payment-method-details-by-id)
   - [Refund Services](#refund-services)
     - [Create refund](#create-refund-1)
     - [List refunds](#list-refunds)
@@ -1629,19 +1623,19 @@ Example: Create a Payment Request
 
 ```js
 r.createPaymentRequest({
-        "amount": 1500,
-        "currency": "PHP",
-        "payment_method": {
-            "type": "EWALLET",
-            "ewallet": {
-                "channel_code" :"GRABPAY",
-                "channel_properties": {
-                    "success_return_url" : "https://redirect.me/goodstuff",
-                    "failure_return_url" : "https://redirect.me/badstuff"
-                }
-            },
-            "reusability": "ONE_TIME_USE"
-        }
+      amount: 1500,
+      currency: 'PHP',
+      payment_method: {
+        type: 'EWALLET',
+        ewallet: {
+          channel_code: 'GRABPAY',
+          channel_properties: {
+            success_return_url: 'https://redirect.me/goodstuff',
+            failure_return_url: 'https://redirect.me/badstuff',
+          },
+        },
+        reusability: 'ONE_TIME_USE',
+      }
 }).then(({ id }) => {
   console.log(`payment request created with ID: ${id}`);
 });
@@ -1652,9 +1646,17 @@ r.createPaymentRequest({
 
 ```ts
 r.createPaymentRequest(data: {
-  amount?: string;
-  currency?: string;
-  payment_method?: PaymentMethod;
+    currency: PaymentRequestCurrencies;
+    amount: number;
+    reference_id?: string;
+    customer_id?: string;
+    country: PaymentRequestCountries;
+    description?: string;
+    payment_method: object;
+    channel_properties?: PaymentRequestChannelProperties;
+    metadata?: object;
+    idempotencty_key?: string;
+    for_user_id?: string;
 })
 ```
 
@@ -1662,13 +1664,16 @@ r.createPaymentRequest(data: {
 
 ```ts
 r.listpaymentrequests(data: {
-  payment_request_id?: string;
-  payment_method_type?: string;
-  channel_code?: string;
-  limit?: number;
-  after_id?: string;
-  before_id?: string;
-  for_user_id?: string;
+    id?: string;
+    reference_id?: string;
+    customer_id?: string;
+    type?: PaymentRequestType;
+    channel_code?: string;
+    status?: PaymentRequestStatuses;
+    limit?: number;
+    after_id?: string;
+    before_id?: string;
+    for_user_id?: string;
 })
 ```
 
@@ -1676,7 +1681,8 @@ r.listpaymentrequests(data: {
 
 ```ts
 r.getPaymentRequestByID(data: {
-  id: string;
+    id: string;
+    for_user_id?: string;
 })
 ```
 
@@ -1695,18 +1701,19 @@ Example: Create a Payment Method
 
 ```js
 r.createPaymentMethod({
-        "type": "EWALLET",
-        "reusability": "ONE_TIME_USE",
-        "ewallet": {
-            "channel_code": "PAYMAYA",
-            "channel_properties": {
-                "success_return_url": "https://redirect.me/goodstuff",
-                "failure_return_url": "https://redirect.me/badstuff",
-                "cancel_return_url": "https://redirect.me/nostuff"
-            }
+      type: 'DIRECT_DEBIT',
+      reusability: 'ONE_TIME_USE',
+      customer_id: '16f72571-9b3a-43dc-b241-5b71f470202f',
+      country: 'ID',
+      direct_debit: {
+        channel_code: 'BRI',
+        channel_properties: {
+          mobile_number: '+6281299640904',
+          card_last_four: '8888',
+          card_expiry: '10/29',
+          email: 'dharma@xendit.co',
         },
-        "metadata": {}
-        }
+      },
 }).then(({ id }) => {
   console.log(`payment method created with ID: ${id}`);
 });
@@ -1717,10 +1724,22 @@ r.createPaymentMethod({
 
 ```ts
 r.createPaymentMethod(data: {
-  type?: string;
-  reusability?: string;
-  ewallet?: ewallet;
+  type: PaymentMethodV2Types;
+  reusability: PaymentMenthodV2Reusabilities;
+  reference_id?: string;
+  customer_id?: string;
+  country?: CreatePaymentMenthodV2Countries;
+  description?: string;
+  billing_information?: BillingInformationItems;
   metadata?: object;
+  ewallet?: EwalletItems;
+  direct_debit?: DirectDebitItems;
+  card?: CardItems;
+  over_the_counter?: OverTheCounterItems;
+  virtual_account?: VirtualAccountItems;
+  qr_code?: QRISItems;
+  for_user_id?: string;
+  idempotency_key?: string;
 })
 ```
 
@@ -1742,7 +1761,8 @@ r.listpaymentmethods(data: {
 
 ```ts
 r.getPaymentMethodByID(data: {
-  id: string;
+    id: string;
+    for_user_id?: string;
 })
 ```
 
