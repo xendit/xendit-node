@@ -24,11 +24,11 @@ const r = new PaymentRequest({});
 
     const getpaymentrequest = await r.getPaymentRequestById({ id: paymentrequest.id });
     // eslint-disable-next-line no-console
-    console.log('retrieved payment request', refundDetails);
+    console.log('retrieved payment request', getpaymentrequest);
 
-    const refundList = await r.listPaymentRequest({});
+    const getpaymentrequestList = await r.listPaymentRequest({});
     // eslint-disable-next-line no-console
-    console.log('list of payment request', refundList);
+    console.log('list of payment request', getpaymentrequestList);
 
     process.exit(0);
   } catch (e) {

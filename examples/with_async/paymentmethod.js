@@ -20,9 +20,9 @@ const r = new PaymentMethodV2({});
     });
     console.log('created payment method', paymentmethod); // eslint-disable-line no-console
 
-    const getpaymentmetohd = await r.getPaymentRequestById({ id: paymentmethod.id });
+    const getpaymentmethodlist = await r.getPaymentMethodByIdV2({ id: paymentmethod.id });
     // eslint-disable-next-line no-console
-    console.log('retrieved payment method', paymentmethod);
+    console.log('retrieved payment method', getpaymentmethodlist);
 
     const paymentmethodlist = await r.listPaymentMethodV2({});
     // eslint-disable-next-line no-console
