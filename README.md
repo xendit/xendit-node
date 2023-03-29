@@ -120,9 +120,15 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Create payment request](#create-payment-request)
     - [List payment requests](#list-payment-requests)
     - [Get payment request details by ID](#get-payment-request-details-by-id)
+    - [confirm payment request](#confirm-payment-request)
+    - [resend payment request](#resend-payment-request)
     - [Create payment method](#create-payment-method)
     - [List payment methods](#list-payment-methods)
     - [Get payment method details by ID](#get-payment-method-details-by-id)
+    - [Authorize Payment method](#authorize-payment-method)
+    - [Update Payment method](#update-payment-method)
+    - [Expire Payment method](#expire-payment-method)
+    - [List payments by payment method id](#list-payments-by-payment-method-id)
   - [Refund Services](#refund-services)
     - [Create refund](#create-refund-1)
     - [List refunds](#list-refunds)
@@ -1686,6 +1692,27 @@ r.getPaymentRequestByID(data: {
 })
 ```
 
+#### confirm payment request
+
+```ts
+r.confirmPaymentRequest(data: {
+    id: string;
+    auth_code: string;
+    idempotencty_key?: string;
+    for_user_id?: string;
+})
+```
+
+#### resend payment request
+
+```ts
+r.resendPaymentRequest(data: {
+    id: string;
+    idempotencty_key?: string;
+    for_user_id?: string;
+})
+```
+
 
 ```
 ### Payment Method 
@@ -1723,7 +1750,7 @@ r.createPaymentMethod({
 #### Create payment method
 
 ```ts
-r.createPaymentMethod(data: {
+r.createPaymentMethodV2(data: {
   type: PaymentMethodV2Types;
   reusability: PaymentMenthodV2Reusabilities;
   reference_id?: string;
@@ -1746,7 +1773,7 @@ r.createPaymentMethod(data: {
 #### List payment methods
 
 ```ts
-r.listpaymentmethods(data: {
+r.listPaymentMethodV2(data: {
   payment_method_id?: string;
   payment_method_type?: string;
   channel_code?: string;
@@ -1760,12 +1787,65 @@ r.listpaymentmethods(data: {
 #### Get payment method details by ID
 
 ```ts
-r.getPaymentMethodByID(data: {
+r.getPaymentMethodByIdV2(data: {
     id: string;
     for_user_id?: string;
 })
 ```
 
+#### Authorize Payment method
+
+```ts
+r.authorizePaymentMethodV2(data: {
+    id: string;
+    auth_code: string;
+    for_user_id?: string;
+    idempotency_key?: string;
+})
+```
+
+#### Update Payment method
+
+```ts
+r.updatePaymentMethodV2(data: {
+    id: string;
+    reference_id?: string;
+    description?: string;
+    metadata?: object;
+    status?: object;
+    reusability?: PaymentMenthodV2Reusabilities;
+    over_the_counter?: UpdateOverTheCounterItems;
+    virtual_account?: UpdateVirtualAccountItems;
+    for_user_id?: string;
+})
+```
+
+#### Expire Payment method
+
+```ts
+r.expirePaymentMethodV2(data: {
+    id: string;
+    for_user_id?: string;
+    idempotency_key?: string;
+})
+```
+
+#### List payments by payment method id
+
+```ts
+r.listPaymentsByPaymentMethodIdV2(data: {
+    id: string;
+    payment_request_id?: string;
+    reference_id?: string;
+    status?: ListPaymentMethodV2StatusItems;
+    limit?: number;
+    after_id?: string;
+    before_id?: string;
+    created?: string;
+    updated?: string;
+    for_user_id?: string;
+})
+```
 
 
 Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#refunds) for more info about methods' parameters
