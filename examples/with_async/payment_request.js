@@ -6,23 +6,25 @@ const r = new PaymentRequest({});
 (async function() {
   try {
     let paymentrequest = await r.createPaymentRequest({
-        "amount": 1500,
-        "currency": "PHP",
-        "payment_method": {
-            "type": "EWALLET",
-            "ewallet": {
-                "channel_code" :"GRABPAY",
-                "channel_properties": {
-                    "success_return_url" : "https://redirect.me/goodstuff",
-                    "failure_return_url" : "https://redirect.me/badstuff"
-                }
-            },
-            "reusability": "ONE_TIME_USE"
-        }
+      amount: 1500,
+      currency: 'PHP',
+      payment_method: {
+        type: 'EWALLET',
+        ewallet: {
+          channel_code: 'GRABPAY',
+          channel_properties: {
+            success_return_url: 'https://redirect.me/goodstuff',
+            failure_return_url: 'https://redirect.me/badstuff',
+          },
+        },
+        reusability: 'ONE_TIME_USE',
+      },
     });
     console.log('created payment request', paymentrequest); // eslint-disable-line no-console
 
-    const getpaymentrequest = await r.getPaymentRequestById({ id: paymentrequest.id });
+    const getpaymentrequest = await r.getPaymentRequestById({
+      id: paymentrequest.id,
+    });
     // eslint-disable-next-line no-console
     console.log('retrieved payment request', getpaymentrequest);
 
@@ -36,4 +38,3 @@ const r = new PaymentRequest({});
     process.exit(1);
   }
 })();
-

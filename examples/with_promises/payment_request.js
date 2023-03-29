@@ -5,19 +5,19 @@ const ref = new PaymentRequest();
 
 ref
   .createPaymentRequest({
-    "amount": 1500,
-    "currency": "PHP",
-    "payment_method": {
-        "type": "EWALLET",
-        "ewallet": {
-            "channel_code" :"GRABPAY",
-            "channel_properties": {
-                "success_return_url" : "https://redirect.me/goodstuff",
-                "failure_return_url" : "https://redirect.me/badstuff"
-            }
+    amount: 1500,
+    currency: 'PHP',
+    payment_method: {
+      type: 'EWALLET',
+      ewallet: {
+        channel_code: 'GRABPAY',
+        channel_properties: {
+          success_return_url: 'https://redirect.me/goodstuff',
+          failure_return_url: 'https://redirect.me/badstuff',
         },
-        "reusability": "ONE_TIME_USE"
-    }
+      },
+      reusability: 'ONE_TIME_USE',
+    },
   })
   .then(r => {
     // eslint-disable-next-line no-console
