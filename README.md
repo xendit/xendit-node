@@ -121,7 +121,7 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [List payment requests](#list-payment-requests)
     - [Get payment request details by ID](#get-payment-request-details-by-id)
     - [confirm payment request](#confirm-payment-request)
-    - [resend payment request](#resend-payment-request)
+    - [resend auth for payment request](#resend-auth-for-payment-request)
   - [Payment Method](#payment-method)
     - [Create payment method](#create-payment-method)
     - [List payment methods](#list-payment-methods)
@@ -1629,6 +1629,8 @@ const r = new PaymentRequest();
 Example: Create a Payment Request
 
 ```js
+
+
 r.createPaymentRequest({
       amount: 1500,
       currency: 'PHP',
@@ -1648,6 +1650,8 @@ r.createPaymentRequest({
 });
 ```
 
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#payment-requests) for more info about methods' parameters
+
 
 #### Create payment request
 
@@ -1662,7 +1666,7 @@ r.createPaymentRequest(data: {
     payment_method: object;
     channel_properties?: PaymentRequestChannelProperties;
     metadata?: object;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
 })
 ```
@@ -1699,17 +1703,17 @@ r.getPaymentRequestByID(data: {
 r.confirmPaymentRequest(data: {
     id: string;
     auth_code: string;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
 })
 ```
 
-#### resend payment request
+#### resend auth for payment request
 
 ```ts
-r.resendPaymentRequest(data: {
+r.resendAuthForPaymentRequest(data: {
     id: string;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
 })
 ```
@@ -1745,6 +1749,8 @@ r.createPaymentMethod({
   console.log(`payment method created with ID: ${id}`);
 });
 ```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#payment-methods) for more info about methods' parameters
 
 
 #### Create payment method
@@ -1848,9 +1854,6 @@ r.listPaymentsByPaymentMethodIdV2(data: {
 ```
 
 
-Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#refunds) for more info about methods' parameters
-
-
 ### Refund Services
 
 Instanitiate Refund service using constructor that has been injected with Xendit keys
@@ -1885,7 +1888,7 @@ r.createRefund(data: {
   amount?: number;
   reason: RefundReasons;
   metadata?: object;
-  idempotencty_key?: string;
+  idempotency_key?: string;
   for_user_id?: string;
 })
 ```
