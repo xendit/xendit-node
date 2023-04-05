@@ -20,7 +20,7 @@ export = class Refund {
     amount?: number;
     reason: RefundReasons;
     metadata?: object;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
   }): Promise<object>;
 

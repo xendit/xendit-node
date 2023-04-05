@@ -116,6 +116,20 @@ For PCI compliance to be maintained, tokenization of credit cards info should be
     - [Set Callback URL](#set-callback-url)
     - [Create transfers](#create-transfers)
     - [Create fee rules](#create-fee-rules)
+  - [Payment Request](#payment-request)
+    - [Create payment request](#create-payment-request)
+    - [List payment requests](#list-payment-requests)
+    - [Get payment request details by ID](#get-payment-request-details-by-id)
+    - [confirm payment request](#confirm-payment-request)
+    - [resend auth for payment request](#resend-auth-for-payment-request)
+  - [Payment Method](#payment-method)
+    - [Create payment method](#create-payment-method)
+    - [List payment methods](#list-payment-methods)
+    - [Get payment method details by ID](#get-payment-method-details-by-id)
+    - [Authorize Payment method](#authorize-payment-method)
+    - [Update Payment method](#update-payment-method)
+    - [Expire Payment method](#expire-payment-method)
+    - [List payments by payment method id](#list-payments-by-payment-method-id)
   - [Refund Services](#refund-services)
     - [Create refund](#create-refund-1)
     - [List refunds](#list-refunds)
@@ -1601,7 +1615,244 @@ p.createFeeRule(data: {
     currency: string;
   }>;
 })
+
 ```
+### Payment Request
+
+Instanitiate Payment Request using constructor that has been injected with Xendit keys
+
+```js
+const { PaymentRequest } = x;
+const r = new PaymentRequest();
+```
+
+Example: Create a Payment Request
+
+```js
+
+
+r.createPaymentRequest({
+      amount: 1500,
+      currency: 'PHP',
+      payment_method: {
+        type: 'EWALLET',
+        ewallet: {
+          channel_code: 'GRABPAY',
+          channel_properties: {
+            success_return_url: 'https://redirect.me/goodstuff',
+            failure_return_url: 'https://redirect.me/badstuff',
+          },
+        },
+        reusability: 'ONE_TIME_USE',
+      }
+}).then(({ id }) => {
+  console.log(`payment request created with ID: ${id}`);
+});
+```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#payment-requests) for more info about methods' parameters
+
+
+#### Create payment request
+
+```ts
+r.createPaymentRequest(data: {
+    currency: PaymentRequestCurrencies;
+    amount: number;
+    reference_id?: string;
+    customer_id?: string;
+    country: PaymentRequestCountries;
+    description?: string;
+    payment_method: object;
+    channel_properties?: PaymentRequestChannelProperties;
+    metadata?: object;
+    idempotency_key?: string;
+    for_user_id?: string;
+})
+```
+
+#### List payment requests
+
+```ts
+r.listpaymentrequests(data: {
+    id?: string;
+    reference_id?: string;
+    customer_id?: string;
+    type?: PaymentRequestType;
+    channel_code?: string;
+    status?: PaymentRequestStatuses;
+    limit?: number;
+    after_id?: string;
+    before_id?: string;
+    for_user_id?: string;
+})
+```
+
+#### Get payment request details by ID
+
+```ts
+r.getPaymentRequestByID(data: {
+    id: string;
+    for_user_id?: string;
+})
+```
+
+#### confirm payment request
+
+```ts
+r.confirmPaymentRequest(data: {
+    id: string;
+    auth_code: string;
+    idempotency_key?: string;
+    for_user_id?: string;
+})
+```
+
+#### resend auth for payment request
+
+```ts
+r.resendAuthForPaymentRequest(data: {
+    id: string;
+    idempotency_key?: string;
+    for_user_id?: string;
+})
+```
+
+
+### Payment Method 
+
+Instanitiate Payment Method using constructor that has been injected with Xendit keys
+
+```js
+const { PaymentMethod } = x;
+const r = new PaymentMethod();
+```
+
+Example: Create a Payment Method
+
+```js
+r.createPaymentMethod({
+      type: 'DIRECT_DEBIT',
+      reusability: 'ONE_TIME_USE',
+      customer_id: '16f72571-9b3a-43dc-b241-5b71f470202f',
+      country: 'ID',
+      direct_debit: {
+        channel_code: 'BRI',
+        channel_properties: {
+          mobile_number: '+6281299640904',
+          card_last_four: '8888',
+          card_expiry: '10/29',
+          email: 'dharma@xendit.co',
+        },
+      },
+}).then(({ id }) => {
+  console.log(`payment method created with ID: ${id}`);
+});
+```
+
+Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#payment-methods) for more info about methods' parameters
+
+
+#### Create payment method
+
+```ts
+r.createPaymentMethodV2(data: {
+  type: PaymentMethodV2Types;
+  reusability: PaymentMenthodV2Reusabilities;
+  reference_id?: string;
+  customer_id?: string;
+  country?: CreatePaymentMenthodV2Countries;
+  description?: string;
+  billing_information?: BillingInformationItems;
+  metadata?: object;
+  ewallet?: EwalletItems;
+  direct_debit?: DirectDebitItems;
+  card?: CardItems;
+  over_the_counter?: OverTheCounterItems;
+  virtual_account?: VirtualAccountItems;
+  qr_code?: QRISItems;
+  for_user_id?: string;
+  idempotency_key?: string;
+})
+```
+
+#### List payment methods
+
+```ts
+r.listPaymentMethodV2(data: {
+  payment_method_id?: string;
+  payment_method_type?: string;
+  channel_code?: string;
+  limit?: number;
+  after_id?: string;
+  before_id?: string;
+  for_user_id?: string;
+})
+```
+
+#### Get payment method details by ID
+
+```ts
+r.getPaymentMethodByIdV2(data: {
+    id: string;
+    for_user_id?: string;
+})
+```
+
+#### Authorize Payment method
+
+```ts
+r.authorizePaymentMethodV2(data: {
+    id: string;
+    auth_code: string;
+    for_user_id?: string;
+    idempotency_key?: string;
+})
+```
+
+#### Update Payment method
+
+```ts
+r.updatePaymentMethodV2(data: {
+    id: string;
+    reference_id?: string;
+    description?: string;
+    metadata?: object;
+    status?: object;
+    reusability?: PaymentMenthodV2Reusabilities;
+    over_the_counter?: UpdateOverTheCounterItems;
+    virtual_account?: UpdateVirtualAccountItems;
+    for_user_id?: string;
+})
+```
+
+#### Expire Payment method
+
+```ts
+r.expirePaymentMethodV2(data: {
+    id: string;
+    for_user_id?: string;
+    idempotency_key?: string;
+})
+```
+
+#### List payments by payment method id
+
+```ts
+r.listPaymentsByPaymentMethodIdV2(data: {
+    id: string;
+    payment_request_id?: string;
+    reference_id?: string;
+    status?: ListPaymentMethodV2StatusItems;
+    limit?: number;
+    after_id?: string;
+    before_id?: string;
+    created?: string;
+    updated?: string;
+    for_user_id?: string;
+})
+```
+
 
 ### Refund Services
 
@@ -1637,7 +1888,7 @@ r.createRefund(data: {
   amount?: number;
   reason: RefundReasons;
   metadata?: object;
-  idempotencty_key?: string;
+  idempotency_key?: string;
   for_user_id?: string;
 })
 ```

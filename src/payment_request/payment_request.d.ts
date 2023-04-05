@@ -55,20 +55,20 @@ export = class PaymentRequest {
     payment_method: object;
     channel_properties?: PaymentRequestChannelProperties;
     metadata?: object;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
   }): Promise<object>;
 
   confirmPaymentRequest(data: {
     id: string;
     auth_code: string;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
   }): Promise<object>;
 
-  resendPaymentRequest(data: {
+  resendAuthForPaymentRequest(data: {
     id: string;
-    idempotencty_key?: string;
+    idempotency_key?: string;
     for_user_id?: string;
   }): Promise<object>;
 

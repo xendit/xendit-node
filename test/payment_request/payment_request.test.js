@@ -122,7 +122,7 @@ describe('Payment Request Service', () => {
   describe('resend payments request', () => {
     it('should get a response of payment request confirmed', done => {
       expect(
-        pr.resendPaymentRequest({
+        pr.resendAuthForPaymentRequest({
           id: 'pr-6e9778ea-7d62-40fe-8b25-a4d740754c5f',
         }),
       )

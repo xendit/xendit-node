@@ -93,7 +93,7 @@ PaymentRequest.prototype.confirmPaymentRequest = function(data) {
   });
 };
 
-PaymentRequest.prototype.resendPaymentRequest = function(data) {
+PaymentRequest.prototype.resendAuthForPaymentRequest = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['id'], data, reject);
 
