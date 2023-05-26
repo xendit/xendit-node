@@ -53,6 +53,7 @@ export = class PaymentRequest {
     country: PaymentRequestCountries;
     description?: string;
     payment_method: object;
+    payment_method_id: string;
     channel_properties?: PaymentRequestChannelProperties;
     metadata?: object;
     idempotency_key?: string;
