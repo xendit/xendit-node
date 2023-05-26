@@ -55,6 +55,7 @@ PaymentRequest.prototype.createPaymentRequest = function(data) {
         country: data.country,
         description: data.description,
         payment_method: data.payment_method,
+        payment_method_id: data.payment_method_id,
         channel_properties: data.channel_properties,
         metadata: data.metadata,
       }),
