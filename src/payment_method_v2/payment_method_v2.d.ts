@@ -211,7 +211,7 @@ export = class PaymentMethodV2 {
     reference_id?: string;
     description?: string;
     metadata?: object;
-    status?: object;
+    status?: string;
     reusability?: PaymentMenthodV2Reusabilities;
     over_the_counter?: UpdateOverTheCounterItems;
     virtual_account?: UpdateVirtualAccountItems;
