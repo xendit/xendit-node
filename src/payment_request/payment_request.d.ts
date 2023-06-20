@@ -10,6 +10,16 @@ enum PaymentRequestCountries {
   PH = 'PH',
 }
 
+enum PaymentRequestInitiator {
+  Customer = 'CUSTOMER',
+  Merchant = 'MERCHANT',
+}
+
+enum PaymentRequestCaptureMethod {
+  Automatic = 'AUTOMATIC',
+  Manual = 'Manual',
+}
+
 enum PaymentRequestRedeemPoints {
   RedeemNone = 'REDEEM_NONE',
   RedeemAll = 'REDEEM_ALL',
@@ -50,11 +60,15 @@ export = class PaymentRequest {
     amount: number;
     reference_id?: string;
     customer_id?: string;
-    country: PaymentRequestCountries;
+    country?: PaymentRequestCountries;
     description?: string;
-    payment_method: object;
+    payment_method?: object;
     channel_properties?: PaymentRequestChannelProperties;
     metadata?: object;
+    payment_method_id?: string;
+    shipping_information?: object;
+    initiator?: PaymentRequestInitiator;
+    capture_method?: PaymentRequestCaptureMethod;
     idempotency_key?: string;
     for_user_id?: string;
   }): Promise<object>;

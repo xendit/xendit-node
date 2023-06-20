@@ -1666,6 +1666,10 @@ r.createPaymentRequest(data: {
     payment_method: object;
     channel_properties?: PaymentRequestChannelProperties;
     metadata?: object;
+    payment_method_id?: string;
+    shipping_information?: object;
+    initiator?: PaymentRequestInitiator;
+    capture_method?: PaymentRequestCaptureMethod;
     idempotency_key?: string;
     for_user_id?: string;
 })
