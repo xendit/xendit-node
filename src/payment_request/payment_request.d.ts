@@ -17,7 +17,7 @@ enum PaymentRequestInitiator {
 
 enum PaymentRequestCaptureMethod {
   Automatic = 'AUTOMATIC',
-  Manual = 'Manual',
+  Manual = 'MANUAL',
 }
 
 enum PaymentRequestRedeemPoints {

@@ -60,7 +60,7 @@ PaymentRequest.prototype.createPaymentRequest = function(data) {
         payment_method_id: data.payment_method_id,
         capture_method: data.capture_method,
         shipping_information: data.shipping_information,
-        initiator: data.initiator
+        initiator: data.initiator,
       }),
     })
       .then(resolve)
