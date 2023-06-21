@@ -1,31 +1,31 @@
 import { XenditOptions } from '../xendit_opts';
 
-enum PaymentRequestCurrencies {
+export enum PaymentRequestCurrencies {
   IDR = 'IDR',
   PHP = 'PHP',
 }
 
-enum PaymentRequestCountries {
+export enum PaymentRequestCountries {
   ID = 'ID',
   PH = 'PH',
 }
 
-enum PaymentRequestInitiator {
+export enum PaymentRequestInitiator {
   Customer = 'CUSTOMER',
   Merchant = 'MERCHANT',
 }
 
-enum PaymentRequestCaptureMethod {
+export enum PaymentRequestCaptureMethod {
   Automatic = 'AUTOMATIC',
   Manual = 'MANUAL',
 }
 
-enum PaymentRequestRedeemPoints {
+export enum PaymentRequestRedeemPoints {
   RedeemNone = 'REDEEM_NONE',
   RedeemAll = 'REDEEM_ALL',
 }
 
-enum PaymentRequestType {
+export enum PaymentRequestType {
   Card = 'CARD',
   EWallet = 'EWALLET',
   DirectDebit = 'DIRECT_DEBIT',
@@ -34,7 +34,7 @@ enum PaymentRequestType {
   VirtualAccount = 'VIRTUAL_ACCOUNT',
 }
 
-enum PaymentRequestStatuses {
+export enum PaymentRequestStatuses {
   Succeeded = 'SUCCEEDED',
   Failed = 'FAILED',
   Pending = 'PENDING',
