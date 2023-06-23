@@ -1,21 +1,31 @@
 import { XenditOptions } from '../xendit_opts';
 
-enum PaymentRequestCurrencies {
+export enum PaymentRequestCurrencies {
   IDR = 'IDR',
   PHP = 'PHP',
 }
 
-enum PaymentRequestCountries {
+export enum PaymentRequestCountries {
   ID = 'ID',
   PH = 'PH',
 }
 
-enum PaymentRequestRedeemPoints {
+export enum PaymentRequestInitiator {
+  Customer = 'CUSTOMER',
+  Merchant = 'MERCHANT',
+}
+
+export enum PaymentRequestCaptureMethod {
+  Automatic = 'AUTOMATIC',
+  Manual = 'MANUAL',
+}
+
+export enum PaymentRequestRedeemPoints {
   RedeemNone = 'REDEEM_NONE',
   RedeemAll = 'REDEEM_ALL',
 }
 
-enum PaymentRequestType {
+export enum PaymentRequestType {
   Card = 'CARD',
   EWallet = 'EWALLET',
   DirectDebit = 'DIRECT_DEBIT',
@@ -24,7 +34,7 @@ enum PaymentRequestType {
   VirtualAccount = 'VIRTUAL_ACCOUNT',
 }
 
-enum PaymentRequestStatuses {
+export enum PaymentRequestStatuses {
   Succeeded = 'SUCCEEDED',
   Failed = 'FAILED',
   Pending = 'PENDING',
@@ -50,11 +60,15 @@ export = class PaymentRequest {
     amount: number;
     reference_id?: string;
     customer_id?: string;
-    country: PaymentRequestCountries;
+    country?: PaymentRequestCountries;
     description?: string;
-    payment_method: object;
+    payment_method?: object;
     channel_properties?: PaymentRequestChannelProperties;
     metadata?: object;
+    payment_method_id?: string;
+    shipping_information?: object;
+    initiator?: PaymentRequestInitiator;
+    capture_method?: PaymentRequestCaptureMethod;
     idempotency_key?: string;
     for_user_id?: string;
   }): Promise<object>;

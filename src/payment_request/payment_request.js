@@ -29,7 +29,7 @@ PaymentRequest._constructorWithInjectedXenditOpts = function(options) {
 
 PaymentRequest.prototype.createPaymentRequest = function(data) {
   return promWithJsErr((resolve, reject) => {
-    Validate.rejectOnMissingFields(['currency', 'amount'], data, reject);
+    Validate.rejectOnMissingFields(['amount'], data, reject);
 
     let headers = {
       Authorization: Auth.basicAuthHeader(this.opts.secretKey),
@@ -57,6 +57,10 @@ PaymentRequest.prototype.createPaymentRequest = function(data) {
         payment_method: data.payment_method,
         channel_properties: data.channel_properties,
         metadata: data.metadata,
+        payment_method_id: data.payment_method_id,
+        capture_method: data.capture_method,
+        shipping_information: data.shipping_information,
+        initiator: data.initiator,
       }),
     })
       .then(resolve)
