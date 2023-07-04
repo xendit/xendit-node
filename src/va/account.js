@@ -30,6 +30,9 @@ function createFixedVA(data) {
           : undefined,
         is_single_use: data.isSingleUse,
         description: data.description,
+        currency: data.currency,
+        country: data.country,
+        alternative_display_types: data.alternativeDisplayTypes,
       }),
     })
       .then(resolve)

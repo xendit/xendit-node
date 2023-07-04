@@ -9,6 +9,9 @@ export function createFixedVA(data: {
   expirationDate?: Date;
   isSingleUse?: boolean;
   description?: string;
+  currency?: string;
+  country?: string;
+  alternativeDisplayTypes?: string[];
   forUserID?: string;
 }): Promise<object>;
 

@@ -292,7 +292,7 @@ card.createPromotion(data: {
 
 ### Virtual Account Services
 
-Instanitiate VA service using constructor that has been injected with Xendit keys
+Instantiate VA service using constructor that has been injected with Xendit keys
 
 ```js
 const { VirtualAcc } = x;
@@ -340,6 +340,9 @@ va.createFixedVA(data: {
   expirationDate?: Date;
   isSingleUse?: boolean;
   description?: string;
+  currency?: string;
+  country?: string;
+  alternativeDisplayTypes?: string[];
   forUserID?: string;
 })
 ```
