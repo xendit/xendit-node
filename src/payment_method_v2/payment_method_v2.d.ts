@@ -6,15 +6,15 @@ enum PaymentMethodV2Types {
   DirectDebit = 'DIRECT_DEBIT',
   OverTheCounter = 'OVER_THE_COUNTER',
   QRCODE = 'QR_CODE',
-  VitrualAccount = 'VIRTUAL_ACCOUNT',
+  VirtualAccount = 'VIRTUAL_ACCOUNT',
 }
 
-enum PaymentMenthodV2Reusabilities {
+enum PaymentMethodV2Reusabilities {
   OneTimeUse = 'ONE_TIME_USE',
   MultipleUse = 'MULTIPLE_USE',
 }
 
-enum CreatePaymentMenthodV2Countries {
+enum CreatePaymentMethodV2Countries {
   ID = 'ID',
   PH = 'PH',
 }
@@ -165,10 +165,10 @@ export = class PaymentMethodV2 {
   ) => typeof PaymentMethodV2;
   createPaymentMethodV2(data: {
     type: PaymentMethodV2Types;
-    reusability: PaymentMenthodV2Reusabilities;
+    reusability: PaymentMethodV2Reusabilities;
     reference_id?: string;
     customer_id?: string;
-    country?: CreatePaymentMenthodV2Countries;
+    country?: CreatePaymentMethodV2Countries;
     description?: string;
     billing_information?: BillingInformationItems;
     metadata?: object;
@@ -185,7 +185,7 @@ export = class PaymentMethodV2 {
   listPaymentMethodV2(data: {
     id: string;
     type?: PaymentMethodV2Types;
-    reusability?: PaymentMenthodV2Reusabilities;
+    reusability?: PaymentMethodV2Reusabilities;
     reference_id?: string;
     customer_id?: string;
     limit?: string;
@@ -212,7 +212,7 @@ export = class PaymentMethodV2 {
     description?: string;
     metadata?: object;
     status?: string;
-    reusability?: PaymentMenthodV2Reusabilities;
+    reusability?: PaymentMethodV2Reusabilities;
     over_the_counter?: UpdateOverTheCounterItems;
     virtual_account?: UpdateVirtualAccountItems;
     for_user_id?: string;
