@@ -1765,10 +1765,10 @@ Refer to [Xendit API Reference](https://developers.xendit.co/api-reference/#paym
 ```ts
 r.createPaymentMethodV2(data: {
   type: PaymentMethodV2Types;
-  reusability: PaymentMenthodV2Reusabilities;
+  reusability: PaymentMethodV2Reusabilities;
   reference_id?: string;
   customer_id?: string;
-  country?: CreatePaymentMenthodV2Countries;
+  country?: CreatePaymentMethodV2Countries;
   description?: string;
   billing_information?: BillingInformationItems;
   metadata?: object;
@@ -1826,7 +1826,7 @@ r.updatePaymentMethodV2(data: {
     description?: string;
     metadata?: object;
     status?: string;
-    reusability?: PaymentMenthodV2Reusabilities;
+    reusability?: PaymentMethodV2Reusabilities;
     over_the_counter?: UpdateOverTheCounterItems;
     virtual_account?: UpdateVirtualAccountItems;
     for_user_id?: string;
