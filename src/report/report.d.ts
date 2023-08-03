@@ -30,6 +30,7 @@ export = class Report {
     filterDateTo?: Date;
     format?: formatTypes;
     currency?: currencyTypes;
+    forUserId?: string;
   }): Promise<object>;
-  getReport(data: { id: string }): Promise<object>;
+  getReport(data: { id: string; forUserId?: string }): Promise<object>;
 };

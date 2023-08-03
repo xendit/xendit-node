@@ -27,12 +27,18 @@ Transaction.prototype.getTransaction = function(data) {
   return promWithJsErr((resolve, reject) => {
     Validate.rejectOnMissingFields(['id'], data, reject);
 
+    const headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserId) {
+      headers['for-user-id'] = data.forUserId;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}`, {
       method: 'GET',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-      },
+      headers,
     })
       .then(resolve)
       .catch(reject);
@@ -47,6 +53,7 @@ Transaction.prototype.listTransactions = function(data) {
     // If the data is a date we convert to an ISO string format for dates
     // Else we simply add the key-value pair
     for (let field of Object.keys(data)) {
+      if (field === 'forUserId') continue;
       if (Array.isArray(data[field])) {
         for (let v of data[field]) {
           QUERY_STRING += `${queryTypes[field]}=${v}&`;
@@ -59,12 +66,18 @@ Transaction.prototype.listTransactions = function(data) {
     }
     QUERY_STRING = QUERY_STRING.slice(0, -1);
 
+    const headers = {
+      Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      'Content-Type': 'application/json',
+    };
+
+    if (data && data.forUserId) {
+      headers['for-user-id'] = data.forUserId;
+    }
+
     fetchWithHTTPErr(`${this.API_ENDPOINT}${QUERY_STRING}`, {
       method: 'GET',
-      headers: {
-        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'Content-Type': 'application/json',
-      },
+      headers,
     })
       .then(resolve)
       .catch(reject);

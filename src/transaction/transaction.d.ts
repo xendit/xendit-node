@@ -5,7 +5,7 @@ export = class Transaction {
   static _constructorWithInjectedXenditOpts: (
     opts: XenditOptions,
   ) => typeof Transaction;
-  getTransaction(data: { id: string }): Promise<object>;
+  getTransaction(data: { id: string; forUserId?: string }): Promise<object>;
   listTransactions(data: {
     types?: Array<string>;
     statuses?: Array<string>;
@@ -22,5 +22,6 @@ export = class Transaction {
     createdDateTo?: Date;
     updatedDateFrom?: Date;
     updatedDateTo?: Date;
+    forUserId?: string;
   }): Promise<object>;
 };
