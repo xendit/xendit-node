@@ -73,8 +73,10 @@ RegionalRetailOutlet.prototype.updatePaymentCode = function(data) {
       },
       body: JSON.stringify({
         amount: data.amount,
-        currency: data.amount,
+        currency: data.currency,
         customer_name: data.customerName,
+        expires_at: data.expiresAt ? data.expiresAt.toISOString() : undefined,
+        description: data.description,
       }),
     })
       .then(resolve)
@@ -87,6 +89,21 @@ RegionalRetailOutlet.prototype.getPaymentCode = function(data) {
     Validate.rejectOnMissingFields(['id'], data, reject);
 
     fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: Auth.basicAuthHeader(this.opts.secretKey),
+      },
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+RegionalRetailOutlet.prototype.getPayments = function (data) {
+  return promWithJsErr((resolve, reject) => {
+    Validate.rejectOnMissingFields(['id'], data, reject);
+
+    fetchWithHTTPErr(`${this.API_ENDPOINT}/${data.id}/payments`, {
       method: 'GET',
       headers: {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
