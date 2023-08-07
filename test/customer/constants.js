@@ -5,7 +5,7 @@ const EMAIL = 'customer@website.com';
 const MOBILE_NUMBER = '+6281212345678';
 const MIDDLE_NAME = 'middle';
 const SURNAME = 'surname';
-const VALID_CREATE_CUSTOMER_RESPONSE = {
+const VALID_CREATE_CUSTOMER_RESPONSE_V20200519 = {
   id: CUSTOMER_ID,
   reference_id: REFERENCE_ID,
   given_names: GIVEN_NAMES,
@@ -22,7 +22,7 @@ const VALID_CREATE_CUSTOMER_RESPONSE = {
   addresses: null,
   source_of_wealth: null,
 };
-const VALID_CUSTOMER = {
+const VALID_CUSTOMER_V20200519 = {
   id: CUSTOMER_ID,
   reference_id: REFERENCE_ID,
   given_names: GIVEN_NAMES,
@@ -74,7 +74,84 @@ const VALID_CUSTOMER = {
   ],
   source_of_wealth: null,
 };
-const VALID_CUSTOMER_ARRAY = [VALID_CUSTOMER, VALID_CUSTOMER];
+const VALID_CUSTOMER_ARRAY_V20200519 = [
+  VALID_CUSTOMER_V20200519,
+  VALID_CUSTOMER_V20200519,
+];
+
+const VALID_CREATE_CUSTOMER_RESPONSE_V20201031 = {
+  id: 'cust-' + CUSTOMER_ID,
+  reference_id: REFERENCE_ID,
+  type: 'INDIVIDUAL',
+  individual_detail: {
+    given_names: GIVEN_NAMES,
+    middle_name: MIDDLE_NAME,
+    surname: SURNAME,
+    date_of_birth: null,
+    employment: null,
+    nationality: null,
+  },
+  email: EMAIL,
+  mobile_number: MOBILE_NUMBER,
+  description: 'dummy customer',
+  phone_number: null,
+  metadata: null,
+  addresses: null,
+};
+
+const VALID_CUSTOMER_V20201031 = {
+  id: CUSTOMER_ID,
+  reference_id: REFERENCE_ID,
+  given_names: GIVEN_NAMES,
+  type: 'INDIVIDUAL',
+  individual_detail: {
+    given_names: GIVEN_NAMES,
+    middle_name: MIDDLE_NAME,
+    surname: SURNAME,
+    date_of_birth: null,
+    employment: null,
+    nationality: null,
+  },
+  email: EMAIL,
+  mobile_number: MOBILE_NUMBER,
+  description: 'dummy customer',
+  phone_number: null,
+  metadata: null,
+  addresses: [
+    {
+      address_id: '9b28de5e-57b2-4072-896a-72995a5802cd',
+      street_line1: 'Panglima Polim IV',
+      street_line2: 'Ruko Grand Panglima Polim, Blok E',
+      city: 'Jakarta Selatan',
+      province_state: 'DKI Jakarta',
+      postal_code: '993448',
+      country: 'ID',
+      category: 'HOME',
+      is_primary: true,
+      created: '2021-02-01T06:35:13.536Z',
+      status: 'ACTIVE',
+      updated: '2021-02-01T06:35:13.536Z',
+    },
+    {
+      address_id: '95a9346b-adae-4dd1-aeaf-1a961eda2cb2',
+      street_line1: 'Panglima Polim V',
+      street_line2: 'Ruko Grand Panglima Polim, Blok F',
+      city: 'Jakarta Selatan',
+      province_state: 'DKI Jakarta',
+      postal_code: '993448',
+      category: 'WORK',
+      country: 'ID',
+      status: 'ACTIVE',
+      updated: '2021-02-01T06:35:13.536Z',
+    },
+  ],
+  source_of_wealth: null,
+};
+
+const VALID_CUSTOMER_ARRAY_V20201031 = [
+  VALID_CUSTOMER_V20201031,
+  VALID_CUSTOMER_V20201031,
+];
 
 module.exports = {
   CUSTOMER_ID,
@@ -84,7 +161,10 @@ module.exports = {
   MOBILE_NUMBER,
   MIDDLE_NAME,
   SURNAME,
-  VALID_CREATE_CUSTOMER_RESPONSE,
-  VALID_CUSTOMER,
-  VALID_CUSTOMER_ARRAY,
+  VALID_CREATE_CUSTOMER_RESPONSE_V20200519,
+  VALID_CREATE_CUSTOMER_RESPONSE_V20201031,
+  VALID_CUSTOMER_V20200519,
+  VALID_CUSTOMER_ARRAY_V20200519,
+  VALID_CUSTOMER_V20201031,
+  VALID_CUSTOMER_ARRAY_V20201031,
 };

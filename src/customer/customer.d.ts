@@ -109,5 +109,18 @@ export = class Customer {
     dateOfBirth?: string;
     metadata?: object;
     apiVersion?: string;
+    type?: string;
+    individualDetail?: IndividualDetail;
+    businessDetail?: BusinessDetail;
+    phoneNumber?: string;
+    hashedPhoneNumber?: string;
+    identityAccounts?: IdentityAccount[];
+    kycDocuments?: KYCDocument[];
+    description?: string;
+    dateOfRegistration?: Date;
+    domicileOfRegistration?: string;
+    entity?: string;
+    client?: string;
+    clientName?: string;
   }): Promise<object>;
 };

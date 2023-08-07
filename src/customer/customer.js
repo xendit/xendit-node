@@ -23,6 +23,7 @@ Customer._constructorWithInjectedXenditOpts = function(options) {
 
 Customer.prototype.createCustomer = function(data) {
   return promWithJsErr((resolve, reject) => {
+    const apiVersion = data.apiVersion ? data.apiVersion : '';
     const compulsoryFields = populateCompulsaryFields(data, apiVersion);
     Validate.rejectOnMissingFields(compulsoryFields, data, reject);
 
@@ -31,7 +32,7 @@ Customer.prototype.createCustomer = function(data) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
-        'API-VERSION': data.apiVersion ? data.apiVersion : '',
+        'API-VERSION': apiVersion,
       },
       body: transformCustomerObjectBody(data, apiVersion),
     })
@@ -76,6 +77,7 @@ Customer.prototype.getCustomerByReferenceID = function(data) {
 };
 
 Customer.prototype.updateCustomer = function(data) {
+  const apiVersion = data.apiVersion ? data.apiVersion : '';
   return promWithJsErr((resolve, reject) => {
     fetchWithHTTPErr(`${this.API_ENDPOINT}/customers/${data.id}`, {
       method: 'PATCH',
@@ -84,29 +86,7 @@ Customer.prototype.updateCustomer = function(data) {
         Authorization: Auth.basicAuthHeader(this.opts.secretKey),
         'API-VERSION': data.apiVersion ? data.apiVersion : '',
       },
-      body: JSON.stringify({
-        reference_id: data.referenceID,
-        mobile_number: data.mobileNumber,
-        given_names: data.givenNames,
-        middle_name: data.middleName,
-        surname: data.surname,
-        description: data.description,
-        phone_number: data.phoneNumber,
-        nationality: data.nationality,
-        addresses: data.addresses
-          ? data.addresses.map(address => ({
-              country: address.country,
-              street_line1: address.streetLine1,
-              street_line2: address.streetLine2,
-              city: address.city,
-              province: address.province,
-              state: address.state,
-              postal_code: address.postalCode,
-            }))
-          : [],
-        date_of_birth: data.dateOfBirth,
-        metadata: data.metadata,
-      }),
+      body: transformCustomerObjectBody(data, apiVersion),
     })
       .then(resolve)
       .catch(reject);
@@ -119,8 +99,36 @@ function transformCustomerObjectBody(data, apiVersion) {
       return JSON.stringify({
         reference_id: data.referenceID,
         type: data.type,
-        individual_detail: data.individualDetail,
-        business_detail: data.businessDetail,
+        individual_detail: data.individualDetail
+          ? {
+              given_names: data.individualDetail.givenNames,
+              surname: data.individualDetail.surname,
+              nationality: data.individualDetail.nationality,
+              place_of_birth: data.individualDetail.placeOfBirth,
+              date_of_birth: data.individualDetail.dateOfBirth,
+              gender: data.individualDetail.gender,
+              employment: data.individualDetail.employment
+                ? {
+                    employer_name:
+                      data.individualDetail.employment.employerName,
+                    nature_of_business:
+                      data.individualDetail.employment.natureOfBusiness,
+                    role_description:
+                      data.individualDetail.employment.roleDescription,
+                  }
+                : undefined,
+            }
+          : undefined,
+        business_detail: data.businessDetail
+          ? {
+              business_name: data.businessDetail.businessName,
+              trading_name: data.businessDetail.tradingName,
+              business_type: data.businessDetail.businessType,
+              nature_of_business: data.businessDetail.natureOfBusiness,
+              business_domicile: data.businessDetail.businessDomicile,
+              date_of_registration: data.businessDetail.dateOfRegistration,
+            }
+          : undefined,
         mobile_number: data.mobileNumber,
         phone_number: data.phoneNumber,
         hashed_phone_number: data.hashedPhoneNumber,
@@ -135,17 +143,28 @@ function transformCustomerObjectBody(data, apiVersion) {
               state: address.state,
               postal_code: address.postalCode,
             }))
-          : [],
+          : undefined,
         identity_accounts: data.identityAccounts
-          ? data.identity_accounts.map(identity_account => ({
+          ? data.identityAccounts.map(identity_account => ({
               type: identity_account.type,
               company: identity_account.company,
               description: identity_account.description,
               country: identity_account.country,
               properties: identity_account.properties,
             }))
-          : [],
-        kyc_documents: data.kycDocuments,
+          : undefined,
+        kyc_documents: data.kycDocuments
+          ? data.kycDocuments.map(kycDocument => ({
+              country: kycDocument.country,
+              type: kycDocument.type,
+              sub_type: kycDocument.subType,
+              document_name: kycDocument.documentName,
+              document_number: kycDocument.documentNumber,
+              expires_at: kycDocument.expiresAt,
+              holder_name: kycDocument.holderName,
+              document_images: kycDocument.documentImages,
+            }))
+          : undefined,
         description: data.description,
         date_of_registration: data.dateOfRegistration,
         domicile_of_registration: data.domicileOfRegistration,

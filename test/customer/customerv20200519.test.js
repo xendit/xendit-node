@@ -29,10 +29,10 @@ before(function() {
       surname: TestConstants.SURNAME,
       addresses: [],
     })
-    .reply(200, TestConstants.VALID_CREATE_CUSTOMER_RESPONSE);
+    .reply(200, TestConstants.VALID_CREATE_CUSTOMER_RESPONSE_V20200519);
   nock(customer.API_ENDPOINT)
     .get(`/customers/${TestConstants.CUSTOMER_ID}`)
-    .reply(200, TestConstants.VALID_CREATE_CUSTOMER_RESPONSE);
+    .reply(200, TestConstants.VALID_CREATE_CUSTOMER_RESPONSE_V20200519);
   nock(customer.API_ENDPOINT)
     .patch(`/customers/${TestConstants.CUSTOMER_ID}`, {
       description: 'customer dummy',
@@ -52,13 +52,16 @@ before(function() {
         },
       ],
     })
-    .reply(200, TestConstants.VALID_CUSTOMER);
+    .reply(200, TestConstants.VALID_CUSTOMER_V20200519);
   nock(customer.API_ENDPOINT)
     .get(`/customers?reference_id=${TestConstants.REFERENCE_ID}`)
-    .reply(200, TestConstants.VALID_CUSTOMER_ARRAY);
+    .reply(200, TestConstants.VALID_CUSTOMER_ARRAY_V20200519);
+});
+after(function() {
+  nock.cleanAll();
 });
 
-describe('Customer Service', function() {
+describe('Customer Service v2020-05-19', function() {
   describe('createCustomer', () => {
     it('should create a customer', done => {
       expect(
@@ -73,7 +76,9 @@ describe('Customer Service', function() {
           addresses: [],
         }),
       )
-        .to.eventually.deep.equal(TestConstants.VALID_CREATE_CUSTOMER_RESPONSE)
+        .to.eventually.deep.equal(
+          TestConstants.VALID_CREATE_CUSTOMER_RESPONSE_V20200519,
+        )
         .and.notify(done);
     });
     it('should report missing required fields', done => {
@@ -92,7 +97,9 @@ describe('Customer Service', function() {
   describe('getCustomer', () => {
     it('should get a customer', done => {
       expect(customer.getCustomer({ id: TestConstants.CUSTOMER_ID }))
-        .to.eventually.deep.equal(TestConstants.VALID_CREATE_CUSTOMER_RESPONSE)
+        .to.eventually.deep.equal(
+          TestConstants.VALID_CREATE_CUSTOMER_RESPONSE_V20200519,
+        )
         .and.notify(done);
     });
     it('should report missing required fields', done => {
@@ -131,7 +138,7 @@ describe('Customer Service', function() {
           ],
         }),
       )
-        .to.eventually.deep.equal(TestConstants.VALID_CUSTOMER)
+        .to.eventually.deep.equal(TestConstants.VALID_CUSTOMER_V20200519)
         .and.notify(done);
     });
   });
@@ -143,7 +150,7 @@ describe('Customer Service', function() {
           referenceID: TestConstants.REFERENCE_ID,
         }),
       )
-        .to.eventually.deep.equal(TestConstants.VALID_CUSTOMER_ARRAY)
+        .to.eventually.deep.equal(TestConstants.VALID_CUSTOMER_ARRAY_V20200519)
         .and.notify(done);
     });
     it('should report missing required fields', done => {
