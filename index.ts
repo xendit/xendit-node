@@ -2,6 +2,9 @@
 /* eslint-disable */
 export * from './runtime';
 
+import { PaymentRequest } from './payment_request';
+export { PaymentRequest } from './payment_request';
+
 import { Payout } from './payout';
 export { Payout } from './payout';
 
@@ -24,6 +27,7 @@ export interface XenditOpts {
 }
 export class Xendit {
   opts: XenditOpts;
+  PaymentRequest: PaymentRequest;
   Payout: Payout;
   Transaction: Transaction;
   Balance: Balance;
@@ -50,6 +54,8 @@ export class Xendit {
     }
 
 
+       this.PaymentRequest = new PaymentRequest(this.opts);
+    
        this.Payout = new Payout(this.opts);
     
        this.Transaction = new Transaction(this.opts);

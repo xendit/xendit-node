@@ -136,7 +136,7 @@ export class BaseAPI {
         const headers = Object.assign({}, this.configuration.headers, context.headers);
         Object.keys(headers).forEach(key => headers[key] === undefined ? delete headers[key] : {});
         headers['xendit-lib'] = 'node';
-        headers['xendit-lib-ver'] = '3.0.0-beta.0';
+        headers['xendit-lib-ver'] = '3.0.0-beta.1';
 
         const initParams = {
             method: context.method,
