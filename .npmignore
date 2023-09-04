@@ -1,5 +1,1 @@
-node_modules/
-.env*
-test
-.eslint*
-.prettierrc
+README.md
