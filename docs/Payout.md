@@ -11,11 +11,10 @@ const { Payout } = xenditClient
 const xenditPayoutClient = new PayoutClient({secretKey: YOUR_SECRET_KEY})
 
 // At this point, `Payout` and `xenditPayoutClient` will have no usage difference, for example:
-// Payout.cancelPayout()
+// Payout.
 // or
-// xenditPayoutClient.cancelPayout()
+// xenditPayoutClient.
 ```
-
 ## API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
 
 

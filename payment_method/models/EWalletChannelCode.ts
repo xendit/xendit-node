@@ -27,7 +27,11 @@ export const EWalletChannelCode = {
     Momo: 'MOMO',
     Vnptwallet: 'VNPTWALLET',
     Viettelpay: 'VIETTELPAY',
-    Zalopay: 'ZALOPAY'
+    Zalopay: 'ZALOPAY',
+    Wechatpay: 'WECHATPAY',
+    Linepay: 'LINEPAY',
+    Truemoney: 'TRUEMONEY',
+    Alipay: 'ALIPAY'
 } as const;
 export type EWalletChannelCode = typeof EWalletChannelCode[keyof typeof EWalletChannelCode];
 

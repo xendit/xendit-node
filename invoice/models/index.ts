@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AddressObject';
+export * from './AlternativeDisplayItem';
 export * from './BadRequestError';
 export * from './Bank';
 export * from './BankCode';

@@ -13,11 +13,9 @@
  */
 export const InvoiceStatus = {
     Pending: 'PENDING',
-    Completing: 'COMPLETING',
     Paid: 'PAID',
     Settled: 'SETTLED',
-    Expired: 'EXPIRED',
-    Reminder: 'REMINDER'
+    Expired: 'EXPIRED'
 } as const;
 export type InvoiceStatus = typeof InvoiceStatus[keyof typeof InvoiceStatus];
 

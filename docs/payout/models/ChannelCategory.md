@@ -10,4 +10,6 @@ Category of channel code, as some channels might require more fields during proc
 
     * `Ewallet` (value: `'EWALLET'`)
 
+    * `Otc` (value: `'OTC'`)
+
 

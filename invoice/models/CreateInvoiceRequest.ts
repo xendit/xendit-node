@@ -63,12 +63,6 @@ export interface CreateInvoiceRequest {
      */
     description?: string;
     /**
-     * The client type (internal use).
-     * @type {string}
-     * @memberof CreateInvoiceRequest
-     */
-    clientType?: string;
-    /**
      * The duration of the invoice.
      * @type {string}
      * @memberof CreateInvoiceRequest
@@ -191,7 +185,6 @@ export function CreateInvoiceRequestFromJSONTyped(json: any, ignoreDiscriminator
         'amount': json['amount'],
         'payerEmail': !exists(json, 'payer_email') ? undefined : json['payer_email'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'clientType': !exists(json, 'client_type') ? undefined : json['client_type'],
         'invoiceDuration': !exists(json, 'invoice_duration') ? undefined : json['invoice_duration'],
         'callbackVirtualAccountId': !exists(json, 'callback_virtual_account_id') ? undefined : json['callback_virtual_account_id'],
         'shouldSendEmail': !exists(json, 'should_send_email') ? undefined : json['should_send_email'],
@@ -224,7 +217,6 @@ export function CreateInvoiceRequestToJSON(value?: CreateInvoiceRequest | null):
         'amount': value.amount,
         'payer_email': value.payerEmail,
         'description': value.description,
-        'client_type': value.clientType,
         'invoice_duration': value.invoiceDuration,
         'callback_virtual_account_id': value.callbackVirtualAccountId,
         'should_send_email': value.shouldSendEmail,

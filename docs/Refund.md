@@ -11,11 +11,10 @@ const { Refund } = xenditClient
 const xenditRefundClient = new RefundClient({secretKey: YOUR_SECRET_KEY})
 
 // At this point, `Refund` and `xenditRefundClient` will have no usage difference, for example:
-// Refund.cancelRefund()
+// Refund.
 // or
-// xenditRefundClient.cancelRefund()
+// xenditRefundClient.
 ```
-
 ## 
 
 

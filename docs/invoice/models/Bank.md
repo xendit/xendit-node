@@ -12,5 +12,6 @@ An object representing bank details for invoices.
 **bankAccountNumber** | string |  | The bank account number. |
 **accountHolderName** | string | ✅ | The name of the account holder. |
 **transferAmount** | number |  | The transfer amount. |
+**alternativeDisplays** | [[]AlternativeDisplayItem](AlternativeDisplayItem.md) |  |  |
 
 

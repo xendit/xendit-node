@@ -10,7 +10,6 @@ An object representing for an invoice creation request.
 **amount** | number | ✅ | The invoice amount. |
 **payerEmail** | string |  | The email address of the payer. |
 **description** | string |  | A description of the payment. |
-**clientType** | string |  | The client type (internal use). |
 **invoiceDuration** | string |  | The duration of the invoice. |
 **callbackVirtualAccountId** | string |  | The ID of the callback virtual account. |
 **shouldSendEmail** | boolean |  | Indicates whether email notifications should be sent. |

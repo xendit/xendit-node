@@ -17,8 +17,7 @@ export const InvoiceClientType = {
     Integration: 'INTEGRATION',
     OnDemand: 'ON_DEMAND',
     Recurring: 'RECURRING',
-    Mobile: 'MOBILE',
-    Storefront: 'STOREFRONT'
+    Mobile: 'MOBILE'
 } as const;
 export type InvoiceClientType = typeof InvoiceClientType[keyof typeof InvoiceClientType];
 

@@ -11,11 +11,10 @@ const { Invoice } = xenditClient
 const xenditInvoiceClient = new InvoiceClient({secretKey: YOUR_SECRET_KEY})
 
 // At this point, `Invoice` and `xenditInvoiceClient` will have no usage difference, for example:
-// Invoice.createInvoice()
+// Invoice.
 // or
-// xenditInvoiceClient.createInvoice()
+// xenditInvoiceClient.
 ```
-
 ## Create an invoice
 
 
@@ -114,7 +113,7 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  externalId|  | string |
-|  statuses|  | []string |
+|  statuses|  | [[]InvoiceStatus](invoice/models/InvoiceStatus.md) |
 |  limit|  | number |
 |  createdAfter|  | Date |
 |  createdBefore|  | Date |
@@ -123,7 +122,7 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 |  expiredAfter|  | Date |
 |  expiredBefore|  | Date |
 |  lastInvoice|  | string |
-|  clientTypes|  | []string |
+|  clientTypes|  | [[]InvoiceClientType](invoice/models/InvoiceClientType.md) |
 |  paymentChannels|  | []string |
 |  onDemandLink|  | string |
 |  recurringPaymentId|  | string |

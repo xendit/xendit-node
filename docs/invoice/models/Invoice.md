@@ -9,7 +9,6 @@ An object representing details for an invoice.
 | **id** | string |  | The unique identifier for the invoice. |
 **externalId** | string | ✅ | The external identifier for the invoice. |
 **userId** | string | ✅ | The user ID associated with the invoice. |
-**isHigh** | boolean | ✅ | Indicates if it\&#39;s a high-value invoice. |
 **payerEmail** | string |  | The email address of the payer. |
 **description** | string |  | A description of the invoice. |
 **paymentMethod** | [InvoicePaymentMethod](InvoicePaymentMethod.md) |  |  |
@@ -28,7 +27,6 @@ An object representing details for an invoice.
 **availablePaylaters** | [[]Paylater](Paylater.md) | ✅ | An array of available pay-later options for payment. |
 **shouldExcludeCreditCard** | boolean |  | Indicates whether credit card payments should be excluded. |
 **shouldSendEmail** | boolean | ✅ | Indicates whether email notifications should be sent. |
-**clientType** | [InvoiceClientType](InvoiceClientType.md) | ✅ |  |
 **created** | Date | ✅ | Representing a date and time in ISO 8601 format. |
 **updated** | Date | ✅ | Representing a date and time in ISO 8601 format. |
 **successRedirectUrl** | string |  | The URL to redirect to on successful payment. |

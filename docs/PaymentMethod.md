@@ -11,11 +11,10 @@ const { PaymentMethod } = xenditClient
 const xenditPaymentMethodClient = new PaymentMethodClient({secretKey: YOUR_SECRET_KEY})
 
 // At this point, `PaymentMethod` and `xenditPaymentMethodClient` will have no usage difference, for example:
-// PaymentMethod.authPaymentMethod()
+// PaymentMethod.
 // or
-// xenditPaymentMethodClient.authPaymentMethod()
+// xenditPaymentMethodClient.
 ```
-
 ## Validate a payment method\'s linking OTP
 
 

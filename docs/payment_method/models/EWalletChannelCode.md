@@ -38,4 +38,12 @@ EWallet Channel Code
 
     * `Zalopay` (value: `'ZALOPAY'`)
 
+    * `Wechatpay` (value: `'WECHATPAY'`)
+
+    * `Linepay` (value: `'LINEPAY'`)
+
+    * `Truemoney` (value: `'TRUEMONEY'`)
+
+    * `Alipay` (value: `'ALIPAY'`)
+
 

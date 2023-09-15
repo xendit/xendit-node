@@ -18,6 +18,4 @@ Representing the client type or source of an invoice.
 
     * `Mobile` (value: `'MOBILE'`)
 
-    * `Storefront` (value: `'STOREFRONT'`)
-
 

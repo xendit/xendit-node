@@ -31,12 +31,6 @@ import {
     EwalletFromJSONTyped,
     EwalletToJSON,
 } from './Ewallet';
-import type { InvoiceClientType } from './InvoiceClientType';
-import {
-    InvoiceClientTypeFromJSON,
-    InvoiceClientTypeFromJSONTyped,
-    InvoiceClientTypeToJSON,
-} from './InvoiceClientType';
 import type { InvoiceCurrency } from './InvoiceCurrency';
 import {
     InvoiceCurrencyFromJSON,
@@ -116,12 +110,6 @@ export interface Invoice {
      * @memberof Invoice
      */
     userId: string;
-    /**
-     * Indicates if it's a high-value invoice.
-     * @type {boolean}
-     * @memberof Invoice
-     */
-    isHigh: boolean;
     /**
      * The email address of the payer.
      * @type {string}
@@ -231,12 +219,6 @@ export interface Invoice {
      */
     shouldSendEmail: boolean;
     /**
-     * 
-     * @type {InvoiceClientType}
-     * @memberof Invoice
-     */
-    clientType: InvoiceClientType;
-    /**
      * Representing a date and time in ISO 8601 format.
      * @type {Date}
      * @memberof Invoice
@@ -317,7 +299,6 @@ export function instanceOfInvoice(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "externalId" in value;
     isInstance = isInstance && "userId" in value;
-    isInstance = isInstance && "isHigh" in value;
     isInstance = isInstance && "status" in value;
     isInstance = isInstance && "merchantName" in value;
     isInstance = isInstance && "merchantProfilePictureUrl" in value;
@@ -331,7 +312,6 @@ export function instanceOfInvoice(value: object): boolean {
     isInstance = isInstance && "availableDirectDebits" in value;
     isInstance = isInstance && "availablePaylaters" in value;
     isInstance = isInstance && "shouldSendEmail" in value;
-    isInstance = isInstance && "clientType" in value;
     isInstance = isInstance && "created" in value;
     isInstance = isInstance && "updated" in value;
 
@@ -351,7 +331,6 @@ export function InvoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): I
         'id': !exists(json, 'id') ? undefined : json['id'],
         'externalId': json['external_id'],
         'userId': json['user_id'],
-        'isHigh': json['is_high'],
         'payerEmail': !exists(json, 'payer_email') ? undefined : json['payer_email'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'paymentMethod': !exists(json, 'payment_method') ? undefined : InvoicePaymentMethodFromJSON(json['payment_method']),
@@ -370,7 +349,6 @@ export function InvoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): I
         'availablePaylaters': ((json['available_paylaters'] as Array<any>).map(PaylaterFromJSON)),
         'shouldExcludeCreditCard': !exists(json, 'should_exclude_credit_card') ? undefined : json['should_exclude_credit_card'],
         'shouldSendEmail': json['should_send_email'],
-        'clientType': InvoiceClientTypeFromJSON(json['client_type']),
         'created': (new Date(json['created'])),
         'updated': (new Date(json['updated'])),
         'successRedirectUrl': !exists(json, 'success_redirect_url') ? undefined : json['success_redirect_url'],
@@ -398,7 +376,6 @@ export function InvoiceToJSON(value?: Invoice | null): any {
         'id': value.id,
         'external_id': value.externalId,
         'user_id': value.userId,
-        'is_high': value.isHigh,
         'payer_email': value.payerEmail,
         'description': value.description,
         'payment_method': InvoicePaymentMethodToJSON(value.paymentMethod),
@@ -417,7 +394,6 @@ export function InvoiceToJSON(value?: Invoice | null): any {
         'available_paylaters': ((value.availablePaylaters as Array<any>).map(PaylaterToJSON)),
         'should_exclude_credit_card': value.shouldExcludeCreditCard,
         'should_send_email': value.shouldSendEmail,
-        'client_type': InvoiceClientTypeToJSON(value.clientType),
         'created': (value.created.toISOString()),
         'updated': (value.updated.toISOString()),
         'success_redirect_url': value.successRedirectUrl,

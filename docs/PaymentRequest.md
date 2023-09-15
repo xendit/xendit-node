@@ -11,11 +11,10 @@ const { PaymentRequest } = xenditClient
 const xenditPaymentRequestClient = new PaymentRequestClient({secretKey: YOUR_SECRET_KEY})
 
 // At this point, `PaymentRequest` and `xenditPaymentRequestClient` will have no usage difference, for example:
-// PaymentRequest.authorizePaymentRequest()
+// PaymentRequest.
 // or
-// xenditPaymentRequestClient.authorizePaymentRequest()
+// xenditPaymentRequestClient.
 ```
-
 ## Payment Request Authorize
 
 

@@ -7,6 +7,12 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { AlternativeDisplayItem } from './AlternativeDisplayItem';
+import {
+    AlternativeDisplayItemFromJSON,
+    AlternativeDisplayItemFromJSONTyped,
+    AlternativeDisplayItemToJSON,
+} from './AlternativeDisplayItem';
 import type { BankCode } from './BankCode';
 import {
     BankCodeFromJSON,
@@ -56,6 +62,12 @@ export interface Bank {
      * @memberof Bank
      */
     transferAmount?: number;
+    /**
+     * 
+     * @type {Array<AlternativeDisplayItem>}
+     * @memberof Bank
+     */
+    alternativeDisplays?: Array<AlternativeDisplayItem>;
 }
 
 /**
@@ -86,6 +98,7 @@ export function BankFromJSONTyped(json: any, ignoreDiscriminator: boolean): Bank
         'bankAccountNumber': !exists(json, 'bank_account_number') ? undefined : json['bank_account_number'],
         'accountHolderName': json['account_holder_name'],
         'transferAmount': !exists(json, 'transfer_amount') ? undefined : json['transfer_amount'],
+        'alternativeDisplays': !exists(json, 'alternative_displays') ? undefined : ((json['alternative_displays'] as Array<any>).map(AlternativeDisplayItemFromJSON)),
     };
 }
 
@@ -104,6 +117,7 @@ export function BankToJSON(value?: Bank | null): any {
         'bank_account_number': value.bankAccountNumber,
         'account_holder_name': value.accountHolderName,
         'transfer_amount': value.transferAmount,
+        'alternative_displays': value.alternativeDisplays === undefined ? undefined : ((value.alternativeDisplays as Array<any>).map(AlternativeDisplayItemToJSON)),
     };
 }
 

@@ -13,8 +13,10 @@ import type {
   CreateInvoiceRequest,
   ForbiddenError,
   Invoice,
+  InvoiceClientType,
   InvoiceError404ResponseDefinition,
   InvoiceNotFoundError,
+  InvoiceStatus,
   ServerError,
   UnauthorizedError,
 } from '../models';
@@ -27,10 +29,14 @@ import {
     ForbiddenErrorToJSON,
     InvoiceFromJSON,
     InvoiceToJSON,
+    InvoiceClientTypeFromJSON,
+    InvoiceClientTypeToJSON,
     InvoiceError404ResponseDefinitionFromJSON,
     InvoiceError404ResponseDefinitionToJSON,
     InvoiceNotFoundErrorFromJSON,
     InvoiceNotFoundErrorToJSON,
+    InvoiceStatusFromJSON,
+    InvoiceStatusToJSON,
     ServerErrorFromJSON,
     ServerErrorToJSON,
     UnauthorizedErrorFromJSON,
@@ -53,7 +59,7 @@ export interface GetInvoiceByIdRequest {
 
 export interface GetInvoicesRequest {
     externalId?: string;
-    statuses?: Array<GetInvoicesStatusesEnum>;
+    statuses?: Array<InvoiceStatus>;
     limit?: number;
     createdAfter?: Date;
     createdBefore?: Date;
@@ -62,7 +68,7 @@ export interface GetInvoicesRequest {
     expiredAfter?: Date;
     expiredBefore?: Date;
     lastInvoice?: string;
-    clientTypes?: Array<GetInvoicesClientTypesEnum>;
+    clientTypes?: Array<InvoiceClientType>;
     paymentChannels?: Array<string>;
     onDemandLink?: string;
     recurringPaymentId?: string;
@@ -277,26 +283,3 @@ export class InvoiceApi extends runtime.BaseAPI {
     }
 
 }
-
-/**
- * @export
- */
-export const GetInvoicesStatusesEnum = {
-    Pending: 'PENDING',
-    Paid: 'PAID',
-    Settled: 'SETTLED',
-    Expired: 'EXPIRED'
-} as const;
-export type GetInvoicesStatusesEnum = typeof GetInvoicesStatusesEnum[keyof typeof GetInvoicesStatusesEnum];
-/**
- * @export
- */
-export const GetInvoicesClientTypesEnum = {
-    ApiGateway: 'API_GATEWAY',
-    Dashboard: 'DASHBOARD',
-    Integration: 'INTEGRATION',
-    OnDemand: 'ON_DEMAND',
-    Recurring: 'RECURRING',
-    Mobile: 'MOBILE'
-} as const;
-export type GetInvoicesClientTypesEnum = typeof GetInvoicesClientTypesEnum[keyof typeof GetInvoicesClientTypesEnum];

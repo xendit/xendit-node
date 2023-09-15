@@ -34,4 +34,6 @@ Virtual Account Channel Code
 
     * `Msb` (value: `'MSB'`)
 
+    * `StandardChartered` (value: `'STANDARD_CHARTERED'`)
+
 

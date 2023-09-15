@@ -2,23 +2,23 @@
 /* eslint-disable */
 export * from './runtime';
 
-import { PaymentRequest } from './payment_request';
-export { PaymentRequest } from './payment_request';
-
-import { Payout } from './payout';
-export { Payout } from './payout';
-
 import { Transaction, Balance } from './balance_and_transaction';
 export { Transaction, Balance } from './balance_and_transaction';
 
-import { Invoice } from './invoice';
-export { Invoice } from './invoice';
+import { PaymentRequest } from './payment_request';
+export { PaymentRequest } from './payment_request';
 
 import { PaymentMethod } from './payment_method';
 export { PaymentMethod } from './payment_method';
 
 import { Refund } from './refund';
 export { Refund } from './refund';
+
+import { Invoice } from './invoice';
+export { Invoice } from './invoice';
+
+import { Payout } from './payout';
+export { Payout } from './payout';
 
 
 export interface XenditOpts {
@@ -27,13 +27,13 @@ export interface XenditOpts {
 }
 export class Xendit {
   opts: XenditOpts;
-  PaymentRequest: PaymentRequest;
-  Payout: Payout;
   Transaction: Transaction;
   Balance: Balance;
-  Invoice: Invoice;
+  PaymentRequest: PaymentRequest;
   PaymentMethod: PaymentMethod;
   Refund: Refund;
+  Invoice: Invoice;
+  Payout: Payout;
 
 
   constructor({ secretKey: _secretKey, xenditURL: _xenditURL }: XenditOpts) {
@@ -54,18 +54,18 @@ export class Xendit {
     }
 
 
-       this.PaymentRequest = new PaymentRequest(this.opts);
-    
-       this.Payout = new Payout(this.opts);
-    
        this.Transaction = new Transaction(this.opts);
        this.Balance = new Balance(this.opts);
     
-       this.Invoice = new Invoice(this.opts);
+       this.PaymentRequest = new PaymentRequest(this.opts);
     
        this.PaymentMethod = new PaymentMethod(this.opts);
     
        this.Refund = new Refund(this.opts);
+    
+       this.Invoice = new Invoice(this.opts);
+    
+       this.Payout = new Payout(this.opts);
     
   }
 }

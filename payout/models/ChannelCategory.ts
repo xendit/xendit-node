@@ -13,7 +13,8 @@
  */
 export const ChannelCategory = {
     Bank: 'BANK',
-    Ewallet: 'EWALLET'
+    Ewallet: 'EWALLET',
+    Otc: 'OTC'
 } as const;
 export type ChannelCategory = typeof ChannelCategory[keyof typeof ChannelCategory];
 
