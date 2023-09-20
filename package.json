@@ -1,78 +1,36 @@
 {
   "name": "xendit-node",
-  "version": "1.22.0",
-  "description": "NodeJS client for Xendit API",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "scripts": {
-    "test": "mocha test/**/*.test.js",
-    "test:integration": "node integration_test",
-    "lint": "eslint index.js ./**/*.{js,ts}",
-    "lint:fix": "eslint index.js ./**/*.{js,ts} --fix",
-    "format": "prettier --config .prettierrc --write index.js ./**/*.{js,json,ts}",
-    "gentoc": "markdown-toc -i --bullets=- README.md",
-    "release": "np",
-    "report": "nyc -r text -r lcov npm run test",
-    "coveralls": "cat coverage/lcov.info | coveralls"
-  },
+  "version": "3.0.0",
+  "description": "OpenAPI client for xendit-node",
+  "author": "OpenAPI-Generator",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xendit/xendit-node.git"
+    "url": "https://github.com/xendit/xendit-node.git"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,ts}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{js,ts}": [
-      "eslint",
-      "git add"
-    ],
-    "README.md": [
-      "markdown-toc -i --bullets=-",
-      "git add"
-    ]
-  },
-  "keywords": [
-    "xendit",
-    "api",
-    "client",
-    "node"
+  "files": [
+    "balance_and_transaction/**",
+    "payment_request/**",
+    "payment_method/**",
+    "refund/**",
+    "invoice/**",
+    "payout/**",
+    "docs/**",
+    "images/**",
+    "README.md",
+    "package.json",
+    "index.js",
+    "index.d.ts",
+    "runtime.js",
+    "runtime.d.ts"
   ],
-  "author": "Stanley Nguyen <stanley@xendit.co>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xendit/xendit-node/issues"
-  },
-  "homepage": "https://github.com/xendit/xendit-node#readme",
-  "dependencies": {
-    "node-fetch": "^2.6.1"
+  "main": "./index.js",
+  "typings": "./index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "custom-publish": "cp README.md dist/ && cp -R docs dist/ && cp -R images dist/ && cp package.json dist && cd dist && npm publish"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.13.0",
-    "@typescript-eslint/parser": "^2.13.0",
-    "babel-eslint": "^10.0.3",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.0.11",
-    "dotenv": "^8.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^3.0.5",
-    "lint-staged": "^9.3.0",
-    "markdown-toc": "^1.2.0",
-    "mocha": "^6.2.3",
-    "nock": "^11.9.1",
-    "np": "^7.4.0",
-    "nyc": "^15.0.1",
-    "prettier": "^1.18.2",
-    "typescript": "^3.7.4"
+    "typescript": "^4.0"
   }
 }
