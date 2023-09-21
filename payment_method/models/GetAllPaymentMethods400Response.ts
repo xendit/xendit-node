@@ -45,7 +45,8 @@ export const GetAllPaymentMethods400ResponseErrorCodeEnum = {
     InactivePaymentMethod: 'INACTIVE_PAYMENT_METHOD',
     PaymentMethodNotSupported: 'PAYMENT_METHOD_NOT_SUPPORTED',
     IncorrectAmount: 'INCORRECT_AMOUNT',
-    DuplicatedFixedPaymentInstrument: 'DUPLICATED_FIXED_PAYMENT_INSTRUMENT'
+    DuplicatedFixedPaymentInstrument: 'DUPLICATED_FIXED_PAYMENT_INSTRUMENT',
+    CurrencyMismatched: 'CURRENCY_MISMATCHED'
 } as const;
 export type GetAllPaymentMethods400ResponseErrorCodeEnum = typeof GetAllPaymentMethods400ResponseErrorCodeEnum[keyof typeof GetAllPaymentMethods400ResponseErrorCodeEnum];
 

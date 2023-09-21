@@ -118,8 +118,6 @@ export interface GetPaymentsByPaymentMethodIdRequest {
     updatedGte?: Date;
     updatedLte?: Date;
     limit?: number;
-    afterId?: string;
-    beforeId?: string;
     idempotencyKey?: string;
 }
 
@@ -467,14 +465,6 @@ export class PaymentMethodApi extends runtime.BaseAPI {
 
         if (requestParameters.limit !== undefined) {
             queryParameters['limit'] = requestParameters.limit;
-        }
-
-        if (requestParameters.afterId !== undefined) {
-            queryParameters['after_id'] = requestParameters.afterId;
-        }
-
-        if (requestParameters.beforeId !== undefined) {
-            queryParameters['before_id'] = requestParameters.beforeId;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

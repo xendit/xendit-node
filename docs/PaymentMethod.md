@@ -195,8 +195,6 @@ const response: PaymentMethod = await xenditPaymentMethodClient.getPaymentMethod
 |  updatedGte|  | Date |
 |  updatedLte|  | Date |
 |  limit|  | number |
-|  afterId|  | string |
-|  beforeId|  | string |
 |  idempotencyKey|  | string |
 
 ### Usage Examples
