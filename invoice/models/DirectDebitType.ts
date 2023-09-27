@@ -25,7 +25,12 @@ export const DirectDebitType = {
     BcaKlikpay: 'BCA_KLIKPAY',
     BaBcaKlikpay: 'BA_BCA_KLIKPAY',
     DcBcaKlikpay: 'DC_BCA_KLIKPAY',
-    DdBcaKlikpay: 'DD_BCA_KLIKPAY'
+    DdBcaKlikpay: 'DD_BCA_KLIKPAY',
+    DdBdoEpay: 'DD_BDO_EPAY',
+    DdRcbc: 'DD_RCBC',
+    DdChinabank: 'DD_CHINABANK',
+    BaChinabank: 'BA_CHINABANK',
+    DcChinabank: 'DC_CHINABANK'
 } as const;
 export type DirectDebitType = typeof DirectDebitType[keyof typeof DirectDebitType];
 

@@ -69,8 +69,6 @@ export interface GetPaymentRequestByIDRequest {
 export interface GetPaymentRequestCapturesRequest {
     paymentRequestId: string;
     limit?: number;
-    afterId?: string;
-    beforeId?: string;
     idempotencyKey?: string;
 }
 
@@ -318,14 +316,6 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.limit !== undefined) {
             queryParameters['limit'] = requestParameters.limit;
-        }
-
-        if (requestParameters.afterId !== undefined) {
-            queryParameters['after_id'] = requestParameters.afterId;
-        }
-
-        if (requestParameters.beforeId !== undefined) {
-            queryParameters['before_id'] = requestParameters.beforeId;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

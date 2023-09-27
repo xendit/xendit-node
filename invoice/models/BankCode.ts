@@ -18,7 +18,10 @@ export const BankCode = {
     Mandiri: 'MANDIRI',
     Permata: 'PERMATA',
     Bsi: 'BSI',
-    Bjb: 'BJB'
+    Bjb: 'BJB',
+    SahabatSampoerna: 'SAHABAT_SAMPOERNA',
+    Cimb: 'CIMB',
+    Bnc: 'BNC'
 } as const;
 export type BankCode = typeof BankCode[keyof typeof BankCode];
 

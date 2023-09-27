@@ -18,7 +18,10 @@ export const EwalletType = {
     Paymaya: 'PAYMAYA',
     Shopeepay: 'SHOPEEPAY',
     Gcash: 'GCASH',
-    Grabpay: 'GRABPAY'
+    Grabpay: 'GRABPAY',
+    Astrapay: 'ASTRAPAY',
+    Nexcash: 'NEXCASH',
+    Jeniuspay: 'JENIUSPAY'
 } as const;
 export type EwalletType = typeof EwalletType[keyof typeof EwalletType];
 

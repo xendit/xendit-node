@@ -34,4 +34,14 @@ Representing the available Direct Debit channels used for invoice-related transa
 
     * `DdBcaKlikpay` (value: `'DD_BCA_KLIKPAY'`)
 
+    * `DdBdoEpay` (value: `'DD_BDO_EPAY'`)
+
+    * `DdRcbc` (value: `'DD_RCBC'`)
+
+    * `DdChinabank` (value: `'DD_CHINABANK'`)
+
+    * `BaChinabank` (value: `'BA_CHINABANK'`)
+
+    * `DcChinabank` (value: `'DC_CHINABANK'`)
+
 

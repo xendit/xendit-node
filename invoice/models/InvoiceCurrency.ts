@@ -14,6 +14,8 @@
 export const InvoiceCurrency = {
     Idr: 'IDR',
     Usd: 'USD',
+    Thb: 'THB',
+    Vnd: 'VND',
     Php: 'PHP'
 } as const;
 export type InvoiceCurrency = typeof InvoiceCurrency[keyof typeof InvoiceCurrency];

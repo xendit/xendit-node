@@ -20,4 +20,10 @@ Representing the available bank channels used for invoice-related transactions.
 
     * `Bjb` (value: `'BJB'`)
 
+    * `SahabatSampoerna` (value: `'SAHABAT_SAMPOERNA'`)
+
+    * `Cimb` (value: `'CIMB'`)
+
+    * `Bnc` (value: `'BNC'`)
+
 

@@ -10,6 +10,10 @@ Representing the currency used for an invoice.
 
     * `Usd` (value: `'USD'`)
 
+    * `Thb` (value: `'THB'`)
+
+    * `Vnd` (value: `'VND'`)
+
     * `Php` (value: `'PHP'`)
 
 

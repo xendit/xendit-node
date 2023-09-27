@@ -84,11 +84,125 @@ const response: Capture = await xenditPaymentRequestClient.capturePaymentRequest
 |  data|  | [PaymentRequestParameters](payment_request/models/PaymentRequestParameters.md) |
 
 ### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentRequest } from 'xendit-node/payment_request/models'
+#### E-Wallet One Time Payment via Redirect URL
 
-const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentRequest({ })
+```typescript
+import { PaymentRequestParameters, PaymentRequest } from 'xendit-node/payment_request/models'
+
+const data: PaymentRequestParameters = {
+  "country" : "ID",
+  "amount" : 15000,
+  "paymentMethod" : {
+    "ewallet" : {
+      "channelProperties" : {
+        "successReturnUrl" : "https://redirect.me/success"
+      },
+      "channelCode" : "SHOPEEPAY"
+    },
+    "reusability" : "ONE_TIME_USE",
+    "type" : "EWALLET"
+  },
+  "currency" : "IDR",
+  "referenceId" : "example-ref-1234"
+}
+
+const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentRequest({
+    data
+})
+```
+#### Fixed amount dynamic QR
+
+```typescript
+import { PaymentRequestParameters, PaymentRequest } from 'xendit-node/payment_request/models'
+
+const data: PaymentRequestParameters = {
+  "amount" : 15000,
+  "metadata" : {
+    "sku" : "example-sku-1234"
+  },
+  "paymentMethod" : {
+    "qrCode" : {
+      "channelCode" : "“QRIS”"
+    },
+    "reusability" : "ONE_TIME_USE",
+    "type" : "QR_CODE"
+  },
+  "currency" : "IDR",
+  "referenceId" : "example-ref-1234"
+}
+
+const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentRequest({
+    data
+})
+```
+#### Fixed amount single use Virtual Account
+
+```typescript
+import { PaymentRequestParameters, PaymentRequest } from 'xendit-node/payment_request/models'
+
+const data: PaymentRequestParameters = {
+  "country" : "ID",
+  "amount" : 15000,
+  "metadata" : {
+    "sku" : "example-sku-1234"
+  },
+  "paymentMethod" : {
+    "reusability" : "ONE_TIME_USE",
+    "type" : "VIRTUAL_ACCOUNT",
+    "virtualAccount" : {
+      "channelProperties" : {
+        "customerName" : "Ahmad Gunawan",
+        "expiresAt" : "2023-01-03T17:00:00Z"
+      },
+      "channelCode" : "BNI"
+    },
+    "referenceId" : "example-1234"
+  },
+  "currency" : "IDR",
+  "referenceId" : "example-ref-1234"
+}
+
+const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentRequest({
+    data
+})
+```
+#### Subsequent PH Direct Debit payments after account linking
+
+```typescript
+import { PaymentRequestParameters, PaymentRequest } from 'xendit-node/payment_request/models'
+
+const data: PaymentRequestParameters = {
+  "amount" : 1500,
+  "metadata" : {
+    "sku" : "example-sku-1234"
+  },
+  "paymentMethodId" : "pm-9685a196-81e9-4c73-8d62-97df5aab2762",
+  "currency" : "PHP",
+  "referenceId" : "example-ref-1234"
+}
+
+const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentRequest({
+    data
+})
+```
+#### Subsequent tokenized E-Wallet payments after account linking
+
+```typescript
+import { PaymentRequestParameters, PaymentRequest } from 'xendit-node/payment_request/models'
+
+const data: PaymentRequestParameters = {
+  "amount" : 15000,
+  "metadata" : {
+    "sku" : "example-sku-1234"
+  },
+  "paymentMethodId" : "pm-2b2c6092-2100-4843-a7fc-f5c7edac7efd",
+  "currency" : "IDR",
+  "referenceId" : "example-ref-1234"
+}
+
+const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentRequest({
+    data
+})
 ```
 ## Get all payment requests by filter
 
@@ -158,8 +272,6 @@ const response: PaymentRequest = await xenditPaymentRequestClient.getPaymentRequ
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
 |  limit|  | number |
-|  afterId|  | string |
-|  beforeId|  | string |
 |  idempotencyKey|  | string |
 
 ### Usage Examples

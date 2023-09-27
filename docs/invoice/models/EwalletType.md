@@ -20,4 +20,10 @@ Representing the available eWallet channels used for invoice-related transaction
 
     * `Grabpay` (value: `'GRABPAY'`)
 
+    * `Astrapay` (value: `'ASTRAPAY'`)
+
+    * `Nexcash` (value: `'NEXCASH'`)
+
+    * `Jeniuspay` (value: `'JENIUSPAY'`)
+
 

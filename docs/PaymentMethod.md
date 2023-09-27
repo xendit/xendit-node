@@ -57,11 +57,69 @@ const response: PaymentMethod = await xenditPaymentMethodClient.authPaymentMetho
 |  data|  | [PaymentMethodParameters](payment_method/models/PaymentMethodParameters.md) |
 
 ### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentMethod } from 'xendit-node/payment_method/models'
+#### Account linking for E-Wallet
 
-const response: PaymentMethod = await xenditPaymentMethodClient.createPaymentMethod({ })
+```typescript
+import { PaymentMethodParameters, PaymentMethod } from 'xendit-node/payment_method/models'
+
+const data: PaymentMethodParameters = {
+  "ewallet" : {
+    "channelProperties" : {
+      "failureReturnUrl" : "https://redirect.me/failure",
+      "successReturnUrl" : "https://redirect.me/success",
+      "cancelReturnUrl" : "https://redirect.me/cancel"
+    },
+    "channelCode" : "OVO"
+  },
+  "metadata" : {
+    "sku" : "example-1234"
+  },
+  "reusability" : "MULTIPLE_USE",
+  "type" : "EWALLET",
+  "customer" : {
+    "type" : "INDIVIDUAL",
+    "referenceId" : "customer-123",
+    "individualDetail" : {
+      "surname" : "Doe",
+      "givenNames" : "John"
+    }
+  }
+}
+
+const response: PaymentMethod = await xenditPaymentMethodClient.createPaymentMethod({
+    data
+})
+```
+#### Account linking for PH Direct Debit
+
+```typescript
+import { PaymentMethodParameters, PaymentMethod } from 'xendit-node/payment_method/models'
+
+const data: PaymentMethodParameters = {
+  "mobileNumber" : 628774494404,
+  "reusability" : "MULTIPLE_USE",
+  "type" : "DIRECT_DEBIT",
+  "directDebit" : {
+    "channelProperties" : {
+      "failureReturnUrl" : "https://redirect.me/failure",
+      "successReturnUrl" : "https://redirect.me/success"
+    },
+    "channelCode" : "BPI"
+  },
+  "email" : "testemail@email.com",
+  "customer" : {
+    "type" : "INDIVIDUAL",
+    "referenceId" : "customer-123",
+    "individualDetail" : {
+      "surname" : "Doe",
+      "givenNames" : "John"
+    }
+  }
+}
+
+const response: PaymentMethod = await xenditPaymentMethodClient.createPaymentMethod({
+    data
+})
 ```
 ## Expires a payment method
 
