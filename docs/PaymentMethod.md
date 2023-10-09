@@ -147,30 +147,6 @@ const response: PaymentMethod = await xenditPaymentMethodClient.expirePaymentMet
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
 })
 ```
-## Get all payment channels
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `getAllPaymentChannels` |
-| Request Parameters  |  [GetAllPaymentChannelsRequest](#request-parameters--GetAllPaymentChannelsRequest)	 |
-| Return Type  |  [PaymentChannelList](payment_method/models/PaymentChannelList.md) |
-
-### Request Parameters — `GetAllPaymentChannelsRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  isActivated|  | boolean |
-|  type|  | string |
-|  idempotencyKey|  | string |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentChannelList } from 'xendit-node/payment_method/models'
-
-const response: PaymentChannelList = await xenditPaymentMethodClient.getAllPaymentChannels({ })
-```
 ## Get all payment methods by filters
 
 

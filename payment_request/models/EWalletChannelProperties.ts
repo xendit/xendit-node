@@ -42,7 +42,7 @@ export interface EWalletChannelProperties {
      * @type {string}
      * @memberof EWalletChannelProperties
      */
-    mobilenumber?: string;
+    mobileNumber?: string;
     /**
      * 
      * @type {string}
@@ -74,7 +74,7 @@ export function EWalletChannelPropertiesFromJSONTyped(json: any, ignoreDiscrimin
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cancelReturnUrl': !exists(json, 'cancel_return_url') ? undefined : json['cancel_return_url'],
         'redeemPoints': !exists(json, 'redeem_points') ? undefined : json['redeem_points'],
-        'mobilenumber': !exists(json, 'mobile:number') ? undefined : json['mobile:number'],
+        'mobileNumber': !exists(json, 'mobile_number') ? undefined : json['mobile_number'],
         'cashtag': !exists(json, 'cashtag') ? undefined : json['cashtag'],
     };
 }
@@ -92,7 +92,7 @@ export function EWalletChannelPropertiesToJSON(value?: EWalletChannelProperties 
         'failure_return_url': value.failureReturnUrl,
         'cancel_return_url': value.cancelReturnUrl,
         'redeem_points': value.redeemPoints,
-        'mobile:number': value.mobilenumber,
+        'mobile_number': value.mobileNumber,
         'cashtag': value.cashtag,
     };
 }

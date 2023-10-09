@@ -15,7 +15,6 @@ import type {
   GetAllPaymentMethods403Response,
   GetAllPaymentMethods404Response,
   GetAllPaymentMethodsDefaultResponse,
-  PaymentChannelList,
   PaymentMethod,
   PaymentMethodAuthParameters,
   PaymentMethodExpireParameters,
@@ -40,8 +39,6 @@ import {
     GetAllPaymentMethods404ResponseToJSON,
     GetAllPaymentMethodsDefaultResponseFromJSON,
     GetAllPaymentMethodsDefaultResponseToJSON,
-    PaymentChannelListFromJSON,
-    PaymentChannelListToJSON,
     PaymentMethodFromJSON,
     PaymentMethodToJSON,
     PaymentMethodAuthParametersFromJSON,
@@ -78,12 +75,6 @@ export interface ExpirePaymentMethodRequest {
     paymentMethodId: string;
     idempotencyKey?: string;
     data?: PaymentMethodExpireParameters | null;
-}
-
-export interface GetAllPaymentChannelsRequest {
-    isActivated?: GetAllPaymentChannelsIsActivatedEnum;
-    type?: string;
-    idempotencyKey?: string;
 }
 
 export interface GetAllPaymentMethodsRequest {
@@ -258,47 +249,6 @@ export class PaymentMethodApi extends runtime.BaseAPI {
      */
     async expirePaymentMethod(requestParameters: ExpirePaymentMethodRequest): Promise<PaymentMethod> {
         const response = await this.expirePaymentMethodRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Get all payment channels
-     * Get all payment channels
-     */
-    private async getAllPaymentChannelsRaw(requestParameters: GetAllPaymentChannelsRequest): Promise<runtime.ApiResponse<PaymentChannelList>> {
-        const queryParameters: any = {};
-
-        if (requestParameters.isActivated !== undefined) {
-            queryParameters['is_activated'] = requestParameters.isActivated;
-        }
-
-        if (requestParameters.type !== undefined) {
-            queryParameters['type'] = requestParameters.type;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/v2/payment_methods/channels`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentChannelListFromJSON(jsonValue));
-    }
-
-    /**
-     * Get all payment channels
-     * Get all payment channels
-     */
-    async getAllPaymentChannels(requestParameters: GetAllPaymentChannelsRequest = {}): Promise<PaymentChannelList> {
-        const response = await this.getAllPaymentChannelsRaw(requestParameters);
         return await response.value();
     }
 
@@ -573,12 +523,3 @@ export class PaymentMethodApi extends runtime.BaseAPI {
     }
 
 }
-
-/**
- * @export
- */
-export const GetAllPaymentChannelsIsActivatedEnum = {
-    True: true,
-    False: false
-} as const;
-export type GetAllPaymentChannelsIsActivatedEnum = typeof GetAllPaymentChannelsIsActivatedEnum[keyof typeof GetAllPaymentChannelsIsActivatedEnum];
