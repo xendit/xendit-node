@@ -30,6 +30,7 @@ const xenditPaymentRequestClient = new PaymentRequestClient({secretKey: YOUR_SEC
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 |  data|  | [PaymentRequestAuthParameters](payment_request/models/PaymentRequestAuthParameters.md) |
 
 ### Usage Examples
@@ -56,6 +57,7 @@ const response: PaymentRequest = await xenditPaymentRequestClient.authorizePayme
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 |  data|  | [CaptureParameters](payment_request/models/CaptureParameters.md) |
 
 ### Usage Examples
@@ -81,6 +83,7 @@ const response: Capture = await xenditPaymentRequestClient.capturePaymentRequest
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 |  data|  | [PaymentRequestParameters](payment_request/models/PaymentRequestParameters.md) |
 
 ### Usage Examples
@@ -224,6 +227,7 @@ const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentR
 |  beforeId|  | string |
 |  afterId|  | string |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -247,6 +251,7 @@ const response: PaymentRequestListResponse = await xenditPaymentRequestClient.ge
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -273,6 +278,7 @@ const response: PaymentRequest = await xenditPaymentRequestClient.getPaymentRequ
 |  paymentRequestId| ✅ | string |
 |  limit|  | number |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -298,6 +304,7 @@ const response: CaptureListResponse = await xenditPaymentRequestClient.getPaymen
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage

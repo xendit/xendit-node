@@ -37,17 +37,20 @@ import {
 export interface AuthorizePaymentRequestRequest {
     paymentRequestId: string;
     idempotencyKey?: string;
+    forUserId?: string;
     data?: PaymentRequestAuthParameters;
 }
 
 export interface CapturePaymentRequestRequest {
     paymentRequestId: string;
     idempotencyKey?: string;
+    forUserId?: string;
     data?: CaptureParameters;
 }
 
 export interface CreatePaymentRequestRequest {
     idempotencyKey?: string;
+    forUserId?: string;
     data?: PaymentRequestParameters;
 }
 
@@ -59,22 +62,26 @@ export interface GetAllPaymentRequestsRequest {
     beforeId?: string;
     afterId?: string;
     idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetPaymentRequestByIDRequest {
     paymentRequestId: string;
     idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetPaymentRequestCapturesRequest {
     paymentRequestId: string;
     limit?: number;
     idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface ResendPaymentRequestAuthRequest {
     paymentRequestId: string;
     idempotencyKey?: string;
+    forUserId?: string;
 }
 
 /**
@@ -111,6 +118,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -153,6 +164,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
         const response = await this.request({
             path: `/payment_requests/{paymentRequestId}/captures`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
             method: 'POST',
@@ -187,6 +202,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -247,6 +266,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
         const response = await this.request({
             path: `/payment_requests`,
             method: 'GET',
@@ -282,6 +305,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -325,6 +352,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
         const response = await this.request({
             path: `/payment_requests/{paymentRequestId}/captures`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
             method: 'GET',
@@ -360,6 +391,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
