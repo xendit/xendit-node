@@ -20,7 +20,8 @@ export const RetailOutletName = {
     DpMlhuillier: 'DP_MLHUILLIER',
     DpPalawan: 'DP_PALAWAN',
     DpEcpaySchool: 'DP_ECPAY_SCHOOL',
-    Lbc: 'LBC'
+    Lbc: 'LBC',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type RetailOutletName = typeof RetailOutletName[keyof typeof RetailOutletName];
 
@@ -30,6 +31,11 @@ export function RetailOutletNameFromJSON(json: any): RetailOutletName {
 }
 
 export function RetailOutletNameFromJSONTyped(json: any, ignoreDiscriminator: boolean): RetailOutletName {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(RetailOutletName)[Object.values(RetailOutletName).indexOf(json)]
+        return RetailOutletName[key] === undefined ?
+            RetailOutletName['XenditEnumDefaultFallback'] : RetailOutletName[key]
+    }
     return json as RetailOutletName;
 }
 

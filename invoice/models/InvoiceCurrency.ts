@@ -16,7 +16,8 @@ export const InvoiceCurrency = {
     Usd: 'USD',
     Thb: 'THB',
     Vnd: 'VND',
-    Php: 'PHP'
+    Php: 'PHP',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type InvoiceCurrency = typeof InvoiceCurrency[keyof typeof InvoiceCurrency];
 
@@ -26,6 +27,11 @@ export function InvoiceCurrencyFromJSON(json: any): InvoiceCurrency {
 }
 
 export function InvoiceCurrencyFromJSONTyped(json: any, ignoreDiscriminator: boolean): InvoiceCurrency {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(InvoiceCurrency)[Object.values(InvoiceCurrency).indexOf(json)]
+        return InvoiceCurrency[key] === undefined ?
+            InvoiceCurrency['XenditEnumDefaultFallback'] : InvoiceCurrency[key]
+    }
     return json as InvoiceCurrency;
 }
 

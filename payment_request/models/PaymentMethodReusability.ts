@@ -13,7 +13,8 @@
  */
 export const PaymentMethodReusability = {
     MultipleUse: 'MULTIPLE_USE',
-    OneTimeUse: 'ONE_TIME_USE'
+    OneTimeUse: 'ONE_TIME_USE',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentMethodReusability = typeof PaymentMethodReusability[keyof typeof PaymentMethodReusability];
 
@@ -23,6 +24,11 @@ export function PaymentMethodReusabilityFromJSON(json: any): PaymentMethodReusab
 }
 
 export function PaymentMethodReusabilityFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentMethodReusability {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentMethodReusability)[Object.values(PaymentMethodReusability).indexOf(json)]
+        return PaymentMethodReusability[key] === undefined ?
+            PaymentMethodReusability['XenditEnumDefaultFallback'] : PaymentMethodReusability[key]
+    }
     return json as PaymentMethodReusability;
 }
 

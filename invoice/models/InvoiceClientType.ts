@@ -17,7 +17,8 @@ export const InvoiceClientType = {
     Integration: 'INTEGRATION',
     OnDemand: 'ON_DEMAND',
     Recurring: 'RECURRING',
-    Mobile: 'MOBILE'
+    Mobile: 'MOBILE',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type InvoiceClientType = typeof InvoiceClientType[keyof typeof InvoiceClientType];
 
@@ -27,6 +28,11 @@ export function InvoiceClientTypeFromJSON(json: any): InvoiceClientType {
 }
 
 export function InvoiceClientTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): InvoiceClientType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(InvoiceClientType)[Object.values(InvoiceClientType).indexOf(json)]
+        return InvoiceClientType[key] === undefined ?
+            InvoiceClientType['XenditEnumDefaultFallback'] : InvoiceClientType[key]
+    }
     return json as InvoiceClientType;
 }
 

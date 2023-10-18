@@ -28,9 +28,8 @@ const xenditCustomerClient = new CustomerClient({secretKey: YOUR_SECRET_KEY})
 ### Request Parameters — `CreateCustomerRequest`
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
-|  iDEMPOTENCYKEY|  | string |
-|  forUserId|  | string |
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 |  data|  | [CustomerRequest](customer/models/CustomerRequest.md) |
 
 ### Usage Examples
@@ -55,7 +54,6 @@ const response: Customer = await xenditCustomerClient.createCustomer({ })
 |-----------|:----------:|:----------:|
 |  id| ✅ | string |
 |  forUserId|  | string |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -81,7 +79,6 @@ const response: Customer = await xenditCustomerClient.getCustomer({
 |-----------|:----------:|:----------:|
 |  referenceId| ✅ | string |
 |  forUserId|  | string |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -107,7 +104,6 @@ const response: GetCustomerByReferenceID200Response = await xenditCustomerClient
 |-----------|:----------:|:----------:|
 |  id| ✅ | string |
 |  forUserId|  | string |
-|  idempotencyKey|  | string |
 |  data|  | [PatchCustomer](customer/models/PatchCustomer.md) |
 
 ### Usage Examples

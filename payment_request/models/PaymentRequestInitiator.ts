@@ -13,7 +13,8 @@
  */
 export const PaymentRequestInitiator = {
     Customer: 'CUSTOMER',
-    Merchant: 'MERCHANT'
+    Merchant: 'MERCHANT',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestInitiator = typeof PaymentRequestInitiator[keyof typeof PaymentRequestInitiator];
 
@@ -23,6 +24,11 @@ export function PaymentRequestInitiatorFromJSON(json: any): PaymentRequestInitia
 }
 
 export function PaymentRequestInitiatorFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentRequestInitiator {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentRequestInitiator)[Object.values(PaymentRequestInitiator).indexOf(json)]
+        return PaymentRequestInitiator[key] === undefined ?
+            PaymentRequestInitiator['XenditEnumDefaultFallback'] : PaymentRequestInitiator[key]
+    }
     return json as PaymentRequestInitiator;
 }
 

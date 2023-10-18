@@ -17,7 +17,8 @@ export const PaylaterType = {
     Uangme: 'UANGME',
     Billease: 'BILLEASE',
     Cashalo: 'CASHALO',
-    Atome: 'ATOME'
+    Atome: 'ATOME',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaylaterType = typeof PaylaterType[keyof typeof PaylaterType];
 
@@ -27,6 +28,11 @@ export function PaylaterTypeFromJSON(json: any): PaylaterType {
 }
 
 export function PaylaterTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaylaterType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaylaterType)[Object.values(PaylaterType).indexOf(json)]
+        return PaylaterType[key] === undefined ?
+            PaylaterType['XenditEnumDefaultFallback'] : PaylaterType[key]
+    }
     return json as PaylaterType;
 }
 

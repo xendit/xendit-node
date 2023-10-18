@@ -16,7 +16,8 @@ export const EndCustomerStatus = {
     Inactive: 'INACTIVE',
     Pending: 'PENDING',
     Blocked: 'BLOCKED',
-    Deleted: 'DELETED'
+    Deleted: 'DELETED',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type EndCustomerStatus = typeof EndCustomerStatus[keyof typeof EndCustomerStatus];
 
@@ -26,6 +27,11 @@ export function EndCustomerStatusFromJSON(json: any): EndCustomerStatus {
 }
 
 export function EndCustomerStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): EndCustomerStatus {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(EndCustomerStatus)[Object.values(EndCustomerStatus).indexOf(json)]
+        return EndCustomerStatus[key] === undefined ?
+            EndCustomerStatus['XenditEnumDefaultFallback'] : EndCustomerStatus[key]
+    }
     return json as EndCustomerStatus;
 }
 

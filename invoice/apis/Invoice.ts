@@ -45,19 +45,16 @@ import {
 
 export interface CreateInvoiceOperationRequest {
     data: CreateInvoiceRequest;
-}
-
-export interface ExpireInvoiceRequest {
-    invoiceId: string;
-    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetInvoiceByIdRequest {
     invoiceId: string;
-    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetInvoicesRequest {
+    forUserId?: string;
     externalId?: string;
     statuses?: Array<InvoiceStatus>;
     limit?: number;
@@ -72,7 +69,11 @@ export interface GetInvoicesRequest {
     paymentChannels?: Array<string>;
     onDemandLink?: string;
     recurringPaymentId?: string;
-    idempotencyKey?: string;
+}
+
+export interface ExpireInvoiceRequest {
+    invoiceId: string;
+    forUserId?: string;
 }
 
 /**
@@ -106,6 +107,10 @@ export class InvoiceApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
         const response = await this.request({
             path: `/v2/invoices/`,
             method: 'POST',
@@ -126,41 +131,6 @@ export class InvoiceApi extends runtime.BaseAPI {
     }
 
     /**
-     * Manually expire an invoice
-     */
-    private async expireInvoiceRaw(requestParameters: ExpireInvoiceRequest): Promise<runtime.ApiResponse<Invoice>> {
-        if (requestParameters.invoiceId === null || requestParameters.invoiceId === undefined) {
-            throw new runtime.RequiredError('invoiceId','Required parameter requestParameters.invoiceId was null or undefined when calling expireInvoice.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/invoices/{invoice_id}/expire!`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters.invoiceId))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => InvoiceFromJSON(jsonValue));
-    }
-
-    /**
-     * Manually expire an invoice
-     */
-    async expireInvoice(requestParameters: ExpireInvoiceRequest): Promise<Invoice> {
-        const response = await this.expireInvoiceRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Get invoice by invoice id
      */
     private async getInvoiceByIdRaw(requestParameters: GetInvoiceByIdRequest): Promise<runtime.ApiResponse<Invoice>> {
@@ -173,8 +143,8 @@ export class InvoiceApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -260,8 +230,8 @@ export class InvoiceApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -279,6 +249,41 @@ export class InvoiceApi extends runtime.BaseAPI {
      */
     async getInvoices(requestParameters: GetInvoicesRequest = {}): Promise<Array<Invoice>> {
         const response = await this.getInvoicesRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Manually expire an invoice
+     */
+    private async expireInvoiceRaw(requestParameters: ExpireInvoiceRequest): Promise<runtime.ApiResponse<Invoice>> {
+        if (requestParameters.invoiceId === null || requestParameters.invoiceId === undefined) {
+            throw new runtime.RequiredError('invoiceId','Required parameter requestParameters.invoiceId was null or undefined when calling expireInvoice.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/invoices/{invoice_id}/expire!`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters.invoiceId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InvoiceFromJSON(jsonValue));
+    }
+
+    /**
+     * Manually expire an invoice
+     */
+    async expireInvoice(requestParameters: ExpireInvoiceRequest): Promise<Invoice> {
+        const response = await this.expireInvoiceRaw(requestParameters);
         return await response.value();
     }
 

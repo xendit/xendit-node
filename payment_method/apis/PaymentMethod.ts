@@ -61,42 +61,19 @@ import {
     SimulatePaymentRequestToJSON,
 } from '../models';
 
-export interface AuthPaymentMethodRequest {
-    paymentMethodId: string;
-    idempotencyKey?: string;
-    data?: PaymentMethodAuthParameters;
-}
-
 export interface CreatePaymentMethodRequest {
+    forUserId?: string;
     data?: PaymentMethodParameters;
-}
-
-export interface ExpirePaymentMethodRequest {
-    paymentMethodId: string;
-    idempotencyKey?: string;
-    data?: PaymentMethodExpireParameters | null;
-}
-
-export interface GetAllPaymentMethodsRequest {
-    id?: Array<string>;
-    type?: Array<string>;
-    status?: Array<PaymentMethodStatus>;
-    reusability?: PaymentMethodReusability;
-    customerId?: string;
-    referenceId?: string;
-    afterId?: string;
-    beforeId?: string;
-    limit?: number;
-    idempotencyKey?: string;
 }
 
 export interface GetPaymentMethodByIDRequest {
     paymentMethodId: string;
-    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetPaymentsByPaymentMethodIdRequest {
     paymentMethodId: string;
+    forUserId?: string;
     paymentRequestId?: Array<string>;
     paymentMethodId2?: Array<string>;
     referenceId?: Array<string>;
@@ -109,18 +86,41 @@ export interface GetPaymentsByPaymentMethodIdRequest {
     updatedGte?: Date;
     updatedLte?: Date;
     limit?: number;
-    idempotencyKey?: string;
 }
 
 export interface PatchPaymentMethodRequest {
     paymentMethodId: string;
-    idempotencyKey?: string;
+    forUserId?: string;
     data?: PaymentMethodUpdateParameters;
+}
+
+export interface GetAllPaymentMethodsRequest {
+    forUserId?: string;
+    id?: Array<string>;
+    type?: Array<string>;
+    status?: Array<PaymentMethodStatus>;
+    reusability?: PaymentMethodReusability;
+    customerId?: string;
+    referenceId?: string;
+    afterId?: string;
+    beforeId?: string;
+    limit?: number;
+}
+
+export interface ExpirePaymentMethodRequest {
+    paymentMethodId: string;
+    forUserId?: string;
+    data?: PaymentMethodExpireParameters | null;
+}
+
+export interface AuthPaymentMethodRequest {
+    paymentMethodId: string;
+    forUserId?: string;
+    data?: PaymentMethodAuthParameters;
 }
 
 export interface SimulatePaymentOperationRequest {
     paymentMethodId: string;
-    idempotencyKey?: string;
     data?: SimulatePaymentRequest;
 }
 
@@ -141,46 +141,6 @@ export class PaymentMethodApi extends runtime.BaseAPI {
     }
 
     /**
-     * This endpoint validates a payment method linking OTP
-     * Validate a payment method\'s linking OTP
-     */
-    private async authPaymentMethodRaw(requestParameters: AuthPaymentMethodRequest): Promise<runtime.ApiResponse<PaymentMethod>> {
-        if (requestParameters.paymentMethodId === null || requestParameters.paymentMethodId === undefined) {
-            throw new runtime.RequiredError('paymentMethodId','Required parameter requestParameters.paymentMethodId was null or undefined when calling authPaymentMethod.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/v2/payment_methods/{paymentMethodId}/auth`.replace(`{${"paymentMethodId"}}`, encodeURIComponent(String(requestParameters.paymentMethodId))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PaymentMethodAuthParametersToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentMethodFromJSON(jsonValue));
-    }
-
-    /**
-     * This endpoint validates a payment method linking OTP
-     * Validate a payment method\'s linking OTP
-     */
-    async authPaymentMethod(requestParameters: AuthPaymentMethodRequest): Promise<PaymentMethod> {
-        const response = await this.authPaymentMethodRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * This endpoint initiates creation of payment method
      * Creates payment method
      */
@@ -191,6 +151,10 @@ export class PaymentMethodApi extends runtime.BaseAPI {
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
 
         const response = await this.request({
             path: `/v2/payment_methods`,
@@ -213,115 +177,6 @@ export class PaymentMethodApi extends runtime.BaseAPI {
     }
 
     /**
-     * This endpoint expires a payment method and performs unlinking if necessary
-     * Expires a payment method
-     */
-    private async expirePaymentMethodRaw(requestParameters: ExpirePaymentMethodRequest): Promise<runtime.ApiResponse<PaymentMethod>> {
-        if (requestParameters.paymentMethodId === null || requestParameters.paymentMethodId === undefined) {
-            throw new runtime.RequiredError('paymentMethodId','Required parameter requestParameters.paymentMethodId was null or undefined when calling expirePaymentMethod.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/v2/payment_methods/{paymentMethodId}/expire`.replace(`{${"paymentMethodId"}}`, encodeURIComponent(String(requestParameters.paymentMethodId))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PaymentMethodExpireParametersToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentMethodFromJSON(jsonValue));
-    }
-
-    /**
-     * This endpoint expires a payment method and performs unlinking if necessary
-     * Expires a payment method
-     */
-    async expirePaymentMethod(requestParameters: ExpirePaymentMethodRequest): Promise<PaymentMethod> {
-        const response = await this.expirePaymentMethodRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Get all payment methods by filters
-     * Get all payment methods by filters
-     */
-    private async getAllPaymentMethodsRaw(requestParameters: GetAllPaymentMethodsRequest): Promise<runtime.ApiResponse<PaymentMethodList>> {
-        const queryParameters: any = {};
-
-        if (requestParameters.id) {
-            queryParameters['id'] = requestParameters.id;
-        }
-
-        if (requestParameters.type) {
-            queryParameters['type'] = requestParameters.type;
-        }
-
-        if (requestParameters.status) {
-            queryParameters['status'] = requestParameters.status;
-        }
-
-        if (requestParameters.reusability !== undefined) {
-            queryParameters['reusability'] = requestParameters.reusability;
-        }
-
-        if (requestParameters.customerId !== undefined) {
-            queryParameters['customer_id'] = requestParameters.customerId;
-        }
-
-        if (requestParameters.referenceId !== undefined) {
-            queryParameters['reference_id'] = requestParameters.referenceId;
-        }
-
-        if (requestParameters.afterId !== undefined) {
-            queryParameters['after_id'] = requestParameters.afterId;
-        }
-
-        if (requestParameters.beforeId !== undefined) {
-            queryParameters['before_id'] = requestParameters.beforeId;
-        }
-
-        if (requestParameters.limit !== undefined) {
-            queryParameters['limit'] = requestParameters.limit;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/v2/payment_methods`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentMethodListFromJSON(jsonValue));
-    }
-
-    /**
-     * Get all payment methods by filters
-     * Get all payment methods by filters
-     */
-    async getAllPaymentMethods(requestParameters: GetAllPaymentMethodsRequest = {}): Promise<PaymentMethodList> {
-        const response = await this.getAllPaymentMethodsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Get payment method by ID
      * Get payment method by ID
      */
@@ -335,8 +190,8 @@ export class PaymentMethodApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -420,8 +275,8 @@ export class PaymentMethodApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -444,7 +299,7 @@ export class PaymentMethodApi extends runtime.BaseAPI {
     }
 
     /**
-     * This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```.  This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.
+     * This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```. This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.
      * Patch payment methods
      */
     private async patchPaymentMethodRaw(requestParameters: PatchPaymentMethodRequest): Promise<runtime.ApiResponse<PaymentMethod>> {
@@ -459,8 +314,8 @@ export class PaymentMethodApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -475,11 +330,160 @@ export class PaymentMethodApi extends runtime.BaseAPI {
     }
 
     /**
-     * This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```.  This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.
+     * This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```. This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.
      * Patch payment methods
      */
     async patchPaymentMethod(requestParameters: PatchPaymentMethodRequest): Promise<PaymentMethod> {
         const response = await this.patchPaymentMethodRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Get all payment methods by filters
+     * Get all payment methods by filters
+     */
+    private async getAllPaymentMethodsRaw(requestParameters: GetAllPaymentMethodsRequest): Promise<runtime.ApiResponse<PaymentMethodList>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.id) {
+            queryParameters['id'] = requestParameters.id;
+        }
+
+        if (requestParameters.type) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        if (requestParameters.status) {
+            queryParameters['status'] = requestParameters.status;
+        }
+
+        if (requestParameters.reusability !== undefined) {
+            queryParameters['reusability'] = requestParameters.reusability;
+        }
+
+        if (requestParameters.customerId !== undefined) {
+            queryParameters['customer_id'] = requestParameters.customerId;
+        }
+
+        if (requestParameters.referenceId !== undefined) {
+            queryParameters['reference_id'] = requestParameters.referenceId;
+        }
+
+        if (requestParameters.afterId !== undefined) {
+            queryParameters['after_id'] = requestParameters.afterId;
+        }
+
+        if (requestParameters.beforeId !== undefined) {
+            queryParameters['before_id'] = requestParameters.beforeId;
+        }
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/v2/payment_methods`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentMethodListFromJSON(jsonValue));
+    }
+
+    /**
+     * Get all payment methods by filters
+     * Get all payment methods by filters
+     */
+    async getAllPaymentMethods(requestParameters: GetAllPaymentMethodsRequest = {}): Promise<PaymentMethodList> {
+        const response = await this.getAllPaymentMethodsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This endpoint expires a payment method and performs unlinking if necessary
+     * Expires a payment method
+     */
+    private async expirePaymentMethodRaw(requestParameters: ExpirePaymentMethodRequest): Promise<runtime.ApiResponse<PaymentMethod>> {
+        if (requestParameters.paymentMethodId === null || requestParameters.paymentMethodId === undefined) {
+            throw new runtime.RequiredError('paymentMethodId','Required parameter requestParameters.paymentMethodId was null or undefined when calling expirePaymentMethod.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/v2/payment_methods/{paymentMethodId}/expire`.replace(`{${"paymentMethodId"}}`, encodeURIComponent(String(requestParameters.paymentMethodId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PaymentMethodExpireParametersToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentMethodFromJSON(jsonValue));
+    }
+
+    /**
+     * This endpoint expires a payment method and performs unlinking if necessary
+     * Expires a payment method
+     */
+    async expirePaymentMethod(requestParameters: ExpirePaymentMethodRequest): Promise<PaymentMethod> {
+        const response = await this.expirePaymentMethodRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This endpoint validates a payment method linking OTP
+     * Validate a payment method\'s linking OTP
+     */
+    private async authPaymentMethodRaw(requestParameters: AuthPaymentMethodRequest): Promise<runtime.ApiResponse<PaymentMethod>> {
+        if (requestParameters.paymentMethodId === null || requestParameters.paymentMethodId === undefined) {
+            throw new runtime.RequiredError('paymentMethodId','Required parameter requestParameters.paymentMethodId was null or undefined when calling authPaymentMethod.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/v2/payment_methods/{paymentMethodId}/auth`.replace(`{${"paymentMethodId"}}`, encodeURIComponent(String(requestParameters.paymentMethodId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PaymentMethodAuthParametersToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentMethodFromJSON(jsonValue));
+    }
+
+    /**
+     * This endpoint validates a payment method linking OTP
+     * Validate a payment method\'s linking OTP
+     */
+    async authPaymentMethod(requestParameters: AuthPaymentMethodRequest): Promise<PaymentMethod> {
+        const response = await this.authPaymentMethodRaw(requestParameters);
         return await response.value();
     }
 
@@ -498,10 +502,6 @@ export class PaymentMethodApi extends runtime.BaseAPI {
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
         headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
 
         const response = await this.request({
             path: `/v2/payment_methods/{paymentMethodId}/payments/simulate`.replace(`{${"paymentMethodId"}}`, encodeURIComponent(String(requestParameters.paymentMethodId))),

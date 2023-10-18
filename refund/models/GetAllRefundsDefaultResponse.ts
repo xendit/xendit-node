@@ -10,37 +10,37 @@ import { exists, mapValues } from '../../runtime';
 /**
  * 
  * @export
- * @interface CreateRefundDefaultResponse
+ * @interface GetAllRefundsDefaultResponse
  */
-export interface CreateRefundDefaultResponse {
+export interface GetAllRefundsDefaultResponse {
     /**
      * 
      * @type {string}
-     * @memberof CreateRefundDefaultResponse
+     * @memberof GetAllRefundsDefaultResponse
      */
     errorCode?: string;
     /**
      * 
      * @type {string}
-     * @memberof CreateRefundDefaultResponse
+     * @memberof GetAllRefundsDefaultResponse
      */
     message?: string;
 }
 
 /**
- * Check if a given object implements the CreateRefundDefaultResponse interface.
+ * Check if a given object implements the GetAllRefundsDefaultResponse interface.
  */
-export function instanceOfCreateRefundDefaultResponse(value: object): boolean {
+export function instanceOfGetAllRefundsDefaultResponse(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function CreateRefundDefaultResponseFromJSON(json: any): CreateRefundDefaultResponse {
-    return CreateRefundDefaultResponseFromJSONTyped(json, false);
+export function GetAllRefundsDefaultResponseFromJSON(json: any): GetAllRefundsDefaultResponse {
+    return GetAllRefundsDefaultResponseFromJSONTyped(json, false);
 }
 
-export function CreateRefundDefaultResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateRefundDefaultResponse {
+export function GetAllRefundsDefaultResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GetAllRefundsDefaultResponse {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -51,7 +51,7 @@ export function CreateRefundDefaultResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function CreateRefundDefaultResponseToJSON(value?: CreateRefundDefaultResponse | null): any {
+export function GetAllRefundsDefaultResponseToJSON(value?: GetAllRefundsDefaultResponse | null): any {
     if (value === undefined) {
         return undefined;
     }

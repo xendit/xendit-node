@@ -21,7 +21,8 @@ export const EwalletType = {
     Grabpay: 'GRABPAY',
     Astrapay: 'ASTRAPAY',
     Nexcash: 'NEXCASH',
-    Jeniuspay: 'JENIUSPAY'
+    Jeniuspay: 'JENIUSPAY',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type EwalletType = typeof EwalletType[keyof typeof EwalletType];
 
@@ -31,6 +32,11 @@ export function EwalletTypeFromJSON(json: any): EwalletType {
 }
 
 export function EwalletTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): EwalletType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(EwalletType)[Object.values(EwalletType).indexOf(json)]
+        return EwalletType[key] === undefined ?
+            EwalletType['XenditEnumDefaultFallback'] : EwalletType[key]
+    }
     return json as EwalletType;
 }
 

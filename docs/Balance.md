@@ -31,7 +31,6 @@ const xenditBalanceClient = new BalanceClient({secretKey: YOUR_SECRET_KEY})
 |  accountType|  | &#39;CASH&#39; | &#39;HOLDING&#39; | &#39;TAX&#39; |
 |  currency|  | string |
 |  forUserId|  | string |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage

@@ -13,7 +13,8 @@
  */
 export const PaymentRequestCaptureMethod = {
     Automatic: 'AUTOMATIC',
-    Manual: 'MANUAL'
+    Manual: 'MANUAL',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestCaptureMethod = typeof PaymentRequestCaptureMethod[keyof typeof PaymentRequestCaptureMethod];
 
@@ -23,6 +24,11 @@ export function PaymentRequestCaptureMethodFromJSON(json: any): PaymentRequestCa
 }
 
 export function PaymentRequestCaptureMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentRequestCaptureMethod {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentRequestCaptureMethod)[Object.values(PaymentRequestCaptureMethod).indexOf(json)]
+        return PaymentRequestCaptureMethod[key] === undefined ?
+            PaymentRequestCaptureMethod['XenditEnumDefaultFallback'] : PaymentRequestCaptureMethod[key]
+    }
     return json as PaymentRequestCaptureMethod;
 }
 

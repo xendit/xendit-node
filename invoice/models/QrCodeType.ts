@@ -13,7 +13,8 @@
  */
 export const QrCodeType = {
     Qris: 'QRIS',
-    Promptpay: 'PROMPTPAY'
+    Promptpay: 'PROMPTPAY',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type QrCodeType = typeof QrCodeType[keyof typeof QrCodeType];
 
@@ -23,6 +24,11 @@ export function QrCodeTypeFromJSON(json: any): QrCodeType {
 }
 
 export function QrCodeTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): QrCodeType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(QrCodeType)[Object.values(QrCodeType).indexOf(json)]
+        return QrCodeType[key] === undefined ?
+            QrCodeType['XenditEnumDefaultFallback'] : QrCodeType[key]
+    }
     return json as QrCodeType;
 }
 

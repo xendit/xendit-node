@@ -28,11 +28,6 @@ import {
     GetPayouts200ResponseDataInnerToJSON,
 } from '../models';
 
-export interface CancelPayoutRequest {
-    id: string;
-    idempotencyKey?: string;
-}
-
 export interface CreatePayoutOperationRequest {
     idempotencyKey: string;
     forUserId?: string;
@@ -41,14 +36,14 @@ export interface CreatePayoutOperationRequest {
 
 export interface GetPayoutByIdRequest {
     id: string;
-    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetPayoutChannelsRequest {
     currency?: string;
     channelCategory?: Array<ChannelCategory>;
     channelCode?: string;
-    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 export interface GetPayoutsRequest {
@@ -56,7 +51,12 @@ export interface GetPayoutsRequest {
     limit?: number;
     afterId?: string;
     beforeId?: string;
-    idempotencyKey?: string;
+    forUserId?: string;
+}
+
+export interface CancelPayoutRequest {
+    id: string;
+    forUserId?: string;
 }
 
 /**
@@ -73,41 +73,6 @@ export class PayoutApi extends runtime.BaseAPI {
         })
         super(conf)
         this.secretKey = secretKey;
-    }
-
-    /**
-     * API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
-     */
-    private async cancelPayoutRaw(requestParameters: CancelPayoutRequest): Promise<runtime.ApiResponse<GetPayouts200ResponseDataInner>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling cancelPayout.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/v2/payouts/{id}/cancel`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => GetPayouts200ResponseDataInnerFromJSON(jsonValue));
-    }
-
-    /**
-     * API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
-     */
-    async cancelPayout(requestParameters: CancelPayoutRequest): Promise<GetPayouts200ResponseDataInner> {
-        const response = await this.cancelPayoutRaw(requestParameters);
-        return await response.value();
     }
 
     /**
@@ -165,8 +130,8 @@ export class PayoutApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -208,8 +173,8 @@ export class PayoutApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -259,8 +224,8 @@ export class PayoutApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -278,6 +243,41 @@ export class PayoutApi extends runtime.BaseAPI {
      */
     async getPayouts(requestParameters: GetPayoutsRequest): Promise<GetPayouts200Response> {
         const response = await this.getPayoutsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
+     */
+    private async cancelPayoutRaw(requestParameters: CancelPayoutRequest): Promise<runtime.ApiResponse<GetPayouts200ResponseDataInner>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling cancelPayout.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/v2/payouts/{id}/cancel`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetPayouts200ResponseDataInnerFromJSON(jsonValue));
+    }
+
+    /**
+     * API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
+     */
+    async cancelPayout(requestParameters: CancelPayoutRequest): Promise<GetPayouts200ResponseDataInner> {
+        const response = await this.cancelPayoutRaw(requestParameters);
         return await response.value();
     }
 

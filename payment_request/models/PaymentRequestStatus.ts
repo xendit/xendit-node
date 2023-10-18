@@ -19,7 +19,8 @@ export const PaymentRequestStatus = {
     Failed: 'FAILED',
     Voided: 'VOIDED',
     Unknown: 'UNKNOWN',
-    AwaitingCapture: 'AWAITING_CAPTURE'
+    AwaitingCapture: 'AWAITING_CAPTURE',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestStatus = typeof PaymentRequestStatus[keyof typeof PaymentRequestStatus];
 
@@ -29,6 +30,11 @@ export function PaymentRequestStatusFromJSON(json: any): PaymentRequestStatus {
 }
 
 export function PaymentRequestStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentRequestStatus {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentRequestStatus)[Object.values(PaymentRequestStatus).indexOf(json)]
+        return PaymentRequestStatus[key] === undefined ?
+            PaymentRequestStatus['XenditEnumDefaultFallback'] : PaymentRequestStatus[key]
+    }
     return json as PaymentRequestStatus;
 }
 

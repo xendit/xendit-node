@@ -16,7 +16,8 @@ export const ChannelAccountType = {
     MobileNo: 'MOBILE_NO',
     Passport: 'PASSPORT',
     BusinessRegistration: 'BUSINESS_REGISTRATION',
-    BankAccount: 'BANK_ACCOUNT'
+    BankAccount: 'BANK_ACCOUNT',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type ChannelAccountType = typeof ChannelAccountType[keyof typeof ChannelAccountType];
 
@@ -26,6 +27,11 @@ export function ChannelAccountTypeFromJSON(json: any): ChannelAccountType {
 }
 
 export function ChannelAccountTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChannelAccountType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(ChannelAccountType)[Object.values(ChannelAccountType).indexOf(json)]
+        return ChannelAccountType[key] === undefined ?
+            ChannelAccountType['XenditEnumDefaultFallback'] : ChannelAccountType[key]
+    }
     return json as ChannelAccountType;
 }
 

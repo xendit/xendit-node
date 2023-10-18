@@ -21,7 +21,8 @@ export const KYCDocumentSubType = {
     StudentId: 'STUDENT_ID',
     MilitaryId: 'MILITARY_ID',
     MedicalId: 'MEDICAL_ID',
-    Others: 'OTHERS'
+    Others: 'OTHERS',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type KYCDocumentSubType = typeof KYCDocumentSubType[keyof typeof KYCDocumentSubType];
 
@@ -31,6 +32,11 @@ export function KYCDocumentSubTypeFromJSON(json: any): KYCDocumentSubType {
 }
 
 export function KYCDocumentSubTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): KYCDocumentSubType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(KYCDocumentSubType)[Object.values(KYCDocumentSubType).indexOf(json)]
+        return KYCDocumentSubType[key] === undefined ?
+            KYCDocumentSubType['XenditEnumDefaultFallback'] : KYCDocumentSubType[key]
+    }
     return json as KYCDocumentSubType;
 }
 

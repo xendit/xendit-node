@@ -17,7 +17,8 @@ export const IdentityAccountType = {
     CreditCard: 'CREDIT_CARD',
     PayLater: 'PAY_LATER',
     Otc: 'OTC',
-    QrCode: 'QR_CODE'
+    QrCode: 'QR_CODE',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type IdentityAccountType = typeof IdentityAccountType[keyof typeof IdentityAccountType];
 
@@ -27,6 +28,11 @@ export function IdentityAccountTypeFromJSON(json: any): IdentityAccountType {
 }
 
 export function IdentityAccountTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): IdentityAccountType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(IdentityAccountType)[Object.values(IdentityAccountType).indexOf(json)]
+        return IdentityAccountType[key] === undefined ?
+            IdentityAccountType['XenditEnumDefaultFallback'] : IdentityAccountType[key]
+    }
     return json as IdentityAccountType;
 }
 

@@ -16,7 +16,8 @@ export const PaymentRequestCountry = {
     Ph: 'PH',
     Vn: 'VN',
     Th: 'TH',
-    My: 'MY'
+    My: 'MY',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestCountry = typeof PaymentRequestCountry[keyof typeof PaymentRequestCountry];
 
@@ -26,6 +27,11 @@ export function PaymentRequestCountryFromJSON(json: any): PaymentRequestCountry 
 }
 
 export function PaymentRequestCountryFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentRequestCountry {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentRequestCountry)[Object.values(PaymentRequestCountry).indexOf(json)]
+        return PaymentRequestCountry[key] === undefined ?
+            PaymentRequestCountry['XenditEnumDefaultFallback'] : PaymentRequestCountry[key]
+    }
     return json as PaymentRequestCountry;
 }
 

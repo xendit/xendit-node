@@ -15,32 +15,6 @@ const xenditPaymentMethodClient = new PaymentMethodClient({secretKey: YOUR_SECRE
 // or
 // xenditPaymentMethodClient.
 ```
-## Validate a payment method\'s linking OTP
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `authPaymentMethod` |
-| Request Parameters  |  [AuthPaymentMethodRequest](#request-parameters--AuthPaymentMethodRequest)	 |
-| Return Type  |  [PaymentMethod](payment_method/models/PaymentMethod.md) |
-
-### Request Parameters — `AuthPaymentMethodRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  paymentMethodId| ✅ | string |
-|  idempotencyKey|  | string |
-|  data|  | [PaymentMethodAuthParameters](payment_method/models/PaymentMethodAuthParameters.md) |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentMethod } from 'xendit-node/payment_method/models'
-
-const response: PaymentMethod = await xenditPaymentMethodClient.authPaymentMethod({ 
-    paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
-```
 ## Creates payment method
 
 
@@ -54,6 +28,7 @@ const response: PaymentMethod = await xenditPaymentMethodClient.authPaymentMetho
 ### Request Parameters — `CreatePaymentMethodRequest`
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
+|  forUserId|  | string |
 |  data|  | [PaymentMethodParameters](payment_method/models/PaymentMethodParameters.md) |
 
 ### Usage Examples
@@ -121,63 +96,6 @@ const response: PaymentMethod = await xenditPaymentMethodClient.createPaymentMet
     data
 })
 ```
-## Expires a payment method
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `expirePaymentMethod` |
-| Request Parameters  |  [ExpirePaymentMethodRequest](#request-parameters--ExpirePaymentMethodRequest)	 |
-| Return Type  |  [PaymentMethod](payment_method/models/PaymentMethod.md) |
-
-### Request Parameters — `ExpirePaymentMethodRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  paymentMethodId| ✅ | string |
-|  idempotencyKey|  | string |
-|  data|  | [PaymentMethodExpireParameters](payment_method/models/PaymentMethodExpireParameters.md) |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentMethod } from 'xendit-node/payment_method/models'
-
-const response: PaymentMethod = await xenditPaymentMethodClient.expirePaymentMethod({ 
-    paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
-```
-## Get all payment methods by filters
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `getAllPaymentMethods` |
-| Request Parameters  |  [GetAllPaymentMethodsRequest](#request-parameters--GetAllPaymentMethodsRequest)	 |
-| Return Type  |  [PaymentMethodList](payment_method/models/PaymentMethodList.md) |
-
-### Request Parameters — `GetAllPaymentMethodsRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  id|  | []string |
-|  type|  | []string |
-|  status|  | [[]PaymentMethodStatus](payment_method/models/PaymentMethodStatus.md) |
-|  reusability|  | [PaymentMethodReusability](payment_method/models/PaymentMethodReusability.md) |
-|  customerId|  | string |
-|  referenceId|  | string |
-|  afterId|  | string |
-|  beforeId|  | string |
-|  limit|  | number |
-|  idempotencyKey|  | string |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentMethodList } from 'xendit-node/payment_method/models'
-
-const response: PaymentMethodList = await xenditPaymentMethodClient.getAllPaymentMethods({ })
-```
 ## Get payment method by ID
 
 
@@ -192,7 +110,7 @@ const response: PaymentMethodList = await xenditPaymentMethodClient.getAllPaymen
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentMethodId| ✅ | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -217,6 +135,7 @@ const response: PaymentMethod = await xenditPaymentMethodClient.getPaymentMethod
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentMethodId| ✅ | string |
+|  forUserId|  | string |
 |  paymentRequestId|  | []string |
 |  paymentMethodId2|  | []string |
 |  referenceId|  | []string |
@@ -229,7 +148,6 @@ const response: PaymentMethod = await xenditPaymentMethodClient.getPaymentMethod
 |  updatedGte|  | Date |
 |  updatedLte|  | Date |
 |  limit|  | number |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -254,7 +172,7 @@ const response: object = await xenditPaymentMethodClient.getPaymentsByPaymentMet
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentMethodId| ✅ | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 |  data|  | [PaymentMethodUpdateParameters](payment_method/models/PaymentMethodUpdateParameters.md) |
 
 ### Usage Examples
@@ -263,6 +181,89 @@ const response: object = await xenditPaymentMethodClient.getPaymentsByPaymentMet
 import { PaymentMethod } from 'xendit-node/payment_method/models'
 
 const response: PaymentMethod = await xenditPaymentMethodClient.patchPaymentMethod({ 
+    paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
+})
+```
+## Get all payment methods by filters
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `getAllPaymentMethods` |
+| Request Parameters  |  [GetAllPaymentMethodsRequest](#request-parameters--GetAllPaymentMethodsRequest)	 |
+| Return Type  |  [PaymentMethodList](payment_method/models/PaymentMethodList.md) |
+
+### Request Parameters — `GetAllPaymentMethodsRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  forUserId|  | string |
+|  id|  | []string |
+|  type|  | []string |
+|  status|  | [[]PaymentMethodStatus](payment_method/models/PaymentMethodStatus.md) |
+|  reusability|  | [PaymentMethodReusability](payment_method/models/PaymentMethodReusability.md) |
+|  customerId|  | string |
+|  referenceId|  | string |
+|  afterId|  | string |
+|  beforeId|  | string |
+|  limit|  | number |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { PaymentMethodList } from 'xendit-node/payment_method/models'
+
+const response: PaymentMethodList = await xenditPaymentMethodClient.getAllPaymentMethods({ })
+```
+## Expires a payment method
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `expirePaymentMethod` |
+| Request Parameters  |  [ExpirePaymentMethodRequest](#request-parameters--ExpirePaymentMethodRequest)	 |
+| Return Type  |  [PaymentMethod](payment_method/models/PaymentMethod.md) |
+
+### Request Parameters — `ExpirePaymentMethodRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  paymentMethodId| ✅ | string |
+|  forUserId|  | string |
+|  data|  | [PaymentMethodExpireParameters](payment_method/models/PaymentMethodExpireParameters.md) |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { PaymentMethod } from 'xendit-node/payment_method/models'
+
+const response: PaymentMethod = await xenditPaymentMethodClient.expirePaymentMethod({ 
+    paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
+})
+```
+## Validate a payment method\'s linking OTP
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `authPaymentMethod` |
+| Request Parameters  |  [AuthPaymentMethodRequest](#request-parameters--AuthPaymentMethodRequest)	 |
+| Return Type  |  [PaymentMethod](payment_method/models/PaymentMethod.md) |
+
+### Request Parameters — `AuthPaymentMethodRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  paymentMethodId| ✅ | string |
+|  forUserId|  | string |
+|  data|  | [PaymentMethodAuthParameters](payment_method/models/PaymentMethodAuthParameters.md) |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { PaymentMethod } from 'xendit-node/payment_method/models'
+
+const response: PaymentMethod = await xenditPaymentMethodClient.authPaymentMethod({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
 })
 ```
@@ -280,7 +281,6 @@ const response: PaymentMethod = await xenditPaymentMethodClient.patchPaymentMeth
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentMethodId| ✅ | string |
-|  idempotencyKey|  | string |
 |  data|  | [SimulatePaymentRequest](payment_method/models/SimulatePaymentRequest.md) |
 
 ### Usage Examples

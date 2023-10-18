@@ -19,7 +19,8 @@ export const KYCDocumentType = {
     Passport: 'PASSPORT',
     Visa: 'VISA',
     BusinessRegistration: 'BUSINESS_REGISTRATION',
-    BusinessLicense: 'BUSINESS_LICENSE'
+    BusinessLicense: 'BUSINESS_LICENSE',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type KYCDocumentType = typeof KYCDocumentType[keyof typeof KYCDocumentType];
 
@@ -29,6 +30,11 @@ export function KYCDocumentTypeFromJSON(json: any): KYCDocumentType {
 }
 
 export function KYCDocumentTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): KYCDocumentType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(KYCDocumentType)[Object.values(KYCDocumentType).indexOf(json)]
+        return KYCDocumentType[key] === undefined ?
+            KYCDocumentType['XenditEnumDefaultFallback'] : KYCDocumentType[key]
+    }
     return json as KYCDocumentType;
 }
 

@@ -173,7 +173,8 @@ export const Currency = {
     Yer: 'YER',
     Zar: 'ZAR',
     Zmw: 'ZMW',
-    Zwd: 'ZWD'
+    Zwd: 'ZWD',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type Currency = typeof Currency[keyof typeof Currency];
 
@@ -183,6 +184,11 @@ export function CurrencyFromJSON(json: any): Currency {
 }
 
 export function CurrencyFromJSONTyped(json: any, ignoreDiscriminator: boolean): Currency {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(Currency)[Object.values(Currency).indexOf(json)]
+        return Currency[key] === undefined ?
+            Currency['XenditEnumDefaultFallback'] : Currency[key]
+    }
     return json as Currency;
 }
 

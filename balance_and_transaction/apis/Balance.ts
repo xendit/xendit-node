@@ -26,7 +26,6 @@ export interface GetBalanceRequest {
     accountType?: GetBalanceAccountTypeEnum;
     currency?: string;
     forUserId?: string;
-    idempotencyKey?: string;
 }
 
 /**
@@ -65,10 +64,6 @@ export class BalanceApi extends runtime.BaseAPI {
 
         if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
-        }
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
         const response = await this.request({

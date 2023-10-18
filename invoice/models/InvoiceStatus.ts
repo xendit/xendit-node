@@ -15,7 +15,8 @@ export const InvoiceStatus = {
     Pending: 'PENDING',
     Paid: 'PAID',
     Settled: 'SETTLED',
-    Expired: 'EXPIRED'
+    Expired: 'EXPIRED',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type InvoiceStatus = typeof InvoiceStatus[keyof typeof InvoiceStatus];
 
@@ -25,6 +26,11 @@ export function InvoiceStatusFromJSON(json: any): InvoiceStatus {
 }
 
 export function InvoiceStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): InvoiceStatus {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(InvoiceStatus)[Object.values(InvoiceStatus).indexOf(json)]
+        return InvoiceStatus[key] === undefined ?
+            InvoiceStatus['XenditEnumDefaultFallback'] : InvoiceStatus[key]
+    }
     return json as InvoiceStatus;
 }
 

@@ -74,7 +74,8 @@ export const DirectDebitChannelCode = {
     PublicFpxBusiness: 'PUBLIC_FPX_BUSINESS',
     RhbFpxBusiness: 'RHB_FPX_BUSINESS',
     SchFpxBusiness: 'SCH_FPX_BUSINESS',
-    UobFpxBusiness: 'UOB_FPX_BUSINESS'
+    UobFpxBusiness: 'UOB_FPX_BUSINESS',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type DirectDebitChannelCode = typeof DirectDebitChannelCode[keyof typeof DirectDebitChannelCode];
 
@@ -84,6 +85,11 @@ export function DirectDebitChannelCodeFromJSON(json: any): DirectDebitChannelCod
 }
 
 export function DirectDebitChannelCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): DirectDebitChannelCode {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(DirectDebitChannelCode)[Object.values(DirectDebitChannelCode).indexOf(json)]
+        return DirectDebitChannelCode[key] === undefined ?
+            DirectDebitChannelCode['XenditEnumDefaultFallback'] : DirectDebitChannelCode[key]
+    }
     return json as DirectDebitChannelCode;
 }
 

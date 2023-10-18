@@ -26,7 +26,8 @@ export const VirtualAccountChannelCode = {
     Vietcapital: 'VIETCAPITAL',
     Woori: 'WOORI',
     Msb: 'MSB',
-    StandardChartered: 'STANDARD_CHARTERED'
+    StandardChartered: 'STANDARD_CHARTERED',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type VirtualAccountChannelCode = typeof VirtualAccountChannelCode[keyof typeof VirtualAccountChannelCode];
 
@@ -36,6 +37,11 @@ export function VirtualAccountChannelCodeFromJSON(json: any): VirtualAccountChan
 }
 
 export function VirtualAccountChannelCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): VirtualAccountChannelCode {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(VirtualAccountChannelCode)[Object.values(VirtualAccountChannelCode).indexOf(json)]
+        return VirtualAccountChannelCode[key] === undefined ?
+            VirtualAccountChannelCode['XenditEnumDefaultFallback'] : VirtualAccountChannelCode[key]
+    }
     return json as VirtualAccountChannelCode;
 }
 

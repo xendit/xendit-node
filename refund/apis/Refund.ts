@@ -15,7 +15,7 @@ import type {
   CreateRefund404Response,
   CreateRefund409Response,
   CreateRefund503Response,
-  CreateRefundDefaultResponse,
+  GetAllRefundsDefaultResponse,
   Refund,
   RefundList,
 } from '../models';
@@ -32,27 +32,41 @@ import {
     CreateRefund409ResponseToJSON,
     CreateRefund503ResponseFromJSON,
     CreateRefund503ResponseToJSON,
-    CreateRefundDefaultResponseFromJSON,
-    CreateRefundDefaultResponseToJSON,
+    GetAllRefundsDefaultResponseFromJSON,
+    GetAllRefundsDefaultResponseToJSON,
     RefundFromJSON,
     RefundToJSON,
     RefundListFromJSON,
     RefundListToJSON,
 } from '../models';
 
-export interface CancelRefundRequest {
-    refundID: string;
-    idempotencyKey?: string;
-}
-
 export interface CreateRefundRequest {
     idempotencyKey?: string;
+    forUserId?: string;
     data?: CreateRefund;
 }
 
 export interface GetRefundRequest {
     refundID: string;
     idempotencyKey?: string;
+    forUserId?: string;
+}
+
+export interface GetAllRefundsRequest {
+    forUserId?: string;
+    paymentRequestId?: string;
+    invoiceId?: string;
+    paymentMethodType?: string;
+    channelCode?: string;
+    limit?: number;
+    afterId?: string;
+    beforeId?: string;
+}
+
+export interface CancelRefundRequest {
+    refundID: string;
+    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 /**
@@ -73,39 +87,6 @@ export class RefundApi extends runtime.BaseAPI {
 
     /**
      */
-    private async cancelRefundRaw(requestParameters: CancelRefundRequest): Promise<runtime.ApiResponse<Refund>> {
-        if (requestParameters.refundID === null || requestParameters.refundID === undefined) {
-            throw new runtime.RequiredError('refundID','Required parameter requestParameters.refundID was null or undefined when calling cancelRefund.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/refunds/{refundID}/cancel`.replace(`{${"refundID"}}`, encodeURIComponent(String(requestParameters.refundID))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => RefundFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async cancelRefund(requestParameters: CancelRefundRequest): Promise<Refund> {
-        const response = await this.cancelRefundRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     */
     private async createRefundRaw(requestParameters: CreateRefundRequest): Promise<runtime.ApiResponse<Refund>> {
         const queryParameters: any = {};
 
@@ -116,6 +97,10 @@ export class RefundApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -138,31 +123,6 @@ export class RefundApi extends runtime.BaseAPI {
 
     /**
      */
-    private async getAllRefundsRaw(): Promise<runtime.ApiResponse<RefundList>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        const response = await this.request({
-            path: `/refunds/`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => RefundListFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async getAllRefunds(): Promise<RefundList> {
-        const response = await this.getAllRefundsRaw();
-        return await response.value();
-    }
-
-    /**
-     */
     private async getRefundRaw(requestParameters: GetRefundRequest): Promise<runtime.ApiResponse<Refund>> {
         if (requestParameters.refundID === null || requestParameters.refundID === undefined) {
             throw new runtime.RequiredError('refundID','Required parameter requestParameters.refundID was null or undefined when calling getRefund.');
@@ -175,6 +135,10 @@ export class RefundApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -191,6 +155,100 @@ export class RefundApi extends runtime.BaseAPI {
      */
     async getRefund(requestParameters: GetRefundRequest): Promise<Refund> {
         const response = await this.getRefundRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    private async getAllRefundsRaw(requestParameters: GetAllRefundsRequest): Promise<runtime.ApiResponse<RefundList>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.paymentRequestId !== undefined) {
+            queryParameters['payment_request_id'] = requestParameters.paymentRequestId;
+        }
+
+        if (requestParameters.invoiceId !== undefined) {
+            queryParameters['invoice_id'] = requestParameters.invoiceId;
+        }
+
+        if (requestParameters.paymentMethodType !== undefined) {
+            queryParameters['payment_method_type'] = requestParameters.paymentMethodType;
+        }
+
+        if (requestParameters.channelCode !== undefined) {
+            queryParameters['channel_code'] = requestParameters.channelCode;
+        }
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.afterId !== undefined) {
+            queryParameters['after_id'] = requestParameters.afterId;
+        }
+
+        if (requestParameters.beforeId !== undefined) {
+            queryParameters['before_id'] = requestParameters.beforeId;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/refunds`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => RefundListFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getAllRefunds(requestParameters: GetAllRefundsRequest = {}): Promise<RefundList> {
+        const response = await this.getAllRefundsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    private async cancelRefundRaw(requestParameters: CancelRefundRequest): Promise<runtime.ApiResponse<Refund>> {
+        if (requestParameters.refundID === null || requestParameters.refundID === undefined) {
+            throw new runtime.RequiredError('refundID','Required parameter requestParameters.refundID was null or undefined when calling cancelRefund.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
+            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/refunds/{refundID}/cancel`.replace(`{${"refundID"}}`, encodeURIComponent(String(requestParameters.refundID))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => RefundFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async cancelRefund(requestParameters: CancelRefundRequest): Promise<Refund> {
+        const response = await this.cancelRefundRaw(requestParameters);
         return await response.value();
     }
 

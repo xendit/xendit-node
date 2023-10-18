@@ -14,7 +14,8 @@
 export const ChannelCategory = {
     Bank: 'BANK',
     Ewallet: 'EWALLET',
-    Otc: 'OTC'
+    Otc: 'OTC',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type ChannelCategory = typeof ChannelCategory[keyof typeof ChannelCategory];
 
@@ -24,6 +25,11 @@ export function ChannelCategoryFromJSON(json: any): ChannelCategory {
 }
 
 export function ChannelCategoryFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChannelCategory {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(ChannelCategory)[Object.values(ChannelCategory).indexOf(json)]
+        return ChannelCategory[key] === undefined ?
+            ChannelCategory['XenditEnumDefaultFallback'] : ChannelCategory[key]
+    }
     return json as ChannelCategory;
 }
 

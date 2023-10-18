@@ -29,6 +29,7 @@ const xenditInvoiceClient = new InvoiceClient({secretKey: YOUR_SECRET_KEY})
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  data| ✅ | [CreateInvoiceRequest](invoice/models/CreateInvoiceRequest.md) |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Create Invoice Request
@@ -49,31 +50,6 @@ const response: Invoice = await xenditInvoiceClient.createInvoice({
     data
 })
 ```
-## Manually expire an invoice
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `expireInvoice` |
-| Request Parameters  |  [ExpireInvoiceRequest](#request-parameters--ExpireInvoiceRequest)	 |
-| Return Type  |  [Invoice](invoice/models/Invoice.md) |
-
-### Request Parameters — `ExpireInvoiceRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  invoiceId| ✅ | string |
-|  idempotencyKey|  | string |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { Invoice } from 'xendit-node/invoice/models'
-
-const response: Invoice = await xenditInvoiceClient.expireInvoice({ 
-    invoiceId: "5f4708b7bd394b0400b96276",
-})
-```
 ## Get invoice by invoice id
 
 
@@ -88,7 +64,7 @@ const response: Invoice = await xenditInvoiceClient.expireInvoice({
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  invoiceId| ✅ | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -112,6 +88,7 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 ### Request Parameters — `GetInvoicesRequest`
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
+|  forUserId|  | string |
 |  externalId|  | string |
 |  statuses|  | [[]InvoiceStatus](invoice/models/InvoiceStatus.md) |
 |  limit|  | number |
@@ -126,7 +103,6 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 |  paymentChannels|  | []string |
 |  onDemandLink|  | string |
 |  recurringPaymentId|  | string |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -134,4 +110,29 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 import { Invoice } from 'xendit-node/invoice/models'
 
 const response: Invoice[] = await xenditInvoiceClient.getInvoices({ })
+```
+## Manually expire an invoice
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `expireInvoice` |
+| Request Parameters  |  [ExpireInvoiceRequest](#request-parameters--ExpireInvoiceRequest)	 |
+| Return Type  |  [Invoice](invoice/models/Invoice.md) |
+
+### Request Parameters — `ExpireInvoiceRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  invoiceId| ✅ | string |
+|  forUserId|  | string |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { Invoice } from 'xendit-node/invoice/models'
+
+const response: Invoice = await xenditInvoiceClient.expireInvoice({ 
+    invoiceId: "5f4708b7bd394b0400b96276",
+})
 ```

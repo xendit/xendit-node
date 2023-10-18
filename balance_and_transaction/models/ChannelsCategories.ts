@@ -25,7 +25,8 @@ export const ChannelsCategories = {
     VirtualAccount: 'VIRTUAL_ACCOUNT',
     Xenplatform: 'XENPLATFORM',
     DirectBankTransfer: 'DIRECT_BANK_TRANSFER',
-    Other: 'OTHER'
+    Other: 'OTHER',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type ChannelsCategories = typeof ChannelsCategories[keyof typeof ChannelsCategories];
 
@@ -35,6 +36,11 @@ export function ChannelsCategoriesFromJSON(json: any): ChannelsCategories {
 }
 
 export function ChannelsCategoriesFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChannelsCategories {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(ChannelsCategories)[Object.values(ChannelsCategories).indexOf(json)]
+        return ChannelsCategories[key] === undefined ?
+            ChannelsCategories['XenditEnumDefaultFallback'] : ChannelsCategories[key]
+    }
     return json as ChannelsCategories;
 }
 

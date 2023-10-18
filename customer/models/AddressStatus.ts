@@ -13,7 +13,8 @@
  */
 export const AddressStatus = {
     Active: 'ACTIVE',
-    Deleted: 'DELETED'
+    Deleted: 'DELETED',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type AddressStatus = typeof AddressStatus[keyof typeof AddressStatus];
 
@@ -23,6 +24,11 @@ export function AddressStatusFromJSON(json: any): AddressStatus {
 }
 
 export function AddressStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): AddressStatus {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(AddressStatus)[Object.values(AddressStatus).indexOf(json)]
+        return AddressStatus[key] === undefined ?
+            AddressStatus['XenditEnumDefaultFallback'] : AddressStatus[key]
+    }
     return json as AddressStatus;
 }
 

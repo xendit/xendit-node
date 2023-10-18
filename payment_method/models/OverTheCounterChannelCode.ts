@@ -27,7 +27,8 @@ export const OverTheCounterChannelCode = {
     SmBills: 'SM_BILLS',
     RobinsonsBills: 'ROBINSONS_BILLS',
     Alfamart: 'ALFAMART',
-    Indomaret: 'INDOMARET'
+    Indomaret: 'INDOMARET',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type OverTheCounterChannelCode = typeof OverTheCounterChannelCode[keyof typeof OverTheCounterChannelCode];
 
@@ -37,6 +38,11 @@ export function OverTheCounterChannelCodeFromJSON(json: any): OverTheCounterChan
 }
 
 export function OverTheCounterChannelCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): OverTheCounterChannelCode {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(OverTheCounterChannelCode)[Object.values(OverTheCounterChannelCode).indexOf(json)]
+        return OverTheCounterChannelCode[key] === undefined ?
+            OverTheCounterChannelCode['XenditEnumDefaultFallback'] : OverTheCounterChannelCode[key]
+    }
     return json as OverTheCounterChannelCode;
 }
 

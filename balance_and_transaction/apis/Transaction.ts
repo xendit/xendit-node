@@ -40,6 +40,11 @@ import {
     ValidationErrorToJSON,
 } from '../models';
 
+export interface GetTransactionByIDRequest {
+    id: string;
+    forUserId?: string;
+}
+
 export interface GetAllTransactionsRequest {
     forUserId?: string;
     types?: Array<TransactionTypes>;
@@ -55,13 +60,6 @@ export interface GetAllTransactionsRequest {
     limit?: number;
     afterId?: string;
     beforeId?: string;
-    idempotencyKey?: string;
-}
-
-export interface GetTransactionByIDRequest {
-    id: string;
-    forUserId?: string;
-    idempotencyKey?: string;
 }
 
 /**
@@ -78,6 +76,43 @@ export class TransactionApi extends runtime.BaseAPI {
         })
         super(conf)
         this.secretKey = secretKey;
+    }
+
+    /**
+     * Get single specific transaction by transaction id.
+     * Get a transaction based on its id
+     */
+    private async getTransactionByIDRaw(requestParameters: GetTransactionByIDRequest): Promise<runtime.ApiResponse<TransactionResponse>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTransactionByID.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/transactions/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TransactionResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Get single specific transaction by transaction id.
+     * Get a transaction based on its id
+     */
+    async getTransactionByID(requestParameters: GetTransactionByIDRequest): Promise<TransactionResponse> {
+        const response = await this.getTransactionByIDRaw(requestParameters);
+        return await response.value();
     }
 
     /**
@@ -146,10 +181,6 @@ export class TransactionApi extends runtime.BaseAPI {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
         const response = await this.request({
             path: `/transactions`,
             method: 'GET',
@@ -166,47 +197,6 @@ export class TransactionApi extends runtime.BaseAPI {
      */
     async getAllTransactions(requestParameters: GetAllTransactionsRequest = {}): Promise<TransactionsResponse> {
         const response = await this.getAllTransactionsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Get single specific transaction by transaction id.
-     * Get a transaction based on its id
-     */
-    private async getTransactionByIDRaw(requestParameters: GetTransactionByIDRequest): Promise<runtime.ApiResponse<TransactionResponse>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTransactionByID.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
-            headerParameters['for-user-id'] = String(requestParameters.forUserId);
-        }
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/transactions/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => TransactionResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Get single specific transaction by transaction id.
-     * Get a transaction based on its id
-     */
-    async getTransactionByID(requestParameters: GetTransactionByIDRequest): Promise<TransactionResponse> {
-        const response = await this.getTransactionByIDRaw(requestParameters);
         return await response.value();
     }
 

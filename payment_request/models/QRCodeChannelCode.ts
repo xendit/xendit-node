@@ -15,7 +15,8 @@ export const QRCodeChannelCode = {
     Dana: 'DANA',
     Rcbc: 'RCBC',
     Linkaja: 'LINKAJA',
-    Promptpay: 'PROMPTPAY'
+    Promptpay: 'PROMPTPAY',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type QRCodeChannelCode = typeof QRCodeChannelCode[keyof typeof QRCodeChannelCode];
 
@@ -25,6 +26,11 @@ export function QRCodeChannelCodeFromJSON(json: any): QRCodeChannelCode {
 }
 
 export function QRCodeChannelCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): QRCodeChannelCode {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(QRCodeChannelCode)[Object.values(QRCodeChannelCode).indexOf(json)]
+        return QRCodeChannelCode[key] === undefined ?
+            QRCodeChannelCode['XenditEnumDefaultFallback'] : QRCodeChannelCode[key]
+    }
     return json as QRCodeChannelCode;
 }
 

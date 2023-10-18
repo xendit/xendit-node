@@ -15,6 +15,31 @@ const xenditTransactionClient = new TransactionClient({secretKey: YOUR_SECRET_KE
 // or
 // xenditTransactionClient.
 ```
+## Get a transaction based on its id
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `getTransactionByID` |
+| Request Parameters  |  [GetTransactionByIDRequest](#request-parameters--GetTransactionByIDRequest)	 |
+| Return Type  |  [TransactionResponse](balance_and_transaction/models/TransactionResponse.md) |
+
+### Request Parameters — `GetTransactionByIDRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  id| ✅ | string |
+|  forUserId|  | string |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { TransactionResponse } from 'xendit-node/balance_and_transaction/models'
+
+const response: TransactionResponse = await xenditTransactionClient.getTransactionByID({ 
+    id: "id_example",
+})
+```
 ## Get a list of transactions
 
 
@@ -42,7 +67,6 @@ const xenditTransactionClient = new TransactionClient({secretKey: YOUR_SECRET_KE
 |  limit|  | number |
 |  afterId|  | string |
 |  beforeId|  | string |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -50,30 +74,4 @@ const xenditTransactionClient = new TransactionClient({secretKey: YOUR_SECRET_KE
 import { TransactionsResponse } from 'xendit-node/balance_and_transaction/models'
 
 const response: TransactionsResponse = await xenditTransactionClient.getAllTransactions({ })
-```
-## Get a transaction based on its id
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `getTransactionByID` |
-| Request Parameters  |  [GetTransactionByIDRequest](#request-parameters--GetTransactionByIDRequest)	 |
-| Return Type  |  [TransactionResponse](balance_and_transaction/models/TransactionResponse.md) |
-
-### Request Parameters — `GetTransactionByIDRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  id| ✅ | string |
-|  forUserId|  | string |
-|  idempotencyKey|  | string |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { TransactionResponse } from 'xendit-node/balance_and_transaction/models'
-
-const response: TransactionResponse = await xenditTransactionClient.getTransactionByID({ 
-    id: "id_example",
-})
 ```

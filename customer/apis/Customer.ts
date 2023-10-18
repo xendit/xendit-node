@@ -38,28 +38,24 @@ import {
 } from '../models';
 
 export interface CreateCustomerRequest {
-    iDEMPOTENCYKEY?: string;
-    forUserId?: string;
     idempotencyKey?: string;
+    forUserId?: string;
     data?: CustomerRequest;
 }
 
 export interface GetCustomerRequest {
     id: string;
     forUserId?: string;
-    idempotencyKey?: string;
 }
 
 export interface GetCustomerByReferenceIDRequest {
     referenceId: string;
     forUserId?: string;
-    idempotencyKey?: string;
 }
 
 export interface UpdateCustomerRequest {
     id: string;
     forUserId?: string;
-    idempotencyKey?: string;
     data?: PatchCustomer;
 }
 
@@ -91,16 +87,12 @@ export class CustomerApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (requestParameters.iDEMPOTENCYKEY !== undefined && requestParameters.iDEMPOTENCYKEY !== null) {
-            headerParameters['IDEMPOTENCY-KEY'] = String(requestParameters.iDEMPOTENCYKEY);
+        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
+            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
         if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
-        }
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
         const response = await this.request({
@@ -139,10 +131,6 @@ export class CustomerApi extends runtime.BaseAPI {
 
         if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
-        }
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
         const response = await this.request({
@@ -186,10 +174,6 @@ export class CustomerApi extends runtime.BaseAPI {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
         const response = await this.request({
             path: `/customers`,
             method: 'GET',
@@ -227,10 +211,6 @@ export class CustomerApi extends runtime.BaseAPI {
 
         if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
-        }
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
         }
 
         const response = await this.request({

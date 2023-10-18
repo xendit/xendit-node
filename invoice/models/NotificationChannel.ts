@@ -15,7 +15,8 @@ export const NotificationChannel = {
     Email: 'email',
     Sms: 'sms',
     Whatsapp: 'whatsapp',
-    Viber: 'viber'
+    Viber: 'viber',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type NotificationChannel = typeof NotificationChannel[keyof typeof NotificationChannel];
 
@@ -25,6 +26,11 @@ export function NotificationChannelFromJSON(json: any): NotificationChannel {
 }
 
 export function NotificationChannelFromJSONTyped(json: any, ignoreDiscriminator: boolean): NotificationChannel {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(NotificationChannel)[Object.values(NotificationChannel).indexOf(json)]
+        return NotificationChannel[key] === undefined ?
+            NotificationChannel['XenditEnumDefaultFallback'] : NotificationChannel[key]
+    }
     return json as NotificationChannel;
 }
 

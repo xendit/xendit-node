@@ -19,7 +19,8 @@ export const PaymentMethodType = {
     Ewallet: 'EWALLET',
     OverTheCounter: 'OVER_THE_COUNTER',
     QrCode: 'QR_CODE',
-    VirtualAccount: 'VIRTUAL_ACCOUNT'
+    VirtualAccount: 'VIRTUAL_ACCOUNT',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentMethodType = typeof PaymentMethodType[keyof typeof PaymentMethodType];
 
@@ -29,6 +30,11 @@ export function PaymentMethodTypeFromJSON(json: any): PaymentMethodType {
 }
 
 export function PaymentMethodTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentMethodType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentMethodType)[Object.values(PaymentMethodType).indexOf(json)]
+        return PaymentMethodType[key] === undefined ?
+            PaymentMethodType['XenditEnumDefaultFallback'] : PaymentMethodType[key]
+    }
     return json as PaymentMethodType;
 }
 

@@ -15,58 +15,6 @@ const xenditPaymentRequestClient = new PaymentRequestClient({secretKey: YOUR_SEC
 // or
 // xenditPaymentRequestClient.
 ```
-## Payment Request Authorize
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `authorizePaymentRequest` |
-| Request Parameters  |  [AuthorizePaymentRequestRequest](#request-parameters--AuthorizePaymentRequestRequest)	 |
-| Return Type  |  [PaymentRequest](payment_request/models/PaymentRequest.md) |
-
-### Request Parameters — `AuthorizePaymentRequestRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  paymentRequestId| ✅ | string |
-|  idempotencyKey|  | string |
-|  data|  | [PaymentRequestAuthParameters](payment_request/models/PaymentRequestAuthParameters.md) |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentRequest } from 'xendit-node/payment_request/models'
-
-const response: PaymentRequest = await xenditPaymentRequestClient.authorizePaymentRequest({ 
-    paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
-```
-## Payment Request Capture
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `capturePaymentRequest` |
-| Request Parameters  |  [CapturePaymentRequestRequest](#request-parameters--CapturePaymentRequestRequest)	 |
-| Return Type  |  [Capture](payment_request/models/Capture.md) |
-
-### Request Parameters — `CapturePaymentRequestRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  paymentRequestId| ✅ | string |
-|  idempotencyKey|  | string |
-|  data|  | [CaptureParameters](payment_request/models/CaptureParameters.md) |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { Capture } from 'xendit-node/payment_request/models'
-
-const response: Capture = await xenditPaymentRequestClient.capturePaymentRequest({ 
-    paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
-```
 ## Create Payment Request
 
 
@@ -81,6 +29,7 @@ const response: Capture = await xenditPaymentRequestClient.capturePaymentRequest
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  idempotencyKey|  | string |
+|  forUserId|  | string |
 |  data|  | [PaymentRequestParameters](payment_request/models/PaymentRequestParameters.md) |
 
 ### Usage Examples
@@ -204,34 +153,6 @@ const response: PaymentRequest = await xenditPaymentRequestClient.createPaymentR
     data
 })
 ```
-## Get all payment requests by filter
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `getAllPaymentRequests` |
-| Request Parameters  |  [GetAllPaymentRequestsRequest](#request-parameters--GetAllPaymentRequestsRequest)	 |
-| Return Type  |  [PaymentRequestListResponse](payment_request/models/PaymentRequestListResponse.md) |
-
-### Request Parameters — `GetAllPaymentRequestsRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  referenceId|  | []string |
-|  id|  | []string |
-|  customerId|  | []string |
-|  limit|  | number |
-|  beforeId|  | string |
-|  afterId|  | string |
-|  idempotencyKey|  | string |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { PaymentRequestListResponse } from 'xendit-node/payment_request/models'
-
-const response: PaymentRequestListResponse = await xenditPaymentRequestClient.getAllPaymentRequests({ })
-```
 ## Get payment request by ID
 
 
@@ -246,7 +167,7 @@ const response: PaymentRequestListResponse = await xenditPaymentRequestClient.ge
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -271,8 +192,8 @@ const response: PaymentRequest = await xenditPaymentRequestClient.getPaymentRequ
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
+|  forUserId|  | string |
 |  limit|  | number |
-|  idempotencyKey|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -280,6 +201,86 @@ const response: PaymentRequest = await xenditPaymentRequestClient.getPaymentRequ
 import { CaptureListResponse } from 'xendit-node/payment_request/models'
 
 const response: CaptureListResponse = await xenditPaymentRequestClient.getPaymentRequestCaptures({ 
+    paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
+})
+```
+## Get all payment requests by filter
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `getAllPaymentRequests` |
+| Request Parameters  |  [GetAllPaymentRequestsRequest](#request-parameters--GetAllPaymentRequestsRequest)	 |
+| Return Type  |  [PaymentRequestListResponse](payment_request/models/PaymentRequestListResponse.md) |
+
+### Request Parameters — `GetAllPaymentRequestsRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  forUserId|  | string |
+|  referenceId|  | []string |
+|  id|  | []string |
+|  customerId|  | []string |
+|  limit|  | number |
+|  beforeId|  | string |
+|  afterId|  | string |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { PaymentRequestListResponse } from 'xendit-node/payment_request/models'
+
+const response: PaymentRequestListResponse = await xenditPaymentRequestClient.getAllPaymentRequests({ })
+```
+## Payment Request Capture
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `capturePaymentRequest` |
+| Request Parameters  |  [CapturePaymentRequestRequest](#request-parameters--CapturePaymentRequestRequest)	 |
+| Return Type  |  [Capture](payment_request/models/Capture.md) |
+
+### Request Parameters — `CapturePaymentRequestRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  paymentRequestId| ✅ | string |
+|  forUserId|  | string |
+|  data|  | [CaptureParameters](payment_request/models/CaptureParameters.md) |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { Capture } from 'xendit-node/payment_request/models'
+
+const response: Capture = await xenditPaymentRequestClient.capturePaymentRequest({ 
+    paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
+})
+```
+## Payment Request Authorize
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `authorizePaymentRequest` |
+| Request Parameters  |  [AuthorizePaymentRequestRequest](#request-parameters--AuthorizePaymentRequestRequest)	 |
+| Return Type  |  [PaymentRequest](payment_request/models/PaymentRequest.md) |
+
+### Request Parameters — `AuthorizePaymentRequestRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  paymentRequestId| ✅ | string |
+|  forUserId|  | string |
+|  data|  | [PaymentRequestAuthParameters](payment_request/models/PaymentRequestAuthParameters.md) |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { PaymentRequest } from 'xendit-node/payment_request/models'
+
+const response: PaymentRequest = await xenditPaymentRequestClient.authorizePaymentRequest({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
 })
 ```
@@ -297,7 +298,7 @@ const response: CaptureListResponse = await xenditPaymentRequestClient.getPaymen
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  paymentRequestId| ✅ | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage

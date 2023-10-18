@@ -21,7 +21,8 @@ export const BankCode = {
     Bjb: 'BJB',
     SahabatSampoerna: 'SAHABAT_SAMPOERNA',
     Cimb: 'CIMB',
-    Bnc: 'BNC'
+    Bnc: 'BNC',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type BankCode = typeof BankCode[keyof typeof BankCode];
 
@@ -31,6 +32,11 @@ export function BankCodeFromJSON(json: any): BankCode {
 }
 
 export function BankCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): BankCode {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(BankCode)[Object.values(BankCode).indexOf(json)]
+        return BankCode[key] === undefined ?
+            BankCode['XenditEnumDefaultFallback'] : BankCode[key]
+    }
     return json as BankCode;
 }
 

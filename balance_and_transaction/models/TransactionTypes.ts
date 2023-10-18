@@ -24,7 +24,8 @@ export const TransactionTypes = {
     Cashback: 'CASHBACK',
     Topup: 'TOPUP',
     Withdrawal: 'WITHDRAWAL',
-    Other: 'OTHER'
+    Other: 'OTHER',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type TransactionTypes = typeof TransactionTypes[keyof typeof TransactionTypes];
 
@@ -34,6 +35,11 @@ export function TransactionTypesFromJSON(json: any): TransactionTypes {
 }
 
 export function TransactionTypesFromJSONTyped(json: any, ignoreDiscriminator: boolean): TransactionTypes {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(TransactionTypes)[Object.values(TransactionTypes).indexOf(json)]
+        return TransactionTypes[key] === undefined ?
+            TransactionTypes['XenditEnumDefaultFallback'] : TransactionTypes[key]
+    }
     return json as TransactionTypes;
 }
 

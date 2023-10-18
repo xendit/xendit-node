@@ -16,7 +16,8 @@ export const PaymentRequestCurrency = {
     Php: 'PHP',
     Vnd: 'VND',
     Thb: 'THB',
-    Myr: 'MYR'
+    Myr: 'MYR',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestCurrency = typeof PaymentRequestCurrency[keyof typeof PaymentRequestCurrency];
 
@@ -26,6 +27,11 @@ export function PaymentRequestCurrencyFromJSON(json: any): PaymentRequestCurrenc
 }
 
 export function PaymentRequestCurrencyFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentRequestCurrency {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentRequestCurrency)[Object.values(PaymentRequestCurrency).indexOf(json)]
+        return PaymentRequestCurrency[key] === undefined ?
+            PaymentRequestCurrency['XenditEnumDefaultFallback'] : PaymentRequestCurrency[key]
+    }
     return json as PaymentRequestCurrency;
 }
 

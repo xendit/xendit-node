@@ -1,4 +1,4 @@
-# CreateRefundDefaultResponse
+# GetAllRefundsDefaultResponse
 
 
 

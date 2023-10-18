@@ -16,7 +16,8 @@ export const PaymentMethodStatus = {
     Inactive: 'INACTIVE',
     Pending: 'PENDING',
     Expired: 'EXPIRED',
-    Failed: 'FAILED'
+    Failed: 'FAILED',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentMethodStatus = typeof PaymentMethodStatus[keyof typeof PaymentMethodStatus];
 
@@ -26,6 +27,11 @@ export function PaymentMethodStatusFromJSON(json: any): PaymentMethodStatus {
 }
 
 export function PaymentMethodStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentMethodStatus {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(PaymentMethodStatus)[Object.values(PaymentMethodStatus).indexOf(json)]
+        return PaymentMethodStatus[key] === undefined ?
+            PaymentMethodStatus['XenditEnumDefaultFallback'] : PaymentMethodStatus[key]
+    }
     return json as PaymentMethodStatus;
 }
 

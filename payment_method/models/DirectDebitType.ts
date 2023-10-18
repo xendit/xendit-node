@@ -14,7 +14,8 @@
 export const DirectDebitType = {
     DebitCard: 'DEBIT_CARD',
     BankAccount: 'BANK_ACCOUNT',
-    BankRedirect: 'BANK_REDIRECT'
+    BankRedirect: 'BANK_REDIRECT',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type DirectDebitType = typeof DirectDebitType[keyof typeof DirectDebitType];
 
@@ -24,6 +25,11 @@ export function DirectDebitTypeFromJSON(json: any): DirectDebitType {
 }
 
 export function DirectDebitTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): DirectDebitType {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(DirectDebitType)[Object.values(DirectDebitType).indexOf(json)]
+        return DirectDebitType[key] === undefined ?
+            DirectDebitType['XenditEnumDefaultFallback'] : DirectDebitType[key]
+    }
     return json as DirectDebitType;
 }
 

@@ -18,4 +18,7 @@ Representing the client type or source of an invoice.
 
     * `Mobile` (value: `'MOBILE'`)
 
+    * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
+
+If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.
 

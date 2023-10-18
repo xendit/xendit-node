@@ -15,31 +15,6 @@ const xenditPayoutClient = new PayoutClient({secretKey: YOUR_SECRET_KEY})
 // or
 // xenditPayoutClient.
 ```
-## API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
-
-
-### Function Signature
-| Name          |    Value 	     |
-|--------------------|:-------------:|
-| Function Name | `cancelPayout` |
-| Request Parameters  |  [CancelPayoutRequest](#request-parameters--CancelPayoutRequest)	 |
-| Return Type  |  [GetPayouts200ResponseDataInner](payout/models/GetPayouts200ResponseDataInner.md) |
-
-### Request Parameters — `CancelPayoutRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  id| ✅ | string |
-|  idempotencyKey|  | string |
-
-### Usage Examples
-#### Minimum API Usage
-```typescript
-import { GetPayouts200ResponseDataInner } from 'xendit-node/payout/models'
-
-const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.cancelPayout({ 
-    id: "disb-7baa7335-a0b2-4678-bb8c-318c0167f332",
-})
-```
 ## API to send money at scale to bank accounts & eWallets
 
 
@@ -95,7 +70,7 @@ const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.create
 | Field Name |  Required  |   Type 	   |
 |-----------|:----------:|:----------:|
 |  id| ✅ | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -122,7 +97,7 @@ const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.getPay
 |  currency|  | string |
 |  channelCategory|  | [[]ChannelCategory](payout/models/ChannelCategory.md) |
 |  channelCode|  | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -148,7 +123,7 @@ const response: Channel[] = await xenditPayoutClient.getPayoutChannels({ })
 |  limit|  | number |
 |  afterId|  | string |
 |  beforeId|  | string |
-|  idempotencyKey|  | string |
+|  forUserId|  | string |
 
 ### Usage Examples
 #### Minimum API Usage
@@ -157,5 +132,30 @@ import { GetPayouts200Response } from 'xendit-node/payout/models'
 
 const response: GetPayouts200Response = await xenditPayoutClient.getPayouts({ 
     referenceId: "DISB-123",
+})
+```
+## API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `cancelPayout` |
+| Request Parameters  |  [CancelPayoutRequest](#request-parameters--CancelPayoutRequest)	 |
+| Return Type  |  [GetPayouts200ResponseDataInner](payout/models/GetPayouts200ResponseDataInner.md) |
+
+### Request Parameters — `CancelPayoutRequest`
+| Field Name |  Required  |   Type 	   |
+|-----------|:----------:|:----------:|
+|  id| ✅ | string |
+|  forUserId|  | string |
+
+### Usage Examples
+#### Minimum API Usage
+```typescript
+import { GetPayouts200ResponseDataInner } from 'xendit-node/payout/models'
+
+const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.cancelPayout({ 
+    id: "disb-7baa7335-a0b2-4678-bb8c-318c0167f332",
 })
 ```

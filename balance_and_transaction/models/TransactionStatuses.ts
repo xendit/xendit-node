@@ -16,7 +16,8 @@ export const TransactionStatuses = {
     Pending: 'PENDING',
     Failed: 'FAILED',
     Reversed: 'REVERSED',
-    Voided: 'VOIDED'
+    Voided: 'VOIDED',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type TransactionStatuses = typeof TransactionStatuses[keyof typeof TransactionStatuses];
 
@@ -26,6 +27,11 @@ export function TransactionStatusesFromJSON(json: any): TransactionStatuses {
 }
 
 export function TransactionStatusesFromJSONTyped(json: any, ignoreDiscriminator: boolean): TransactionStatuses {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(TransactionStatuses)[Object.values(TransactionStatuses).indexOf(json)]
+        return TransactionStatuses[key] === undefined ?
+            TransactionStatuses['XenditEnumDefaultFallback'] : TransactionStatuses[key]
+    }
     return json as TransactionStatuses;
 }
 

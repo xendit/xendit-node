@@ -21,7 +21,8 @@ export const InvoicePaymentMethod = {
     Ewallet: 'EWALLET',
     DirectDebit: 'DIRECT_DEBIT',
     BankTransfer: 'BANK_TRANSFER',
-    Paylater: 'PAYLATER'
+    Paylater: 'PAYLATER',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type InvoicePaymentMethod = typeof InvoicePaymentMethod[keyof typeof InvoicePaymentMethod];
 
@@ -31,6 +32,11 @@ export function InvoicePaymentMethodFromJSON(json: any): InvoicePaymentMethod {
 }
 
 export function InvoicePaymentMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): InvoicePaymentMethod {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(InvoicePaymentMethod)[Object.values(InvoicePaymentMethod).indexOf(json)]
+        return InvoicePaymentMethod[key] === undefined ?
+            InvoicePaymentMethod['XenditEnumDefaultFallback'] : InvoicePaymentMethod[key]
+    }
     return json as InvoicePaymentMethod;
 }
 

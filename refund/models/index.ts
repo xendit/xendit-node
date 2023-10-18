@@ -6,6 +6,6 @@ export * from './CreateRefund403Response';
 export * from './CreateRefund404Response';
 export * from './CreateRefund409Response';
 export * from './CreateRefund503Response';
-export * from './CreateRefundDefaultResponse';
+export * from './GetAllRefundsDefaultResponse';
 export * from './Refund';
 export * from './RefundList';

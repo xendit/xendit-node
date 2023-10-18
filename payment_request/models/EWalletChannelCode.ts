@@ -30,7 +30,8 @@ export const EWalletChannelCode = {
     Wechatpay: 'WECHATPAY',
     Linepay: 'LINEPAY',
     Truemoney: 'TRUEMONEY',
-    Alipay: 'ALIPAY'
+    Alipay: 'ALIPAY',
+    XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type EWalletChannelCode = typeof EWalletChannelCode[keyof typeof EWalletChannelCode];
 
@@ -40,6 +41,11 @@ export function EWalletChannelCodeFromJSON(json: any): EWalletChannelCode {
 }
 
 export function EWalletChannelCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): EWalletChannelCode {
+    if (json !== "" || json !== null) {
+        const key = Object.keys(EWalletChannelCode)[Object.values(EWalletChannelCode).indexOf(json)]
+        return EWalletChannelCode[key] === undefined ?
+            EWalletChannelCode['XenditEnumDefaultFallback'] : EWalletChannelCode[key]
+    }
     return json as EWalletChannelCode;
 }
 

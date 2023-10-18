@@ -34,47 +34,48 @@ import {
     PaymentRequestParametersToJSON,
 } from '../models';
 
-export interface AuthorizePaymentRequestRequest {
-    paymentRequestId: string;
-    idempotencyKey?: string;
-    data?: PaymentRequestAuthParameters;
-}
-
-export interface CapturePaymentRequestRequest {
-    paymentRequestId: string;
-    idempotencyKey?: string;
-    data?: CaptureParameters;
-}
-
 export interface CreatePaymentRequestRequest {
     idempotencyKey?: string;
+    forUserId?: string;
     data?: PaymentRequestParameters;
 }
 
+export interface GetPaymentRequestByIDRequest {
+    paymentRequestId: string;
+    forUserId?: string;
+}
+
+export interface GetPaymentRequestCapturesRequest {
+    paymentRequestId: string;
+    forUserId?: string;
+    limit?: number;
+}
+
 export interface GetAllPaymentRequestsRequest {
+    forUserId?: string;
     referenceId?: Array<string>;
     id?: Array<string>;
     customerId?: Array<string>;
     limit?: number;
     beforeId?: string;
     afterId?: string;
-    idempotencyKey?: string;
 }
 
-export interface GetPaymentRequestByIDRequest {
+export interface CapturePaymentRequestRequest {
     paymentRequestId: string;
-    idempotencyKey?: string;
+    forUserId?: string;
+    data?: CaptureParameters;
 }
 
-export interface GetPaymentRequestCapturesRequest {
+export interface AuthorizePaymentRequestRequest {
     paymentRequestId: string;
-    limit?: number;
-    idempotencyKey?: string;
+    forUserId?: string;
+    data?: PaymentRequestAuthParameters;
 }
 
 export interface ResendPaymentRequestAuthRequest {
     paymentRequestId: string;
-    idempotencyKey?: string;
+    forUserId?: string;
 }
 
 /**
@@ -94,86 +95,6 @@ export class PaymentRequestApi extends runtime.BaseAPI {
     }
 
     /**
-     * Payment Request Authorize
-     * Payment Request Authorize
-     */
-    private async authorizePaymentRequestRaw(requestParameters: AuthorizePaymentRequestRequest): Promise<runtime.ApiResponse<PaymentRequest>> {
-        if (requestParameters.paymentRequestId === null || requestParameters.paymentRequestId === undefined) {
-            throw new runtime.RequiredError('paymentRequestId','Required parameter requestParameters.paymentRequestId was null or undefined when calling authorizePaymentRequest.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/payment_requests/{paymentRequestId}/auth`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PaymentRequestAuthParametersToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentRequestFromJSON(jsonValue));
-    }
-
-    /**
-     * Payment Request Authorize
-     * Payment Request Authorize
-     */
-    async authorizePaymentRequest(requestParameters: AuthorizePaymentRequestRequest): Promise<PaymentRequest> {
-        const response = await this.authorizePaymentRequestRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Payment Request Capture
-     * Payment Request Capture
-     */
-    private async capturePaymentRequestRaw(requestParameters: CapturePaymentRequestRequest): Promise<runtime.ApiResponse<Capture>> {
-        if (requestParameters.paymentRequestId === null || requestParameters.paymentRequestId === undefined) {
-            throw new runtime.RequiredError('paymentRequestId','Required parameter requestParameters.paymentRequestId was null or undefined when calling capturePaymentRequest.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/payment_requests/{paymentRequestId}/captures`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: CaptureParametersToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CaptureFromJSON(jsonValue));
-    }
-
-    /**
-     * Payment Request Capture
-     * Payment Request Capture
-     */
-    async capturePaymentRequest(requestParameters: CapturePaymentRequestRequest): Promise<Capture> {
-        const response = await this.capturePaymentRequestRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Create Payment Request
      * Create Payment Request
      */
@@ -187,6 +108,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
             headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        }
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -210,63 +135,6 @@ export class PaymentRequestApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get all payment requests by filter
-     * Get all payment requests by filter
-     */
-    private async getAllPaymentRequestsRaw(requestParameters: GetAllPaymentRequestsRequest): Promise<runtime.ApiResponse<PaymentRequestListResponse>> {
-        const queryParameters: any = {};
-
-        if (requestParameters.referenceId) {
-            queryParameters['reference_id'] = requestParameters.referenceId;
-        }
-
-        if (requestParameters.id) {
-            queryParameters['id'] = requestParameters.id;
-        }
-
-        if (requestParameters.customerId) {
-            queryParameters['customer_id'] = requestParameters.customerId;
-        }
-
-        if (requestParameters.limit !== undefined) {
-            queryParameters['limit'] = requestParameters.limit;
-        }
-
-        if (requestParameters.beforeId !== undefined) {
-            queryParameters['before_id'] = requestParameters.beforeId;
-        }
-
-        if (requestParameters.afterId !== undefined) {
-            queryParameters['after_id'] = requestParameters.afterId;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
-
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
-        }
-
-        const response = await this.request({
-            path: `/payment_requests`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentRequestListResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Get all payment requests by filter
-     * Get all payment requests by filter
-     */
-    async getAllPaymentRequests(requestParameters: GetAllPaymentRequestsRequest = {}): Promise<PaymentRequestListResponse> {
-        const response = await this.getAllPaymentRequestsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Get payment request by ID
      * Get payment request by ID
      */
@@ -280,8 +148,8 @@ export class PaymentRequestApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -321,8 +189,8 @@ export class PaymentRequestApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
@@ -345,6 +213,143 @@ export class PaymentRequestApi extends runtime.BaseAPI {
     }
 
     /**
+     * Get all payment requests by filter
+     * Get all payment requests by filter
+     */
+    private async getAllPaymentRequestsRaw(requestParameters: GetAllPaymentRequestsRequest): Promise<runtime.ApiResponse<PaymentRequestListResponse>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.referenceId) {
+            queryParameters['reference_id'] = requestParameters.referenceId;
+        }
+
+        if (requestParameters.id) {
+            queryParameters['id'] = requestParameters.id;
+        }
+
+        if (requestParameters.customerId) {
+            queryParameters['customer_id'] = requestParameters.customerId;
+        }
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.beforeId !== undefined) {
+            queryParameters['before_id'] = requestParameters.beforeId;
+        }
+
+        if (requestParameters.afterId !== undefined) {
+            queryParameters['after_id'] = requestParameters.afterId;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/payment_requests`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentRequestListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Get all payment requests by filter
+     * Get all payment requests by filter
+     */
+    async getAllPaymentRequests(requestParameters: GetAllPaymentRequestsRequest = {}): Promise<PaymentRequestListResponse> {
+        const response = await this.getAllPaymentRequestsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Payment Request Capture
+     * Payment Request Capture
+     */
+    private async capturePaymentRequestRaw(requestParameters: CapturePaymentRequestRequest): Promise<runtime.ApiResponse<Capture>> {
+        if (requestParameters.paymentRequestId === null || requestParameters.paymentRequestId === undefined) {
+            throw new runtime.RequiredError('paymentRequestId','Required parameter requestParameters.paymentRequestId was null or undefined when calling capturePaymentRequest.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/payment_requests/{paymentRequestId}/captures`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CaptureParametersToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CaptureFromJSON(jsonValue));
+    }
+
+    /**
+     * Payment Request Capture
+     * Payment Request Capture
+     */
+    async capturePaymentRequest(requestParameters: CapturePaymentRequestRequest): Promise<Capture> {
+        const response = await this.capturePaymentRequestRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Payment Request Authorize
+     * Payment Request Authorize
+     */
+    private async authorizePaymentRequestRaw(requestParameters: AuthorizePaymentRequestRequest): Promise<runtime.ApiResponse<PaymentRequest>> {
+        if (requestParameters.paymentRequestId === null || requestParameters.paymentRequestId === undefined) {
+            throw new runtime.RequiredError('paymentRequestId','Required parameter requestParameters.paymentRequestId was null or undefined when calling authorizePaymentRequest.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        const response = await this.request({
+            path: `/payment_requests/{paymentRequestId}/auth`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PaymentRequestAuthParametersToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentRequestFromJSON(jsonValue));
+    }
+
+    /**
+     * Payment Request Authorize
+     * Payment Request Authorize
+     */
+    async authorizePaymentRequest(requestParameters: AuthorizePaymentRequestRequest): Promise<PaymentRequest> {
+        const response = await this.authorizePaymentRequestRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Payment Request Resend Auth
      * Payment Request Resend Auth
      */
@@ -358,8 +363,8 @@ export class PaymentRequestApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
         headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
 
-        if (requestParameters.idempotencyKey !== undefined && requestParameters.idempotencyKey !== null) {
-            headerParameters['idempotency-key'] = String(requestParameters.idempotencyKey);
+        if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
+            headerParameters['for-user-id'] = String(requestParameters.forUserId);
         }
 
         const response = await this.request({
