@@ -15,7 +15,18 @@ const xenditRefundClient = new RefundClient({secretKey: YOUR_SECRET_KEY})
 // or
 // xenditRefundClient.
 ```
-## 
+
+All URIs are relative to https://api.xendit.co, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**createRefund()**](Refund.md#createrefund-function) | **POST** /refunds |  |
+| [**getRefund()**](Refund.md#getrefund-function) | **GET** /refunds/{refundID} |  |
+| [**getAllRefunds()**](Refund.md#getallrefunds-function) | **GET** /refunds |  |
+| [**cancelRefund()**](Refund.md#cancelrefund-function) | **POST** /refunds/{refundID}/cancel |  |
+
+
+## `createRefund()` Function
 
 
 ### Function Signature
@@ -23,23 +34,22 @@ const xenditRefundClient = new RefundClient({secretKey: YOUR_SECRET_KEY})
 |--------------------|:-------------:|
 | Function Name | `createRefund` |
 | Request Parameters  |  [CreateRefundRequest](#request-parameters--CreateRefundRequest)	 |
-| Return Type  |  [Refund](refund/models/Refund.md) |
+| Return Type  |  [Refund](refund/Refund.md) |
 
-### Request Parameters — `CreateRefundRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  idempotencyKey|  | string |
-|  forUserId|  | string |
-|  data|  | [CreateRefund](refund/models/CreateRefund.md) |
+### Request Parameters - CreateRefundRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **idempotencyKey** | **string** |  |  |
+| **forUserId** | **string** |  |  |
+| **data** | [**CreateRefund**](refund/CreateRefund.md) |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Refund } from 'xendit-node/refund/models'
 
 const response: Refund = await xenditRefundClient.createRefund({ })
 ```
-## 
+## `getRefund()` Function
 
 
 ### Function Signature
@@ -47,17 +57,16 @@ const response: Refund = await xenditRefundClient.createRefund({ })
 |--------------------|:-------------:|
 | Function Name | `getRefund` |
 | Request Parameters  |  [GetRefundRequest](#request-parameters--GetRefundRequest)	 |
-| Return Type  |  [Refund](refund/models/Refund.md) |
+| Return Type  |  [Refund](refund/Refund.md) |
 
-### Request Parameters — `GetRefundRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  refundID| ✅ | string |
-|  idempotencyKey|  | string |
-|  forUserId|  | string |
+### Request Parameters - GetRefundRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **refundID** | **string** | ☑️ |  |
+| **idempotencyKey** | **string** |  |  |
+| **forUserId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Refund } from 'xendit-node/refund/models'
 
@@ -65,7 +74,7 @@ const response: Refund = await xenditRefundClient.getRefund({
     refundID: "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822",
 })
 ```
-## 
+## `getAllRefunds()` Function
 
 
 ### Function Signature
@@ -73,28 +82,27 @@ const response: Refund = await xenditRefundClient.getRefund({
 |--------------------|:-------------:|
 | Function Name | `getAllRefunds` |
 | Request Parameters  |  [GetAllRefundsRequest](#request-parameters--GetAllRefundsRequest)	 |
-| Return Type  |  [RefundList](refund/models/RefundList.md) |
+| Return Type  |  [RefundList](refund/RefundList.md) |
 
-### Request Parameters — `GetAllRefundsRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  forUserId|  | string |
-|  paymentRequestId|  | string |
-|  invoiceId|  | string |
-|  paymentMethodType|  | string |
-|  channelCode|  | string |
-|  limit|  | number |
-|  afterId|  | string |
-|  beforeId|  | string |
+### Request Parameters - GetAllRefundsRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **forUserId** | **string** |  |  |
+| **paymentRequestId** | **string** |  |  |
+| **invoiceId** | **string** |  |  |
+| **paymentMethodType** | **string** |  |  |
+| **channelCode** | **string** |  |  |
+| **limit** | **number** |  |  |
+| **afterId** | **string** |  |  |
+| **beforeId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { RefundList } from 'xendit-node/refund/models'
 
 const response: RefundList = await xenditRefundClient.getAllRefunds({ })
 ```
-## 
+## `cancelRefund()` Function
 
 
 ### Function Signature
@@ -102,17 +110,16 @@ const response: RefundList = await xenditRefundClient.getAllRefunds({ })
 |--------------------|:-------------:|
 | Function Name | `cancelRefund` |
 | Request Parameters  |  [CancelRefundRequest](#request-parameters--CancelRefundRequest)	 |
-| Return Type  |  [Refund](refund/models/Refund.md) |
+| Return Type  |  [Refund](refund/Refund.md) |
 
-### Request Parameters — `CancelRefundRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  refundID| ✅ | string |
-|  idempotencyKey|  | string |
-|  forUserId|  | string |
+### Request Parameters - CancelRefundRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **refundID** | **string** | ☑️ |  |
+| **idempotencyKey** | **string** |  |  |
+| **forUserId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Refund } from 'xendit-node/refund/models'
 
@@ -120,3 +127,5 @@ const response: Refund = await xenditRefundClient.cancelRefund({
     refundID: "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822",
 })
 ```
+
+[[Back to README]](../README.md)

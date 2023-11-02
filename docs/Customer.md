@@ -15,7 +15,18 @@ const xenditCustomerClient = new CustomerClient({secretKey: YOUR_SECRET_KEY})
 // or
 // xenditCustomerClient.
 ```
-## Create Customer
+
+All URIs are relative to https://api.xendit.co, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**createCustomer()**](Customer.md#createcustomer-function) | **POST** /customers | Create Customer |
+| [**getCustomer()**](Customer.md#getcustomer-function) | **GET** /customers/{id} | Get Customer By ID |
+| [**getCustomerByReferenceID()**](Customer.md#getcustomerbyreferenceid-function) | **GET** /customers | GET customers by reference id |
+| [**updateCustomer()**](Customer.md#updatecustomer-function) | **PATCH** /customers/{id} | Update End Customer Resource |
+
+
+## `createCustomer()` Function
 
 
 ### Function Signature
@@ -23,23 +34,22 @@ const xenditCustomerClient = new CustomerClient({secretKey: YOUR_SECRET_KEY})
 |--------------------|:-------------:|
 | Function Name | `createCustomer` |
 | Request Parameters  |  [CreateCustomerRequest](#request-parameters--CreateCustomerRequest)	 |
-| Return Type  |  [Customer](customer/models/Customer.md) |
+| Return Type  |  [Customer](customer/Customer.md) |
 
-### Request Parameters — `CreateCustomerRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  idempotencyKey|  | string |
-|  forUserId|  | string |
-|  data|  | [CustomerRequest](customer/models/CustomerRequest.md) |
+### Request Parameters - CreateCustomerRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **idempotencyKey** | **string** |  |  |
+| **forUserId** | **string** |  |  |
+| **data** | [**CustomerRequest**](customer/CustomerRequest.md) |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Customer } from 'xendit-node/customer/models'
 
 const response: Customer = await xenditCustomerClient.createCustomer({ })
 ```
-## Get Customer By ID
+## `getCustomer()` Function
 
 
 ### Function Signature
@@ -47,16 +57,15 @@ const response: Customer = await xenditCustomerClient.createCustomer({ })
 |--------------------|:-------------:|
 | Function Name | `getCustomer` |
 | Request Parameters  |  [GetCustomerRequest](#request-parameters--GetCustomerRequest)	 |
-| Return Type  |  [Customer](customer/models/Customer.md) |
+| Return Type  |  [Customer](customer/Customer.md) |
 
-### Request Parameters — `GetCustomerRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  id| ✅ | string |
-|  forUserId|  | string |
+### Request Parameters - GetCustomerRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **id** | **string** | ☑️ |  |
+| **forUserId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Customer } from 'xendit-node/customer/models'
 
@@ -64,7 +73,7 @@ const response: Customer = await xenditCustomerClient.getCustomer({
     id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
 })
 ```
-## GET customers by reference id
+## `getCustomerByReferenceID()` Function
 
 
 ### Function Signature
@@ -72,16 +81,15 @@ const response: Customer = await xenditCustomerClient.getCustomer({
 |--------------------|:-------------:|
 | Function Name | `getCustomerByReferenceID` |
 | Request Parameters  |  [GetCustomerByReferenceIDRequest](#request-parameters--GetCustomerByReferenceIDRequest)	 |
-| Return Type  |  [GetCustomerByReferenceID200Response](customer/models/GetCustomerByReferenceID200Response.md) |
+| Return Type  |  [GetCustomerByReferenceID200Response](customer/GetCustomerByReferenceID200Response.md) |
 
-### Request Parameters — `GetCustomerByReferenceIDRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  referenceId| ✅ | string |
-|  forUserId|  | string |
+### Request Parameters - GetCustomerByReferenceIDRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **referenceId** | **string** | ☑️ |  |
+| **forUserId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { GetCustomerByReferenceID200Response } from 'xendit-node/customer/models'
 
@@ -89,7 +97,7 @@ const response: GetCustomerByReferenceID200Response = await xenditCustomerClient
     referenceId: "referenceId_example",
 })
 ```
-## Update End Customer Resource
+## `updateCustomer()` Function
 
 
 ### Function Signature
@@ -97,17 +105,16 @@ const response: GetCustomerByReferenceID200Response = await xenditCustomerClient
 |--------------------|:-------------:|
 | Function Name | `updateCustomer` |
 | Request Parameters  |  [UpdateCustomerRequest](#request-parameters--UpdateCustomerRequest)	 |
-| Return Type  |  [Customer](customer/models/Customer.md) |
+| Return Type  |  [Customer](customer/Customer.md) |
 
-### Request Parameters — `UpdateCustomerRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  id| ✅ | string |
-|  forUserId|  | string |
-|  data|  | [PatchCustomer](customer/models/PatchCustomer.md) |
+### Request Parameters - UpdateCustomerRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **id** | **string** | ☑️ |  |
+| **forUserId** | **string** |  |  |
+| **data** | [**PatchCustomer**](customer/PatchCustomer.md) |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Customer } from 'xendit-node/customer/models'
 
@@ -115,3 +122,5 @@ const response: Customer = await xenditCustomerClient.updateCustomer({
     id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
 })
 ```
+
+[[Back to README]](../README.md)

@@ -15,7 +15,16 @@ const xenditTransactionClient = new TransactionClient({secretKey: YOUR_SECRET_KE
 // or
 // xenditTransactionClient.
 ```
-## Get a transaction based on its id
+
+All URIs are relative to https://api.xendit.co, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getTransactionByID()**](Transaction.md#gettransactionbyid-function) | **GET** /transactions/{id} | Get a transaction based on its id |
+| [**getAllTransactions()**](Transaction.md#getalltransactions-function) | **GET** /transactions | Get a list of transactions |
+
+
+## `getTransactionByID()` Function
 
 
 ### Function Signature
@@ -23,16 +32,15 @@ const xenditTransactionClient = new TransactionClient({secretKey: YOUR_SECRET_KE
 |--------------------|:-------------:|
 | Function Name | `getTransactionByID` |
 | Request Parameters  |  [GetTransactionByIDRequest](#request-parameters--GetTransactionByIDRequest)	 |
-| Return Type  |  [TransactionResponse](balance_and_transaction/models/TransactionResponse.md) |
+| Return Type  |  [TransactionResponse](balance_and_transaction/TransactionResponse.md) |
 
-### Request Parameters — `GetTransactionByIDRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  id| ✅ | string |
-|  forUserId|  | string |
+### Request Parameters - GetTransactionByIDRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **id** | **string** | ☑️ |  |
+| **forUserId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { TransactionResponse } from 'xendit-node/balance_and_transaction/models'
 
@@ -40,7 +48,7 @@ const response: TransactionResponse = await xenditTransactionClient.getTransacti
     id: "id_example",
 })
 ```
-## Get a list of transactions
+## `getAllTransactions()` Function
 
 
 ### Function Signature
@@ -48,30 +56,31 @@ const response: TransactionResponse = await xenditTransactionClient.getTransacti
 |--------------------|:-------------:|
 | Function Name | `getAllTransactions` |
 | Request Parameters  |  [GetAllTransactionsRequest](#request-parameters--GetAllTransactionsRequest)	 |
-| Return Type  |  [TransactionsResponse](balance_and_transaction/models/TransactionsResponse.md) |
+| Return Type  |  [TransactionsResponse](balance_and_transaction/TransactionsResponse.md) |
 
-### Request Parameters — `GetAllTransactionsRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  forUserId|  | string |
-|  types|  | [[]TransactionTypes](balance_and_transaction/models/TransactionTypes.md) |
-|  statuses|  | [[]TransactionStatuses](balance_and_transaction/models/TransactionStatuses.md) |
-|  channelCategories|  | [[]ChannelsCategories](balance_and_transaction/models/ChannelsCategories.md) |
-|  referenceId|  | string |
-|  productId|  | string |
-|  accountIdentifier|  | string |
-|  amount|  | number |
-|  currency|  | [Currency](balance_and_transaction/models/Currency.md) |
-|  created|  | [DateRangeFilter](balance_and_transaction/models/DateRangeFilter.md) |
-|  updated|  | [DateRangeFilter](balance_and_transaction/models/DateRangeFilter.md) |
-|  limit|  | number |
-|  afterId|  | string |
-|  beforeId|  | string |
+### Request Parameters - GetAllTransactionsRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **forUserId** | **string** |  |  |
+| **types** | [**TransactionTypes[]**](balance_and_transaction/TransactionTypes.md) |  |  |
+| **statuses** | [**TransactionStatuses[]**](balance_and_transaction/TransactionStatuses.md) |  |  |
+| **channelCategories** | [**ChannelsCategories[]**](balance_and_transaction/ChannelsCategories.md) |  |  |
+| **referenceId** | **string** |  |  |
+| **productId** | **string** |  |  |
+| **accountIdentifier** | **string** |  |  |
+| **amount** | **number** |  |  |
+| **currency** | [**Currency**](balance_and_transaction/Currency.md) |  |  |
+| **created** | [**DateRangeFilter**](balance_and_transaction/DateRangeFilter.md) |  |  |
+| **updated** | [**DateRangeFilter**](balance_and_transaction/DateRangeFilter.md) |  |  |
+| **limit** | **number** |  |  |
+| **afterId** | **string** |  |  |
+| **beforeId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { TransactionsResponse } from 'xendit-node/balance_and_transaction/models'
 
 const response: TransactionsResponse = await xenditTransactionClient.getAllTransactions({ })
 ```
+
+[[Back to README]](../README.md)
