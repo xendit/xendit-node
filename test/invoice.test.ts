@@ -8,12 +8,12 @@ let sampleDatum : string
 
 describe("Invoice API", () => {
     beforeAll(() => {
-        dotenv.config({ path: '.env.test' })
+        dotenv.config({ path: './test/.env.test' })
         instanceAPI = new Xendit({
             secretKey: process.env.DEVELOPMENT_API_KEY,
             xenditURL: "https://api.xendit.co"
         }).Invoice
-    })
+    });
 
     it("createInvoice", async () => {
         try {
