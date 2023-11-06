@@ -17,6 +17,7 @@ export const PaymentRequestCurrency = {
     Vnd: 'VND',
     Thb: 'THB',
     Myr: 'MYR',
+    Usd: 'USD',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestCurrency = typeof PaymentRequestCurrency[keyof typeof PaymentRequestCurrency];

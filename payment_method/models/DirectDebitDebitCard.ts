@@ -37,6 +37,12 @@ export interface DirectDebitDebitCard {
      * @memberof DirectDebitDebitCard
      */
     email?: string | null;
+    /**
+     * Account number of the customer
+     * @type {string}
+     * @memberof DirectDebitDebitCard
+     */
+    accountNumber?: string | null;
 }
 
 /**
@@ -62,6 +68,7 @@ export function DirectDebitDebitCardFromJSONTyped(json: any, ignoreDiscriminator
         'cardLastFour': !exists(json, 'card_last_four') ? undefined : json['card_last_four'],
         'cardExpiry': !exists(json, 'card_expiry') ? undefined : json['card_expiry'],
         'email': !exists(json, 'email') ? undefined : json['email'],
+        'accountNumber': !exists(json, 'account_number') ? undefined : json['account_number'],
     };
 }
 
@@ -78,6 +85,7 @@ export function DirectDebitDebitCardToJSON(value?: DirectDebitDebitCard | null):
         'card_last_four': value.cardLastFour,
         'card_expiry': value.cardExpiry,
         'email': value.email,
+        'account_number': value.accountNumber,
     };
 }
 

@@ -17,6 +17,7 @@ export const PaymentMethodCountry = {
     Vn: 'VN',
     Th: 'TH',
     My: 'MY',
+    Us: 'US',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentMethodCountry = typeof PaymentMethodCountry[keyof typeof PaymentMethodCountry];

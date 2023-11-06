@@ -27,6 +27,7 @@ export const VirtualAccountChannelCode = {
     Woori: 'WOORI',
     Msb: 'MSB',
     StandardChartered: 'STANDARD_CHARTERED',
+    Ambank: 'AMBANK',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type VirtualAccountChannelCode = typeof VirtualAccountChannelCode[keyof typeof VirtualAccountChannelCode];

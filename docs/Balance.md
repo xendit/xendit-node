@@ -15,7 +15,15 @@ const xenditBalanceClient = new BalanceClient({secretKey: YOUR_SECRET_KEY})
 // or
 // xenditBalanceClient.
 ```
-## Retrieves balances for a business, default to CASH type
+
+All URIs are relative to https://api.xendit.co, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getBalance()**](Balance.md#getbalance-function) | **GET** /balance | Retrieves balances for a business, default to CASH type |
+
+
+## `getBalance()` Function
 
 
 ### Function Signature
@@ -23,19 +31,20 @@ const xenditBalanceClient = new BalanceClient({secretKey: YOUR_SECRET_KEY})
 |--------------------|:-------------:|
 | Function Name | `getBalance` |
 | Request Parameters  |  [GetBalanceRequest](#request-parameters--GetBalanceRequest)	 |
-| Return Type  |  [Balance](balance_and_transaction/models/Balance.md) |
+| Return Type  |  [Balance](balance_and_transaction/Balance.md) |
 
-### Request Parameters — `GetBalanceRequest`
-| Field Name |  Required  |   Type 	   |
-|-----------|:----------:|:----------:|
-|  accountType|  | &#39;CASH&#39; | &#39;HOLDING&#39; | &#39;TAX&#39; |
-|  currency|  | string |
-|  forUserId|  | string |
+### Request Parameters - GetBalanceRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **accountType** | [CASH, HOLDING, TAX] |  | [&#39;CASH&#39;] |
+| **currency** | **string** |  |  |
+| **forUserId** | **string** |  |  |
 
-### Usage Examples
-#### Minimum API Usage
+### Usage Example
 ```typescript
 import { Balance } from 'xendit-node/balance_and_transaction/models'
 
 const response: Balance = await xenditBalanceClient.getBalance({ })
 ```
+
+[[Back to README]](../README.md)

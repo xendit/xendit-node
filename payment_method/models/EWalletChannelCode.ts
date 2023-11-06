@@ -32,6 +32,7 @@ export const EWalletChannelCode = {
     Linepay: 'LINEPAY',
     Truemoney: 'TRUEMONEY',
     Alipay: 'ALIPAY',
+    Touchandgo: 'TOUCHANDGO',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type EWalletChannelCode = typeof EWalletChannelCode[keyof typeof EWalletChannelCode];

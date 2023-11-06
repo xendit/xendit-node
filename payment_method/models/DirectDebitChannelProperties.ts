@@ -61,6 +61,12 @@ export interface DirectDebitChannelProperties {
      * @memberof DirectDebitChannelProperties
      */
     requireAuth?: boolean | null;
+    /**
+     * Account number of the customer
+     * @type {string}
+     * @memberof DirectDebitChannelProperties
+     */
+    accountNumber?: string | null;
 }
 
 /**
@@ -90,6 +96,7 @@ export function DirectDebitChannelPropertiesFromJSONTyped(json: any, ignoreDiscr
         'email': !exists(json, 'email') ? undefined : json['email'],
         'identityDocumentNumber': !exists(json, 'identity_document_number') ? undefined : json['identity_document_number'],
         'requireAuth': !exists(json, 'require_auth') ? undefined : json['require_auth'],
+        'accountNumber': !exists(json, 'account_number') ? undefined : json['account_number'],
     };
 }
 
@@ -110,6 +117,7 @@ export function DirectDebitChannelPropertiesToJSON(value?: DirectDebitChannelPro
         'email': value.email,
         'identity_document_number': value.identityDocumentNumber,
         'require_auth': value.requireAuth,
+        'account_number': value.accountNumber,
     };
 }
 

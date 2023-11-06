@@ -5,7 +5,7 @@
 The official Xendit Node SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Node.
 
-* Package version: 3.4.0
+* Package version: 3.6.0
 
 # Getting Started
 
@@ -53,8 +53,8 @@ Find detailed API information and examples for each of our product’s by clicki
 * [PaymentRequest](docs/PaymentRequest.md)
 * [PaymentMethod](docs/PaymentMethod.md)
 * [Refund](docs/Refund.md)
-* [Transaction](docs/Transaction.md)
 * [Balance](docs/Balance.md)
+* [Transaction](docs/Transaction.md)
 * [Customer](docs/Customer.md)
 * [Payout](docs/Payout.md)
 
