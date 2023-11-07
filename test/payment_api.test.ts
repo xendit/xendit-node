@@ -13,7 +13,6 @@ const testResponseData = {
     directDebit: {
         createdPaymentMethodId: "",
         createdPaymentRequestId: "",
-        createdCustomerId: "",
     },
     eWallet: {
         createdPaymentMethodId: "",
