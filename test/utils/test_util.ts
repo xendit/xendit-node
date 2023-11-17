@@ -1,5 +1,5 @@
 export class TestUtil {
-    public static generateUniqueIdForBusiness(busines_id: string) {
-        return `${busines_id}-${Date.now().toString()}`
+    public static generateUniqueIdForBusiness(business_id: string) {
+        return `${business_id}-${Date.now().toString()}`
     }
 }
