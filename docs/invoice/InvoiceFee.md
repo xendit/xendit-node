@@ -6,8 +6,8 @@ An object representing internal details for a fee associated with an invoice.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **type** | string | ☑️ | The type of fee. | | |
-**value** | number | ☑️ | The value or amount of the fee. | | |
+| **type** |string | ☑️ | The type of fee. | | |
+| **value** |number | ☑️ | The value or amount of the fee. | | |
 
 
 

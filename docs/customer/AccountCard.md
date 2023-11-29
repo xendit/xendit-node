@@ -6,7 +6,7 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **tokenId** | string |  | The token id returned in tokenisation | | |
+| **tokenId** |string |  | The token id returned in tokenisation | | |
 
 
 

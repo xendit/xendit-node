@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **referenceId** | string |  |  | | |
-**captureAmount** | number | ☑️ |  | | |
+| **referenceId** |string |  |  | | |
+| **captureAmount** |number | ☑️ |  | | |
 
 
 

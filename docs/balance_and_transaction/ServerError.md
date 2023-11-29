@@ -6,9 +6,9 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **statusCode** | number | ☑️ |  | | |
-**error** | string | ☑️ |  | | |
-**message** | string | ☑️ |  | | |
+| **statusCode** |number | ☑️ |  | | |
+| **error** |string | ☑️ |  | | |
+| **message** |string | ☑️ |  | | |
 
 
 

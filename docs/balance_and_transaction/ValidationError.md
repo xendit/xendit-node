@@ -6,10 +6,10 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **statusCode** | number | ☑️ |  | | |
-**error** | string | ☑️ |  | | |
-**message** | string | ☑️ |  | | |
-**validation** | object |  |  | | |
+| **statusCode** |number | ☑️ |  | | |
+| **error** |string | ☑️ |  | | |
+| **message** |string | ☑️ |  | | |
+| **validation** |object |  |  | | |
 
 
 

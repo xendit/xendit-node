@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **maskedBankAccountNumber** | string |  |  | | |
-**bankAccountHash** | string |  |  | | |
+| **maskedBankAccountNumber** |string |  |  | | |
+| **bankAccountHash** |string |  |  | | |
 
 
 

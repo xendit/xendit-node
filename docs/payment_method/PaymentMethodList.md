@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **data** | [[]PaymentMethod](PaymentMethod.md) | ☑️ |  | | |
-**hasMore** | boolean |  |  | | |
+| **data** |[PaymentMethod[]](PaymentMethod.md) | ☑️ |  | | |
+| **hasMore** |boolean |  |  | | |
 
 
 

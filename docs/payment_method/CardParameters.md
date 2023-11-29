@@ -6,9 +6,9 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **currency** | string | ☑️ |  | | |
-**channelProperties** | [CardChannelProperties](CardChannelProperties.md) |  |  | | |
-**cardInformation** | [CardParametersCardInformation](CardParametersCardInformation.md) |  |  | | |
+| **currency** |string | ☑️ |  | | |
+| **channelProperties** |[CardChannelProperties](CardChannelProperties.md) |  |  | | |
+| **cardInformation** |[CardParametersCardInformation](CardParametersCardInformation.md) |  |  | | |
 
 
 

@@ -6,8 +6,8 @@ An object representing paylater details for invoices.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **paylaterType** | [PaylaterType](PaylaterType.md) | ☑️ |  | | |
-**shouldExclude** | boolean |  | Indicates whether this paylater option should be excluded. | | |
+| **paylaterType** |[PaylaterType](PaylaterType.md) | ☑️ |  | | |
+| **shouldExclude** |boolean |  | Indicates whether this paylater option should be excluded. | | |
 
 
 

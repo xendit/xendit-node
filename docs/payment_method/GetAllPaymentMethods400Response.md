@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **errorCode** | string |  |  | | |
-**message** | string |  |  | | |
+| **errorCode** |string |  |  | | |
+| **message** |string |  |  | | |
 
 
 

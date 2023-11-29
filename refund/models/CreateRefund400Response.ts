@@ -38,7 +38,8 @@ export const CreateRefund400ResponseErrorCodeEnum = {
     MaximumRefundAmountReached: 'MAXIMUM_REFUND_AMOUNT_REACHED',
     PartialRefundNotSupported: 'PARTIAL_REFUND_NOT_SUPPORTED',
     RefundNotSupported: 'REFUND_NOT_SUPPORTED',
-    TransactionNotFound: 'TRANSACTION_NOT_FOUND'
+    TransactionNotFound: 'TRANSACTION_NOT_FOUND',
+    RefundInProgress: 'REFUND_IN_PROGRESS'
 } as const;
 export type CreateRefund400ResponseErrorCodeEnum = typeof CreateRefund400ResponseErrorCodeEnum[keyof typeof CreateRefund400ResponseErrorCodeEnum];
 

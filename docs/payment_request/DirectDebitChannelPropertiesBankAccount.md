@@ -6,10 +6,10 @@ Direct Debit Bank Account Channel Properties
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **successReturnUrl** | string |  |  | | |
-**failureReturnUrl** | string |  |  | | |
-**mobileNumber** | string |  |  | | |
-**identityDocumentNumber** | string |  |  | | |
+| **successReturnUrl** |string |  |  | | |
+| **failureReturnUrl** |string |  |  | | |
+| **mobileNumber** |string |  |  | | |
+| **identityDocumentNumber** |string |  |  | | |
 
 
 

@@ -6,7 +6,7 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **account** | [EWalletAccount](EWalletAccount.md) |  |  | | |
+| **account** |[EWalletAccount](EWalletAccount.md) |  |  | | |
 
 
 

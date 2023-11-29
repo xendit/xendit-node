@@ -6,8 +6,8 @@ QR Code Channel Properties
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **qrString** | string |  |  | | |
-**expiresAt** | Date |  |  | | |
+| **qrString** |string |  |  | | |
+| **expiresAt** |Date |  |  | | |
 
 
 

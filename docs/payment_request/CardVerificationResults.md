@@ -6,9 +6,9 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **threeDSecure** | [CardVerificationResultsThreeDSecure](CardVerificationResultsThreeDSecure.md) |  |  | | |
-**cvvResult** | string |  |  | | |
-**addressVerificationResult** | string |  |  | | |
+| **threeDSecure** |[CardVerificationResultsThreeDSecure](CardVerificationResultsThreeDSecure.md) |  |  | | |
+| **cvvResult** |string |  |  | | |
+| **addressVerificationResult** |string |  |  | | |
 
 
 

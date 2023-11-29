@@ -6,7 +6,7 @@ An object representing QR code details for invoices.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **qrCodeType** | [QrCodeType](QrCodeType.md) | ☑️ |  | | |
+| **qrCodeType** |[QrCodeType](QrCodeType.md) | ☑️ |  | | |
 
 
 

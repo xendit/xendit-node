@@ -46,7 +46,7 @@ import { TransactionResponse } from 'xendit-node/balance_and_transaction/models'
 
 const response: TransactionResponse = await xenditTransactionClient.getTransactionByID({ 
     id: "id_example",
-})
+)
 ```
 ## `getAllTransactions()` Function
 
@@ -80,7 +80,8 @@ const response: TransactionResponse = await xenditTransactionClient.getTransacti
 ```typescript
 import { TransactionsResponse } from 'xendit-node/balance_and_transaction/models'
 
-const response: TransactionsResponse = await xenditTransactionClient.getAllTransactions({ })
+const response: TransactionsResponse = await xenditTransactionClient.getAllTransactions({ )
 ```
+
 
 [[Back to README]](../README.md)

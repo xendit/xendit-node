@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **data** | [[]PaymentRequest](PaymentRequest.md) | ☑️ |  | | |
-**hasMore** | boolean | ☑️ |  | | |
+| **data** |[PaymentRequest[]](PaymentRequest.md) | ☑️ |  | | |
+| **hasMore** |boolean | ☑️ |  | | |
 
 
 

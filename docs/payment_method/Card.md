@@ -6,10 +6,10 @@ Card Payment Method Details
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **currency** | string | ☑️ |  | | |
-**channelProperties** | [CardChannelProperties](CardChannelProperties.md) | ☑️ |  | | |
-**cardInformation** | [TokenizedCardInformation](TokenizedCardInformation.md) |  |  | | |
-**cardVerificationResults** | [CardVerificationResults](CardVerificationResults.md) |  |  | | |
+| **currency** |string | ☑️ |  | | |
+| **channelProperties** |[CardChannelProperties](CardChannelProperties.md) | ☑️ |  | | |
+| **cardInformation** |[TokenizedCardInformation](TokenizedCardInformation.md) |  |  | | |
+| **cardVerificationResults** |[CardVerificationResults](CardVerificationResults.md) |  |  | | |
 
 
 

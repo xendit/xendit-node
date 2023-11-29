@@ -6,9 +6,9 @@ Channel information for digital destinations (banks, e-wallets)
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **accountHolderName** | string |  | Registered account name | | |
-**accountNumber** | string | ☑️ | Registered account number | | |
-**accountType** | [ChannelAccountType](ChannelAccountType.md) |  |  | | |
+| **accountHolderName** |string |  | Registered account name | | |
+| **accountNumber** |string | ☑️ | Registered account number | | |
+| **accountType** |[ChannelAccountType](ChannelAccountType.md) |  |  | | |
 
 
 

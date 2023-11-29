@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **amount** | number |  |  | | |
-**channelProperties** | [OverTheCounterChannelPropertiesUpdate](OverTheCounterChannelPropertiesUpdate.md) |  |  | | |
+| **amount** |number |  |  | | |
+| **channelProperties** |[OverTheCounterChannelPropertiesUpdate](OverTheCounterChannelPropertiesUpdate.md) |  |  | | |
 
 
 

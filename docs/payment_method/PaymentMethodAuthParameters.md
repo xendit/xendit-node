@@ -6,7 +6,7 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **authCode** | string | ☑️ |  | | |
+| **authCode** |string | ☑️ |  | | |
 
 
 

@@ -6,9 +6,9 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **errorCode** | string | ☑️ |  | | |
-**message** | any | ☑️ |  | | |
-**errors** | []object |  |  | | |
+| **errorCode** |string | ☑️ |  | | |
+| **message** |any | ☑️ |  | | |
+| **errors** |object[] |  |  | | |
 
 
 

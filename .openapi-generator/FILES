@@ -1,4 +1,4 @@
-.github/workflows/generate-release-tag.yml
+.eslintrc.json
 .gitignore
 .npmignore
 README.md
@@ -29,10 +29,13 @@ docs/payment_request/EWalletChannelCode.md
 docs/payment_request/EWalletChannelProperties.md
 docs/payment_request/EWalletParameters.md
 docs/payment_request/Error.md
+docs/payment_request/InvoicePartnerMetadata.md
 docs/payment_request/OverTheCounter.md
 docs/payment_request/OverTheCounterChannelCode.md
 docs/payment_request/OverTheCounterChannelProperties.md
 docs/payment_request/OverTheCounterParameters.md
+docs/payment_request/PaymentCallback.md
+docs/payment_request/PaymentCallbackData.md
 docs/payment_request/PaymentMethod.md
 docs/payment_request/PaymentMethodParameters.md
 docs/payment_request/PaymentMethodReusability.md
@@ -97,11 +100,14 @@ payment_request/models/EWalletAllOf.ts
 payment_request/models/EWalletChannelCode.ts
 payment_request/models/EWalletChannelProperties.ts
 payment_request/models/EWalletParameters.ts
+payment_request/models/InvoicePartnerMetadata.ts
 payment_request/models/ModelError.ts
 payment_request/models/OverTheCounter.ts
 payment_request/models/OverTheCounterChannelCode.ts
 payment_request/models/OverTheCounterChannelProperties.ts
 payment_request/models/OverTheCounterParameters.ts
+payment_request/models/PaymentCallback.ts
+payment_request/models/PaymentCallbackData.ts
 payment_request/models/PaymentMethod.ts
 payment_request/models/PaymentMethodParameters.ts
 payment_request/models/PaymentMethodReusability.ts

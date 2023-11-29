@@ -83,7 +83,7 @@ import { Invoice } from 'xendit-node/invoice/models'
 
 const response: Invoice = await xenditInvoiceClient.getInvoiceById({ 
     invoiceId: "62efe4c33e45294d63f585f2",
-})
+)
 ```
 ## `getInvoices()` Function
 
@@ -93,7 +93,7 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 |--------------------|:-------------:|
 | Function Name | `getInvoices` |
 | Request Parameters  |  [GetInvoicesRequest](#request-parameters--GetInvoicesRequest)	 |
-| Return Type  |  [[]Invoice](invoice/Invoice.md) |
+| Return Type  |  [Invoice[]](invoice/Invoice.md) |
 
 ### Request Parameters - GetInvoicesRequest
 | Field Name |   Type 	 |  Required  | Default |
@@ -118,7 +118,7 @@ const response: Invoice = await xenditInvoiceClient.getInvoiceById({
 ```typescript
 import { Invoice } from 'xendit-node/invoice/models'
 
-const response: Invoice[] = await xenditInvoiceClient.getInvoices({ })
+const response: Invoice[] = await xenditInvoiceClient.getInvoices({ )
 ```
 ## `expireInvoice()` Function
 
@@ -142,7 +142,46 @@ import { Invoice } from 'xendit-node/invoice/models'
 
 const response: Invoice = await xenditInvoiceClient.expireInvoice({ 
     invoiceId: "5f4708b7bd394b0400b96276",
-})
+)
+```
+
+## Callback Objects
+Use the following callback objects provided by Xendit to receive callbacks (also known as webhooks) that Xendit sends you on events, such as successful payments. Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+### InvoiceCallback Object
+>Invoice Callback Object
+
+Model Documentation: [InvoiceCallback](invoice/InvoiceCallback.md)
+#### Usage Example
+Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+```typescript
+import { InvoiceCallback } from 'xendit-node/invoice/models'
+
+const invoiceCallback = {
+  "amount" : 2000000,
+  "paymentDestination" : "TEST815",
+  "created" : "2020-01-13T02:32:49.827Z",
+  "externalId" : "testing-invoice",
+  "description" : "Invoice webhook test",
+  "userId" : "5848fdf860053555135587e7",
+  "merchantName" : "Xendit",
+  "paymentChannel" : "ALFAMART",
+  "paymentMethod" : "RETAIL_OUTLET",
+  "paidAt" : "2020-01-14T02:32:50.912Z",
+  "currency" : "IDR",
+  "id" : "593f4ed1c3d3bb7f39733d83",
+  "paidAmount" : 2000000,
+  "payerEmail" : "test@xendit.co",
+  "updated" : "2020-01-13T02:32:50.912Z",
+  "status" : "PAID"
+}
+```
+
+You may then use the callback object in your webhook or callback handler like so,
+```typescript
+function SimulateInvoiceCallback(invoiceCallback: InvoiceCallback) {
+    const { id } = invoiceCallback
+    // do things here with the callback
+}
 ```
 
 [[Back to README]](../README.md)

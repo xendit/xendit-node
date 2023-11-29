@@ -6,9 +6,9 @@ Supported amount ranges for payouts to this channel
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **minimum** | number | ☑️ | Lowest amount supported for a payout to this channel | | |
-**maximum** | number | ☑️ | Highest amount supported for a payout to this channel | | |
-**minimumIncrement** | number | ☑️ | Supported increments | | |
+| **minimum** |number | ☑️ | Lowest amount supported for a payout to this channel | | |
+| **maximum** |number | ☑️ | Highest amount supported for a payout to this channel | | |
+| **minimumIncrement** |number | ☑️ | Supported increments | | |
 
 
 

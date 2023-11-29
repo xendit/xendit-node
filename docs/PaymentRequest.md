@@ -189,7 +189,7 @@ import { PaymentRequest } from 'xendit-node/payment_request/models'
 
 const response: PaymentRequest = await xenditPaymentRequestClient.getPaymentRequestByID({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `getPaymentRequestCaptures()` Function
 
@@ -214,7 +214,7 @@ import { CaptureListResponse } from 'xendit-node/payment_request/models'
 
 const response: CaptureListResponse = await xenditPaymentRequestClient.getPaymentRequestCaptures({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `getAllPaymentRequests()` Function
 
@@ -241,7 +241,7 @@ const response: CaptureListResponse = await xenditPaymentRequestClient.getPaymen
 ```typescript
 import { PaymentRequestListResponse } from 'xendit-node/payment_request/models'
 
-const response: PaymentRequestListResponse = await xenditPaymentRequestClient.getAllPaymentRequests({ })
+const response: PaymentRequestListResponse = await xenditPaymentRequestClient.getAllPaymentRequests({ )
 ```
 ## `capturePaymentRequest()` Function
 
@@ -266,7 +266,7 @@ import { Capture } from 'xendit-node/payment_request/models'
 
 const response: Capture = await xenditPaymentRequestClient.capturePaymentRequest({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `authorizePaymentRequest()` Function
 
@@ -291,7 +291,7 @@ import { PaymentRequest } from 'xendit-node/payment_request/models'
 
 const response: PaymentRequest = await xenditPaymentRequestClient.authorizePaymentRequest({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `resendPaymentRequestAuth()` Function
 
@@ -315,7 +315,85 @@ import { PaymentRequest } from 'xendit-node/payment_request/models'
 
 const response: PaymentRequest = await xenditPaymentRequestClient.resendPaymentRequestAuth({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
+```
+
+## Callback Objects
+Use the following callback objects provided by Xendit to receive callbacks (also known as webhooks) that Xendit sends you on events, such as successful payments. Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+### PaymentCallback Object
+>Callback for successful or failed payments made via the Payments API
+
+Model Documentation: [PaymentCallback](payment_request/PaymentCallback.md)
+#### Usage Example
+Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+```typescript
+import { PaymentCallback } from 'xendit-node/payment_request/models'
+
+const paymentCallback = {
+  "apiVersion" : null,
+  "data" : {
+    "country" : "PH",
+    "amount" : 1000,
+    "metadata" : {
+      "sku" : "ABCDEFGH"
+    },
+    "failureCode" : null,
+    "created" : "2022-08-12T13:30:40.9209Z",
+    "paymentRequestId" : "pr-5b26cae1-545b-49e9-855e-f85128f3e705",
+    "description" : null,
+    "referenceId" : "25cfd0f9-baee-44ca-9a12-6debe03f3c22",
+    "paymentDetail" : null,
+    "channelProperties" : null,
+    "customerId" : "c832697e-a62d-46fa-a383-24930b155e81",
+    "paymentMethod" : {
+      "metadata" : {
+        "sku" : "ABCDEFGH"
+      },
+      "created" : "2022-08-12T13:30:26.579048Z",
+      "description" : null,
+      "reusability" : "MULTIPLE_USE",
+      "type" : "DIRECT_DEBIT",
+      "directDebit" : {
+        "bankAccount" : {
+          "maskedBankAccountNumber" : "XXXXXX1234",
+          "bankAccountHash" : "b4dfa99c9b60c77f2e3962b73c098945"
+        },
+        "channelProperties" : {
+          "failureReturnUrl" : "https://your-redirect-website.com/failure",
+          "successReturnUrl" : "https://your-redirect-website.com/success"
+        },
+        "debitCard" : null,
+        "type" : "BANK_ACCOUNT",
+        "channelCode" : "BPI"
+      },
+      "referenceId" : "620b9df4-fe69-4bfd-b9d4-5cba6861db8a",
+      "ewallet" : null,
+      "directBankTransfer" : null,
+      "qrCode" : null,
+      "overTheCounter" : null,
+      "id" : "pm-951b1ad9-1fbb-4724-a744-8956ab6ed17f",
+      "updated" : "2022-08-12T13:30:40.221525Z",
+      "virtualAccount" : null,
+      "card" : null,
+      "status" : "ACTIVE"
+    },
+    "currency" : "PHP",
+    "id" : "ddpy-3cd658ae-25b9-4659-aa36-596ae41a809f",
+    "updated" : "2022-08-12T13:30:58.729373Z",
+    "status" : "SUCCEEDED"
+  },
+  "created" : "2022-08-12T13:30:58.986Z",
+  "businessId" : "5f27a14a9bf05c73dd040bc8",
+  "event" : "payment.succeeded"
+}
+```
+
+You may then use the callback object in your webhook or callback handler like so,
+```typescript
+function SimulatePaymentCallback(paymentCallback: PaymentCallback) {
+    const { id } = paymentCallback
+    // do things here with the callback
+}
 ```
 
 [[Back to README]](../README.md)

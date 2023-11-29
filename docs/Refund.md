@@ -47,7 +47,7 @@ All URIs are relative to https://api.xendit.co, except if the operation defines 
 ```typescript
 import { Refund } from 'xendit-node/refund/models'
 
-const response: Refund = await xenditRefundClient.createRefund({ })
+const response: Refund = await xenditRefundClient.createRefund({ )
 ```
 ## `getRefund()` Function
 
@@ -72,7 +72,7 @@ import { Refund } from 'xendit-node/refund/models'
 
 const response: Refund = await xenditRefundClient.getRefund({ 
     refundID: "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `getAllRefunds()` Function
 
@@ -100,7 +100,7 @@ const response: Refund = await xenditRefundClient.getRefund({
 ```typescript
 import { RefundList } from 'xendit-node/refund/models'
 
-const response: RefundList = await xenditRefundClient.getAllRefunds({ })
+const response: RefundList = await xenditRefundClient.getAllRefunds({ )
 ```
 ## `cancelRefund()` Function
 
@@ -125,7 +125,50 @@ import { Refund } from 'xendit-node/refund/models'
 
 const response: Refund = await xenditRefundClient.cancelRefund({ 
     refundID: "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
+```
+
+## Callback Objects
+Use the following callback objects provided by Xendit to receive callbacks (also known as webhooks) that Xendit sends you on events, such as successful payments. Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+### RefundCallback Object
+>Callback for successful or failed Refunds made via the Payments API
+
+Model Documentation: [RefundCallback](refund/RefundCallback.md)
+#### Usage Example
+Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+```typescript
+import { RefundCallback } from 'xendit-node/refund/models'
+
+const refundCallback = {
+  "data" : {
+    "reason" : "CANCELLATION",
+    "amount" : 10000,
+    "metadata" : null,
+    "failureCode" : null,
+    "created" : "2020-08-30T09:12:33.001Z",
+    "referenceId" : "b2756a1e-e6cd-4352-9a68-0483aa2b6a2",
+    "paymentId" : "ddpy-3cd658ae-25b9-4659-aa36-596ae41a809f",
+    "refundFeeAmount" : null,
+    "invoiceId" : null,
+    "currency" : "PHP",
+    "id" : "rfd-6f4a377d-a201-437f-9119-f8b00cbbe857",
+    "paymentMethodType" : "DIRECT_DEBIT",
+    "updated" : "2020-08-30T09:12:33.001Z",
+    "channelCode" : "BPI",
+    "status" : "SUCCEEDED"
+  },
+  "created" : "2020-08-29T09:12:33.001Z",
+  "businessId" : "5f27a14a9bf05c73dd040bc8",
+  "event" : "refund.succeeded"
+}
+```
+
+You may then use the callback object in your webhook or callback handler like so,
+```typescript
+function SimulateRefundCallback(refundCallback: RefundCallback) {
+    const { id } = refundCallback
+    // do things here with the callback
+}
 ```
 
 [[Back to README]](../README.md)

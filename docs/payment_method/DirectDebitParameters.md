@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **channelCode** | [DirectDebitChannelCode](DirectDebitChannelCode.md) | ☑️ |  | | |
-**channelProperties** | [DirectDebitChannelProperties](DirectDebitChannelProperties.md) | ☑️ |  | | |
+| **channelCode** |[DirectDebitChannelCode](DirectDebitChannelCode.md) | ☑️ |  | | |
+| **channelProperties** |[DirectDebitChannelProperties](DirectDebitChannelProperties.md) | ☑️ |  | | |
 
 
 

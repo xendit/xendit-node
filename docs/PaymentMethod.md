@@ -133,7 +133,7 @@ import { PaymentMethod } from 'xendit-node/payment_method/models'
 
 const response: PaymentMethod = await xenditPaymentMethodClient.getPaymentMethodByID({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `getPaymentsByPaymentMethodId()` Function
 
@@ -165,11 +165,9 @@ const response: PaymentMethod = await xenditPaymentMethodClient.getPaymentMethod
 
 ### Usage Example
 ```typescript
-import {  } from 'xendit-node/payment_method/models'
-
 const response: object = await xenditPaymentMethodClient.getPaymentsByPaymentMethodId({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `patchPaymentMethod()` Function
 
@@ -194,7 +192,7 @@ import { PaymentMethod } from 'xendit-node/payment_method/models'
 
 const response: PaymentMethod = await xenditPaymentMethodClient.patchPaymentMethod({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `getAllPaymentMethods()` Function
 
@@ -224,7 +222,7 @@ const response: PaymentMethod = await xenditPaymentMethodClient.patchPaymentMeth
 ```typescript
 import { PaymentMethodList } from 'xendit-node/payment_method/models'
 
-const response: PaymentMethodList = await xenditPaymentMethodClient.getAllPaymentMethods({ })
+const response: PaymentMethodList = await xenditPaymentMethodClient.getAllPaymentMethods({ )
 ```
 ## `expirePaymentMethod()` Function
 
@@ -249,7 +247,7 @@ import { PaymentMethod } from 'xendit-node/payment_method/models'
 
 const response: PaymentMethod = await xenditPaymentMethodClient.expirePaymentMethod({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `authPaymentMethod()` Function
 
@@ -274,7 +272,7 @@ import { PaymentMethod } from 'xendit-node/payment_method/models'
 
 const response: PaymentMethod = await xenditPaymentMethodClient.authPaymentMethod({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+)
 ```
 ## `simulatePayment()` Function
 
@@ -294,11 +292,69 @@ const response: PaymentMethod = await xenditPaymentMethodClient.authPaymentMetho
 
 ### Usage Example
 ```typescript
-import {  } from 'xendit-node/payment_method/models'
-
-const response:  = await xenditPaymentMethodClient.simulatePayment({ 
+const response = await xenditPaymentMethodClient.simulatePayment({ 
     paymentMethodId: "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822",
-})
+ })
+```
+
+## Callback Objects
+Use the following callback objects provided by Xendit to receive callbacks (also known as webhooks) that Xendit sends you on events, such as successful payments. Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+### PaymentMethodCallback Object
+>Callback for active or expired E-Wallet or Direct Debit account linking, Virtual Accounts or QR strings
+
+Model Documentation: [PaymentMethodCallback](payment_method/PaymentMethodCallback.md)
+#### Usage Example
+Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+```typescript
+import { PaymentMethodCallback } from 'xendit-node/payment_method/models'
+
+const paymentMethodCallback = {
+  "data" : {
+    "country" : "PH",
+    "metadata" : null,
+    "failureCode" : null,
+    "created" : "2022-08-12T13:30:26.579048Z",
+    "description" : null,
+    "reusability" : "MULTIPLE_USE",
+    "type" : "DIRECT_DEBIT",
+    "billingInformation" : null,
+    "directDebit" : {
+      "bankAccount" : {
+        "maskedBankAccountNumber" : "XXXXXX1234",
+        "bankAccountHash" : "b4dfa99c9b60c77f2e3962b73c098945"
+      },
+      "channelProperties" : {
+        "failureReturnUrl" : "https://your-redirect-website.com/failure",
+        "successReturnUrl" : "https://your-redirect-website.com/success"
+      },
+      "debitCard" : null,
+      "type" : "BANK_ACCOUNT",
+      "channelCode" : "BPI"
+    },
+    "referenceId" : "620b9df4-fe69-4bfd-b9d4-5cba6861db8a",
+    "ewallet" : null,
+    "directBankTransfer" : null,
+    "qrCode" : null,
+    "overTheCounter" : null,
+    "customerId" : "e2878b4c-d57e-4a2c-922d-c0313c2800a3",
+    "id" : "pm-6ff0b6f2-f5de-457f-b08f-bc98fbae485a",
+    "updated" : "2022-08-12T13:30:58.908220358Z",
+    "virtualAccount" : null,
+    "card" : null,
+    "status" : "ACTIVE"
+  },
+  "created" : "2022-08-12T13:30:59.074277334Z",
+  "businessId" : "5f27a14a9bf05c73dd040bc8",
+  "event" : "payment_method.activated"
+}
+```
+
+You may then use the callback object in your webhook or callback handler like so,
+```typescript
+function SimulatePaymentMethodCallback(paymentMethodCallback: PaymentMethodCallback) {
+    const { id } = paymentMethodCallback
+    // do things here with the callback
+}
 ```
 
 [[Back to README]](../README.md)

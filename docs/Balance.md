@@ -44,7 +44,8 @@ All URIs are relative to https://api.xendit.co, except if the operation defines 
 ```typescript
 import { Balance } from 'xendit-node/balance_and_transaction/models'
 
-const response: Balance = await xenditBalanceClient.getBalance({ })
+const response: Balance = await xenditBalanceClient.getBalance({ )
 ```
+
 
 [[Back to README]](../README.md)

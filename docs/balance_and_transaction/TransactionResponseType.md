@@ -6,7 +6,7 @@ The type of the transactions.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| 
+
 
 
 [[Back to README]](../../README.md)

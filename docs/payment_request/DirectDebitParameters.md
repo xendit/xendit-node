@@ -6,9 +6,9 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **channelCode** | [DirectDebitChannelCode](DirectDebitChannelCode.md) | ☑️ |  | | |
-**channelProperties** | [DirectDebitChannelProperties](DirectDebitChannelProperties.md) | ☑️ |  | | |
-**type** | [DirectDebitType](DirectDebitType.md) |  |  | | |
+| **channelCode** |[DirectDebitChannelCode](DirectDebitChannelCode.md) | ☑️ |  | | |
+| **channelProperties** |[DirectDebitChannelProperties](DirectDebitChannelProperties.md) | ☑️ |  | | |
+| **type** |[DirectDebitType](DirectDebitType.md) |  |  | | |
 
 
 

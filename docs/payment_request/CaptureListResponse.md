@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **data** | [[]Capture](Capture.md) | ☑️ |  | | |
-**hasMore** | boolean | ☑️ |  | | |
+| **data** |[Capture[]](Capture.md) | ☑️ |  | | |
+| **hasMore** |boolean | ☑️ |  | | |
 
 
 

@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **hasMore** | boolean |  |  | | |
-**data** | [[]Customer](Customer.md) |  |  | | |
+| **hasMore** |boolean |  |  | | |
+| **data** |[Customer[]](Customer.md) |  |  | | |
 
 
 

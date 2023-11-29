@@ -90,7 +90,7 @@ import { GetPayouts200ResponseDataInner } from 'xendit-node/payout/models'
 
 const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.getPayoutById({ 
     id: "disb-7baa7335-a0b2-4678-bb8c-318c0167f332",
-})
+)
 ```
 ## `getPayoutChannels()` Function
 
@@ -100,7 +100,7 @@ const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.getPay
 |--------------------|:-------------:|
 | Function Name | `getPayoutChannels` |
 | Request Parameters  |  [GetPayoutChannelsRequest](#request-parameters--GetPayoutChannelsRequest)	 |
-| Return Type  |  [[]Channel](payout/Channel.md) |
+| Return Type  |  [Channel[]](payout/Channel.md) |
 
 ### Request Parameters - GetPayoutChannelsRequest
 | Field Name |   Type 	 |  Required  | Default |
@@ -114,7 +114,7 @@ const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.getPay
 ```typescript
 import { Channel } from 'xendit-node/payout/models'
 
-const response: Channel[] = await xenditPayoutClient.getPayoutChannels({ })
+const response: Channel[] = await xenditPayoutClient.getPayoutChannels({ )
 ```
 ## `getPayouts()` Function
 
@@ -141,7 +141,7 @@ import { GetPayouts200Response } from 'xendit-node/payout/models'
 
 const response: GetPayouts200Response = await xenditPayoutClient.getPayouts({ 
     referenceId: "DISB-123",
-})
+)
 ```
 ## `cancelPayout()` Function
 
@@ -165,7 +165,8 @@ import { GetPayouts200ResponseDataInner } from 'xendit-node/payout/models'
 
 const response: GetPayouts200ResponseDataInner = await xenditPayoutClient.cancelPayout({ 
     id: "disb-7baa7335-a0b2-4678-bb8c-318c0167f332",
-})
+)
 ```
+
 
 [[Back to README]](../README.md)

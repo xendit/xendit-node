@@ -6,7 +6,7 @@ An object representing e-wallet details for invoices.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **ewalletType** | [EwalletType](EwalletType.md) | ☑️ |  | | |
+| **ewalletType** |[EwalletType](EwalletType.md) | ☑️ |  | | |
 
 
 

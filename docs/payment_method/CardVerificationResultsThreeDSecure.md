@@ -6,11 +6,11 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **threeDSecureFlow** | string |  |  | | |
-**eciCode** | string |  |  | | |
-**threeDSecureResult** | string |  |  | | |
-**threeDSecureResultReason** | string |  |  | | |
-**threeDSecureVersion** | string |  |  | | |
+| **threeDSecureFlow** |string |  |  | | |
+| **eciCode** |string |  |  | | |
+| **threeDSecureResult** |string |  |  | | |
+| **threeDSecureResultReason** |string |  |  | | |
+| **threeDSecureVersion** |string |  |  | | |
 
 
 

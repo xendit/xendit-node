@@ -47,7 +47,7 @@ All URIs are relative to https://api.xendit.co, except if the operation defines 
 ```typescript
 import { Customer } from 'xendit-node/customer/models'
 
-const response: Customer = await xenditCustomerClient.createCustomer({ })
+const response: Customer = await xenditCustomerClient.createCustomer({ )
 ```
 ## `getCustomer()` Function
 
@@ -71,7 +71,7 @@ import { Customer } from 'xendit-node/customer/models'
 
 const response: Customer = await xenditCustomerClient.getCustomer({ 
     id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-})
+)
 ```
 ## `getCustomerByReferenceID()` Function
 
@@ -95,7 +95,7 @@ import { GetCustomerByReferenceID200Response } from 'xendit-node/customer/models
 
 const response: GetCustomerByReferenceID200Response = await xenditCustomerClient.getCustomerByReferenceID({ 
     referenceId: "referenceId_example",
-})
+)
 ```
 ## `updateCustomer()` Function
 
@@ -120,7 +120,8 @@ import { Customer } from 'xendit-node/customer/models'
 
 const response: Customer = await xenditCustomerClient.updateCustomer({ 
     id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-})
+)
 ```
+
 
 [[Back to README]](../README.md)

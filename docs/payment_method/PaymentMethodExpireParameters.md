@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **successReturnUrl** | string |  | URL where the end customer is redirected if the unlinking authorization is successful. | | |
-**failureReturnUrl** | string |  | URL where the end customer is redirected if the unlinking authorization is failed. | | |
+| **successReturnUrl** |string |  | URL where the end customer is redirected if the unlinking authorization is successful. | | |
+| **failureReturnUrl** |string |  | URL where the end customer is redirected if the unlinking authorization is failed. | | |
 
 
 

@@ -6,7 +6,7 @@ An object representing direct debit details for invoices.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **directDebitType** | [DirectDebitType](DirectDebitType.md) | ☑️ |  | | |
+| **directDebitType** |[DirectDebitType](DirectDebitType.md) | ☑️ |  | | |
 
 
 

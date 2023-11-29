@@ -6,8 +6,8 @@ An object representing alternative display of a VA.
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **type** | string |  | Represent type of alternative display. | | |
-**value** | string |  | Represent value of alternative display value. | | |
+| **type** |string |  | Represent type of alternative display. | | |
+| **value** |string |  | Represent value of alternative display value. | | |
 
 
 

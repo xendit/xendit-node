@@ -6,7 +6,7 @@ The balance remaining in your account
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **balance** | number | ☑️ |  | | |
+| **balance** |number | ☑️ |  | | |
 
 
 

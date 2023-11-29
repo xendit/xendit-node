@@ -8,4 +8,6 @@ export * from './CreateRefund409Response';
 export * from './CreateRefund503Response';
 export * from './GetAllRefundsDefaultResponse';
 export * from './Refund';
+export * from './RefundCallback';
+export * from './RefundCallbackData';
 export * from './RefundList';

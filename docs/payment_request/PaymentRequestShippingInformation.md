@@ -6,12 +6,12 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **country** | string | ☑️ |  | | |
-**streetLine1** | string |  |  | | |
-**streetLine2** | string |  |  | | |
-**city** | string |  |  | | |
-**provinceState** | string |  |  | | |
-**postalCode** | string |  |  | | |
+| **country** |string | ☑️ |  | | |
+| **streetLine1** |string |  |  | | |
+| **streetLine2** |string |  |  | | |
+| **city** |string |  |  | | |
+| **provinceState** |string |  |  | | |
+| **postalCode** |string |  |  | | |
 
 
 

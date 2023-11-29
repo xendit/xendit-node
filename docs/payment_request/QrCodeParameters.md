@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **channelCode** | [QRCodeChannelCode](QRCodeChannelCode.md) |  |  | | |
-**channelProperties** | [QRCodeChannelProperties](QRCodeChannelProperties.md) |  |  | | |
+| **channelCode** |[QRCodeChannelCode](QRCodeChannelCode.md) |  |  | | |
+| **channelProperties** |[QRCodeChannelProperties](QRCodeChannelProperties.md) |  |  | | |
 
 
 

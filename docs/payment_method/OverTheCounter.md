@@ -6,10 +6,10 @@ Over The Counter Payment Method Details
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **amount** | number |  |  | | |
-**currency** | string |  |  | | |
-**channelCode** | [OverTheCounterChannelCode](OverTheCounterChannelCode.md) | ☑️ |  | | |
-**channelProperties** | [OverTheCounterChannelProperties](OverTheCounterChannelProperties.md) | ☑️ |  | | |
+| **amount** |number |  |  | | |
+| **currency** |string |  |  | | |
+| **channelCode** |[OverTheCounterChannelCode](OverTheCounterChannelCode.md) | ☑️ |  | | |
+| **channelProperties** |[OverTheCounterChannelProperties](OverTheCounterChannelProperties.md) | ☑️ |  | | |
 
 
 

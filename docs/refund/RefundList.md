@@ -6,8 +6,8 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **data** | [[]Refund](Refund.md) | ☑️ |  | | |
-**hasMore** | boolean |  |  | | |
+| **data** |[Refund[]](Refund.md) | ☑️ |  | | |
+| **hasMore** |boolean |  |  | | |
 
 
 

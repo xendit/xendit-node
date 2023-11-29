@@ -6,9 +6,9 @@ Additional notification for completed payout
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **emailTo** | []string |  | Valid email address to send the payout receipt | | |
-**emailCc** | []string |  | Valid email address to cc the payout receipt | | |
-**emailBcc** | []string |  | Valid email address to bcc the payout receipt | | |
+| **emailTo** |string[] |  | Valid email address to send the payout receipt | | |
+| **emailCc** |string[] |  | Valid email address to cc the payout receipt | | |
+| **emailBcc** |string[] |  | Valid email address to bcc the payout receipt | | |
 
 
 

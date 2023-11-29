@@ -6,7 +6,7 @@
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **alternativeDisplays** | [[]VirtualAccountAlternativeDisplay](VirtualAccountAlternativeDisplay.md) |  |  | | |
+| **alternativeDisplays** |[VirtualAccountAlternativeDisplay[]](VirtualAccountAlternativeDisplay.md) |  |  | | |
 
 
 

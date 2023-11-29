@@ -35,6 +35,7 @@ export * from './OverTheCounterUpdateParameters';
 export * from './PaymentMethod';
 export * from './PaymentMethodAction';
 export * from './PaymentMethodAuthParameters';
+export * from './PaymentMethodCallback';
 export * from './PaymentMethodCountry';
 export * from './PaymentMethodExpireParameters';
 export * from './PaymentMethodList';
