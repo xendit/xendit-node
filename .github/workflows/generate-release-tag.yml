@@ -1,0 +1,97 @@
+name: Generate Release Tag
+
+on:
+  repository_dispatch:
+    types: [create-release-tag]
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          - "18.0"
+          - "19.0"
+          - "20.0"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Print node version
+        run: node -v
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Testing
+        run: DEVELOPMENT_API_KEY=${{ secrets.DEVELOPMENT_API_KEY }} BUSINESS_ID=${{ secrets.BUSINESS_ID }} npm run test
+
+  send-test-result:
+    name: Slack Notification
+    needs: [testing]
+    if: always() && (needs.testing.result == 'success' || needs.testing.result == 'failure')
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set Slack Color
+      id: set_color
+      run: |
+        if [ "${{ needs.testing.result }}" == "success" ]; then
+          echo "color=good" >> $GITHUB_ENV
+        else
+          echo "color=danger" >> $GITHUB_ENV
+        fi
+
+    - name: Send Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: "[xendi-node] CI pipeline for ${{ github.event.client_payload.version }}"
+        SLACK_MESSAGE: 'Test Result: ${{ needs.testing.result }}'
+        SLACK_COLOR: ${{ steps.set_color.outputs.color }}
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [testing]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set the value in bash
+        id: parse-changelog
+        run: |
+          echo "changelog<<EOF" >> "$GITHUB_OUTPUT"
+          echo "${{ github.event.client_payload.changelog }}" | sed -e 's/%0A/\n/g' >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+        with:
+          tag_name: ${{ github.event.client_payload.version }}
+          release_name: ${{ github.event.client_payload.version }}
+          body: ${{ steps.parse-changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm run custom-publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

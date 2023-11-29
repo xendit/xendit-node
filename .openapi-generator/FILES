@@ -1,4 +1,5 @@
 .eslintrc.json
+.github/workflows/generate-release-tag.yml
 .gitignore
 .npmignore
 README.md
