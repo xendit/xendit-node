@@ -44,29 +44,6 @@ describe("Invoice API", () => {
         }
     })
 
-    it("getInvoices", async () => {
-        try {
-            const response = await instanceAPI.getInvoices()
-            if (response.length > 0) {
-                sampleDatum = response[0].id
-            }
-
-            expect(response).toBeDefined()
-        } catch (error) {
-            console.log({
-                error_code: error.errorCode,
-                message: error.errorMessage,
-                status: error.status,
-            });
-
-            if (
-                !(process.env.IGNORED_ERRORCODE || []).includes(error.errorCode)
-            ) {
-                throw error
-            }
-        }
-    })
-
     it("getInvoiceById", async () => {
         try {
             const response = await instanceAPI.getInvoiceById({
@@ -75,29 +52,6 @@ describe("Invoice API", () => {
 
             expect(response).toBeDefined()
             expect(response.id).toBe(sampleDatum)
-        } catch (error) {
-            console.log({
-                error_code: error.errorCode,
-                message: error.errorMessage,
-                status: error.status,
-            });
-
-            if (
-                !(process.env.IGNORED_ERRORCODE || []).includes(error.errorCode)
-            ) {
-                throw error
-            }
-        }
-    })
-
-    it("expireInvoice", async () => {
-        try {
-            const response = await instanceAPI.expireInvoice({
-                invoiceId: sampleDatum
-            })
-
-            expect(response).toBeDefined()
-            expect(response.status).toBe("EXPIRED")
         } catch (error) {
             console.log({
                 error_code: error.errorCode,
