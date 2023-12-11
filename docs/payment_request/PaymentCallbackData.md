@@ -17,7 +17,7 @@ Represents the actual funds transaction/attempt made to a payment method
 | **paymentMethod** |[PaymentMethod](PaymentMethod.md) | ☑️ |  | | |
 | **channelProperties** |[PaymentRequestChannelProperties](PaymentRequestChannelProperties.md) |  |  | | |
 | **paymentDetail** |object |  |  | | |
-| **failureCode** |object |  |  | | |
+| **failureCode** |string |  |  | | |
 | **created** |string | ☑️ |  | | |
 | **updated** |string | ☑️ |  | | |
 | **metadata** |object |  |  | | |

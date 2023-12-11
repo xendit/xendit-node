@@ -6,6 +6,8 @@ QR Code Channel Code
 ## Enum
 
 
+    * `Qris` (value: `'QRIS'`)
+
     * `Dana` (value: `'DANA'`)
 
     * `Rcbc` (value: `'RCBC'`)

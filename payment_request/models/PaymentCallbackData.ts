@@ -94,10 +94,10 @@ export interface PaymentCallbackData {
     paymentDetail?: object | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof PaymentCallbackData
      */
-    failureCode?: object | null;
+    failureCode?: string | null;
     /**
      * 
      * @type {string}

@@ -22,6 +22,11 @@ export const EwalletType = {
     Astrapay: 'ASTRAPAY',
     Nexcash: 'NEXCASH',
     Jeniuspay: 'JENIUSPAY',
+    Momo: 'MOMO',
+    Zalopay: 'ZALOPAY',
+    Viettelpay: 'VIETTELPAY',
+    Vnptwallet: 'VNPTWALLET',
+    Appota: 'APPOTA',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type EwalletType = typeof EwalletType[keyof typeof EwalletType];
