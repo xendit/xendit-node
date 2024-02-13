@@ -2,23 +2,23 @@
 /* eslint-disable */
 export * from './runtime';
 
+import { Refund } from './refund';
+export { Refund } from './refund';
+
+import { Balance, Transaction } from './balance_and_transaction';
+export { Balance, Transaction } from './balance_and_transaction';
+
 import { Invoice } from './invoice';
 export { Invoice } from './invoice';
 
-import { Refund } from './refund';
-export { Refund } from './refund';
+import { PaymentRequest } from './payment_request';
+export { PaymentRequest } from './payment_request';
 
 import { Customer } from './customer';
 export { Customer } from './customer';
 
-import { Transaction, Balance } from './balance_and_transaction';
-export { Transaction, Balance } from './balance_and_transaction';
-
 import { PaymentMethod } from './payment_method';
 export { PaymentMethod } from './payment_method';
-
-import { PaymentRequest } from './payment_request';
-export { PaymentRequest } from './payment_request';
 
 import { Payout } from './payout';
 export { Payout } from './payout';
@@ -30,13 +30,13 @@ export interface XenditOpts {
 }
 export class Xendit {
   opts: XenditOpts;
-  Invoice: Invoice;
   Refund: Refund;
-  Customer: Customer;
-  Transaction: Transaction;
   Balance: Balance;
-  PaymentMethod: PaymentMethod;
+  Transaction: Transaction;
+  Invoice: Invoice;
   PaymentRequest: PaymentRequest;
+  Customer: Customer;
+  PaymentMethod: PaymentMethod;
   Payout: Payout;
 
 
@@ -58,18 +58,18 @@ export class Xendit {
     }
 
 
+       this.Refund = new Refund(this.opts);
+    
+       this.Balance = new Balance(this.opts);
+       this.Transaction = new Transaction(this.opts);
+    
        this.Invoice = new Invoice(this.opts);
     
-       this.Refund = new Refund(this.opts);
+       this.PaymentRequest = new PaymentRequest(this.opts);
     
        this.Customer = new Customer(this.opts);
     
-       this.Transaction = new Transaction(this.opts);
-       this.Balance = new Balance(this.opts);
-    
        this.PaymentMethod = new PaymentMethod(this.opts);
-    
-       this.PaymentRequest = new PaymentRequest(this.opts);
     
        this.Payout = new Payout(this.opts);
     

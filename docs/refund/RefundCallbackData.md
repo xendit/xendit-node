@@ -7,7 +7,7 @@
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
 | **id** |string | ☑️ |  | | |
-| **paymentRequestId** |string | ☑️ |  | | |
+| **paymentId** |string | ☑️ |  | | |
 | **invoiceId** |string |  |  | | |
 | **paymentMethodType** |string | ☑️ |  | | |
 | **amount** |number | ☑️ |  | | |

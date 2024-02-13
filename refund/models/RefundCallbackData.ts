@@ -24,7 +24,7 @@ export interface RefundCallbackData {
      * @type {string}
      * @memberof RefundCallbackData
      */
-    paymentRequestId: string;
+    paymentId: string;
     /**
      * 
      * @type {string}
@@ -117,7 +117,7 @@ export interface RefundCallbackData {
 export function instanceOfRefundCallbackData(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "paymentRequestId" in value;
+    isInstance = isInstance && "paymentId" in value;
     isInstance = isInstance && "paymentMethodType" in value;
     isInstance = isInstance && "amount" in value;
     isInstance = isInstance && "channelCode" in value;
@@ -142,7 +142,7 @@ export function RefundCallbackDataFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'id': json['id'],
-        'paymentRequestId': json['payment_request_id'],
+        'paymentId': json['payment_id'],
         'invoiceId': !exists(json, 'invoice_id') ? undefined : json['invoice_id'],
         'paymentMethodType': json['payment_method_type'],
         'amount': json['amount'],
@@ -170,7 +170,7 @@ export function RefundCallbackDataToJSON(value?: RefundCallbackData | null): any
     return {
         
         'id': value.id,
-        'payment_request_id': value.paymentRequestId,
+        'payment_id': value.paymentId,
         'invoice_id': value.invoiceId,
         'payment_method_type': value.paymentMethodType,
         'amount': value.amount,
