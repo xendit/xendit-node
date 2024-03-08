@@ -36,6 +36,14 @@ Representing the available eWallet channels used for invoice-related transaction
 
     * `Appota` (value: `'APPOTA'`)
 
+    * `Linepay` (value: `'LINEPAY'`)
+
+    * `Truemoney` (value: `'TRUEMONEY'`)
+
+    * `Wechatpay` (value: `'WECHATPAY'`)
+
+    * `Touchngo` (value: `'TOUCHNGO'`)
+
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 
 If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.

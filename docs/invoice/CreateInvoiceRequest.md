@@ -26,6 +26,7 @@ An object representing for an invoice creation request.
 | **reminderTimeUnit** |string |  | The unit of the reminder time. | | |
 | **items** |[InvoiceItem[]](InvoiceItem.md) |  | An array of items included in the invoice. | | |
 | **fees** |[InvoiceFee[]](InvoiceFee.md) |  | An array of fees associated with the invoice. | | |
+| **channelProperties** |[ChannelProperties](ChannelProperties.md) |  |  | | |
 
 
 

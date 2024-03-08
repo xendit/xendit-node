@@ -33,12 +33,6 @@ export interface NotificationPreference {
      */
     invoiceReminder?: Array<NotificationChannel>;
     /**
-     * Notification channels for expired invoices.
-     * @type {Array<NotificationChannel>}
-     * @memberof NotificationPreference
-     */
-    invoiceExpired?: Array<NotificationChannel>;
-    /**
      * Notification channels for when an invoice is paid.
      * @type {Array<NotificationChannel>}
      * @memberof NotificationPreference
@@ -67,7 +61,6 @@ export function NotificationPreferenceFromJSONTyped(json: any, ignoreDiscriminat
         
         'invoiceCreated': !exists(json, 'invoice_created') ? undefined : ((json['invoice_created'] as Array<any>).map(NotificationChannelFromJSON)),
         'invoiceReminder': !exists(json, 'invoice_reminder') ? undefined : ((json['invoice_reminder'] as Array<any>).map(NotificationChannelFromJSON)),
-        'invoiceExpired': !exists(json, 'invoice_expired') ? undefined : ((json['invoice_expired'] as Array<any>).map(NotificationChannelFromJSON)),
         'invoicePaid': !exists(json, 'invoice_paid') ? undefined : ((json['invoice_paid'] as Array<any>).map(NotificationChannelFromJSON)),
     };
 }
@@ -83,7 +76,6 @@ export function NotificationPreferenceToJSON(value?: NotificationPreference | nu
         
         'invoice_created': value.invoiceCreated === undefined ? undefined : ((value.invoiceCreated as Array<any>).map(NotificationChannelToJSON)),
         'invoice_reminder': value.invoiceReminder === undefined ? undefined : ((value.invoiceReminder as Array<any>).map(NotificationChannelToJSON)),
-        'invoice_expired': value.invoiceExpired === undefined ? undefined : ((value.invoiceExpired as Array<any>).map(NotificationChannelToJSON)),
         'invoice_paid': value.invoicePaid === undefined ? undefined : ((value.invoicePaid as Array<any>).map(NotificationChannelToJSON)),
     };
 }

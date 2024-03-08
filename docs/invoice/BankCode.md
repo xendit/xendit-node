@@ -26,6 +26,10 @@ Representing the available bank channels used for invoice-related transactions.
 
     * `Bnc` (value: `'BNC'`)
 
+    * `Hana` (value: `'HANA'`)
+
+    * `Muamalat` (value: `'MUAMALAT'`)
+
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 
 If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.

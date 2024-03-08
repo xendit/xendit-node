@@ -13,6 +13,12 @@ import {
     BankFromJSONTyped,
     BankToJSON,
 } from './Bank';
+import type { ChannelProperties } from './ChannelProperties';
+import {
+    ChannelPropertiesFromJSON,
+    ChannelPropertiesFromJSONTyped,
+    ChannelPropertiesToJSON,
+} from './ChannelProperties';
 import type { CustomerObject } from './CustomerObject';
 import {
     CustomerObjectFromJSON,
@@ -290,6 +296,12 @@ export interface Invoice {
      * @memberof Invoice
      */
     fees?: Array<InvoiceFee>;
+    /**
+     * 
+     * @type {ChannelProperties}
+     * @memberof Invoice
+     */
+    channelProperties?: ChannelProperties;
 }
 
 /**
@@ -361,6 +373,7 @@ export function InvoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): I
         'customer': !exists(json, 'customer') ? undefined : CustomerObjectFromJSON(json['customer']),
         'customerNotificationPreference': !exists(json, 'customer_notification_preference') ? undefined : NotificationPreferenceFromJSON(json['customer_notification_preference']),
         'fees': !exists(json, 'fees') ? undefined : ((json['fees'] as Array<any>).map(InvoiceFeeFromJSON)),
+        'channelProperties': !exists(json, 'channel_properties') ? undefined : ChannelPropertiesFromJSON(json['channel_properties']),
     };
 }
 
@@ -406,6 +419,7 @@ export function InvoiceToJSON(value?: Invoice | null): any {
         'customer': CustomerObjectToJSON(value.customer),
         'customer_notification_preference': NotificationPreferenceToJSON(value.customerNotificationPreference),
         'fees': value.fees === undefined ? undefined : ((value.fees as Array<any>).map(InvoiceFeeToJSON)),
+        'channel_properties': ChannelPropertiesToJSON(value.channelProperties),
     };
 }
 

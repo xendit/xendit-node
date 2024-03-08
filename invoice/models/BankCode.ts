@@ -22,6 +22,8 @@ export const BankCode = {
     SahabatSampoerna: 'SAHABAT_SAMPOERNA',
     Cimb: 'CIMB',
     Bnc: 'BNC',
+    Hana: 'HANA',
+    Muamalat: 'MUAMALAT',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type BankCode = typeof BankCode[keyof typeof BankCode];

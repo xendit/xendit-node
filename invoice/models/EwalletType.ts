@@ -27,6 +27,10 @@ export const EwalletType = {
     Viettelpay: 'VIETTELPAY',
     Vnptwallet: 'VNPTWALLET',
     Appota: 'APPOTA',
+    Linepay: 'LINEPAY',
+    Truemoney: 'TRUEMONEY',
+    Wechatpay: 'WECHATPAY',
+    Touchngo: 'TOUCHNGO',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type EwalletType = typeof EwalletType[keyof typeof EwalletType];

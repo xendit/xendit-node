@@ -22,6 +22,7 @@ export const InvoicePaymentMethod = {
     DirectDebit: 'DIRECT_DEBIT',
     BankTransfer: 'BANK_TRANSFER',
     Paylater: 'PAYLATER',
+    Cryptocurrency: 'CRYPTOCURRENCY',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type InvoicePaymentMethod = typeof InvoicePaymentMethod[keyof typeof InvoicePaymentMethod];

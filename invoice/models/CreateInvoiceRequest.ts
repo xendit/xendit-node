@@ -7,6 +7,12 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { ChannelProperties } from './ChannelProperties';
+import {
+    ChannelPropertiesFromJSON,
+    ChannelPropertiesFromJSONTyped,
+    ChannelPropertiesToJSON,
+} from './ChannelProperties';
 import type { CustomerObject } from './CustomerObject';
 import {
     CustomerObjectFromJSON,
@@ -158,6 +164,12 @@ export interface CreateInvoiceRequest {
      * @memberof CreateInvoiceRequest
      */
     fees?: Array<InvoiceFee>;
+    /**
+     * 
+     * @type {ChannelProperties}
+     * @memberof CreateInvoiceRequest
+     */
+    channelProperties?: ChannelProperties;
 }
 
 /**
@@ -201,6 +213,7 @@ export function CreateInvoiceRequestFromJSONTyped(json: any, ignoreDiscriminator
         'reminderTimeUnit': !exists(json, 'reminder_time_unit') ? undefined : json['reminder_time_unit'],
         'items': !exists(json, 'items') ? undefined : ((json['items'] as Array<any>).map(InvoiceItemFromJSON)),
         'fees': !exists(json, 'fees') ? undefined : ((json['fees'] as Array<any>).map(InvoiceFeeFromJSON)),
+        'channelProperties': !exists(json, 'channel_properties') ? undefined : ChannelPropertiesFromJSON(json['channel_properties']),
     };
 }
 
@@ -233,6 +246,7 @@ export function CreateInvoiceRequestToJSON(value?: CreateInvoiceRequest | null):
         'reminder_time_unit': value.reminderTimeUnit,
         'items': value.items === undefined ? undefined : ((value.items as Array<any>).map(InvoiceItemToJSON)),
         'fees': value.fees === undefined ? undefined : ((value.fees as Array<any>).map(InvoiceFeeToJSON)),
+        'channel_properties': ChannelPropertiesToJSON(value.channelProperties),
     };
 }
 

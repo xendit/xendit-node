@@ -5,6 +5,8 @@ export * from './AlternativeDisplayItem';
 export * from './BadRequestError';
 export * from './Bank';
 export * from './BankCode';
+export * from './ChannelProperties';
+export * from './ChannelPropertiesCards';
 export * from './CreateInvoiceRequest';
 export * from './CustomerObject';
 export * from './DirectDebit';

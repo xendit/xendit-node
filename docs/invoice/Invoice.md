@@ -39,6 +39,7 @@ An object representing details for an invoice.
 | **customer** |[CustomerObject](CustomerObject.md) |  |  | | |
 | **customerNotificationPreference** |[NotificationPreference](NotificationPreference.md) |  |  | | |
 | **fees** |[InvoiceFee[]](InvoiceFee.md) |  | An array of fees associated with the invoice. | | |
+| **channelProperties** |[ChannelProperties](ChannelProperties.md) |  |  | | |
 
 
 
