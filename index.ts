@@ -2,9 +2,6 @@
 /* eslint-disable */
 export * from './runtime';
 
-import { PaymentRequest } from './payment_request';
-export { PaymentRequest } from './payment_request';
-
 import { Invoice } from './invoice';
 export { Invoice } from './invoice';
 
@@ -14,11 +11,14 @@ export { Transaction, Balance } from './balance_and_transaction';
 import { Refund } from './refund';
 export { Refund } from './refund';
 
-import { PaymentMethod } from './payment_method';
-export { PaymentMethod } from './payment_method';
-
 import { Payout } from './payout';
 export { Payout } from './payout';
+
+import { PaymentRequest } from './payment_request';
+export { PaymentRequest } from './payment_request';
+
+import { PaymentMethod } from './payment_method';
+export { PaymentMethod } from './payment_method';
 
 import { Customer } from './customer';
 export { Customer } from './customer';
@@ -30,13 +30,13 @@ export interface XenditOpts {
 }
 export class Xendit {
   opts: XenditOpts;
-  PaymentRequest: PaymentRequest;
   Invoice: Invoice;
   Transaction: Transaction;
   Balance: Balance;
   Refund: Refund;
-  PaymentMethod: PaymentMethod;
   Payout: Payout;
+  PaymentRequest: PaymentRequest;
+  PaymentMethod: PaymentMethod;
   Customer: Customer;
 
 
@@ -58,8 +58,6 @@ export class Xendit {
     }
 
 
-       this.PaymentRequest = new PaymentRequest(this.opts);
-    
        this.Invoice = new Invoice(this.opts);
     
        this.Transaction = new Transaction(this.opts);
@@ -67,9 +65,11 @@ export class Xendit {
     
        this.Refund = new Refund(this.opts);
     
-       this.PaymentMethod = new PaymentMethod(this.opts);
-    
        this.Payout = new Payout(this.opts);
+    
+       this.PaymentRequest = new PaymentRequest(this.opts);
+    
+       this.PaymentMethod = new PaymentMethod(this.opts);
     
        this.Customer = new Customer(this.opts);
     

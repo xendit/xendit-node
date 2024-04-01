@@ -18,6 +18,8 @@ Direct Debit Channel Code
 
     * `Bpi` (value: `'BPI'`)
 
+    * `BpiRecurring` (value: `'BPI_RECURRING'`)
+
     * `Bdo` (value: `'BDO'`)
 
     * `Cimbniaga` (value: `'CIMBNIAGA'`)
@@ -28,7 +30,9 @@ Direct Debit Channel Code
 
     * `Ubp` (value: `'UBP'`)
 
-    * `AutodebitUbp` (value: `'AUTODEBIT_UBP'`)
+    * `UbpEada` (value: `'UBP_EADA'`)
+
+    * `UbpDebitPull` (value: `'UBP_DEBIT_PULL'`)
 
     * `Chinabank` (value: `'CHINABANK'`)
 
@@ -131,6 +135,36 @@ Direct Debit Channel Code
     * `SchFpxBusiness` (value: `'SCH_FPX_BUSINESS'`)
 
     * `UobFpxBusiness` (value: `'UOB_FPX_BUSINESS'`)
+
+    * `BdoOnlineBanking` (value: `'BDO_ONLINE_BANKING'`)
+
+    * `BpiOnlineBanking` (value: `'BPI_ONLINE_BANKING'`)
+
+    * `UnionbankOnlineBanking` (value: `'UNIONBANK_ONLINE_BANKING'`)
+
+    * `BocOnlineBanking` (value: `'BOC_ONLINE_BANKING'`)
+
+    * `ChinabankOnlineBanking` (value: `'CHINABANK_ONLINE_BANKING'`)
+
+    * `InstapayOnlineBanking` (value: `'INSTAPAY_ONLINE_BANKING'`)
+
+    * `LandbankOnlineBanking` (value: `'LANDBANK_ONLINE_BANKING'`)
+
+    * `MaybankOnlineBanking` (value: `'MAYBANK_ONLINE_BANKING'`)
+
+    * `MetrobankOnlineBanking` (value: `'METROBANK_ONLINE_BANKING'`)
+
+    * `PnbOnlineBanking` (value: `'PNB_ONLINE_BANKING'`)
+
+    * `PsbankOnlineBanking` (value: `'PSBANK_ONLINE_BANKING'`)
+
+    * `PesonetOnlineBanking` (value: `'PESONET_ONLINE_BANKING'`)
+
+    * `RcbcOnlineBanking` (value: `'RCBC_ONLINE_BANKING'`)
+
+    * `RobinsonsBankOnlineBanking` (value: `'ROBINSONS_BANK_ONLINE_BANKING'`)
+
+    * `SecurityBankOnlineBanking` (value: `'SECURITY_BANK_ONLINE_BANKING'`)
 
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 

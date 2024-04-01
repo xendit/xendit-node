@@ -31,6 +31,7 @@ export const VirtualAccountChannelCode = {
     Bnc: 'BNC',
     Hana: 'HANA',
     Muamalat: 'MUAMALAT',
+    BankTransfer: 'BANK_TRANSFER',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type VirtualAccountChannelCode = typeof VirtualAccountChannelCode[keyof typeof VirtualAccountChannelCode];

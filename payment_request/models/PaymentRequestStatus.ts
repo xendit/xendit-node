@@ -20,6 +20,7 @@ export const PaymentRequestStatus = {
     Voided: 'VOIDED',
     Unknown: 'UNKNOWN',
     AwaitingCapture: 'AWAITING_CAPTURE',
+    Expired: 'EXPIRED',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type PaymentRequestStatus = typeof PaymentRequestStatus[keyof typeof PaymentRequestStatus];

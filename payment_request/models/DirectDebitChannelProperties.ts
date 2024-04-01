@@ -33,6 +33,12 @@ import {
  */
 export interface DirectDebitChannelProperties {
     /**
+     * Email address of the customer that is registered to the partner channel
+     * @type {string}
+     * @memberof DirectDebitChannelProperties
+     */
+    email?: string;
+    /**
      * Mobile number of the customer registered to the partner channel
      * @type {string}
      * @memberof DirectDebitChannelProperties
@@ -74,12 +80,6 @@ export interface DirectDebitChannelProperties {
      * @memberof DirectDebitChannelProperties
      */
     cardExpiry?: string;
-    /**
-     * Email address of the customer that is registered to the partner channel
-     * @type {string}
-     * @memberof DirectDebitChannelProperties
-     */
-    email?: string;
 }
 
 /**
@@ -101,6 +101,7 @@ export function DirectDebitChannelPropertiesFromJSONTyped(json: any, ignoreDiscr
     }
     return {
         
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'mobileNumber': !exists(json, 'mobile_number') ? undefined : json['mobile_number'],
         'successReturnUrl': !exists(json, 'success_return_url') ? undefined : json['success_return_url'],
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
@@ -108,7 +109,6 @@ export function DirectDebitChannelPropertiesFromJSONTyped(json: any, ignoreDiscr
         'accountNumber': !exists(json, 'account_number') ? undefined : json['account_number'],
         'cardLastFour': !exists(json, 'card_last_four') ? undefined : json['card_last_four'],
         'cardExpiry': !exists(json, 'card_expiry') ? undefined : json['card_expiry'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
     };
 }
 
@@ -121,6 +121,7 @@ export function DirectDebitChannelPropertiesToJSON(value?: DirectDebitChannelPro
     }
     return {
         
+        'email': value.email,
         'mobile_number': value.mobileNumber,
         'success_return_url': value.successReturnUrl,
         'failure_return_url': value.failureReturnUrl,
@@ -128,7 +129,6 @@ export function DirectDebitChannelPropertiesToJSON(value?: DirectDebitChannelPro
         'account_number': value.accountNumber,
         'card_last_four': value.cardLastFour,
         'card_expiry': value.cardExpiry,
-        'email': value.email,
     };
 }
 

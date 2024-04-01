@@ -44,6 +44,8 @@ Virtual Account Channel Code
 
     * `Muamalat` (value: `'MUAMALAT'`)
 
+    * `BankTransfer` (value: `'BANK_TRANSFER'`)
+
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 
 If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.

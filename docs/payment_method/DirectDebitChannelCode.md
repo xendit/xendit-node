@@ -14,6 +14,10 @@ Direct Debit Channel Code
 
     * `Bpi` (value: `'BPI'`)
 
+    * `AutodebitBpi` (value: `'AUTODEBIT_BPI'`)
+
+    * `BpiRecurring` (value: `'BPI_RECURRING'`)
+
     * `Bri` (value: `'BRI'`)
 
     * `Bni` (value: `'BNI'`)
@@ -51,6 +55,8 @@ Direct Debit Channel Code
     * `BdoEpay` (value: `'BDO_EPAY'`)
 
     * `AutodebitUbp` (value: `'AUTODEBIT_UBP'`)
+
+    * `UbpDebitPull` (value: `'UBP_DEBIT_PULL'`)
 
     * `AffinFpx` (value: `'AFFIN_FPX'`)
 

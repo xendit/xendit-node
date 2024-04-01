@@ -7,6 +7,12 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { CardChannelCode } from './CardChannelCode';
+import {
+    CardChannelCodeFromJSON,
+    CardChannelCodeFromJSONTyped,
+    CardChannelCodeToJSON,
+} from './CardChannelCode';
 import type { CardChannelProperties } from './CardChannelProperties';
 import {
     CardChannelPropertiesFromJSON,
@@ -34,10 +40,16 @@ import {
 export interface Card {
     /**
      * 
+     * @type {CardChannelCode}
+     * @memberof Card
+     */
+    channelCode?: CardChannelCode;
+    /**
+     * 
      * @type {string}
      * @memberof Card
      */
-    currency: string | null;
+    currency?: string | null;
     /**
      * 
      * @type {CardChannelProperties}
@@ -63,7 +75,6 @@ export interface Card {
  */
 export function instanceOfCard(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "currency" in value;
     isInstance = isInstance && "channelProperties" in value;
 
     return isInstance;
@@ -79,7 +90,8 @@ export function CardFromJSONTyped(json: any, ignoreDiscriminator: boolean): Card
     }
     return {
         
-        'currency': json['currency'],
+        'channelCode': !exists(json, 'channel_code') ? undefined : CardChannelCodeFromJSON(json['channel_code']),
+        'currency': !exists(json, 'currency') ? undefined : json['currency'],
         'channelProperties': CardChannelPropertiesFromJSON(json['channel_properties']),
         'cardInformation': !exists(json, 'card_information') ? undefined : TokenizedCardInformationFromJSON(json['card_information']),
         'cardVerificationResults': !exists(json, 'card_verification_results') ? undefined : CardVerificationResultsFromJSON(json['card_verification_results']),
@@ -95,6 +107,7 @@ export function CardToJSON(value?: Card | null): any {
     }
     return {
         
+        'channel_code': CardChannelCodeToJSON(value.channelCode),
         'currency': value.currency,
         'channel_properties': CardChannelPropertiesToJSON(value.channelProperties),
         'card_information': TokenizedCardInformationToJSON(value.cardInformation),

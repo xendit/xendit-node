@@ -27,6 +27,7 @@ All URIs are relative to https://api.xendit.co, except if the operation defines 
 | [**capturePaymentRequest()**](PaymentRequest.md#capturepaymentrequest-function) | **POST** /payment_requests/{paymentRequestId}/captures | Payment Request Capture |
 | [**authorizePaymentRequest()**](PaymentRequest.md#authorizepaymentrequest-function) | **POST** /payment_requests/{paymentRequestId}/auth | Payment Request Authorize |
 | [**resendPaymentRequestAuth()**](PaymentRequest.md#resendpaymentrequestauth-function) | **POST** /payment_requests/{paymentRequestId}/auth/resend | Payment Request Resend Auth |
+| [**simulatePaymentRequestPayment()**](PaymentRequest.md#simulatepaymentrequestpayment-function) | **POST** /payment_requests/{paymentRequestId}/payments/simulate | Payment Request Simulate Payment |
 
 
 ## `createPaymentRequest()` Function
@@ -314,6 +315,29 @@ const response: PaymentRequest = await xenditPaymentRequestClient.authorizePayme
 import { PaymentRequest } from 'xendit-node/payment_request/models'
 
 const response: PaymentRequest = await xenditPaymentRequestClient.resendPaymentRequestAuth({ 
+    paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
+)
+```
+## `simulatePaymentRequestPayment()` Function
+
+
+### Function Signature
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `simulatePaymentRequestPayment` |
+| Request Parameters  |  [SimulatePaymentRequestPaymentRequest](#request-parameters--SimulatePaymentRequestPaymentRequest)	 |
+| Return Type  |  [PaymentSimulation](payment_request/PaymentSimulation.md) |
+
+### Request Parameters - SimulatePaymentRequestPaymentRequest
+| Field Name |   Type 	 |  Required  | Default |
+|-----------|:----------:|:----------:|-----------|
+| **paymentRequestId** | **string** | ☑️ |  |
+
+### Usage Example
+```typescript
+import { PaymentSimulation } from 'xendit-node/payment_request/models'
+
+const response: PaymentSimulation = await xenditPaymentRequestClient.simulatePaymentRequestPayment({ 
     paymentRequestId: "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822",
 )
 ```

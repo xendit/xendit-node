@@ -28,6 +28,9 @@ export const VirtualAccountChannelCode = {
     Msb: 'MSB',
     StandardChartered: 'STANDARD_CHARTERED',
     Ambank: 'AMBANK',
+    Bnc: 'BNC',
+    Hana: 'HANA',
+    Muamalat: 'MUAMALAT',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type VirtualAccountChannelCode = typeof VirtualAccountChannelCode[keyof typeof VirtualAccountChannelCode];

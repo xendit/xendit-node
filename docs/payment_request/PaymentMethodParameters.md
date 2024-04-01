@@ -10,6 +10,7 @@
 | **reusability** |[PaymentMethodReusability](PaymentMethodReusability.md) | ☑️ |  | | |
 | **description** |string |  |  | | |
 | **referenceId** |string |  |  | | |
+| **card** |[CardParameters](CardParameters.md) |  |  | | |
 | **directDebit** |[DirectDebitParameters](DirectDebitParameters.md) |  |  | | |
 | **ewallet** |[EWalletParameters](EWalletParameters.md) |  |  | | |
 | **overTheCounter** |[OverTheCounterParameters](OverTheCounterParameters.md) |  |  | | |

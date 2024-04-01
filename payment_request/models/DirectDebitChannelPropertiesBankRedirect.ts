@@ -14,6 +14,12 @@ import { exists, mapValues } from '../../runtime';
  */
 export interface DirectDebitChannelPropertiesBankRedirect {
     /**
+     * 
+     * @type {string}
+     * @memberof DirectDebitChannelPropertiesBankRedirect
+     */
+    email?: string;
+    /**
      * Mobile number of the customer that is registered to channel
      * @type {string}
      * @memberof DirectDebitChannelPropertiesBankRedirect
@@ -52,6 +58,7 @@ export function DirectDebitChannelPropertiesBankRedirectFromJSONTyped(json: any,
     }
     return {
         
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'mobileNumber': !exists(json, 'mobile_number') ? undefined : json['mobile_number'],
         'successReturnUrl': !exists(json, 'success_return_url') ? undefined : json['success_return_url'],
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
@@ -67,6 +74,7 @@ export function DirectDebitChannelPropertiesBankRedirectToJSON(value?: DirectDeb
     }
     return {
         
+        'email': value.email,
         'mobile_number': value.mobileNumber,
         'success_return_url': value.successReturnUrl,
         'failure_return_url': value.failureReturnUrl,

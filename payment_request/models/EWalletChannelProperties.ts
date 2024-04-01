@@ -20,6 +20,12 @@ export interface EWalletChannelProperties {
      */
     successReturnUrl?: string;
     /**
+     * URL where the end-customer is redirected if the authorization is successful
+     * @type {string}
+     * @memberof EWalletChannelProperties
+     */
+    pendingReturnUrl?: string;
+    /**
      * URL where the end-customer is redirected if the authorization failed
      * @type {string}
      * @memberof EWalletChannelProperties
@@ -49,6 +55,12 @@ export interface EWalletChannelProperties {
      * @memberof EWalletChannelProperties
      */
     cashtag?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EWalletChannelProperties
+     */
+    promotionLabel?: string;
 }
 
 /**
@@ -71,11 +83,13 @@ export function EWalletChannelPropertiesFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'successReturnUrl': !exists(json, 'success_return_url') ? undefined : json['success_return_url'],
+        'pendingReturnUrl': !exists(json, 'pending_return_url') ? undefined : json['pending_return_url'],
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cancelReturnUrl': !exists(json, 'cancel_return_url') ? undefined : json['cancel_return_url'],
         'redeemPoints': !exists(json, 'redeem_points') ? undefined : json['redeem_points'],
         'mobileNumber': !exists(json, 'mobile_number') ? undefined : json['mobile_number'],
         'cashtag': !exists(json, 'cashtag') ? undefined : json['cashtag'],
+        'promotionLabel': !exists(json, 'promotion_label') ? undefined : json['promotion_label'],
     };
 }
 
@@ -89,11 +103,13 @@ export function EWalletChannelPropertiesToJSON(value?: EWalletChannelProperties 
     return {
         
         'success_return_url': value.successReturnUrl,
+        'pending_return_url': value.pendingReturnUrl,
         'failure_return_url': value.failureReturnUrl,
         'cancel_return_url': value.cancelReturnUrl,
         'redeem_points': value.redeemPoints,
         'mobile_number': value.mobileNumber,
         'cashtag': value.cashtag,
+        'promotion_label': value.promotionLabel,
     };
 }
 

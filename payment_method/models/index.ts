@@ -2,6 +2,7 @@
 /* eslint-disable */
 export * from './BillingInformation';
 export * from './Card';
+export * from './CardChannelCode';
 export * from './CardChannelProperties';
 export * from './CardParameters';
 export * from './CardParametersCardInformation';

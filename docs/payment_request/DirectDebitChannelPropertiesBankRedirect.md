@@ -6,6 +6,7 @@ Direct Debit Bank Account Channel Properties
 
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
+| **email** |string |  |  | | |
 | **mobileNumber** |string |  | Mobile number of the customer that is registered to channel | | |
 | **successReturnUrl** |string |  |  | | |
 | **failureReturnUrl** |string |  |  | | |

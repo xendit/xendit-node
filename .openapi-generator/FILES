@@ -8,8 +8,10 @@ docs/payment_request/Capture.md
 docs/payment_request/CaptureListResponse.md
 docs/payment_request/CaptureParameters.md
 docs/payment_request/Card.md
+docs/payment_request/CardChannelCode.md
 docs/payment_request/CardChannelProperties.md
 docs/payment_request/CardInformation.md
+docs/payment_request/CardParameters.md
 docs/payment_request/CardVerificationResults.md
 docs/payment_request/CardVerificationResultsThreeDSecure.md
 docs/payment_request/DirectDebit.md
@@ -59,6 +61,7 @@ docs/payment_request/PaymentRequestParametersChannelProperties.md
 docs/payment_request/PaymentRequestParametersChannelPropertiesAllOf.md
 docs/payment_request/PaymentRequestShippingInformation.md
 docs/payment_request/PaymentRequestStatus.md
+docs/payment_request/PaymentSimulation.md
 docs/payment_request/QrCode.md
 docs/payment_request/QrCodeChannelCode.md
 docs/payment_request/QrCodeChannelProperties.md
@@ -80,8 +83,10 @@ payment_request/models/Capture.ts
 payment_request/models/CaptureListResponse.ts
 payment_request/models/CaptureParameters.ts
 payment_request/models/Card.ts
+payment_request/models/CardChannelCode.ts
 payment_request/models/CardChannelProperties.ts
 payment_request/models/CardInformation.ts
+payment_request/models/CardParameters.ts
 payment_request/models/CardVerificationResults.ts
 payment_request/models/CardVerificationResultsThreeDSecure.ts
 payment_request/models/DirectDebit.ts
@@ -131,6 +136,7 @@ payment_request/models/PaymentRequestParametersChannelProperties.ts
 payment_request/models/PaymentRequestParametersChannelPropertiesAllOf.ts
 payment_request/models/PaymentRequestShippingInformation.ts
 payment_request/models/PaymentRequestStatus.ts
+payment_request/models/PaymentSimulation.ts
 payment_request/models/QRCode.ts
 payment_request/models/QRCodeChannelCode.ts
 payment_request/models/QRCodeChannelProperties.ts

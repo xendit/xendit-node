@@ -1,22 +1,12 @@
-# QRCodeChannelCode
+# CardChannelCode
 
-QR Code Channel Code
+Card Channel Code
 
 
 ## Enum
 
 
-    * `Qris` (value: `'QRIS'`)
-
-    * `Dana` (value: `'DANA'`)
-
-    * `Rcbc` (value: `'RCBC'`)
-
-    * `Promptpay` (value: `'PROMPTPAY'`)
-
-    * `Linkaja` (value: `'LINKAJA'`)
-
-    * `Xendit` (value: `'XENDIT'`)
+    * `Gpn` (value: `'GPN'`)
 
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 

@@ -43,6 +43,12 @@ export interface CardChannelProperties {
      * @memberof CardChannelProperties
      */
     merchantIdTag?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CardChannelProperties
+     */
+    expiresAt?: Date;
 }
 
 /**
@@ -69,6 +75,7 @@ export function CardChannelPropertiesFromJSONTyped(json: any, ignoreDiscriminato
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cardonfileType': !exists(json, 'cardonfile_type') ? undefined : json['cardonfile_type'],
         'merchantIdTag': !exists(json, 'merchant_id_tag') ? undefined : json['merchant_id_tag'],
+        'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
     };
 }
 
@@ -86,6 +93,7 @@ export function CardChannelPropertiesToJSON(value?: CardChannelProperties | null
         'failure_return_url': value.failureReturnUrl,
         'cardonfile_type': value.cardonfileType,
         'merchant_id_tag': value.merchantIdTag,
+        'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
     };
 }
 

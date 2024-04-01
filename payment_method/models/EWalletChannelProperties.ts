@@ -32,6 +32,12 @@ export interface EWalletChannelProperties {
      */
     cancelReturnUrl?: string;
     /**
+     * URL where the end-customer is redirected if the authorization is pending
+     * @type {string}
+     * @memberof EWalletChannelProperties
+     */
+    pendingReturnUrl?: string;
+    /**
      * Mobile number of customer in E.164 format (e.g. +628123123123). For OVO one time payment use only.
      * @type {string}
      * @memberof EWalletChannelProperties
@@ -73,6 +79,7 @@ export function EWalletChannelPropertiesFromJSONTyped(json: any, ignoreDiscrimin
         'successReturnUrl': !exists(json, 'success_return_url') ? undefined : json['success_return_url'],
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cancelReturnUrl': !exists(json, 'cancel_return_url') ? undefined : json['cancel_return_url'],
+        'pendingReturnUrl': !exists(json, 'pending_return_url') ? undefined : json['pending_return_url'],
         'mobileNumber': !exists(json, 'mobile_number') ? undefined : json['mobile_number'],
         'redeemPoints': !exists(json, 'redeem_points') ? undefined : json['redeem_points'],
         'cashtag': !exists(json, 'cashtag') ? undefined : json['cashtag'],
@@ -91,6 +98,7 @@ export function EWalletChannelPropertiesToJSON(value?: EWalletChannelProperties 
         'success_return_url': value.successReturnUrl,
         'failure_return_url': value.failureReturnUrl,
         'cancel_return_url': value.cancelReturnUrl,
+        'pending_return_url': value.pendingReturnUrl,
         'mobile_number': value.mobileNumber,
         'redeem_points': value.redeemPoints,
         'cashtag': value.cashtag,

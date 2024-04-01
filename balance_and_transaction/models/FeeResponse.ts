@@ -53,7 +53,8 @@ export const FeeResponseStatusEnum = {
     Pending: 'PENDING',
     Completed: 'COMPLETED',
     Canceled: 'CANCELED',
-    Reversed: 'REVERSED'
+    Reversed: 'REVERSED',
+    NotApplicable: 'NOT_APPLICABLE'
 } as const;
 export type FeeResponseStatusEnum = typeof FeeResponseStatusEnum[keyof typeof FeeResponseStatusEnum];
 

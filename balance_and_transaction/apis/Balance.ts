@@ -25,6 +25,7 @@ import {
 export interface GetBalanceRequest {
     accountType?: GetBalanceAccountTypeEnum;
     currency?: string;
+    atTimestamp?: Date;
     forUserId?: string;
 }
 
@@ -57,6 +58,10 @@ export class BalanceApi extends runtime.BaseAPI {
 
         if (requestParameters.currency !== undefined) {
             queryParameters['currency'] = requestParameters.currency;
+        }
+
+        if (requestParameters.atTimestamp !== undefined) {
+            queryParameters['at_timestamp'] = (requestParameters.atTimestamp as any).toISOString();
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

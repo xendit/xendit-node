@@ -7,6 +7,12 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { CardParameters } from './CardParameters';
+import {
+    CardParametersFromJSON,
+    CardParametersFromJSONTyped,
+    CardParametersToJSON,
+} from './CardParameters';
 import type { DirectDebitParameters } from './DirectDebitParameters';
 import {
     DirectDebitParametersFromJSON,
@@ -82,6 +88,12 @@ export interface PaymentMethodParameters {
     referenceId?: string;
     /**
      * 
+     * @type {CardParameters}
+     * @memberof PaymentMethodParameters
+     */
+    card?: CardParameters | null;
+    /**
+     * 
      * @type {DirectDebitParameters}
      * @memberof PaymentMethodParameters
      */
@@ -137,6 +149,7 @@ export function PaymentMethodParametersFromJSONTyped(json: any, ignoreDiscrimina
         'reusability': PaymentMethodReusabilityFromJSON(json['reusability']),
         'description': !exists(json, 'description') ? undefined : json['description'],
         'referenceId': !exists(json, 'reference_id') ? undefined : json['reference_id'],
+        'card': !exists(json, 'card') ? undefined : CardParametersFromJSON(json['card']),
         'directDebit': !exists(json, 'direct_debit') ? undefined : DirectDebitParametersFromJSON(json['direct_debit']),
         'ewallet': !exists(json, 'ewallet') ? undefined : EWalletParametersFromJSON(json['ewallet']),
         'overTheCounter': !exists(json, 'over_the_counter') ? undefined : OverTheCounterParametersFromJSON(json['over_the_counter']),
@@ -158,6 +171,7 @@ export function PaymentMethodParametersToJSON(value?: PaymentMethodParameters | 
         'reusability': PaymentMethodReusabilityToJSON(value.reusability),
         'description': value.description,
         'reference_id': value.referenceId,
+        'card': CardParametersToJSON(value.card),
         'direct_debit': DirectDebitParametersToJSON(value.directDebit),
         'ewallet': EWalletParametersToJSON(value.ewallet),
         'over_the_counter': OverTheCounterParametersToJSON(value.overTheCounter),

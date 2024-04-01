@@ -38,6 +38,7 @@ All URIs are relative to https://api.xendit.co, except if the operation defines 
 |-----------|:----------:|:----------:|-----------|
 | **accountType** | [CASH, HOLDING, TAX] |  | [&#39;CASH&#39;] |
 | **currency** | **string** |  |  |
+| **atTimestamp** | **Date** |  |  |
 | **forUserId** | **string** |  |  |
 
 ### Usage Example

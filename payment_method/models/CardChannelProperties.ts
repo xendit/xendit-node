@@ -37,6 +37,12 @@ export interface CardChannelProperties {
      * @memberof CardChannelProperties
      */
     cardonfileType?: CardChannelPropertiesCardonfileTypeEnum;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CardChannelProperties
+     */
+    expiresAt?: Date;
 }
 
 
@@ -74,6 +80,7 @@ export function CardChannelPropertiesFromJSONTyped(json: any, ignoreDiscriminato
         'successReturnUrl': !exists(json, 'success_return_url') ? undefined : json['success_return_url'],
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cardonfileType': !exists(json, 'cardonfile_type') ? undefined : json['cardonfile_type'],
+        'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
     };
 }
 
@@ -90,6 +97,7 @@ export function CardChannelPropertiesToJSON(value?: CardChannelProperties | null
         'success_return_url': value.successReturnUrl,
         'failure_return_url': value.failureReturnUrl,
         'cardonfile_type': value.cardonfileType,
+        'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
     };
 }
 

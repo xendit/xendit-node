@@ -16,6 +16,7 @@ import type {
   PaymentRequestAuthParameters,
   PaymentRequestListResponse,
   PaymentRequestParameters,
+  PaymentSimulation,
 } from '../models';
 import {
     CaptureFromJSON,
@@ -32,6 +33,8 @@ import {
     PaymentRequestListResponseToJSON,
     PaymentRequestParametersFromJSON,
     PaymentRequestParametersToJSON,
+    PaymentSimulationFromJSON,
+    PaymentSimulationToJSON,
 } from '../models';
 
 export interface CreatePaymentRequestRequest {
@@ -76,6 +79,10 @@ export interface AuthorizePaymentRequestRequest {
 export interface ResendPaymentRequestAuthRequest {
     paymentRequestId: string;
     forUserId?: string;
+}
+
+export interface SimulatePaymentRequestPaymentRequest {
+    paymentRequestId: string;
 }
 
 /**
@@ -383,6 +390,39 @@ export class PaymentRequestApi extends runtime.BaseAPI {
      */
     async resendPaymentRequestAuth(requestParameters: ResendPaymentRequestAuthRequest): Promise<PaymentRequest> {
         const response = await this.resendPaymentRequestAuthRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Payment Request Simulate Payment
+     * Payment Request Simulate Payment
+     */
+    private async simulatePaymentRequestPaymentRaw(requestParameters: SimulatePaymentRequestPaymentRequest): Promise<runtime.ApiResponse<PaymentSimulation>> {
+        if (requestParameters.paymentRequestId === null || requestParameters.paymentRequestId === undefined) {
+            throw new runtime.RequiredError('paymentRequestId','Required parameter requestParameters.paymentRequestId was null or undefined when calling simulatePaymentRequestPayment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+        headerParameters["Authorization"] = "Basic " + btoa(this.secretKey + ":");
+
+        const response = await this.request({
+            path: `/payment_requests/{paymentRequestId}/payments/simulate`.replace(`{${"paymentRequestId"}}`, encodeURIComponent(String(requestParameters.paymentRequestId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentSimulationFromJSON(jsonValue));
+    }
+
+    /**
+     * Payment Request Simulate Payment
+     * Payment Request Simulate Payment
+     */
+    async simulatePaymentRequestPayment(requestParameters: SimulatePaymentRequestPaymentRequest): Promise<PaymentSimulation> {
+        const response = await this.simulatePaymentRequestPaymentRaw(requestParameters);
         return await response.value();
     }
 
