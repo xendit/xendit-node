@@ -56,7 +56,7 @@ jobs:
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_TITLE: "[xendi-node] CI pipeline for ${{ github.event.client_payload.version }}"
+        SLACK_TITLE: "[xendit-node] CI pipeline for ${{ github.event.client_payload.version }}"
         SLACK_MESSAGE: 'Test Result: ${{ needs.testing.result }}'
         SLACK_COLOR: ${{ steps.set_color.outputs.color }}
 
