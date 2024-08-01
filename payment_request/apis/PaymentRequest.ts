@@ -40,6 +40,7 @@ import {
 export interface CreatePaymentRequestRequest {
     idempotencyKey?: string;
     forUserId?: string;
+    withSplitRule?: string;
     data?: PaymentRequestParameters;
 }
 
@@ -119,6 +120,10 @@ export class PaymentRequestApi extends runtime.BaseAPI {
 
         if (requestParameters.forUserId !== undefined && requestParameters.forUserId !== null) {
             headerParameters['for-user-id'] = String(requestParameters.forUserId);
+        }
+
+        if (requestParameters.withSplitRule !== undefined && requestParameters.withSplitRule !== null) {
+            headerParameters['with-split-rule'] = String(requestParameters.withSplitRule);
         }
 
         const response = await this.request({

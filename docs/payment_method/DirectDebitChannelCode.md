@@ -14,13 +14,11 @@ Direct Debit Channel Code
 
     * `Bpi` (value: `'BPI'`)
 
-    * `AutodebitBpi` (value: `'AUTODEBIT_BPI'`)
-
     * `BpiRecurring` (value: `'BPI_RECURRING'`)
 
     * `Bri` (value: `'BRI'`)
 
-    * `Bni` (value: `'BNI'`)
+    * `BniAutopay` (value: `'BNI_AUTOPAY'`)
 
     * `Chinabank` (value: `'CHINABANK'`)
 
@@ -54,7 +52,7 @@ Direct Debit Channel Code
 
     * `BdoEpay` (value: `'BDO_EPAY'`)
 
-    * `AutodebitUbp` (value: `'AUTODEBIT_UBP'`)
+    * `UbpEada` (value: `'UBP_EADA'`)
 
     * `UbpDebitPull` (value: `'UBP_DEBIT_PULL'`)
 
@@ -137,6 +135,60 @@ Direct Debit Channel Code
     * `SchFpxBusiness` (value: `'SCH_FPX_BUSINESS'`)
 
     * `UobFpxBusiness` (value: `'UOB_FPX_BUSINESS'`)
+
+    * `BdoOnlineBanking` (value: `'BDO_ONLINE_BANKING'`)
+
+    * `BpiOnlineBanking` (value: `'BPI_ONLINE_BANKING'`)
+
+    * `UnionbankOnlineBanking` (value: `'UNIONBANK_ONLINE_BANKING'`)
+
+    * `BocOnlineBanking` (value: `'BOC_ONLINE_BANKING'`)
+
+    * `ChinabankOnlineBanking` (value: `'CHINABANK_ONLINE_BANKING'`)
+
+    * `InstapayOnlineBanking` (value: `'INSTAPAY_ONLINE_BANKING'`)
+
+    * `LandbankOnlineBanking` (value: `'LANDBANK_ONLINE_BANKING'`)
+
+    * `MaybankOnlineBanking` (value: `'MAYBANK_ONLINE_BANKING'`)
+
+    * `MetrobankOnlineBanking` (value: `'METROBANK_ONLINE_BANKING'`)
+
+    * `PnbOnlineBanking` (value: `'PNB_ONLINE_BANKING'`)
+
+    * `PsbankOnlineBanking` (value: `'PSBANK_ONLINE_BANKING'`)
+
+    * `PesonetOnlineBanking` (value: `'PESONET_ONLINE_BANKING'`)
+
+    * `RcbcOnlineBanking` (value: `'RCBC_ONLINE_BANKING'`)
+
+    * `RobinsonsBankOnlineBanking` (value: `'ROBINSONS_BANK_ONLINE_BANKING'`)
+
+    * `SecurityBankOnlineBanking` (value: `'SECURITY_BANK_ONLINE_BANKING'`)
+
+    * `AutodebitUbp` (value: `'AUTODEBIT_UBP'`)
+
+    * `AutodebitBpi` (value: `'AUTODEBIT_BPI'`)
+
+    * `GbwBblMobileBanking` (value: `'GBW_BBL_MOBILE_BANKING'`)
+
+    * `GbwKbankMobileBanking` (value: `'GBW_KBANK_MOBILE_BANKING'`)
+
+    * `GbwKtbMobileBanking` (value: `'GBW_KTB_MOBILE_BANKING'`)
+
+    * `GbwScbMobileBanking` (value: `'GBW_SCB_MOBILE_BANKING'`)
+
+    * `GbwBayMobileBanking` (value: `'GBW_BAY_MOBILE_BANKING'`)
+
+    * `GbwBbl` (value: `'GBW_BBL'`)
+
+    * `GbwKbank` (value: `'GBW_KBANK'`)
+
+    * `GbwKtb` (value: `'GBW_KTB'`)
+
+    * `GbwScb` (value: `'GBW_SCB'`)
+
+    * `GbwBay` (value: `'GBW_BAY'`)
 
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 

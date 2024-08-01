@@ -7,6 +7,13 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { CardInstallmentConfiguration } from './CardInstallmentConfiguration';
+import {
+    CardInstallmentConfigurationFromJSON,
+    CardInstallmentConfigurationFromJSONTyped,
+    CardInstallmentConfigurationToJSON,
+} from './CardInstallmentConfiguration';
+
 /**
  * Card Channel Properties
  * @export
@@ -49,6 +56,18 @@ export interface CardChannelProperties {
      * @memberof CardChannelProperties
      */
     expiresAt?: Date;
+    /**
+     * 
+     * @type {CardInstallmentConfiguration}
+     * @memberof CardChannelProperties
+     */
+    installmentConfiguration?: CardInstallmentConfiguration | null;
+    /**
+     * To indicate whether to skip the authorization phase
+     * @type {boolean}
+     * @memberof CardChannelProperties
+     */
+    skipAuthorization?: boolean;
 }
 
 /**
@@ -76,6 +95,8 @@ export function CardChannelPropertiesFromJSONTyped(json: any, ignoreDiscriminato
         'cardonfileType': !exists(json, 'cardonfile_type') ? undefined : json['cardonfile_type'],
         'merchantIdTag': !exists(json, 'merchant_id_tag') ? undefined : json['merchant_id_tag'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
+        'installmentConfiguration': !exists(json, 'installment_configuration') ? undefined : CardInstallmentConfigurationFromJSON(json['installment_configuration']),
+        'skipAuthorization': !exists(json, 'skip_authorization') ? undefined : json['skip_authorization'],
     };
 }
 
@@ -94,6 +115,8 @@ export function CardChannelPropertiesToJSON(value?: CardChannelProperties | null
         'cardonfile_type': value.cardonfileType,
         'merchant_id_tag': value.merchantIdTag,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
+        'installment_configuration': CardInstallmentConfigurationToJSON(value.installmentConfiguration),
+        'skip_authorization': value.skipAuthorization,
     };
 }
 

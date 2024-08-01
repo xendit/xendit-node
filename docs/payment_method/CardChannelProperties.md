@@ -11,6 +11,8 @@ Card Channel Properties
 | **failureReturnUrl** |string |  | URL where the end-customer is redirected if the authorization failed | | |
 | **cardonfileType** |string |  | Type of “credential-on-file” / “card-on-file” payment being made. Indicate that this payment uses a previously linked Payment Method for charging. | | |
 | **expiresAt** |Date |  |  | | |
+| **installmentConfiguration** |[CardInstallmentConfiguration](CardInstallmentConfiguration.md) |  |  | | |
+| **merchantIdTag** |string |  | Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use | | |
 
 
 

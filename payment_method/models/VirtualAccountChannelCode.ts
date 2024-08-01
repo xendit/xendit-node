@@ -26,11 +26,16 @@ export const VirtualAccountChannelCode = {
     Vietcapital: 'VIETCAPITAL',
     Woori: 'WOORI',
     Msb: 'MSB',
+    Vpb: 'VPB',
+    Bidv: 'BIDV',
+    Cake: 'CAKE',
     StandardChartered: 'STANDARD_CHARTERED',
     Ambank: 'AMBANK',
+    Uob: 'UOB',
     Bnc: 'BNC',
     Hana: 'HANA',
     Muamalat: 'MUAMALAT',
+    BankTransfer: 'BANK_TRANSFER',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type VirtualAccountChannelCode = typeof VirtualAccountChannelCode[keyof typeof VirtualAccountChannelCode];

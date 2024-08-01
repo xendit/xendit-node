@@ -45,6 +45,7 @@ All URIs are relative to https://api.xendit.co, except if the operation defines 
 |-----------|:----------:|:----------:|-----------|
 | **idempotencyKey** | **string** |  |  |
 | **forUserId** | **string** |  |  |
+| **withSplitRule** | **string** |  |  |
 | **data** | [**PaymentRequestParameters**](payment_request/PaymentRequestParameters.md) |  |  |
 
 ### Usage Example

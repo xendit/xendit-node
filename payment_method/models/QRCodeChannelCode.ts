@@ -18,6 +18,7 @@ export const QRCodeChannelCode = {
     Promptpay: 'PROMPTPAY',
     Linkaja: 'LINKAJA',
     Xendit: 'XENDIT',
+    Qrph: 'QRPH',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type QRCodeChannelCode = typeof QRCodeChannelCode[keyof typeof QRCodeChannelCode];

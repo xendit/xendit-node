@@ -4,6 +4,7 @@ export * from './BillingInformation';
 export * from './Card';
 export * from './CardChannelCode';
 export * from './CardChannelProperties';
+export * from './CardInstallmentConfiguration';
 export * from './CardParameters';
 export * from './CardParametersCardInformation';
 export * from './CardVerificationResults';

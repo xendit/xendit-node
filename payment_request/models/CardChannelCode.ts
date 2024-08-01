@@ -12,7 +12,13 @@
  * @export
  */
 export const CardChannelCode = {
+    BayCardInstallment: 'BAY_CARD_INSTALLMENT',
+    BblCardInstallment: 'BBL_CARD_INSTALLMENT',
     Gpn: 'GPN',
+    KbankCardInstallment: 'KBANK_CARD_INSTALLMENT',
+    KtbCardInstallment: 'KTB_CARD_INSTALLMENT',
+    ScbCardInstallment: 'SCB_CARD_INSTALLMENT',
+    TtbCardInstallment: 'TTB_CARD_INSTALLMENT',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type CardChannelCode = typeof CardChannelCode[keyof typeof CardChannelCode];

@@ -7,6 +7,13 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { CardInstallmentConfiguration } from './CardInstallmentConfiguration';
+import {
+    CardInstallmentConfigurationFromJSON,
+    CardInstallmentConfigurationFromJSONTyped,
+    CardInstallmentConfigurationToJSON,
+} from './CardInstallmentConfiguration';
+
 /**
  * Card Channel Properties
  * @export
@@ -43,6 +50,18 @@ export interface CardChannelProperties {
      * @memberof CardChannelProperties
      */
     expiresAt?: Date;
+    /**
+     * 
+     * @type {CardInstallmentConfiguration}
+     * @memberof CardChannelProperties
+     */
+    installmentConfiguration?: CardInstallmentConfiguration | null;
+    /**
+     * Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use
+     * @type {string}
+     * @memberof CardChannelProperties
+     */
+    merchantIdTag?: string;
 }
 
 
@@ -81,6 +100,8 @@ export function CardChannelPropertiesFromJSONTyped(json: any, ignoreDiscriminato
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cardonfileType': !exists(json, 'cardonfile_type') ? undefined : json['cardonfile_type'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
+        'installmentConfiguration': !exists(json, 'installment_configuration') ? undefined : CardInstallmentConfigurationFromJSON(json['installment_configuration']),
+        'merchantIdTag': !exists(json, 'merchant_id_tag') ? undefined : json['merchant_id_tag'],
     };
 }
 
@@ -98,6 +119,8 @@ export function CardChannelPropertiesToJSON(value?: CardChannelProperties | null
         'failure_return_url': value.failureReturnUrl,
         'cardonfile_type': value.cardonfileType,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
+        'installment_configuration': CardInstallmentConfigurationToJSON(value.installmentConfiguration),
+        'merchant_id_tag': value.merchantIdTag,
     };
 }
 

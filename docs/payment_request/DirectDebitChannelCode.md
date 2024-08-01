@@ -12,7 +12,7 @@ Direct Debit Channel Code
 
     * `Bri` (value: `'BRI'`)
 
-    * `Bni` (value: `'BNI'`)
+    * `BniAutopay` (value: `'BNI_AUTOPAY'`)
 
     * `Mandiri` (value: `'MANDIRI'`)
 

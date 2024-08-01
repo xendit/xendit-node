@@ -7,6 +7,7 @@ export * from './Card';
 export * from './CardChannelCode';
 export * from './CardChannelProperties';
 export * from './CardInformation';
+export * from './CardInstallmentConfiguration';
 export * from './CardParameters';
 export * from './CardVerificationResults';
 export * from './CardVerificationResultsThreeDSecure';

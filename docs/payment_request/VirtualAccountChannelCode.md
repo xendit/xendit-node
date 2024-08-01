@@ -34,9 +34,15 @@ Virtual Account Channel Code
 
     * `Msb` (value: `'MSB'`)
 
+    * `Vpb` (value: `'VPB'`)
+
+    * `Bidv` (value: `'BIDV'`)
+
     * `StandardChartered` (value: `'STANDARD_CHARTERED'`)
 
     * `Ambank` (value: `'AMBANK'`)
+
+    * `Uob` (value: `'UOB'`)
 
     * `Bnc` (value: `'BNC'`)
 

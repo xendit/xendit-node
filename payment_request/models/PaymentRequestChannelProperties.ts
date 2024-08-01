@@ -32,6 +32,12 @@ export interface PaymentRequestChannelProperties {
      */
     cancelReturnUrl?: string;
     /**
+     * URL where the end-customer is redirected if the authorization is pending
+     * @type {string}
+     * @memberof PaymentRequestChannelProperties
+     */
+    pendingReturnUrl?: string;
+    /**
      * REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.
      * @type {string}
      * @memberof PaymentRequestChannelProperties
@@ -79,6 +85,7 @@ export function PaymentRequestChannelPropertiesFromJSONTyped(json: any, ignoreDi
         'successReturnUrl': !exists(json, 'success_return_url') ? undefined : json['success_return_url'],
         'failureReturnUrl': !exists(json, 'failure_return_url') ? undefined : json['failure_return_url'],
         'cancelReturnUrl': !exists(json, 'cancel_return_url') ? undefined : json['cancel_return_url'],
+        'pendingReturnUrl': !exists(json, 'pending_return_url') ? undefined : json['pending_return_url'],
         'redeemPoints': !exists(json, 'redeem_points') ? undefined : json['redeem_points'],
         'requireAuth': !exists(json, 'require_auth') ? undefined : json['require_auth'],
         'merchantIdTag': !exists(json, 'merchant_id_tag') ? undefined : json['merchant_id_tag'],
@@ -98,6 +105,7 @@ export function PaymentRequestChannelPropertiesToJSON(value?: PaymentRequestChan
         'success_return_url': value.successReturnUrl,
         'failure_return_url': value.failureReturnUrl,
         'cancel_return_url': value.cancelReturnUrl,
+        'pending_return_url': value.pendingReturnUrl,
         'redeem_points': value.redeemPoints,
         'require_auth': value.requireAuth,
         'merchant_id_tag': value.merchantIdTag,

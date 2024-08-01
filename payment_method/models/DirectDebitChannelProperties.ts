@@ -67,6 +67,12 @@ export interface DirectDebitChannelProperties {
      * @memberof DirectDebitChannelProperties
      */
     accountNumber?: string | null;
+    /**
+     * Destination Account ID for BaaS topups
+     * @type {string}
+     * @memberof DirectDebitChannelProperties
+     */
+    destinationAccountId?: string | null;
 }
 
 /**
@@ -97,6 +103,7 @@ export function DirectDebitChannelPropertiesFromJSONTyped(json: any, ignoreDiscr
         'identityDocumentNumber': !exists(json, 'identity_document_number') ? undefined : json['identity_document_number'],
         'requireAuth': !exists(json, 'require_auth') ? undefined : json['require_auth'],
         'accountNumber': !exists(json, 'account_number') ? undefined : json['account_number'],
+        'destinationAccountId': !exists(json, 'destination_account_id') ? undefined : json['destination_account_id'],
     };
 }
 
@@ -118,6 +125,7 @@ export function DirectDebitChannelPropertiesToJSON(value?: DirectDebitChannelPro
         'identity_document_number': value.identityDocumentNumber,
         'require_auth': value.requireAuth,
         'account_number': value.accountNumber,
+        'destination_account_id': value.destinationAccountId,
     };
 }
 

@@ -2,26 +2,26 @@
 /* eslint-disable */
 export * from './runtime';
 
+import { Customer } from './customer';
+export { Customer } from './customer';
+
+import { PaymentMethod } from './payment_method';
+export { PaymentMethod } from './payment_method';
+
+import { PaymentRequest } from './payment_request';
+export { PaymentRequest } from './payment_request';
+
 import { Invoice } from './invoice';
 export { Invoice } from './invoice';
+
+import { Payout } from './payout';
+export { Payout } from './payout';
 
 import { Transaction, Balance } from './balance_and_transaction';
 export { Transaction, Balance } from './balance_and_transaction';
 
 import { Refund } from './refund';
 export { Refund } from './refund';
-
-import { Payout } from './payout';
-export { Payout } from './payout';
-
-import { PaymentRequest } from './payment_request';
-export { PaymentRequest } from './payment_request';
-
-import { PaymentMethod } from './payment_method';
-export { PaymentMethod } from './payment_method';
-
-import { Customer } from './customer';
-export { Customer } from './customer';
 
 
 export interface XenditOpts {
@@ -30,14 +30,14 @@ export interface XenditOpts {
 }
 export class Xendit {
   opts: XenditOpts;
+  Customer: Customer;
+  PaymentMethod: PaymentMethod;
+  PaymentRequest: PaymentRequest;
   Invoice: Invoice;
+  Payout: Payout;
   Transaction: Transaction;
   Balance: Balance;
   Refund: Refund;
-  Payout: Payout;
-  PaymentRequest: PaymentRequest;
-  PaymentMethod: PaymentMethod;
-  Customer: Customer;
 
 
   constructor({ secretKey: _secretKey, xenditURL: _xenditURL }: XenditOpts) {
@@ -58,20 +58,20 @@ export class Xendit {
     }
 
 
+       this.Customer = new Customer(this.opts);
+    
+       this.PaymentMethod = new PaymentMethod(this.opts);
+    
+       this.PaymentRequest = new PaymentRequest(this.opts);
+    
        this.Invoice = new Invoice(this.opts);
+    
+       this.Payout = new Payout(this.opts);
     
        this.Transaction = new Transaction(this.opts);
        this.Balance = new Balance(this.opts);
     
        this.Refund = new Refund(this.opts);
-    
-       this.Payout = new Payout(this.opts);
-    
-       this.PaymentRequest = new PaymentRequest(this.opts);
-    
-       this.PaymentMethod = new PaymentMethod(this.opts);
-    
-       this.Customer = new Customer(this.opts);
     
   }
 }

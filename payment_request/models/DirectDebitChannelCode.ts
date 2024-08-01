@@ -15,7 +15,7 @@ export const DirectDebitChannelCode = {
     BcaKlikpay: 'BCA_KLIKPAY',
     BcaOneklik: 'BCA_ONEKLIK',
     Bri: 'BRI',
-    Bni: 'BNI',
+    BniAutopay: 'BNI_AUTOPAY',
     Mandiri: 'MANDIRI',
     Bpi: 'BPI',
     BpiRecurring: 'BPI_RECURRING',

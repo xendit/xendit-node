@@ -15,6 +15,7 @@ Direct Debit Channel Properties
 | **identityDocumentNumber** |string |  | Identity number of the customer registered to the partner channel | | |
 | **requireAuth** |boolean |  |  | | |
 | **accountNumber** |string |  | Account number of the customer | | |
+| **destinationAccountId** |string |  | Destination Account ID for BaaS topups | | |
 
 
 
