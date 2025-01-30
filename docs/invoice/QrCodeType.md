@@ -10,6 +10,8 @@ Representing the available QR Code channels used for invoice-related transaction
 
     * `Promptpay` (value: `'PROMPTPAY'`)
 
+    * `Qrph` (value: `'QRPH'`)
+
     * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
 
 If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.

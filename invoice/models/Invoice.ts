@@ -302,6 +302,12 @@ export interface Invoice {
      * @memberof Invoice
      */
     channelProperties?: ChannelProperties;
+    /**
+     * A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.
+     * @type {object}
+     * @memberof Invoice
+     */
+    metadata?: object;
 }
 
 /**
@@ -374,6 +380,7 @@ export function InvoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): I
         'customerNotificationPreference': !exists(json, 'customer_notification_preference') ? undefined : NotificationPreferenceFromJSON(json['customer_notification_preference']),
         'fees': !exists(json, 'fees') ? undefined : ((json['fees'] as Array<any>).map(InvoiceFeeFromJSON)),
         'channelProperties': !exists(json, 'channel_properties') ? undefined : ChannelPropertiesFromJSON(json['channel_properties']),
+        'metadata': !exists(json, 'metadata') ? undefined : json['metadata'],
     };
 }
 
@@ -420,6 +427,7 @@ export function InvoiceToJSON(value?: Invoice | null): any {
         'customer_notification_preference': NotificationPreferenceToJSON(value.customerNotificationPreference),
         'fees': value.fees === undefined ? undefined : ((value.fees as Array<any>).map(InvoiceFeeToJSON)),
         'channel_properties': ChannelPropertiesToJSON(value.channelProperties),
+        'metadata': value.metadata,
     };
 }
 

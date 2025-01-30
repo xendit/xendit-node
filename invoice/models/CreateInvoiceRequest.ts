@@ -141,11 +141,11 @@ export interface CreateInvoiceRequest {
      */
     reminderTime?: number;
     /**
-     * The local.
+     * The default language to display.
      * @type {string}
      * @memberof CreateInvoiceRequest
      */
-    local?: string;
+    locale?: string;
     /**
      * The unit of the reminder time.
      * @type {string}
@@ -170,6 +170,12 @@ export interface CreateInvoiceRequest {
      * @memberof CreateInvoiceRequest
      */
     channelProperties?: ChannelProperties;
+    /**
+     * A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.
+     * @type {object}
+     * @memberof CreateInvoiceRequest
+     */
+    metadata?: object;
 }
 
 /**
@@ -209,11 +215,12 @@ export function CreateInvoiceRequestFromJSONTyped(json: any, ignoreDiscriminator
         'shouldAuthenticateCreditCard': !exists(json, 'should_authenticate_credit_card') ? undefined : json['should_authenticate_credit_card'],
         'currency': !exists(json, 'currency') ? undefined : json['currency'],
         'reminderTime': !exists(json, 'reminder_time') ? undefined : json['reminder_time'],
-        'local': !exists(json, 'local') ? undefined : json['local'],
+        'locale': !exists(json, 'locale') ? undefined : json['locale'],
         'reminderTimeUnit': !exists(json, 'reminder_time_unit') ? undefined : json['reminder_time_unit'],
         'items': !exists(json, 'items') ? undefined : ((json['items'] as Array<any>).map(InvoiceItemFromJSON)),
         'fees': !exists(json, 'fees') ? undefined : ((json['fees'] as Array<any>).map(InvoiceFeeFromJSON)),
         'channelProperties': !exists(json, 'channel_properties') ? undefined : ChannelPropertiesFromJSON(json['channel_properties']),
+        'metadata': !exists(json, 'metadata') ? undefined : json['metadata'],
     };
 }
 
@@ -242,11 +249,12 @@ export function CreateInvoiceRequestToJSON(value?: CreateInvoiceRequest | null):
         'should_authenticate_credit_card': value.shouldAuthenticateCreditCard,
         'currency': value.currency,
         'reminder_time': value.reminderTime,
-        'local': value.local,
+        'locale': value.locale,
         'reminder_time_unit': value.reminderTimeUnit,
         'items': value.items === undefined ? undefined : ((value.items as Array<any>).map(InvoiceItemToJSON)),
         'fees': value.fees === undefined ? undefined : ((value.fees as Array<any>).map(InvoiceFeeToJSON)),
         'channel_properties': ChannelPropertiesToJSON(value.channelProperties),
+        'metadata': value.metadata,
     };
 }
 

@@ -40,6 +40,7 @@ An object representing details for an invoice.
 | **customerNotificationPreference** |[NotificationPreference](NotificationPreference.md) |  |  | | |
 | **fees** |[InvoiceFee[]](InvoiceFee.md) |  | An array of fees associated with the invoice. | | |
 | **channelProperties** |[ChannelProperties](ChannelProperties.md) |  |  | | |
+| **metadata** |object |  | A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long. | | |
 
 
 

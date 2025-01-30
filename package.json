@@ -1,6 +1,6 @@
 {
   "name": "xendit-node",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "OpenAPI client for xendit-node",
   "author": "OpenAPI-Generator",
   "repository": {
@@ -8,13 +8,13 @@
     "url": "https://github.com/xendit/xendit-node.git"
   },
   "files": [
-    "customer/**",
-    "payment_request/**",
-    "payout/**",
     "invoice/**",
-    "refund/**",
-    "balance_and_transaction/**",
+    "payout/**",
     "payment_method/**",
+    "payment_request/**",
+    "balance_and_transaction/**",
+    "customer/**",
+    "refund/**",
     "docs/**",
     "images/**",
     "README.md",

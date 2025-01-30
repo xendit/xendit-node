@@ -7,6 +7,8 @@ export * from './Bank';
 export * from './BankCode';
 export * from './ChannelProperties';
 export * from './ChannelPropertiesCards';
+export * from './ChannelPropertiesCardsInstallmentConfiguration';
+export * from './ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner';
 export * from './CreateInvoiceRequest';
 export * from './CustomerObject';
 export * from './DirectDebit';

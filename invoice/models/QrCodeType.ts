@@ -14,6 +14,7 @@
 export const QrCodeType = {
     Qris: 'QRIS',
     Promptpay: 'PROMPTPAY',
+    Qrph: 'QRPH',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type QrCodeType = typeof QrCodeType[keyof typeof QrCodeType];

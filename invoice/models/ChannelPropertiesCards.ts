@@ -7,6 +7,13 @@
  */
 
 import { exists, mapValues } from '../../runtime';
+import type { ChannelPropertiesCardsInstallmentConfiguration } from './ChannelPropertiesCardsInstallmentConfiguration';
+import {
+    ChannelPropertiesCardsInstallmentConfigurationFromJSON,
+    ChannelPropertiesCardsInstallmentConfigurationFromJSONTyped,
+    ChannelPropertiesCardsInstallmentConfigurationToJSON,
+} from './ChannelPropertiesCardsInstallmentConfiguration';
+
 /**
  * An object representing properties specific for credit card payment method.
  * @export
@@ -19,6 +26,12 @@ export interface ChannelPropertiesCards {
      * @memberof ChannelPropertiesCards
      */
     allowedBins?: Array<string>;
+    /**
+     * 
+     * @type {ChannelPropertiesCardsInstallmentConfiguration}
+     * @memberof ChannelPropertiesCards
+     */
+    installmentConfiguration?: ChannelPropertiesCardsInstallmentConfiguration;
 }
 
 /**
@@ -41,6 +54,7 @@ export function ChannelPropertiesCardsFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'allowedBins': !exists(json, 'allowed_bins') ? undefined : json['allowed_bins'],
+        'installmentConfiguration': !exists(json, 'installment_configuration') ? undefined : ChannelPropertiesCardsInstallmentConfigurationFromJSON(json['installment_configuration']),
     };
 }
 
@@ -54,6 +68,7 @@ export function ChannelPropertiesCardsToJSON(value?: ChannelPropertiesCards | nu
     return {
         
         'allowed_bins': value.allowedBins,
+        'installment_configuration': ChannelPropertiesCardsInstallmentConfigurationToJSON(value.installmentConfiguration),
     };
 }
 

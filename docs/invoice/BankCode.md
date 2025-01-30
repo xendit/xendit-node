@@ -24,6 +24,20 @@ Representing the available bank channels used for invoice-related transactions.
 
     * `Cimb` (value: `'CIMB'`)
 
+    * `Vietcapital` (value: `'VIETCAPITAL'`)
+
+    * `Woori` (value: `'WOORI'`)
+
+    * `Pv` (value: `'PV'`)
+
+    * `Msb` (value: `'MSB'`)
+
+    * `Vpb` (value: `'VPB'`)
+
+    * `Bidv` (value: `'BIDV'`)
+
+    * `Cake` (value: `'CAKE'`)
+
     * `Bnc` (value: `'BNC'`)
 
     * `Hana` (value: `'HANA'`)

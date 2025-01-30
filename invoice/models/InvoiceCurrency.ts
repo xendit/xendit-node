@@ -17,6 +17,7 @@ export const InvoiceCurrency = {
     Thb: 'THB',
     Vnd: 'VND',
     Php: 'PHP',
+    Myr: 'MYR',
     XenditEnumDefaultFallback: "UNKNOWN_ENUM_VALUE"
 } as const;
 export type InvoiceCurrency = typeof InvoiceCurrency[keyof typeof InvoiceCurrency];
