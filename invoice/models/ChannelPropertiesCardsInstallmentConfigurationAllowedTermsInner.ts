@@ -24,7 +24,7 @@ export interface ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner
      * @type {Array<number>}
      * @memberof ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner
      */
-    allowedTerms?: Array<number>;
+    terms?: Array<number>;
 }
 
 /**
@@ -47,7 +47,7 @@ export function ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInnerF
     return {
         
         'issuer': !exists(json, 'issuer') ? undefined : json['issuer'],
-        'allowedTerms': !exists(json, 'allowed_terms') ? undefined : json['allowed_terms'],
+        'terms': !exists(json, 'terms') ? undefined : json['terms'],
     };
 }
 
@@ -61,7 +61,7 @@ export function ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInnerT
     return {
         
         'issuer': value.issuer,
-        'allowed_terms': value.allowedTerms,
+        'terms': value.terms,
     };
 }
 
