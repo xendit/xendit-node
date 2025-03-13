@@ -5,7 +5,7 @@
 The official Xendit Node SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Node.
 
-* Package version: 6.2.0
+* Package version: 6.3.0
 
 # Getting Started
 
