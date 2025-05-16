@@ -8,6 +8,8 @@ Representing the available eWallet channels used for invoice-related transaction
 
     * `Ovo` (value: `'OVO'`)
 
+    * `Gopay` (value: `'GOPAY'`)
+
     * `Dana` (value: `'DANA'`)
 
     * `Linkaja` (value: `'LINKAJA'`)

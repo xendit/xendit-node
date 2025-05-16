@@ -13,6 +13,7 @@
  */
 export const EwalletType = {
     Ovo: 'OVO',
+    Gopay: 'GOPAY',
     Dana: 'DANA',
     Linkaja: 'LINKAJA',
     Paymaya: 'PAYMAYA',
