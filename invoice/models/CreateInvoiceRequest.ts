@@ -70,10 +70,10 @@ export interface CreateInvoiceRequest {
     description?: string;
     /**
      * The duration of the invoice.
-     * @type {string}
+     * @type {number}
      * @memberof CreateInvoiceRequest
      */
-    invoiceDuration?: string;
+    invoiceDuration?: number;
     /**
      * The ID of the callback virtual account.
      * @type {string}
