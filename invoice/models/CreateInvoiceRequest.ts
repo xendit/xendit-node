@@ -69,11 +69,11 @@ export interface CreateInvoiceRequest {
      */
     description?: string;
     /**
-     * The duration of the invoice.
-     * @type {string}
+     * The duration of the invoice in seconds.
+     * @type {number}
      * @memberof CreateInvoiceRequest
      */
-    invoiceDuration?: string;
+    invoiceDuration?: number;
     /**
      * The ID of the callback virtual account.
      * @type {string}
